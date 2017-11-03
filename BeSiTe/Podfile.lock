@@ -1,0 +1,66 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - FontAwesome+iOS (0.1.4)
+  - IQKeyboardManager (5.0.4)
+  - JSONModel (1.7.0)
+  - MBProgressHUD (1.0.0)
+  - MJExtension (3.0.13)
+  - MJRefresh (3.0.8)
+  - PPiAwesomeButton (1.5.2):
+    - FontAwesome+iOS
+  - SDCycleScrollView (1.65):
+    - SDWebImage (~> 3.7)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
+  - VTMagic (1.2.4):
+    - VTMagic/Core (= 1.2.4)
+  - VTMagic/Core (1.2.4)
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.1.0)
+  - IQKeyboardManager
+  - JSONModel
+  - MBProgressHUD
+  - MJExtension
+  - MJRefresh (~> 3.0.7)
+  - PPiAwesomeButton (= 1.5.2)
+  - SDCycleScrollView
+  - SDWebImage (~> 3.7.3)
+  - VTMagic
+  - YYKit
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  FontAwesome+iOS: 9070b682a9255ca0fdc34bcfb129ad0ba2b73b87
+  IQKeyboardManager: 1df9c0f147af1681cfb2d9977bc30309d45a7e76
+  JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  MJRefresh: fafde8f18f4afd66b434331a9beb67a6c0264056
+  PPiAwesomeButton: 16f7279582fd36f65186b24b83ef876217363eb5
+  SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  VTMagic: b49e5f456dbcbfd9a3588ba92417233a105bc193
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
+
+PODFILE CHECKSUM: a042227c35fb78a5c5f39b18dea5cf84f4c3383e
+
+COCOAPODS: 1.4.0.beta.1

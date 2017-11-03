@@ -1,0 +1,18 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+
+target "BeSiTe" do
+
+pod 'PPiAwesomeButton', '1.5.2'
+pod 'AFNetworking', '~> 3.1.0'
+pod 'SDWebImage' , '~> 3.7.3'
+pod 'MJExtension'
+pod 'MJRefresh', '~> 3.0.7'
+pod 'MBProgressHUD'
+pod 'IQKeyboardManager'
+pod 'YYKit'
+pod 'JSONModel'
+pod 'VTMagic'
+pod 'SDCycleScrollView'
+
+end

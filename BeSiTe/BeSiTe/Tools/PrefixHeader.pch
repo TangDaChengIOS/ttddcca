@@ -1,0 +1,46 @@
+//
+//  PrefixHeader.pch
+//  BeSiTe
+//
+//  Created by 汤达成 on 17/10/14.
+//  Copyright © 2017年 Tang. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "Constant.h"
+
+#define MAXWIDTH     ([UIScreen mainScreen].bounds.size.width)//屏幕宽度
+#define MAXHEIGHT    ([UIScreen mainScreen].bounds.size.height)//屏幕高
+#define kPROPORTION  ([UIScreen mainScreen].bounds.size.width)/375.0f //比例
+
+#define LeftMenuWidth (MAXWIDTH / 4 * 3) //侧滑菜单宽度
+
+//1.日志输出宏定义
+#ifdef DEBUG  //调试状态
+#define MyLog(...) NSLog(__VA_ARGS__)
+#else         //发布状态
+#define MyLog(...)
+#endif
+
+//2. 弱引用
+#define kWeakSelf __weak typeof(self) weak_self = self;
+
+//3.颜色
+#define UIColorFromINTValue(r ,g ,b) [UIColor colorWithRed:(r /255.0) green:(g/255.0) blue:(b/255.0) alpha:1.0]
+#define UIColorFromINTRGBA(r ,g ,b ,a) [UIColor colorWithRed:(r /255.0) green:(g/255.0) blue:(b/255.0) alpha:(a)]
+
+
+#define UIColorFromRGBValue(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+#define kWhiteColor [UIColor whiteColor]
+#define kBlackColor [UIColor blackColor]
+#define kMainColor UIColorFromINTValue(22, 145, 165)
+//4.字体
+#define kFont(size) [UIFont systemFontOfSize:size]
+//3.快速创建控件
+#define KIMAGE(imageStr) [UIImage imageNamed:imageStr]
+#define KIMAGE_Ori(imageStr) [[UIImage imageNamed:imageStr] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+
+#endif /* PrefixHeader_pch */
