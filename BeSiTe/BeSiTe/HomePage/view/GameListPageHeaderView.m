@@ -80,11 +80,12 @@
 #pragma mark -- collectionView delegates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 5;
+    return [BSTSingle defaultSingle].companysArray.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     LastPlayCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:kLastPlayCollectionViewCellReuseID2 forIndexPath:indexPath];
+    [cell setCellWithCompanyModel:[BSTSingle defaultSingle].companysArray[indexPath.item]];
   //  [cell setCellWithModel:self.collectionViewDataSource[indexPath.row]];
     return cell;
 }

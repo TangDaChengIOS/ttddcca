@@ -21,6 +21,12 @@
 		113227B71F909DC500E5EE7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 113227B61F909DC500E5EE7E /* Assets.xcassets */; };
 		113227BA1F909DC500E5EE7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113227B81F909DC500E5EE7E /* LaunchScreen.storyboard */; };
 		113227C31F90A22C00E5EE7E /* AppDelegate+Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 113227C21F90A22C00E5EE7E /* AppDelegate+Setting.m */; };
+		114389921FAC1803008840EC /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 114389911FAC1803008840EC /* UserModel.m */; };
+		114389951FAC5911008840EC /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 114389941FAC5911008840EC /* RSA.m */; };
+		114BC1B01FAFF8AB00C1A46D /* BankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 114BC1AE1FAFF8AB00C1A46D /* BankTableViewCell.m */; };
+		114BC1B11FAFF8AB00C1A46D /* BankTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 114BC1AF1FAFF8AB00C1A46D /* BankTableViewCell.xib */; };
+		114BC1B41FAFFB9100C1A46D /* BankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 114BC1B31FAFFB9100C1A46D /* BankModel.m */; };
+		114BC1B71FAFFDE600C1A46D /* BankSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114BC1B61FAFFDE600C1A46D /* BankSelectViewController.m */; };
 		1154D1191FAAB39200E05734 /* RecordSelectToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1181FAAB39200E05734 /* RecordSelectToolView.m */; };
 		1154D11C1FAAB8FC00E05734 /* PersonRecordSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D11B1FAAB8FC00E05734 /* PersonRecordSearchViewController.m */; };
 		1154D11F1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D11E1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m */; };
@@ -136,6 +142,17 @@
 		113227BB1F909DC500E5EE7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		113227C11F90A22C00E5EE7E /* AppDelegate+Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AppDelegate+Setting.h"; path = "BeSiTe/AppDelegate+Setting.h"; sourceTree = SOURCE_ROOT; };
 		113227C21F90A22C00E5EE7E /* AppDelegate+Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+Setting.m"; path = "BeSiTe/AppDelegate+Setting.m"; sourceTree = SOURCE_ROOT; };
+		114389901FAC1803008840EC /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		114389911FAC1803008840EC /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		114389931FAC5911008840EC /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
+		114389941FAC5911008840EC /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
+		114BC1AD1FAFF8AB00C1A46D /* BankTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankTableViewCell.h; sourceTree = "<group>"; };
+		114BC1AE1FAFF8AB00C1A46D /* BankTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankTableViewCell.m; sourceTree = "<group>"; };
+		114BC1AF1FAFF8AB00C1A46D /* BankTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankTableViewCell.xib; sourceTree = "<group>"; };
+		114BC1B21FAFFB9100C1A46D /* BankModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankModel.h; sourceTree = "<group>"; };
+		114BC1B31FAFFB9100C1A46D /* BankModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankModel.m; sourceTree = "<group>"; };
+		114BC1B51FAFFDE600C1A46D /* BankSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankSelectViewController.h; sourceTree = "<group>"; };
+		114BC1B61FAFFDE600C1A46D /* BankSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankSelectViewController.m; sourceTree = "<group>"; };
 		1154D1171FAAB39200E05734 /* RecordSelectToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordSelectToolView.h; sourceTree = "<group>"; };
 		1154D1181FAAB39200E05734 /* RecordSelectToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordSelectToolView.m; sourceTree = "<group>"; };
 		1154D11A1FAAB8FC00E05734 /* PersonRecordSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonRecordSearchViewController.h; sourceTree = "<group>"; };
@@ -339,7 +356,6 @@
 				116463381F91A947004ECC79 /* PersonCenter */,
 				116463331F91A947004ECC79 /* Contact */,
 				11CBCCF21F9CEB43000E4D01 /* LoginAbout */,
-				1194B1DD1FA772EB00241E49 /* MoneyRecord */,
 				116463321F91A947004ECC79 /* BaseClass */,
 				116463521F91B921004ECC79 /* Tools */,
 				116463551F91E15D004ECC79 /* library */,
@@ -619,6 +635,8 @@
 		116463551F91E15D004ECC79 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				114389931FAC5911008840EC /* RSA.h */,
+				114389941FAC5911008840EC /* RSA.m */,
 				1154D1201FAAD0D800E05734 /* Calendar */,
 				11CBCCE11F9C51E4000E4D01 /* XHStarRateView.h */,
 				11CBCCE21F9C51E4000E4D01 /* XHStarRateView.m */,
@@ -765,7 +783,8 @@
 				1194B1DF1FA772EB00241E49 /* model */,
 				1194B1E01FA772EB00241E49 /* view */,
 			);
-			path = MoneyRecord;
+			name = MoneyRecord;
+			path = ../../MoneyRecord;
 			sourceTree = "<group>";
 		};
 		1194B1DE1FA772EB00241E49 /* Control */ = {
@@ -828,6 +847,9 @@
 				11ECA9421F9D93F100CF84CB /* RegisterPageTwoViewController.h */,
 				11ECA9431F9D93F100CF84CB /* RegisterPageTwoViewController.m */,
 				11ECA9441F9D93F100CF84CB /* RegisterPageTwoViewController.xib */,
+				114BC1B51FAFFDE600C1A46D /* BankSelectViewController.h */,
+				114BC1B61FAFFDE600C1A46D /* BankSelectViewController.m */,
+				1194B1DD1FA772EB00241E49 /* MoneyRecord */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -835,6 +857,10 @@
 		11CBCCF41F9CEB43000E4D01 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				114389901FAC1803008840EC /* UserModel.h */,
+				114389911FAC1803008840EC /* UserModel.m */,
+				114BC1B21FAFFB9100C1A46D /* BankModel.h */,
+				114BC1B31FAFFB9100C1A46D /* BankModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -845,6 +871,9 @@
 				1190EC511F9EE00B007A1D05 /* RegisterSuccessView.h */,
 				1190EC521F9EE00B007A1D05 /* RegisterSuccessView.m */,
 				1190EC541F9EE019007A1D05 /* RegisterSuccessView.xib */,
+				114BC1AD1FAFF8AB00C1A46D /* BankTableViewCell.h */,
+				114BC1AE1FAFF8AB00C1A46D /* BankTableViewCell.m */,
+				114BC1AF1FAFF8AB00C1A46D /* BankTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -935,6 +964,7 @@
 				112435331F9BACA900C5EAAE /* GamesMenuView.xib in Resources */,
 				11CBCCF11F9CD2EB000E4D01 /* PersonMessageViewController.xib in Resources */,
 				1190EC601F9F2087007A1D05 /* PersonBalanceViewController.xib in Resources */,
+				114BC1B11FAFF8AB00C1A46D /* BankTableViewCell.xib in Resources */,
 				116463A61F91F634004ECC79 /* mask.jpg in Resources */,
 				116463A51F91F634004ECC79 /* line.png in Resources */,
 				119EAF2B1FA6142500E6C2CA /* PersonSavingViewController.xib in Resources */,
@@ -1011,12 +1041,14 @@
 			files = (
 				11AC1B701F99DC9400C06D85 /* HomeHeaderView.m in Sources */,
 				1154D1191FAAB39200E05734 /* RecordSelectToolView.m in Sources */,
+				114389921FAC1803008840EC /* UserModel.m in Sources */,
 				116463A21F91F634004ECC79 /* UIViewController+XWTransition.m in Sources */,
 				1164633C1F91A9B1004ECC79 /* ATBaseViewController.m in Sources */,
 				11AC1B741F99F5DC00C06D85 /* LMJScrollTextView.m in Sources */,
 				115893321FA81374008E90C1 /* RecordTableViewCell.m in Sources */,
 				116463AB1F91F634004ECC79 /* XWCoolAnimator+XWLines.m in Sources */,
 				112B16D31FA6C43600CE4555 /* EditNameView.m in Sources */,
+				114BC1B01FAFF8AB00C1A46D /* BankTableViewCell.m in Sources */,
 				113227C31F90A22C00E5EE7E /* AppDelegate+Setting.m in Sources */,
 				1154D12C1FAAD0D800E05734 /* DAYCalendarView.m in Sources */,
 				11CBCCE61F9C6938000E4D01 /* GameListPageHeaderView.m in Sources */,
@@ -1039,6 +1071,7 @@
 				119EAF2A1FA6142500E6C2CA /* PersonSavingViewController.m in Sources */,
 				113227AF1F909DC500E5EE7E /* AppDelegate.m in Sources */,
 				116463BC1F91F634004ECC79 /* XWFilterTransitionView.m in Sources */,
+				114389951FAC5911008840EC /* RSA.m in Sources */,
 				116463B21F91F634004ECC79 /* XWFilterAnimator+XWBarSwipe.m in Sources */,
 				1164634E1F91AA6A004ECC79 /* ContactViewController.m in Sources */,
 				116463A01F91F634004ECC79 /* UINavigationController+XWTransition.m in Sources */,
@@ -1064,6 +1097,7 @@
 				118E79B51FAB66A600DE053B /* BannerADSModel.m in Sources */,
 				1154D12F1FAAD0D800E05734 /* DAYNavigationBar.m in Sources */,
 				116463AD1F91F634004ECC79 /* XWCoolAnimator+XWPageFlip.m in Sources */,
+				114BC1B41FAFFB9100C1A46D /* BankModel.m in Sources */,
 				1154D11F1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m in Sources */,
 				116463B31F91F634004ECC79 /* XWFilterAnimator+XWBoxBlur.m in Sources */,
 				11CBCCEC1F9CB94F000E4D01 /* GameItemCollectionViewCell.m in Sources */,
@@ -1085,6 +1119,7 @@
 				116463A91F91F634004ECC79 /* XWCoolAnimator+XWExplode.m in Sources */,
 				1154D12D1FAAD0D800E05734 /* DAYComponentView.m in Sources */,
 				115893351FA852CB008E90C1 /* MoneyRecordDetailViewController.m in Sources */,
+				114BC1B71FAFFDE600C1A46D /* BankSelectViewController.m in Sources */,
 				1182AF2A1F95B4A3001CE114 /* RequestManager.m in Sources */,
 				1182AF271F95A9E1001CE114 /* ATBaseModel.m in Sources */,
 				118E79B81FAB6D1600DE053B /* GamesModel.m in Sources */,

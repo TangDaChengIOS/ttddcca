@@ -15,9 +15,11 @@ typedef NS_ENUM(NSUInteger,CellShowTypeImgae) {
     CellShowTypeImgaeHot,
     CellShowTypeImgaeNew
 };
+/**侧栏菜单的cell*/
 @interface MenuTableViewCell : UITableViewCell
-
+/**APP功能cell*/
 -(void)setCellWith:(NSString *)title isSingleLine:(BOOL)isSingleLine cellShowTypeImage:(CellShowTypeImgae)type num:(NSInteger)num;
-
+/**设置平台cell*/
+-(void)setCellWithModel:(GamesCompanyModel *)model :(BOOL)isSingleLine;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/**展示游戏菜单页面*/
 @interface GamesMenuView : UIView
 
 +(void)show;

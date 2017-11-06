@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseModel.h"
-
+/**首页广告model*/
 @interface BannerADSModel : ATBaseModel
 @property (nonatomic,copy) NSString * title;//	string	标题
 @property (nonatomic,copy) NSString * imgUrl;//	string	图片

@@ -70,7 +70,10 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(105* kPROPORTION, 80 * kPROPORTION + 20);
+    CGFloat w = (MAXWIDTH - 60)/3;
+    return CGSizeMake(w, w + 20);
+
+//    return CGSizeMake(105* kPROPORTION, 80 * kPROPORTION + 20);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
@@ -96,7 +99,7 @@
 {
     if (!_collectionView) {
         UICollectionViewFlowLayout * lay = [[UICollectionViewFlowLayout alloc]init];
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,75 *kPROPORTION + 30, MAXWIDTH , MAXHEIGHT -(75 *kPROPORTION + 30)) collectionViewLayout:lay];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,75 *kPROPORTION + 30, MAXWIDTH , MAXHEIGHT - 64 -(75 *kPROPORTION + 30)) collectionViewLayout:lay];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.backgroundColor = kWhiteColor;// UIColorFromINTValue(231, 231, 231);

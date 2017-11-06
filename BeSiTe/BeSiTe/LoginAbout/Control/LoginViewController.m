@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "RegisterPageOneViewController.h"
+#import "UserModel.h"
+#import "RSA.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet ATNeedBorderView *nameBackView;
@@ -28,7 +30,19 @@
 }
 - (IBAction)sendCodeBtnDidClicked:(id)sender {
 }
-- (IBAction)loginBtnDidClicked:(id)sender {
+- (IBAction)loginBtnDidClicked:(id)sender
+{
+    NSString * publicKey = @"MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJySAWQ2qvI2bmyU4hFBTi0Wqy*YdK-tIYXyA18KBBxudVbRdaDHSiXO4gTZUAhT118k8MJU34p9HrLhv9tsGYECAwEAAQ..";
+    NSLog(@"%@",[RSA decryptString:@"c4ca4238a0b923820dcc509a6f75849b" publicKey:publicKey]);
+    NSDictionary * dict = @{@"loginName":@"burce111",
+                            @"password":@"c4ca4238a0b923820dcc509a6f75849b"};
+    [RequestManager getWithPath:@"login" params:dict success:^(id JSON) {
+        UserModel * model = [[UserModel alloc]init];
+        [model setValuesForKeysWithDictionary:JSON];
+        NSLog(@"登录成功");
+    } failure:^(NSError *error) {
+    
+    }];
 }
 - (IBAction)registerDidClicked:(id)sender {
     RegisterPageOneViewController * menuVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];

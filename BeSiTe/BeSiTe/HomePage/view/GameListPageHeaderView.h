@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-/**游戏列表顶部*/
+/**游戏列表页顶部*/
 @interface GameListPageHeaderView : UIView
 
 @end

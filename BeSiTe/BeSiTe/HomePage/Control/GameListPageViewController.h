@@ -8,6 +8,7 @@
 
 #import "ATBaseViewController.h"
 
+/**游戏列表页*/
 @interface GameListPageViewController : ATBaseViewController
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GamesCompanyModel.h"
+//#import "GamesCompanyModel.h"
 
 typedef NS_ENUM(NSInteger,HomeItemType) {
     HomeItemTypeDefault =0,
@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger,HomeItemType) {
 };
 
 #define kHomeItemCollectionViewCellReuseID @"kHomeItemCollectionViewCellReuseID"
+/**首页Item cell*/
 @interface HomeItemCollectionViewCell : UICollectionViewCell
 @property (nonatomic,assign) HomeItemType itemType;
 -(void)setCellWithModel:(GamesCompanyModel *)model;

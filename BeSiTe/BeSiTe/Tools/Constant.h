@@ -17,5 +17,6 @@
 #import "ATNeedBorderView.h"
 #import "UIBarButtonItem_withBadge.h"
 #import <MJRefresh/MJRefresh.h>
+#import "BSTSingle.h"
 
 #endif /* Constant_h */

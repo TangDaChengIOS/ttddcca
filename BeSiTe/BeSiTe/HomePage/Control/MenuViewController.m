@@ -43,13 +43,13 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 1 ? self.secondSectionArr.count : 10;
+    return section == 1 ? self.secondSectionArr.count : [BSTSingle defaultSingle].companysArray.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MenuTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kMenuTableViewCellReuseID forIndexPath:indexPath];
     if (indexPath.section == 0) {
-        [cell setCellWith:@"SG" isSingleLine:(indexPath.row+1) %2 cellShowTypeImage:(indexPath.row+1) %2 num:0];
+        [cell setCellWithModel:[BSTSingle defaultSingle].companysArray[indexPath.row] :(indexPath.row+1) %2];
     }else{
         [cell setCellWith:_secondSectionArr[indexPath.row] isSingleLine:(indexPath.row+1) %2 cellShowTypeImage:CellShowTypeImgaeNone num:2];
     }

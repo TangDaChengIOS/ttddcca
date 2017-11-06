@@ -7,10 +7,12 @@
 //
 
 #import "ATBaseModel.h"
-
+/**游戏平台model*/
 @interface GamesCompanyModel : ATBaseModel
 
 @property (nonatomic,copy) NSString * companyCode;//	string	平台CODE
+@property (nonatomic,copy) NSString * companyName;//	string	平台名
+
 @property (nonatomic,copy) NSString * mainIcon;//	string	首页展示图标
 @property (nonatomic,copy) NSString * classIcon;//	string	分类展示图标
 @property (nonatomic,copy) NSString * classIconSel;//	string	分类展示图标_选中状态

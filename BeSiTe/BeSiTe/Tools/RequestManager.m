@@ -34,6 +34,7 @@
             }
             else{
                 NSError * error = [NSError errorWithDomain:NSLocalizedDescriptionKey code:0 userInfo:@{@"msg":responseObject[@"retMsg"]}];
+                MyLog(@"Error:%@",responseObject[@"retMsg"]);
                 if (failure != nil) failure(error);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -51,7 +52,15 @@
             
             MyLog(@"SUCCESS URL:%@",[task.response valueForKey:@"URL"]);
             if (success == nil) return;
-            success(responseObject);
+            if ([responseObject[@"retCode"] integerValue] == 0) {
+                success(responseObject[@"data"]);
+            }
+            else{
+                NSError * error = [NSError errorWithDomain:NSLocalizedDescriptionKey code:0 userInfo:@{@"msg":responseObject[@"retMsg"]}];
+                MyLog(@"Error:%@",responseObject[@"retMsg"]);
+                if (failure != nil) failure(error);
+            }
+//            success(responseObject);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             MyLog(@"ERROR URL:%@",[task.response valueForKey:@"URL"]);

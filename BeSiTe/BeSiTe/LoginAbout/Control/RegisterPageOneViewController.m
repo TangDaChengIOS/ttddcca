@@ -73,6 +73,13 @@
 }
 
 - (IBAction)getCodeBtnDidClicked:(id)sender {
+    NSDictionary * dict = @{@"mobile":@"17318037763",
+                            @"type":@"1"};
+    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON) {
+        NSLog(@"%@",JSON);
+    } failure:^(NSError *error) {
+        
+    }];
 }
 - (IBAction)agreeBtn:(id)sender {
 }

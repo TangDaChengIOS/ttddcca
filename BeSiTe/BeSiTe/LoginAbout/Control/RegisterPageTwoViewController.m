@@ -8,6 +8,7 @@
 
 #import "RegisterPageTwoViewController.h"
 #import "RegisterSuccessView.h"
+#import "BankSelectViewController.h"
 
 @interface RegisterPageTwoViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *firstBtn;
@@ -59,6 +60,9 @@
 }
 //跳过
 - (IBAction)passBtnClick:(id)sender {
+    BankSelectViewController * vc = [[BankSelectViewController alloc]init];
+//    vc.isHaveOtherData = (arc4random()+1) % 2;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -65,7 +65,7 @@
             _typeImage.image = nil;
         }
     }
-    _titleLab.text = model.companyCode;
+    _titleLab.text = model.companyName;
 
 }
 

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #define kGameItemCollectionViewCellReuseID @"kGameItemCollectionViewCellReuseID"
+/**游戏cell*/
 @interface GameItemCollectionViewCell : UICollectionViewCell
 -(void)setCell;
 
