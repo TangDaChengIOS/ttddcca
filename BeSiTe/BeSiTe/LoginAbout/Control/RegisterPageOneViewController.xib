@@ -373,21 +373,23 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RYC-k7-uEf">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_registered_text_background_imd" translatesAutoresizingMaskIntoConstraints="NO" id="RYC-k7-uEf">
                                     <rect key="frame" x="25" y="320" width="270" height="30"/>
-                                    <color key="backgroundColor" red="0.1333333333" green="0.72549019609999998" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="q66-S8-3Lp"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftn-Z4-bgl">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftn-Z4-bgl">
                                     <rect key="frame" x="40" y="320" width="30" height="30"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="KbX-rN-Ohb"/>
                                         <constraint firstAttribute="height" constant="30" id="xgk-jt-mta"/>
                                     </constraints>
-                                    <state key="normal" title="✅"/>
+                                    <state key="normal" image="home_registered_btn_img"/>
+                                    <state key="selected" image="home_registered_btn_checked_img"/>
+                                    <state key="highlighted" image="home_registered_btn_checked_img"/>
                                     <connections>
                                         <action selector="agreeBtn:" destination="-1" eventType="touchUpInside" id="e0o-MV-rlt"/>
                                     </connections>
@@ -479,6 +481,9 @@
         </view>
     </objects>
     <resources>
+        <image name="home_registered_btn_checked_img" width="11" height="11"/>
+        <image name="home_registered_btn_img" width="11" height="11"/>
+        <image name="home_registered_text_background_imd" width="319" height="28"/>
         <image name="navgartion_back_btn" width="27" height="21"/>
     </resources>
 </document>

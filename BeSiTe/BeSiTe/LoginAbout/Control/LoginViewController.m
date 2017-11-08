@@ -45,10 +45,8 @@
     }];
 }
 - (IBAction)registerDidClicked:(id)sender {
-    RegisterPageOneViewController * menuVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];
-    menuVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:menuVC animated:YES];
-
+    RegisterPageOneViewController * registerVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];
+    [self pushVC:registerVC];
 }
 
 #pragma mark -- subViews

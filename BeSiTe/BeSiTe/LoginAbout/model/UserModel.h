@@ -21,4 +21,7 @@
 @property (nonatomic,copy) NSString * vipLevel;
 @property (nonatomic,copy) NSString * token;//	string	用户令牌
 
+@property (nonatomic,copy) NSString * userAmount;//	string	用户余额
+
+
 @end

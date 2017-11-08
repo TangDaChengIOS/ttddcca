@@ -82,7 +82,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     GameListPageViewController * menuVC = [[GameListPageViewController alloc]init];
-    [self.navigationController pushViewController:menuVC animated:YES];
+    [self pushVC:menuVC];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
@@ -140,13 +140,12 @@
 //    return;
 //    GameListPageViewController * menuVC = [[GameListPageViewController alloc]init];
     
-    LoginViewController * menuVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-    menuVC.hidesBottomBarWhenPushed = YES;
+    LoginViewController * loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
 
 //    RegisterPageOneViewController * menuVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];
 
-    
-    [self.navigationController pushViewController:menuVC animated:YES];
+    [self pushVC:loginVC];
+
 }
 
 #pragma mark -- Lazy

@@ -8,9 +8,11 @@
 
 #import "RegisterPageOneViewController.h"
 #import "RegisterPageTwoViewController.h"
+#import "RSA.h"
+#import "UserModel.h"
 
+@interface RegisterPageOneViewController ()<UITextFieldDelegate>
 
-@interface RegisterPageOneViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *firstBtn;
 @property (weak, nonatomic) IBOutlet UIButton *secBtn;
 @property (weak, nonatomic) IBOutlet UIButton *threeBtn;
@@ -56,57 +58,111 @@
     self.threeBtn.layer.cornerRadius = cornerRadius;
     self.threeBtn.layer.borderWidth = 1;
     
+    self.pwdSecTF.delegate = self;
+    self.NotTurePwdLab.hidden = YES;
+
     self.getCodeBtn.layer.borderColor = UIColorFromINTValue(244, 144, 30).CGColor;
     self.getCodeBtn.layer.cornerRadius = 4;
     self.getCodeBtn.layer.borderWidth = 1;
     
-    self.pwdSecBackView.layer.borderColor = UIColorFromINTValue(252, 25, 26).CGColor;
-    
-    self.NotTurePwdLab.hidden = YES;
-    
     CGFloat height = self.agreeBtn.maxY + 100;
     self.scrollViewHeightConstraint.constant = height;
     self.scrollView.contentSize = CGSizeMake(MAXWIDTH, height);
+    
+    kWeakSelf
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
+        [weak_self.scrollViewFirstChildView endEditing:YES];
+    }];
+    [self.scrollViewFirstChildView addGestureRecognizer:tap];
 }
-- (IBAction)registerBtnDidClicked:(id)sender {
-    [self.navigationController pushViewController:[[RegisterPageTwoViewController alloc]initWithNibName:@"RegisterPageTwoViewController" bundle:nil] animated:YES];
+#pragma mark -- TextFieldDeleGate
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == self.pwdSecTF) {
+        self.pwdSecBackView.layer.borderColor = UIColorFromINTValue(205, 205, 205).CGColor;
+        self.NotTurePwdLab.hidden = YES;
+    }
 }
-
-- (IBAction)getCodeBtnDidClicked:(id)sender {
-    NSDictionary * dict = @{@"mobile":@"17318037763",
-                            @"type":@"1"};
-    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON) {
-        NSLog(@"%@",JSON);
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == self.pwdSecTF) {
+        if (![self.pwdTF.text isEqualToString:self.pwdSecTF.text]) {
+            self.pwdSecBackView.layer.borderColor = UIColorFromINTValue(252, 25, 26).CGColor;
+            self.NotTurePwdLab.hidden = NO;
+        }
+    }
+}
+#pragma mark -- 按钮事件
+- (IBAction)registerBtnDidClicked:(id)sender
+{
+    if (![ZZTextInput inputNumberOrLetters:self.nameTF.text]) {
+        TTAlert(@"请输入以数字、字母、下划线组成的6-15位的账号");
+        return;
+    }
+    if (![ZZTextInput isValidateMobile:self.phoneTF.text]) {
+        TTAlert(@"请输入正确的手机号码");
+        return;
+    }
+    if (self.codeTF.text.length <= 0) {
+        TTAlert(@"请输入验证码");
+        return;
+    }
+    if (self.pwdTF.text.length <= 0 || self.pwdSecTF.text.length <= 0) {
+        TTAlert(@"请输入密码");
+        return;
+    }
+    if (![self.pwdTF.text isEqualToString:self.pwdSecTF.text]) {
+        self.pwdSecBackView.layer.borderColor = UIColorFromINTValue(252, 25, 26).CGColor;
+        self.NotTurePwdLab.hidden = NO;
+        return;
+    }
+    NSString * passWord = [RSA encryptString:self.pwdTF.text publicKey:PublicKey];
+    NSDictionary * dict = @{@"loginName":self.nameTF.text,
+                            @"mobile":self.phoneTF.text,
+                            @"password":passWord,
+                            @"smsCode":self.codeTF.text};
+    kWeakSelf
+    [RequestManager postWithPath:@"register" params:dict success:^(id JSON) {
+        UserModel * user = [UserModel new];
+        [user setValuesForKeysWithDictionary:JSON];
+        NSLog(@"%@",user);
+        [weak_self.navigationController pushViewController:[[RegisterPageTwoViewController alloc]initWithNibName:@"RegisterPageTwoViewController" bundle:nil] animated:YES];
     } failure:^(NSError *error) {
         
     }];
 }
-- (IBAction)agreeBtn:(id)sender {
+#pragma mark -- 获取验证码
+- (IBAction)getCodeBtnDidClicked:(id)sender
+{
+    if (![ZZTextInput isValidateMobile:self.phoneTF.text]) {
+        TTAlert(@"请输入正确的手机号码");
+        return;
+    }
+    NSDictionary * dict = @{@"mobile":self.phoneTF.text,
+                            @"type":@"1"};
+    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON) {
+        NSLog(@"%@",JSON);
+    } failure:^(NSError *error) {
+
+    }];
 }
+
+- (IBAction)agreeBtn:(id)sender {
+    self.agreeBtn.selected = !self.agreeBtn.selected;
+}
+
 - (IBAction)readAgree:(id)sender {
+    
 }
 
 - (IBAction)leftBarButtonItemClick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-//-(void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:NO];
-//}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

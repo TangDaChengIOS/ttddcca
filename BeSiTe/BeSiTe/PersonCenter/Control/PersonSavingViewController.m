@@ -8,6 +8,7 @@
 
 #import "PersonSavingViewController.h"
 #import "PersonSavingTableViewCell.h"
+#import "QuickSavingViewController.h"
 
 @interface PersonSavingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *totalMoneyLab;
@@ -42,6 +43,12 @@
     PersonSavingTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kPersonSavingTableViewCellReuseID forIndexPath:indexPath];
     cell.cellType = indexPath.row;
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    QuickSavingViewController * quickSavingVC = [[QuickSavingViewController alloc]initWithNibName:@"QuickSavingViewController" bundle:nil];
+    [self pushVC:quickSavingVC];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -33,9 +33,10 @@
                 success(responseObject[@"data"]);
             }
             else{
-                NSError * error = [NSError errorWithDomain:NSLocalizedDescriptionKey code:0 userInfo:@{@"msg":responseObject[@"retMsg"]}];
-                MyLog(@"Error:%@",responseObject[@"retMsg"]);
-                if (failure != nil) failure(error);
+                TTAlert(responseObject[@"retMsg"]);
+//                NSError * error = [NSError errorWithDomain:NSLocalizedDescriptionKey code:0 userInfo:@{@"msg":responseObject[@"retMsg"]}];
+//                MyLog(@"Error:%@",responseObject[@"retMsg"]);
+//                if (failure != nil) failure(error);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
@@ -56,9 +57,11 @@
                 success(responseObject[@"data"]);
             }
             else{
-                NSError * error = [NSError errorWithDomain:NSLocalizedDescriptionKey code:0 userInfo:@{@"msg":responseObject[@"retMsg"]}];
-                MyLog(@"Error:%@",responseObject[@"retMsg"]);
-                if (failure != nil) failure(error);
+                TTAlert(responseObject[@"retMsg"]);
+
+//                NSError * error = [NSError errorWithDomain:NSLocalizedDescriptionKey code:0 userInfo:@{@"msg":responseObject[@"retMsg"]}];
+//                MyLog(@"Error:%@",responseObject[@"retMsg"]);
+//                if (failure != nil) failure(error);
             }
 //            success(responseObject);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

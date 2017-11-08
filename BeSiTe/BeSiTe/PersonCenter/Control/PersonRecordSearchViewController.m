@@ -29,9 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kWhiteColor;
-    DAYCalendarView * view = [[DAYCalendarView alloc]initWithFrame:CGRectMake(0, 0, MAXWIDTH, 300)];
-    [self.view addSubview:view];
-//    [self configSubViews];
+//    DAYCalendarView * view = [[DAYCalendarView alloc]initWithFrame:CGRectMake(0, 0, MAXWIDTH, 300)];
+//    [self.view addSubview:view];
+    [self configSubViews];
 }
 
 -(void)configSubViews{

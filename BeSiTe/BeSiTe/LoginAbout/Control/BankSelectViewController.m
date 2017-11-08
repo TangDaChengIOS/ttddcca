@@ -45,7 +45,6 @@
 {
     if (_isHaveOtherData && section == 0) {
         return   self.haveUseBankDataSource.count ;
-        return 10;
     }
 
     return self.dataSource.count;

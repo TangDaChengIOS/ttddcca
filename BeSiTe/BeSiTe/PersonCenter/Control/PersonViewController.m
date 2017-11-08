@@ -7,6 +7,8 @@
 //
 
 #import "PersonViewController.h"
+#import "MessageViewController.h"
+
 #import "PersonMessageViewController.h"
 #import "PersonBalanceViewController.h"
 #import "PersonSavingViewController.h"
@@ -15,7 +17,7 @@
 
 #import "MoneyRecordHomeViewController.h"
 
-#import "ATButton.h"
+#import "OnlyShowImageButton.h"
 
 @interface PersonViewController (){
     NSUInteger _badgeValue;
@@ -39,10 +41,10 @@
 - (UIButton *)magicView:(VTMagicView *)magicView menuItemAtIndex:(NSUInteger)itemIndex
 {
     static NSString *itemIdentifier = @"itemIdentifier";
-    ATButton *menuItem = [magicView dequeueReusableItemWithIdentifier:itemIdentifier];
+    OnlyShowImageButton *menuItem = [magicView dequeueReusableItemWithIdentifier:itemIdentifier];
     if (!menuItem) {
 //        menuItem = [UIButton buttonWithType:UIButtonTypeCustom];
-        menuItem = [[ATButton alloc] init];
+        menuItem = [[OnlyShowImageButton alloc] init];
 
 
         [menuItem setTitleColor:RGBCOLOR(50, 50, 50) forState:UIControlStateNormal];
@@ -150,6 +152,10 @@
 }
 
 -(void)rightBarButtonItemClick{
+    MessageViewController * msgVC = [[MessageViewController alloc]initWithNibName:@"MessageViewController" bundle:nil];
+    [self pushVC:msgVC];
+
+    return;
     MoneyRecordHomeViewController * homeVC = [[MoneyRecordHomeViewController alloc]init];
     homeVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:homeVC animated:YES];

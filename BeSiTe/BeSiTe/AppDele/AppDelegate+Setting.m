@@ -21,25 +21,27 @@
     
     //设置标签栏的颜色
     tab.tabBar.barTintColor = [UIColor whiteColor];
+    tab.tabBar.backgroundColor = [UIColor whiteColor];
 //    tab.tabBar.tintColor = [UIColor orangeColor];
     
     NSArray * classNameArr = @[@"HomeViewController",@"ActivityViewController",@"PersonViewController",@"ContactViewController"];
-//    NSArray * titleArr = @[@"主页",@"活动",@"个人中心",@"客服"];
-    NSArray * imageArr = @[@"tabbar_home",@"",@"",@""];
-    NSArray * selectedImageArr = @[@"tabbar_home_select",@"",@"",@""];
+    NSArray * titleArr = @[@"主页",@"活动",@"个人中心",@"客服"];
+    NSArray * imageArr = @[@"common_tabbar_home_icon",@"common_tabbar_activitie_icon",@"common_tabbar_profile_icon",@"common_tabbar_services_icon"];
+    NSArray * selectedImageArr = @[@"common_tabbar_home_select_icon",@"common_tabbar_activitie_select_icon",@"common_tabbar_profile_select_icon",@"common_tabbar_services_select_icon"];
 
     NSMutableArray * vcArr = [NSMutableArray array];
     for (int i=0; i < 4; i++) {
         ATBaseViewController * vc = [[NSClassFromString(classNameArr[i]) alloc]init];
-//        vc.tabBarItem.title = titleArr[i];
-//        NSDictionary *dictHome = [NSDictionary dictionaryWithObject:[UIColor orangeColor] forKey:NSForegroundColorAttributeName];
-//        [vc.tabBarItem setTitleTextAttributes:dictHome forState:UIControlStateNormal];
-//        NSDictionary *dictHome2 = [NSDictionary dictionaryWithObject:[UIColor greenColor] forKey:NSForegroundColorAttributeName];
-//        [vc.tabBarItem setTitleTextAttributes:dictHome2 forState:UIControlStateHighlighted];
+        vc.tabBarItem.title = titleArr[i];
+        NSDictionary *dictHome = [NSDictionary dictionaryWithObject:UIColorFromINTValue(151, 151, 151) forKey:NSForegroundColorAttributeName];
+        [vc.tabBarItem setTitleTextAttributes:dictHome forState:UIControlStateNormal];
+        NSDictionary *dictHome2 = [NSDictionary dictionaryWithObject:UIColorFromINTValue(31, 189, 214) forKey:NSForegroundColorAttributeName];
+        [vc.tabBarItem setTitleTextAttributes:dictHome2 forState:UIControlStateHighlighted];
 
-        vc.tabBarItem.image = [[UIImage imageNamed:imageArr[0]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        vc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImageArr[0]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        [vc.tabBarItem setImageInsets:UIEdgeInsetsMake(5, 0, -5, 0)];
+        vc.tabBarItem.image = [[UIImage imageNamed:imageArr[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        vc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImageArr[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//        [vc.tabBarItem setImageInsets:UIEdgeInsetsMake(5, 0, -5, 0)];
+        [vc.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3)];
         UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
         [vcArr addObject:nav];
         [vc.tabBarItem setBadgeValue:@"9"];

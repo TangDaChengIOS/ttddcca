@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ATButton : UIButton
+/**仅显示图片的按钮*/
+@interface OnlyShowImageButton : UIButton
 
 @property (nonatomic,copy) NSString * normalImage;
 @property (nonatomic,copy) NSString * selectImage;

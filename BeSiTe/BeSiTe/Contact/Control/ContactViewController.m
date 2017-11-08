@@ -2,7 +2,7 @@
 //  ContactViewController.m
 //  BeSiTe
 //
-//  Created by 汤达成 on 17/10/14.
+//  Created by 汤达成 on 17/11/8.
 //  Copyright © 2017年 Tang. All rights reserved.
 //
 
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {

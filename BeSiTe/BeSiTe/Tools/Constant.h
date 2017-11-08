@@ -18,5 +18,7 @@
 #import "UIBarButtonItem_withBadge.h"
 #import <MJRefresh/MJRefresh.h>
 #import "BSTSingle.h"
+#import "ZZTextInput.h"
+#import "VTMagicController+PushVC.h"
 
 #endif /* Constant_h */

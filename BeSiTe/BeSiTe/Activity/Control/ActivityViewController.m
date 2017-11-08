@@ -16,7 +16,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self requestData];
+
+}
+-(void)requestData{
+
+    NSDictionary * dict = @{@"pageNo":@"1",
+                            @"pageSize":@"10"};
+    [RequestManager getManagerDataWithPath:@"favActivity" params:dict success:^(id JSON) {
+        NSLog(@"%@",JSON);
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

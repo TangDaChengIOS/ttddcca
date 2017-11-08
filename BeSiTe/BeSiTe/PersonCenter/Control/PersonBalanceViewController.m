@@ -8,6 +8,7 @@
 
 #import "PersonBalanceViewController.h"
 #import "MoneyListTableViewCell.h"
+#import "MoneyMoveViewController.h"
 
 @interface PersonBalanceViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *totalMoneyLab;
@@ -79,7 +80,8 @@
 }
 
 - (IBAction)turnInBtnClick:(id)sender {
-    
+    MoneyMoveViewController * moneyMoveVC = [[MoneyMoveViewController alloc]initWithNibName:@"MoneyMoveViewController" bundle:nil];
+    [self pushVC:moneyMoveVC];
 }
 - (IBAction)turnOutBtnClick:(id)sender {
     

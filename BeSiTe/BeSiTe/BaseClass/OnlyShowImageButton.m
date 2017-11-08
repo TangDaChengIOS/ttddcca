@@ -6,9 +6,9 @@
 //  Copyright © 2017年 Tang. All rights reserved.
 //
 
-#import "ATButton.h"
+#import "OnlyShowImageButton.h"
 
-@implementation ATButton
+@implementation OnlyShowImageButton
 
 -(instancetype)init{
     if (self = [super init]) {
@@ -24,7 +24,7 @@
 }
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
-    ATButton * button = (ATButton *)object;
+    OnlyShowImageButton * button = (OnlyShowImageButton *)object;
     if (button == self && [keyPath isEqualToString:@"frame"]) {
         self.fullImageView.frame = self.bounds;
     }

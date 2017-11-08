@@ -10,4 +10,5 @@
 #import "BSTSingle.h"
 @interface ATBaseViewController : UIViewController
 
+-(void)pushVC:(ATBaseViewController *)viewController;
 @end
