@@ -448,6 +448,23 @@ static NSData *base64_decode(NSString *str){
     return ret;
 }
 
+#pragma mark -- 使用本地公、私钥文件，加密，解密
+
++ (NSString *)decryptStringUseLocalFile:(NSString *)str
+{
+    NSString* privateKeyPath = [[NSBundle mainBundle] pathForResource:@"private_key" ofType:@"p12"];
+    
+    return [self decryptString:str privateKeyWithContentsOfFile:privateKeyPath password:@"tdcdmm"];
+}
+
+
+
++ (NSString *)encryptStringUseLocalFile:(NSString *)str
+{
+    NSString* publicKeyPath = [[NSBundle mainBundle] pathForResource:@"public_key" ofType:@"der"];
+    return  [self encryptString:str publicKeyWithContentsOfFile:publicKeyPath];
+}
+
 /* END: Decryption with RSA private key */
 
 //作者：jianshu_wl

@@ -7,14 +7,17 @@
 //
 
 #import "MoneyMoveViewController.h"
+#import "MoneyListTableViewCell.h"
 
-@interface MoneyMoveViewController ()
+@interface MoneyMoveViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIButton *moveToGameBtn;
 @property (weak, nonatomic) IBOutlet UIButton *moveToMainBtn;
 @property (weak, nonatomic) IBOutlet UILabel *companyLab;
 @property (weak, nonatomic) IBOutlet UIButton *changeCompanyBtn;
 @property (weak, nonatomic) IBOutlet UITextField *moneyTF;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
+@property (weak, nonatomic) IBOutlet UILabel *mainAccountLab;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -23,8 +26,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self refreshUI:YES];
+    [self configSubViews];
 }
 
+#pragma mark -- UITableViewDelegate / DataSource
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MoneyListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kMoneyListTableViewCellReuseID forIndexPath:indexPath];
+    cell.cellTye = indexPath.row;
+    [cell setCell:nil money:nil whiteBack:(indexPath.row % 2)];
+    return cell;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return indexPath.row == 0 ? 37 : 28;
+}
+
+#pragma mark -- UI配置
+-(void)configSubViews
+{
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.layer.borderColor = UIColorFromRGBValue(0xf3f3f3).CGColor;
+    _tableView.layer.borderWidth = 1;
+    [_tableView registerClass:[MoneyListTableViewCell class] forCellReuseIdentifier:kMoneyListTableViewCellReuseID];
+    
+}
+#pragma mark -- 切换不同的转账方式
 -(void)refreshUI:(BOOL)isLeft
 {
     self.moveToMainBtn.backgroundColor = isLeft ?  UIColorFromINTValue(72, 190, 204) : kWhiteColor;
@@ -43,11 +75,9 @@
         [self.moveToGameBtn setImage:nil forState:UIControlStateNormal];
 
     }
-
-
 }
 
-
+#pragma mark -- ButtonsEvents
 - (IBAction)submitBtnClick:(id)sender {
     [self refreshUI:YES];
 }

@@ -53,7 +53,7 @@
                         <constraint firstAttribute="width" constant="1" id="7Fo-Bo-uab"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPl-0U-C35">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPl-0U-C35" customClass="ATNeedBorderButton">
                     <rect key="frame" x="12" y="587" width="351" height="40"/>
                     <color key="backgroundColor" red="0.98431372549019602" green="0.54117647058823526" blue="0.38543486396236348" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -67,7 +67,7 @@
                         <action selector="aplyBtnClick:" destination="-1" eventType="touchUpInside" id="ycu-D3-ify"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MlK-by-5Eb">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MlK-by-5Eb" customClass="ATNeedBorderButton">
                     <rect key="frame" x="12" y="539" width="167.5" height="40"/>
                     <color key="backgroundColor" red="0.10196078431372549" green="0.6705882352941176" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -80,7 +80,7 @@
                         <action selector="turnInBtnClick:" destination="-1" eventType="touchUpInside" id="SBv-XI-u2V"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4z-uq-2Jl">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4z-uq-2Jl" customClass="ATNeedBorderButton">
                     <rect key="frame" x="195.5" y="539" width="167.5" height="40"/>
                     <color key="backgroundColor" red="0.10196078431372549" green="0.6705882352941176" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>

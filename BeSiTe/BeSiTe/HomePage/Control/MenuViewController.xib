@@ -76,7 +76,7 @@
                             <rect key="frame" x="0.0" y="64" width="324" height="553"/>
                             <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.14509803921568626" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </tableView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oc6-yk-uKe">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oc6-yk-uKe" customClass="ATNeedBorderButton">
                             <rect key="frame" x="20" y="623" width="90" height="36"/>
                             <color key="backgroundColor" red="1" green="0.42745098040000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -96,7 +96,7 @@
                                 <action selector="registerBtnDidClicked:" destination="-1" eventType="touchUpInside" id="5pl-at-tls"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJW-1p-8Ok">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJW-1p-8Ok" customClass="ATNeedBorderButton">
                             <rect key="frame" x="214" y="623" width="90" height="36"/>
                             <color key="backgroundColor" red="0.35449267584550598" green="0.54268499555862615" blue="0.2501310822147651" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>

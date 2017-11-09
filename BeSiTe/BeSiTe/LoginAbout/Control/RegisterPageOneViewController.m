@@ -8,7 +8,7 @@
 
 #import "RegisterPageOneViewController.h"
 #import "RegisterPageTwoViewController.h"
-#import "RSA.h"
+#import "RSAEncryptor.h"
 #import "UserModel.h"
 
 @interface RegisterPageOneViewController ()<UITextFieldDelegate>
@@ -58,6 +58,7 @@
     self.threeBtn.layer.cornerRadius = cornerRadius;
     self.threeBtn.layer.borderWidth = 1;
     
+    self.nameTF.delegate = self;
     self.pwdSecTF.delegate = self;
     self.NotTurePwdLab.hidden = YES;
 
@@ -76,6 +77,13 @@
     [self.scrollViewFirstChildView addGestureRecognizer:tap];
 }
 #pragma mark -- TextFieldDeleGate
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == self.nameTF && self.nameTF.text.length == 0) {
+        self.nameTF.text = @"BC";
+    }
+    return YES;
+}
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField == self.pwdSecTF) {
@@ -116,13 +124,15 @@
         self.NotTurePwdLab.hidden = NO;
         return;
     }
-    NSString * passWord = [RSA encryptString:self.pwdTF.text publicKey:PublicKey];
+    NSString * passWord = [RSAEncryptor encryptStringUseLocalFile:self.pwdTF.text];
     NSDictionary * dict = @{@"loginName":self.nameTF.text,
                             @"mobile":self.phoneTF.text,
                             @"password":passWord,
                             @"smsCode":self.codeTF.text};
     kWeakSelf
     [RequestManager postWithPath:@"register" params:dict success:^(id JSON) {
+        [[NSUserDefaults standardUserDefaults]setObject:JSON forKey:@"UserMessage"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
         UserModel * user = [UserModel new];
         [user setValuesForKeysWithDictionary:JSON];
         NSLog(@"%@",user);

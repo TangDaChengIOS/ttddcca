@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import "RegisterPageOneViewController.h"
 #import "UserModel.h"
-#import "RSA.h"
+#import "ForgetPassWordViewController.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet ATNeedBorderView *nameBackView;
@@ -32,8 +32,7 @@
 }
 - (IBAction)loginBtnDidClicked:(id)sender
 {
-    NSString * publicKey = @"MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJySAWQ2qvI2bmyU4hFBTi0Wqy*YdK-tIYXyA18KBBxudVbRdaDHSiXO4gTZUAhT118k8MJU34p9HrLhv9tsGYECAwEAAQ..";
-    NSLog(@"%@",[RSA decryptString:@"c4ca4238a0b923820dcc509a6f75849b" publicKey:publicKey]);
+//    NSLog(@"%@",[RSA decryptString:@"c4ca4238a0b923820dcc509a6f75849b" publicKey:publicKey]);
     NSDictionary * dict = @{@"loginName":@"burce111",
                             @"password":@"c4ca4238a0b923820dcc509a6f75849b"};
     [RequestManager getWithPath:@"login" params:dict success:^(id JSON) {
@@ -60,14 +59,18 @@
     CGFloat cornerRadius = 4;
 
     self.findPWDBtn.layer.borderColor = UIColorFromINTValue(251, 72, 76).CGColor;
-    self.findPWDBtn.layer.cornerRadius = cornerRadius;
+//    self.findPWDBtn.layer.cornerRadius = cornerRadius;
     self.findPWDBtn.layer.borderWidth = 1;
     
-    self.loginBtn.layer.cornerRadius = cornerRadius;
+//    self.loginBtn.layer.cornerRadius = cornerRadius;
     
     self.registerBtn.layer.borderColor = UIColorFromINTValue(99, 161, 84).CGColor;
-    self.registerBtn.layer.cornerRadius = cornerRadius;
+//    self.registerBtn.layer.cornerRadius = cornerRadius;
     self.registerBtn.layer.borderWidth = 1;
+}
+- (IBAction)findPWDBtnClick:(id)sender {
+    ForgetPassWordViewController * forgetVC = [[ForgetPassWordViewController alloc]initWithNibName:@"ForgetPassWordViewController" bundle:nil];
+    [self pushVC:forgetVC];
 }
 
 -(void)leftBarButtonItemClick{

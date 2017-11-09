@@ -83,7 +83,7 @@
                             <color key="textColor" red="0.035294117647058823" green="0.76078431372549016" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLD-Pc-Ghz">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLD-Pc-Ghz" customClass="ATNeedBorderButton">
                             <rect key="frame" x="24" y="187" width="327" height="40"/>
                             <color key="backgroundColor" red="0.38823529411764707" green="0.63137254901960782" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>

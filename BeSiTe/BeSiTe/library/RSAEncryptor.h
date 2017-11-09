@@ -43,4 +43,19 @@
 + (NSString *)decryptString:(NSString *)str privateKey:(NSString *)privKey;
 
 
+
+/**
+ *  解密方法、使用本地公、私钥文件
+ *
+ *  @param str       需要解密的字符串
+ */
++ (NSString *)decryptStringUseLocalFile:(NSString *)str;
+
+/**
+ *  加密方法、使用本地公、私钥文件
+ *
+ *  @param str    需要加密的字符串
+ */
++ (NSString *)encryptStringUseLocalFile:(NSString *)str;
+
 @end

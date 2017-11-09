@@ -8,8 +8,8 @@
 
 #import "AppDelegate.h"
 #import "AppDelegate+Setting.h"
-#import "RSAEncryptor.h"
 #import <LocalAuthentication/LocalAuthentication.h>
+
 @interface AppDelegate ()
 
 @end
@@ -41,19 +41,7 @@
     }];
     }
     
-    */ 
-    NSString* publicKeyPath = [[NSBundle mainBundle] pathForResource:@"public_key" ofType:@"der"];
-    NSString* privateKeyPath = [[NSBundle mainBundle] pathForResource:@"private_key" ofType:@"p12"];
-    
-   NSString * str = [RSAEncryptor encryptString:@"jintianceshileyitianrsa" publicKeyWithContentsOfFile:publicKeyPath];
-    NSLog(@"%@",str);
-    NSLog(@"%@",[RSAEncryptor decryptString:str privateKeyWithContentsOfFile:privateKeyPath password:@"tdcdmm"]);
-    
-    NSString * str2 = [RSAEncryptor encryptString:@"sdasdsasdasdasdasda" publicKey:PublicKey];
-    NSLog(@"%@",str2);
- 
-    NSString * str3 = [RSAEncryptor decryptString:str2 privateKey:@"MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBANOcUMIPZZqKqiu+JbzmBm7VhHxZqigSm6/yvy34wj0dzNktU2mPaWC/m43QdmQ2ZFL1vBAP8DeAmP8DoEeOjzEtoGMJCjy69cCY5wXAFnmbrDLKMbQhzr3uAtsRN9eq+an24GQenvDjYKjGcS8XWLak9TUHvKAvRzjXYaR+IL4jAgMBAAECgYAerJ4YQ1sbF9arGJkn1MBB+LmHvQepX2kqDCoiY9jkOxmisatRtfQ0jhHicMF4rVnFnNFyEp1jrkR/Uus89DFVUCJi9PavJKctsxnztUB0oOaGV9DJ3BRXD1AmMFLLQFs7g+Jwjlm8wkhWrRY4T+QTHv6OET7VDgTexfi61477wQJBAO+EftIHCit7YX8DKJ8kH2v0tmmnsNJ2VMrIkR2sTh8aS/ejx20r8SpE9IHi69GrfgcF3vik76JS02thX/P0mKkCQQDiLDExr8P8f5b7gLrD64LJVu1HBDN37DaX/Cli3Xf/5RVe5rEm4MCqa1WysUG0zBNYy/PePVqelIzL1trKXaPrAkBZzKgroF4MvV5pW0rQl598Pyxg4nEmBx11Rcs6f85uVNKkjvAHG1F40o+FXwmg+5XtliLpwBTkG/+OI9zwvwS5AkB50NeGLWbfvlCxkToGf/hnPNx7nXWjJ6SX44be6u3Q86+494N+rxrWLw1vOy1qlWfuMZtdnaoLM3NJ7qTUze6VAkA6JgJo53N0hgkHUepNx1gRzQDVZ2L50J0ebgEdAN7mBNLf/4UsZWLUOGTdiPECaW+Q02m9Y2tlzQrXtdWHP4jZ"];
-    NSLog(@"%@",str3);
+    */
     return YES;
 }
 

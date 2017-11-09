@@ -7,8 +7,14 @@
 //
 
 #import "ContactViewController.h"
+#import "ContactModel.h"
 
 @interface ContactViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *fflxLab;
+@property (weak, nonatomic) IBOutlet UILabel *emailLab;
+@property (weak, nonatomic) IBOutlet UILabel *qqLab;
+@property (weak, nonatomic) IBOutlet UILabel *wexinLab;
+@property (weak, nonatomic) IBOutlet UIImageView *erCodeImageView;
 
 @end
 
@@ -16,7 +22,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self requestData];
+}
+
+
+-(void)requestData{
+    kWeakSelf
+    [RequestManager getManagerDataWithPath:@"customerConfig" params:nil success:^(id JSON) {
+        ContactModel * model = [[ContactModel alloc]init];
+        [model setValuesForKeysWithDictionary:JSON];
+        [weak_self setDataWithModel:model];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+-(void)setDataWithModel:(ContactModel *)model{
+    self.fflxLab.text = model.hotline.content;
+    self.wexinLab.text = model.off_wechat.content;
+    self.qqLab.text = model.customer_qq.content;
+    self.emailLab.text = model.customer_hotline.content;
+    
+    [self.erCodeImageView setImageWithURL:[NSURL URLWithString:model.comp_wechat.content] placeholder:KIMAGE(@"8f194ac2f24")];
+}
+
+
+- (IBAction)onLineKefuBtnClick:(id)sender {
+    
 }
 
 - (void)didReceiveMemoryWarning {

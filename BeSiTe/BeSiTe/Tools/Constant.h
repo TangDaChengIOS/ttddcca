@@ -15,6 +15,7 @@
 #import <YYKit/YYKit.h>
 #import "UIView+ATADD.h"
 #import "ATNeedBorderView.h"
+#import "ATNeedBorderButton.h"
 #import "UIBarButtonItem_withBadge.h"
 #import <MJRefresh/MJRefresh.h>
 #import "BSTSingle.h"

@@ -12,7 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactViewController">
             <connections>
+                <outlet property="emailLab" destination="is8-sE-D6k" id="KIy-4O-EhQ"/>
+                <outlet property="erCodeImageView" destination="Sx6-9D-Mo1" id="cHk-ty-DFO"/>
+                <outlet property="fflxLab" destination="zVd-g9-Rdg" id="cuN-jI-Fsh"/>
+                <outlet property="qqLab" destination="blF-oZ-raq" id="iOi-nY-xQH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wexinLab" destination="2k7-Js-x4J" id="pYL-YL-L9l"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -52,8 +57,8 @@
                     <color key="textColor" red="0.49411764705882355" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+44 203 289 9859" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVd-g9-Rdg">
-                    <rect key="frame" x="168" y="206" width="109" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVd-g9-Rdg">
+                    <rect key="frame" x="168" y="206" width="0.0" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="4Qg-5z-HuU"/>
                     </constraints>
@@ -77,8 +82,8 @@
                     <color key="textColor" red="0.49411764705882355" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cs@bstbet.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="is8-sE-D6k">
-                    <rect key="frame" x="168" y="231" width="89" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="is8-sE-D6k">
+                    <rect key="frame" x="168" y="231" width="0.0" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="h0N-J3-Agj"/>
                     </constraints>
@@ -102,8 +107,8 @@
                     <color key="textColor" red="0.49411764705882355" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="800032593" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blF-oZ-raq">
-                    <rect key="frame" x="168" y="256" width="68" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blF-oZ-raq">
+                    <rect key="frame" x="168" y="256" width="0.0" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="qxx-hB-SCT"/>
                     </constraints>
@@ -127,8 +132,8 @@
                     <color key="textColor" red="0.49411764705882355" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="csbeisite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2k7-Js-x4J">
-                    <rect key="frame" x="168" y="281" width="51" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2k7-Js-x4J">
+                    <rect key="frame" x="168" y="281" width="0.0" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="ncl-Lt-vJh"/>
                     </constraints>
@@ -136,7 +141,7 @@
                     <color key="textColor" red="0.38039215686274508" green="0.38039215686274508" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="8f194ac2f24" translatesAutoresizingMaskIntoConstraints="NO" id="Sx6-9D-Mo1">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sx6-9D-Mo1">
                     <rect key="frame" x="135" y="314" width="105" height="105"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Sx6-9D-Mo1" secondAttribute="height" multiplier="1:1" id="D8O-PK-N6E"/>
@@ -151,7 +156,7 @@
                     <color key="textColor" red="0.6588235294117647" green="0.6588235294117647" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxh-nA-8ZJ">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxh-nA-8ZJ" customClass="ATNeedBorderButton">
                     <rect key="frame" x="10" y="458" width="355" height="40"/>
                     <color key="backgroundColor" red="0.396078431372549" green="0.62745098039215685" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -161,6 +166,9 @@
                     <state key="normal" title="在线客服">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onLineKefuBtnClick:" destination="-1" eventType="touchUpInside" id="Asu-Ad-7W1"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -209,7 +217,6 @@
         </view>
     </objects>
     <resources>
-        <image name="8f194ac2f24" width="187" height="187"/>
         <image name="about_custome_mail_icon" width="13" height="13"/>
         <image name="about_custome_qq_icon" width="13" height="13"/>
         <image name="about_custome_tel_icon" width="12" height="12"/>

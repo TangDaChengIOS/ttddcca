@@ -71,7 +71,7 @@
                             </constraints>
                             <state key="normal" image="home_activeity_collect_icon"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUP-xU-L1m">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUP-xU-L1m" customClass="ATNeedBorderButton">
                             <rect key="frame" x="15" y="101" width="265" height="40"/>
                             <color key="backgroundColor" red="0.0" green="0.68627450980392157" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>

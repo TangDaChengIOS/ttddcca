@@ -27,7 +27,6 @@
 		113F71EA1FB2B94B00EB4567 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113F71E91FB2B94B00EB4567 /* MessageTableViewCell.m */; };
 		113F71ED1FB3054900EB4567 /* VTMagicController+PushVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 113F71EC1FB3054900EB4567 /* VTMagicController+PushVC.m */; };
 		114389921FAC1803008840EC /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 114389911FAC1803008840EC /* UserModel.m */; };
-		114389951FAC5911008840EC /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 114389941FAC5911008840EC /* RSA.m */; };
 		114BC1B01FAFF8AB00C1A46D /* BankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 114BC1AE1FAFF8AB00C1A46D /* BankTableViewCell.m */; };
 		114BC1B11FAFF8AB00C1A46D /* BankTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 114BC1AF1FAFF8AB00C1A46D /* BankTableViewCell.xib */; };
 		114BC1B41FAFFB9100C1A46D /* BankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 114BC1B31FAFFB9100C1A46D /* BankModel.m */; };
@@ -106,6 +105,13 @@
 		11AC1B741F99F5DC00C06D85 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC1B731F99F5DC00C06D85 /* LMJScrollTextView.m */; };
 		11B20C081FA9C8F500009977 /* PersonGetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B20C061FA9C8F500009977 /* PersonGetingViewController.m */; };
 		11B20C091FA9C8F500009977 /* PersonGetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B20C071FA9C8F500009977 /* PersonGetingViewController.xib */; };
+		11B211261FB3FC33003CE6ED /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B211251FB3FC33003CE6ED /* ContactModel.m */; };
+		11B2112A1FB405CF003CE6ED /* ForgetPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B211281FB405CF003CE6ED /* ForgetPassWordViewController.m */; };
+		11B2112B1FB405CF003CE6ED /* ForgetPassWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B211291FB405CF003CE6ED /* ForgetPassWordViewController.xib */; };
+		11B2112E1FB430B7003CE6ED /* ATNeedBorderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B2112D1FB430B7003CE6ED /* ATNeedBorderButton.m */; };
+		11B8F0EB1FB49E7100D7E662 /* OnlyShowTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B8F0EA1FB49E7100D7E662 /* OnlyShowTimeTableViewCell.m */; };
+		11B8F0EF1FB4A02000D7E662 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B8F0ED1FB4A02000D7E662 /* ActivityTableViewCell.m */; };
+		11B8F0F01FB4A02000D7E662 /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B8F0EE1FB4A02000D7E662 /* ActivityTableViewCell.xib */; };
 		11BF3BBA1FAA04C500195D1C /* ATTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BF3BB91FAA04C500195D1C /* ATTextField.m */; };
 		11C38DF51FB344D200D75823 /* private_key.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 11C38DF31FB344D200D75823 /* private_key.p12 */; };
 		11C38DF61FB344D200D75823 /* public_key.der in Resources */ = {isa = PBXBuildFile; fileRef = 11C38DF41FB344D200D75823 /* public_key.der */; };
@@ -170,8 +176,6 @@
 		113F71EC1FB3054900EB4567 /* VTMagicController+PushVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VTMagicController+PushVC.m"; sourceTree = "<group>"; };
 		114389901FAC1803008840EC /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		114389911FAC1803008840EC /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
-		114389931FAC5911008840EC /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
-		114389941FAC5911008840EC /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
 		114BC1AD1FAFF8AB00C1A46D /* BankTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankTableViewCell.h; sourceTree = "<group>"; };
 		114BC1AE1FAFF8AB00C1A46D /* BankTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankTableViewCell.m; sourceTree = "<group>"; };
 		114BC1AF1FAFF8AB00C1A46D /* BankTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankTableViewCell.xib; sourceTree = "<group>"; };
@@ -318,6 +322,18 @@
 		11B20C051FA9C8F500009977 /* PersonGetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonGetingViewController.h; sourceTree = "<group>"; };
 		11B20C061FA9C8F500009977 /* PersonGetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonGetingViewController.m; sourceTree = "<group>"; };
 		11B20C071FA9C8F500009977 /* PersonGetingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonGetingViewController.xib; sourceTree = "<group>"; };
+		11B211241FB3FC33003CE6ED /* ContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactModel.h; path = ../view/ContactModel.h; sourceTree = "<group>"; };
+		11B211251FB3FC33003CE6ED /* ContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactModel.m; path = ../view/ContactModel.m; sourceTree = "<group>"; };
+		11B211271FB405CF003CE6ED /* ForgetPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPassWordViewController.h; sourceTree = "<group>"; };
+		11B211281FB405CF003CE6ED /* ForgetPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPassWordViewController.m; sourceTree = "<group>"; };
+		11B211291FB405CF003CE6ED /* ForgetPassWordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPassWordViewController.xib; sourceTree = "<group>"; };
+		11B2112C1FB430B7003CE6ED /* ATNeedBorderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNeedBorderButton.h; sourceTree = "<group>"; };
+		11B2112D1FB430B7003CE6ED /* ATNeedBorderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNeedBorderButton.m; sourceTree = "<group>"; };
+		11B8F0E91FB49E7100D7E662 /* OnlyShowTimeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlyShowTimeTableViewCell.h; sourceTree = "<group>"; };
+		11B8F0EA1FB49E7100D7E662 /* OnlyShowTimeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlyShowTimeTableViewCell.m; sourceTree = "<group>"; };
+		11B8F0EC1FB4A02000D7E662 /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewCell.h; sourceTree = "<group>"; };
+		11B8F0ED1FB4A02000D7E662 /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
+		11B8F0EE1FB4A02000D7E662 /* ActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTableViewCell.xib; sourceTree = "<group>"; };
 		11BF3BB81FAA04C500195D1C /* ATTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTextField.h; sourceTree = "<group>"; };
 		11BF3BB91FAA04C500195D1C /* ATTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTextField.m; sourceTree = "<group>"; };
 		11C38DF31FB344D200D75823 /* private_key.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = private_key.p12; sourceTree = "<group>"; };
@@ -404,6 +420,7 @@
 				116463381F91A947004ECC79 /* PersonCenter */,
 				116463331F91A947004ECC79 /* Contact */,
 				113F71D91FB2B35000EB4567 /* Message */,
+				1194B1DD1FA772EB00241E49 /* MoneyRecord */,
 				11CBCCF21F9CEB43000E4D01 /* LoginAbout */,
 				116463321F91A947004ECC79 /* BaseClass */,
 				116463521F91B921004ECC79 /* Tools */,
@@ -516,6 +533,8 @@
 				113F71E61FB2B5FC00EB4567 /* UIButton_withBadge.m */,
 				113F71EB1FB3054900EB4567 /* VTMagicController+PushVC.h */,
 				113F71EC1FB3054900EB4567 /* VTMagicController+PushVC.m */,
+				11B2112C1FB430B7003CE6ED /* ATNeedBorderButton.h */,
+				11B2112D1FB430B7003CE6ED /* ATNeedBorderButton.m */,
 			);
 			path = BaseClass;
 			sourceTree = "<group>";
@@ -626,6 +645,8 @@
 		1164633E1F91A9FE004ECC79 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				11B211241FB3FC33003CE6ED /* ContactModel.h */,
+				11B211251FB3FC33003CE6ED /* ContactModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -711,6 +732,11 @@
 		116463451F91AA21004ECC79 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				11B8F0E91FB49E7100D7E662 /* OnlyShowTimeTableViewCell.h */,
+				11B8F0EA1FB49E7100D7E662 /* OnlyShowTimeTableViewCell.m */,
+				11B8F0EC1FB4A02000D7E662 /* ActivityTableViewCell.h */,
+				11B8F0ED1FB4A02000D7E662 /* ActivityTableViewCell.m */,
+				11B8F0EE1FB4A02000D7E662 /* ActivityTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -729,8 +755,6 @@
 		116463551F91E15D004ECC79 /* library */ = {
 			isa = PBXGroup;
 			children = (
-				114389931FAC5911008840EC /* RSA.h */,
-				114389941FAC5911008840EC /* RSA.m */,
 				1154D1201FAAD0D800E05734 /* Calendar */,
 				11CBCCE11F9C51E4000E4D01 /* XHStarRateView.h */,
 				11CBCCE21F9C51E4000E4D01 /* XHStarRateView.m */,
@@ -881,8 +905,7 @@
 				1194B1DF1FA772EB00241E49 /* model */,
 				1194B1E01FA772EB00241E49 /* view */,
 			);
-			name = MoneyRecord;
-			path = ../../MoneyRecord;
+			path = MoneyRecord;
 			sourceTree = "<group>";
 		};
 		1194B1DE1FA772EB00241E49 /* Control */ = {
@@ -947,7 +970,9 @@
 				11ECA9441F9D93F100CF84CB /* RegisterPageTwoViewController.xib */,
 				114BC1B51FAFFDE600C1A46D /* BankSelectViewController.h */,
 				114BC1B61FAFFDE600C1A46D /* BankSelectViewController.m */,
-				1194B1DD1FA772EB00241E49 /* MoneyRecord */,
+				11B211271FB405CF003CE6ED /* ForgetPassWordViewController.h */,
+				11B211281FB405CF003CE6ED /* ForgetPassWordViewController.m */,
+				11B211291FB405CF003CE6ED /* ForgetPassWordViewController.xib */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -1088,6 +1113,7 @@
 				116463A61F91F634004ECC79 /* mask.jpg in Resources */,
 				11F5E2471FB1AEB300A23523 /* QuickSavingViewController.xib in Resources */,
 				11C38DFB1FB3567900D75823 /* ContactViewController.xib in Resources */,
+				11B8F0F01FB4A02000D7E662 /* ActivityTableViewCell.xib in Resources */,
 				11C38DF61FB344D200D75823 /* public_key.der in Resources */,
 				116463A51F91F634004ECC79 /* line.png in Resources */,
 				119EAF2B1FA6142500E6C2CA /* PersonSavingViewController.xib in Resources */,
@@ -1098,6 +1124,7 @@
 				114BC1BF1FB0604A00C1A46D /* SavingByCardViewController.xib in Resources */,
 				1164635D1F91E1FC004ECC79 /* MenuViewController.xib in Resources */,
 				11ECA9411F9D93C600CF84CB /* RegisterPageOneViewController.xib in Resources */,
+				11B2112B1FB405CF003CE6ED /* ForgetPassWordViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1180,6 +1207,7 @@
 				1154D12C1FAAD0D800E05734 /* DAYCalendarView.m in Sources */,
 				11CBCCE61F9C6938000E4D01 /* GameListPageHeaderView.m in Sources */,
 				11ECA9491F9DA34400CF84CB /* ATNeedBorderView.m in Sources */,
+				11B211261FB3FC33003CE6ED /* ContactModel.m in Sources */,
 				11C38DFA1FB3567900D75823 /* ContactViewController.m in Sources */,
 				11CBCCE31F9C51E4000E4D01 /* XHStarRateView.m in Sources */,
 				1190EC531F9EE00B007A1D05 /* RegisterSuccessView.m in Sources */,
@@ -1199,7 +1227,6 @@
 				119EAF2A1FA6142500E6C2CA /* PersonSavingViewController.m in Sources */,
 				118A36651FB2030700FD6193 /* MoneyMoveViewController.m in Sources */,
 				116463BC1F91F634004ECC79 /* XWFilterTransitionView.m in Sources */,
-				114389951FAC5911008840EC /* RSA.m in Sources */,
 				113F71ED1FB3054900EB4567 /* VTMagicController+PushVC.m in Sources */,
 				113F71D81FB2B33900EB4567 /* AppDelegate+Setting.m in Sources */,
 				116463B21F91F634004ECC79 /* XWFilterAnimator+XWBarSwipe.m in Sources */,
@@ -1237,8 +1264,10 @@
 				116463B91F91F634004ECC79 /* XWFilterAnimator+XWRipple.m in Sources */,
 				116463481F91AA3E004ECC79 /* HomeViewController.m in Sources */,
 				1154D12E1FAAD0D800E05734 /* DAYIndicatorView.m in Sources */,
+				11B8F0EF1FB4A02000D7E662 /* ActivityTableViewCell.m in Sources */,
 				116463B01F91F634004ECC79 /* XWCoolAnimator.m in Sources */,
 				112B16D91FA727CC00CE4555 /* EditPassWordView.m in Sources */,
+				11B8F0EB1FB49E7100D7E662 /* OnlyShowTimeTableViewCell.m in Sources */,
 				116463BD1F91F634004ECC79 /* XWMagicMoveAnimator.m in Sources */,
 				11CBCCF91F9CEC03000E4D01 /* LoginViewController.m in Sources */,
 				112B16D61FA6D68D00CE4555 /* EditPhoneNumberView.m in Sources */,
@@ -1260,6 +1289,8 @@
 				119589C81F98F57F0070AC16 /* MenuTableViewCell.m in Sources */,
 				116463B51F91F634004ECC79 /* XWFilterAnimator+XWFlash.m in Sources */,
 				11BF3BBA1FAA04C500195D1C /* ATTextField.m in Sources */,
+				11B2112A1FB405CF003CE6ED /* ForgetPassWordViewController.m in Sources */,
+				11B2112E1FB430B7003CE6ED /* ATNeedBorderButton.m in Sources */,
 				1154D1361FAB229B00E05734 /* BSTSingle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

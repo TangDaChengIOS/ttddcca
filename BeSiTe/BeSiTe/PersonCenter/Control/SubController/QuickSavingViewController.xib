@@ -94,7 +94,7 @@
                             <color key="textColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQI-w9-hjc">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QQI-w9-hjc" customClass="ATNeedBorderButton">
                             <rect key="frame" x="216" y="4" width="50" height="30"/>
                             <color key="backgroundColor" red="0.0" green="0.68627450980392157" blue="0.40784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -143,7 +143,7 @@
                             <color key="textColor" red="0.16862745100000001" green="0.16862745100000001" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebV-Ch-Pd4">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebV-Ch-Pd4" customClass="ATNeedBorderButton">
                             <rect key="frame" x="216" y="4" width="50" height="30"/>
                             <color key="backgroundColor" red="0.0" green="0.68627450980000004" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -283,7 +283,7 @@
                         <constraint firstItem="dik-re-WvD" firstAttribute="top" secondItem="MwV-Ql-mx6" secondAttribute="top" constant="11" id="yD1-dg-wIV"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRY-oY-4MW">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRY-oY-4MW" customClass="ATNeedBorderButton">
                     <rect key="frame" x="25" y="347" width="270" height="40"/>
                     <color key="backgroundColor" red="0.98431372549019602" green="0.54117647058823526" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>

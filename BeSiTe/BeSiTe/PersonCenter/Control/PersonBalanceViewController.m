@@ -29,7 +29,7 @@
 
 -(void)configSubViews{
     self.view.backgroundColor = kWhiteColor;
-    _aplyMoneyBtn.layer.cornerRadius = _turnInBtn.layer.cornerRadius = _turnOutBtn.layer.cornerRadius = 4;
+    //_aplyMoneyBtn.layer.cornerRadius = _turnInBtn.layer.cornerRadius = _turnOutBtn.layer.cornerRadius = 4;
     _aplyMoneyBtn.backgroundColor = UIColorFromINTValue(251, 138, 113);
 
     _tableView.delegate = self;
@@ -38,10 +38,6 @@
     _tableView.layer.borderColor = UIColorFromRGBValue(0xf3f3f3).CGColor;
     _tableView.layer.borderWidth = 1;
     [_tableView registerClass:[MoneyListTableViewCell class] forCellReuseIdentifier:kMoneyListTableViewCellReuseID];
-//    
-//    UIView * _vetLine = [[UIView alloc]initWithFrame:CGRectMake(self.view.width /2, _tableView.top, 1, _tableView.height)];
-//    _vetLine.backgroundColor = UIColorFromRGBValue(0xf3f3f3);
-//    [self.view addSubview:_vetLine];
     
 }
 #pragma mark -- UITableViewDelegate / DataSource

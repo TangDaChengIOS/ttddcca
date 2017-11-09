@@ -130,7 +130,7 @@
                                         <constraint firstAttribute="height" constant="14" id="eza-TG-js0"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKQ-ez-7uq">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKQ-ez-7uq" customClass="ATNeedBorderButton">
                                     <rect key="frame" x="291" y="134" width="77" height="27"/>
                                     <color key="backgroundColor" red="0.13725490196078433" green="0.62745098039215685" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -173,7 +173,7 @@
                                         <constraint firstAttribute="width" constant="34" id="tox-vc-Hmn"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0pA-39-qiS">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0pA-39-qiS" customClass="ATNeedBorderButton">
                                     <rect key="frame" x="291" y="179" width="77" height="27"/>
                                     <color key="backgroundColor" red="0.39215686274509803" green="0.62745098039215685" blue="0.34509803921568627" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
