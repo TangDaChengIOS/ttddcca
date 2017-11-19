@@ -11,7 +11,9 @@
 @interface EditPhoneNumberView ()
 
 @property (nonatomic,strong) UILabel * titleLab;
-@property (nonatomic,strong) UITextField * nameTF;
+@property (nonatomic,strong) UITextField * phoneTF;
+@property (nonatomic,strong) UITextField * codeTF;
+@property (nonatomic,strong) UIButton * getCodeBtn;
 
 @end
 
@@ -44,28 +46,28 @@
     [whiteBack addSubview:_titleLab];
   
     //手机号码输入
-    UITextField * phoneTF = [self createTextFieldWithFrame:CGRectMake(16, _titleLab.maxY + 25, whiteBack_W - 32, 38)];
-    phoneTF.placeholder = @"请输入手机号码";
-    [whiteBack addSubview:phoneTF];
+    _phoneTF = [self createTextFieldWithFrame:CGRectMake(16, _titleLab.maxY + 25, whiteBack_W - 32, 38)];
+    _phoneTF.placeholder = @"请输入手机号码";
+    [whiteBack addSubview:_phoneTF];
   
     //获取验证码按钮
-    UIButton * getCodeBtn = [[UIButton alloc]initWithFrame:CGRectMake(whiteBack_W - 16 - 90 * kPROPORTION, phoneTF.maxY + 12, 90 * kPROPORTION, 38)];
-    getCodeBtn.layer.borderColor = UIColorFromINTValue(244, 144, 30).CGColor;
-    getCodeBtn.layer.borderWidth = 1.0f;
-    [getCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [getCodeBtn setTitleColor:UIColorFromINTValue(244, 144, 30) forState:UIControlStateNormal];
-    getCodeBtn.layer.cornerRadius = 4.0f;
-    getCodeBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
-    [getCodeBtn addTarget:self action:@selector(getCodeBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [whiteBack addSubview:getCodeBtn];
+    _getCodeBtn = [[UIButton alloc]initWithFrame:CGRectMake(whiteBack_W - 16 - 90 * kPROPORTION, _phoneTF.maxY + 12, 90 * kPROPORTION, 38)];
+    _getCodeBtn.layer.borderColor = UIColorFromINTValue(244, 144, 30).CGColor;
+    _getCodeBtn.layer.borderWidth = 1.0f;
+    [_getCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+    [_getCodeBtn setTitleColor:UIColorFromINTValue(244, 144, 30) forState:UIControlStateNormal];
+    _getCodeBtn.layer.cornerRadius = 4.0f;
+    _getCodeBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [_getCodeBtn addTarget:self action:@selector(getCodeBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [whiteBack addSubview:_getCodeBtn];
     
     //验证码输入框
-    UITextField * codeTF = [self createTextFieldWithFrame:CGRectMake(16, phoneTF.maxY + 12, whiteBack_W - 36 - 90 * kPROPORTION, 38)];
-    codeTF.placeholder = @"请输入验证码";
-    [whiteBack addSubview:codeTF];
+    _codeTF = [self createTextFieldWithFrame:CGRectMake(16, _phoneTF.maxY + 12, whiteBack_W - 36 - 90 * kPROPORTION, 38)];
+    _codeTF.placeholder = @"请输入验证码";
+    [whiteBack addSubview:_codeTF];
    
     //底部提醒字样lab
-    UILabel * lab2 = [[UILabel alloc]initWithFrame:CGRectMake(16, codeTF.maxY + 12,  whiteBack_W - 32, 15)];
+    UILabel * lab2 = [[UILabel alloc]initWithFrame:CGRectMake(16, _codeTF.maxY + 12,  whiteBack_W - 32, 15)];
     lab2.text = @"请在5分钟内输入验证码";
     lab2.textColor = UIColorFromINTValue(186, 186, 186);
     lab2.font = kFont(12);
@@ -92,24 +94,58 @@
     [whiteBack addSubview:cancelBtn];
     
 }
-+(void)show{
-    UIWindow * window = [[UIApplication sharedApplication].windows lastObject];
++(void)showWithEditPhoneType:(EditPhoneNumberViewType)type
+{
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     EditPhoneNumberView * view = [[EditPhoneNumberView alloc]init];
+    view.editType = type;
+    view.titleLab.text = type == EditPhoneNumberViewTypeEdit ? @"修改手机号码":@"验证手机号码";
     [window addSubview:view];
 }
 
 -(void)saveBtnClick{
-    
+    if (![ZZTextInput isValidateMobile:self.phoneTF.text]) {
+        TTAlert(@"请输入正确的手机号码");
+        return;
+    }
+    if (self.codeTF.text.length <= 0) {
+        TTAlert(@"请输入验证码");
+        return;
+    }
+    NSDictionary * dict  = @{@"type":@"1",
+                             @"smsCode":self.codeTF.text,
+                             @"validateParam":self.phoneTF.text};
+    kWeakSelf
+    [RequestManager postWithPath:@"verify" params:dict success:^(id JSON) {
+        NSLog(@"验证成");
+        [weak_self removeFromSuperview];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 
 -(void)cancelBtnClick{
-    
+    [self removeFromSuperview];
 }
 
 
 -(void)getCodeBtnClick{
-    
+    if (![ZZTextInput isValidateMobile:self.phoneTF.text]) {
+        TTAlert(@"请输入正确的手机号码");
+        return;
+    }
+    kWeakSelf
+    NSDictionary * dict = @{@"mobile":self.phoneTF.text,
+                            @"type":@"1"};
+    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON) {
+        NSLog(@"%@",JSON);
+        [weak_self.getCodeBtn countDownFromTime:5 completion:^(UIButton *countDownButton) {
+            
+        }];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 

@@ -11,7 +11,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PersonMessageViewController">
             <connections>
+                <outlet property="accountNameLab" destination="sn4-WO-q53" id="Ulc-Ax-TY0"/>
+                <outlet property="collectionTopView" destination="oGg-nR-SPc" id="8aU-GL-qOW"/>
+                <outlet property="collectionView" destination="X0u-Qr-s2R" id="Tge-ZH-SMR"/>
+                <outlet property="emailEditBtn" destination="0pA-39-qiS" id="HWn-AB-9WZ"/>
+                <outlet property="emailLab" destination="Bjb-XM-0k3" id="OmG-8E-rwf"/>
+                <outlet property="emailStateImageView" destination="C6v-gj-A8k" id="q4k-0G-g1O"/>
+                <outlet property="mainAccountLab" destination="IDY-Pm-UHq" id="Apy-w2-oR3"/>
+                <outlet property="nameLab" destination="PeY-SW-EMN" id="pEC-Ec-SuT"/>
+                <outlet property="phoneEditBtn" destination="lKQ-ez-7uq" id="SAs-Ra-LUT"/>
+                <outlet property="phoneLab" destination="ovH-Fk-dp5" id="gkn-BB-BhF"/>
+                <outlet property="phoneStateImageView" destination="asM-6J-tn5" id="Scp-Na-3dP"/>
+                <outlet property="specialVIPImageView" destination="GrM-zA-KGk" id="BK5-pk-lra"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="vipImageView" destination="xGV-Tl-yIB" id="3Bd-KJ-dgx"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -50,14 +63,14 @@
                                         <constraint firstAttribute="height" constant="40" id="FcV-g0-pGU"/>
                                     </constraints>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common_VIP-4" translatesAutoresizingMaskIntoConstraints="NO" id="xGV-Tl-yIB">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common_VIP-0" translatesAutoresizingMaskIntoConstraints="NO" id="xGV-Tl-yIB">
                                     <rect key="frame" x="51" y="62" width="15" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="TBX-2k-4j0"/>
                                         <constraint firstAttribute="width" constant="15" id="gRb-SP-Y11"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BCGREAT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sn4-WO-q53">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sn4-WO-q53">
                                     <rect key="frame" x="81" y="49" width="148" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="0jN-YY-eAw"/>
@@ -89,7 +102,7 @@
                                     <color key="textColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="阿汤" placeholder="点击填写姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PeY-SW-EMN">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="点击填写姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PeY-SW-EMN">
                                     <rect key="frame" x="81" y="95" width="78" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="14" id="AF4-cC-MLO"/>
@@ -114,8 +127,8 @@
                                     <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="138****1851" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovH-Fk-dp5">
-                                    <rect key="frame" x="81" y="140" width="72" height="14"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovH-Fk-dp5">
+                                    <rect key="frame" x="81" y="140" width="0.0" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="14" id="IKw-o6-OUe"/>
                                     </constraints>
@@ -124,7 +137,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_verification_img_false" translatesAutoresizingMaskIntoConstraints="NO" id="asM-6J-tn5">
-                                    <rect key="frame" x="163" y="140" width="34" height="14"/>
+                                    <rect key="frame" x="91" y="140" width="34" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="34" id="POz-ag-kpE"/>
                                         <constraint firstAttribute="height" constant="14" id="eza-TG-js0"/>
@@ -157,8 +170,8 @@
                                     <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="179*****@88.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjb-XM-0k3">
-                                    <rect key="frame" x="81" y="185" width="104" height="14"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjb-XM-0k3">
+                                    <rect key="frame" x="81" y="185" width="0.0" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="14" id="XEW-4R-FGI"/>
                                     </constraints>
@@ -167,7 +180,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_verification_img_true" translatesAutoresizingMaskIntoConstraints="NO" id="C6v-gj-A8k">
-                                    <rect key="frame" x="195" y="185" width="34" height="14"/>
+                                    <rect key="frame" x="91" y="185" width="34" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="14" id="3XD-2E-kGY"/>
                                         <constraint firstAttribute="width" constant="34" id="tox-vc-Hmn"/>
@@ -199,6 +212,9 @@
                                     <state key="normal" title="修改密码">
                                         <color key="titleColor" red="0.21176470588235294" green="0.49803921568627452" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="changePWDBtnClick:" destination="-1" eventType="touchUpInside" id="Qn9-PT-Knr"/>
+                                    </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBa-QT-oGs">
                                     <rect key="frame" x="0.0" y="259" width="375" height="1"/>
@@ -215,6 +231,9 @@
                                     <state key="normal" title="推荐有礼">
                                         <color key="titleColor" red="0.89411764705882346" green="0.10588235294117647" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="recommendBtnClick:" destination="-1" eventType="touchUpInside" id="fB3-tc-SK5"/>
+                                    </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGg-nR-SPc">
                                     <rect key="frame" x="0.0" y="304" width="375" height="21"/>
@@ -342,7 +361,7 @@
         </view>
     </objects>
     <resources>
-        <image name="common_VIP-4" width="19" height="19"/>
+        <image name="common_VIP-0" width="17" height="17"/>
         <image name="common_avatar_img" width="38" height="38"/>
         <image name="porfile_vip_btn_img" width="141" height="30"/>
         <image name="profile_collect_title_imgprofile_" width="12" height="10"/>

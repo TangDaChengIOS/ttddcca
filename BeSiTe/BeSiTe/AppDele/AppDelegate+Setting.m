@@ -11,6 +11,8 @@
 #import "HomeViewController.h"
 #import "ContactViewController.h"
 #import "PersonViewController.h"
+#import "UserModel.h"
+#import "RSAEncryptor.h"
 
 @implementation AppDelegate (Setting)
 
@@ -54,6 +56,33 @@
     [self.window makeKeyAndVisible];
     
     [[UINavigationBar appearance]setBarTintColor:kMainColor];
+}
+-(void)test{
+   NSDictionary * dict =  [[NSUserDefaults standardUserDefaults]objectForKey:@"UserMessage"];
+    UserModel * user = [UserModel new];
+    [user setValuesForKeysWithDictionary:dict];
+    [BSTSingle defaultSingle].user = user;
+    NSLog(@"%@",user);
+}
+
+
+-(void)autoLogin
+{
+    NSString * passWord = [RSAEncryptor encryptStringUseLocalFile:@"afg2kn"];
+    
+    NSDictionary * dict = @{@"loginName":@"BCASDFG",
+                            @"password":passWord};
+    [RequestManager getWithPath:@"login" params:dict success:^(id JSON) {
+        [[NSUserDefaults standardUserDefaults]setObject:JSON forKey:@"UserMessage"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        UserModel * model = [[UserModel alloc]init];
+        [model setValuesForKeysWithDictionary:JSON];
+        [BSTSingle defaultSingle].user = model;
+        NSLog(@"登录成功");
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 @end

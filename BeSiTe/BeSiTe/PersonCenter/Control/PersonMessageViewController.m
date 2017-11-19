@@ -10,8 +10,22 @@
 #import "EditNameView.h"
 #import "EditPhoneNumberView.h"
 #import "EditPassWordView.h"
+#import "EditPassWordView.h"
 
 @interface PersonMessageViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *mainAccountLab;
+@property (weak, nonatomic) IBOutlet UIImageView *vipImageView;
+@property (weak, nonatomic) IBOutlet UILabel *accountNameLab;
+@property (weak, nonatomic) IBOutlet UIImageView *specialVIPImageView;
+@property (weak, nonatomic) IBOutlet UITextField *nameLab;
+@property (weak, nonatomic) IBOutlet UILabel *phoneLab;
+@property (weak, nonatomic) IBOutlet UIImageView *phoneStateImageView;
+@property (weak, nonatomic) IBOutlet ATNeedBorderButton *phoneEditBtn;
+@property (weak, nonatomic) IBOutlet UILabel *emailLab;
+@property (weak, nonatomic) IBOutlet UIImageView *emailStateImageView;
+@property (weak, nonatomic) IBOutlet ATNeedBorderButton *emailEditBtn;
+@property (weak, nonatomic) IBOutlet UIView *collectionTopView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -19,30 +33,56 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    //35,160 ,237
-
+    [self getFavGameData];
 }
+
+
+-(void)getFavGameData{
+    [RequestManager getWithPath:@"getFavGames" params:nil success:^(id JSON) {
+        NSLog(@"%@",JSON);
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [EditPassWordView show];
-    });
+    [self readDataFromSingleLeton];
 }
+
+-(void)readDataFromSingleLeton{
+   UserModel * user = [BSTSingle defaultSingle].user;
+
+    self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
+    self.vipImageView.image = KIMAGE([user getVipImageStr]);
+    self.accountNameLab.text = user.userName;
+    self.nameLab.text = user.userName;
+    self.phoneLab.text = user.mobile;
+    self.phoneStateImageView.image = user.mobileVerified == 0 ? KIMAGE(@"profile_verification_img_false") : KIMAGE(@"profile_verification_img_true");
+    [self refreshButton:self.phoneEditBtn state:user.mobileVerified];
+    self.emailLab.text = user.email;
+    self.emailStateImageView.image = user.emailVerified == 0 ? KIMAGE(@"profile_verification_img_false") : KIMAGE(@"profile_verification_img_true");
+    [self refreshButton:self.emailEditBtn state:user.emailVerified];
+
+}
+
+-(void)refreshButton:(UIButton *)button state:(BOOL)isOK{
+    button.backgroundColor = isOK ? UIColorFromINTValue(35,160 ,237):UIColorFromINTValue(100,160,88);
+    [button setTitle:(isOK ? @"修改": @"验证") forState:UIControlStateNormal];
+}
+
+- (IBAction)changePWDBtnClick:(id)sender {
+    [EditPassWordView show];
+}
+- (IBAction)recommendBtnClick:(id)sender {
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

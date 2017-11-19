@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "GamesCompanyModel.h"
+#import "UserModel.h"
 
 @interface BSTSingle : NSObject
 
 @property (nonatomic,strong) NSArray <GamesCompanyModel *>* companysArray;
 
+@property (nonatomic,strong) UserModel * user;
 +(instancetype)defaultSingle;
 
 @end

@@ -42,7 +42,7 @@
 #pragma mark -- subViews
 -(void)configSubViews
 {
-    [self.navigationController setNavigationBarHidden:YES];
+    self.isNeedHiddenNav = YES;
     self.view.backgroundColor = kWhiteColor;
 
     CGFloat cornerRadius = 13;
@@ -103,6 +103,10 @@
 #pragma mark -- 按钮事件
 - (IBAction)registerBtnDidClicked:(id)sender
 {
+        [self.navigationController pushViewController:[[RegisterPageTwoViewController alloc]initWithNibName:@"RegisterPageTwoViewController" bundle:nil] animated:YES];
+    return;
+    
+    
     if (![ZZTextInput inputNumberOrLetters:self.nameTF.text]) {
         TTAlert(@"请输入以数字、字母、下划线组成的6-15位的账号");
         return;
@@ -131,8 +135,7 @@
                             @"smsCode":self.codeTF.text};
     kWeakSelf
     [RequestManager postWithPath:@"register" params:dict success:^(id JSON) {
-        [[NSUserDefaults standardUserDefaults]setObject:JSON forKey:@"UserMessage"];
-        [[NSUserDefaults standardUserDefaults]synchronize];
+
         UserModel * user = [UserModel new];
         [user setValuesForKeysWithDictionary:JSON];
         NSLog(@"%@",user);
@@ -148,10 +151,14 @@
         TTAlert(@"请输入正确的手机号码");
         return;
     }
+    kWeakSelf
     NSDictionary * dict = @{@"mobile":self.phoneTF.text,
                             @"type":@"1"};
     [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON) {
         NSLog(@"%@",JSON);
+        [weak_self.getCodeBtn countDownFromTime:60 completion:^(UIButton *countDownButton) {
+            
+        }];
     } failure:^(NSError *error) {
 
     }];

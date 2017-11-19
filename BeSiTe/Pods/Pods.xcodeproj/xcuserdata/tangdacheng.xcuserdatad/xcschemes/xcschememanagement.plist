@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>PPiAwesomeButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,22 +77,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>29AA5E7E919DF815EC20E097B046E6DB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>40C6FEF1F7A4F1166F844D40C78261B5</key>
+		<key>47FE4F0E9606513E170BF975A8693871</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>496643A0C6647A237EA495B023CFA1A7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5038EBF96DFE2CAE5B9BA879E1BBCFBB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,12 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6B98EAB3D73533BF6F307CE4117B3AE5</key>
+		<key>6135186DA45552E25CE37B09913CB823</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7AC53F97A8C59E642B5FF32FC24DF819</key>
+		<key>6B98EAB3D73533BF6F307CE4117B3AE5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,7 +112,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9E033EDB5EC0819481B0546434FA577B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A0742FC9B2078EB9400C69D87CEB401D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,12 +132,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AFEF2A33569C3D244B86BA44E7024EB6</key>
+		<key>B909B3F4C1474158803FF037F4E4DE77</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B863740757D3CBA41CD5ACEA087BCF5D</key>
+		<key>C4A5C6A2A4C7796D4145C539833BDAA3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CD7ED6C3B7E473B11FC39FEBBCBC5DE9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

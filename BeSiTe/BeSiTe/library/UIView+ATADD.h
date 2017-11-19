@@ -16,4 +16,7 @@
 /**right坐标*/
 @property (nonatomic,readonly) CGFloat maxX;
 
+/**Y轴偏移，并且Height相应变化*/
+@property (nonatomic) CGFloat y_offset;
+
 @end

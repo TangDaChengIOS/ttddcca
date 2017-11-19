@@ -55,7 +55,7 @@
 {
     [_mainImage setImageWithURL:[NSURL URLWithString:model.mainIcon] placeholder:KIMAGE(@"home_gameType_AG_icon")];
     if (model.isHot) {
-        _typeImage.image = KIMAGE(@"home_activity_hot_icon");
+        _typeImage.image = KIMAGE(@"home_gameType_hot_img");
     }
     else{
         if (model.isNew) {

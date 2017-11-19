@@ -8,6 +8,7 @@
 
 #import "ATBaseViewController.h"
 
+/**找回密码*/
 @interface ForgetPassWordViewController : ATBaseViewController
 
 @end

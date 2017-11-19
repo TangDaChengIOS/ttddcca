@@ -19,5 +19,14 @@
     return self.frame.origin.y + self.frame.size.height;
 }
 
+-(void)setY_offset:(CGFloat)y_offset
+{
+    self.top += y_offset;
+    self.height -= y_offset;
+}
+
+-(CGFloat)y_offset{
+    return -1;
+}
 
 @end

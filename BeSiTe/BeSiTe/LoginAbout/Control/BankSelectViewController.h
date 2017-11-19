@@ -7,6 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
+#import "BankTableViewCell.h"
 
 typedef NS_ENUM(NSUInteger, BankSelectVCEnterType) {
     BankSelectVCEnterTypeDefault = 0,    //默认，只显示所有银行列表
@@ -15,4 +16,5 @@ typedef NS_ENUM(NSUInteger, BankSelectVCEnterType) {
 
 @interface BankSelectViewController : ATBaseViewController
 @property (nonatomic,assign) BOOL isHaveOtherData;
+@property (nonatomic,copy) void (^selectBankBlock)(BankModel * model);
 @end

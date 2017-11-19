@@ -97,7 +97,6 @@
                     </state>
                     <connections>
                         <action selector="findPWDBtnClick:" destination="-1" eventType="touchUpInside" id="hQK-ae-ywX"/>
-                        <action selector="sendCodeBtnDidClicked:" destination="-1" eventType="touchUpInside" id="uIQ-3e-d2a"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtx-ja-2bc" customClass="ATNeedBorderButton">

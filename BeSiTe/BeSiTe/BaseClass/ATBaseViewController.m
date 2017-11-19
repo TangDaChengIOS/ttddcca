@@ -9,17 +9,18 @@
 #import "ATBaseViewController.h"
 
 @interface ATBaseViewController ()
-@property (nonatomic,assign) BOOL isHiddenNav;
+
 @end
 
 @implementation ATBaseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
 
 //    self.view.backgroundColor = [UIColor colorWithRed:arc4random()%255/255.0 green:arc4random()%255/255.0 blue:arc4random()%255/255.0 alpha:1];
-    _isHiddenNav = self.navigationController.navigationBarHidden;
+
     if (self.navigationController.viewControllers.count > 1) {
            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"navgartion_back_btn") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
     }
@@ -28,12 +29,23 @@
 -(void)leftBarButtonItemClick{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (_isNeedHiddenNav) {
+        [self.navigationController setNavigationBarHidden:YES];
+
+    }else{
+        [self.navigationController setNavigationBarHidden:NO];
+
+    }
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:_isHiddenNav];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
--(void)pushVC:(ATBaseViewController *)viewController{
+-(void)pushVC:(UIViewController *)viewController{
     viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
 }

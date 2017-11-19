@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 /**展示游戏菜单页面*/
 @interface GamesMenuView : UIView
-
+@property (nonatomic,copy) void (^tryPlayBlock)();
 +(void)show;
 
 @end

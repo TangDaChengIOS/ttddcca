@@ -22,6 +22,10 @@
     NSSet *set = [[NSSet alloc] initWithObjects:@"text/plain", @"application/json", nil];
     manager.responseSerializer.acceptableContentTypes = set;
     
+    if ([BSTSingle defaultSingle].user) {
+        [manager.requestSerializer setValue:[BSTSingle defaultSingle].user.token forHTTPHeaderField:@"ACCESS_TOKEN"];
+    }
+    
     NSMutableDictionary *allParams = [params mutableCopy];
     if ([method isEqualToString:@"GET"]) {
         
@@ -33,6 +37,8 @@
                 success(responseObject[@"data"]);
             }
             else{
+                MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
+
                 TTAlert(responseObject[@"retMsg"]);
 //                NSError * error = [NSError errorWithDomain:NSLocalizedDescriptionKey code:0 userInfo:@{@"msg":responseObject[@"retMsg"]}];
 //                MyLog(@"Error:%@",responseObject[@"retMsg"]);

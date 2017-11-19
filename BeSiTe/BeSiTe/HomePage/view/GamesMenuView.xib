@@ -61,6 +61,9 @@
                             <state key="normal" title="试玩">
                                 <color key="titleColor" red="0.52156862745098043" green="0.33333333333333331" blue="0.0039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="tryPlayBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Weq-3d-FIp"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWQ-1T-sQR">
                             <rect key="frame" x="240" y="56" width="40" height="30"/>
@@ -70,6 +73,9 @@
                                 <constraint firstAttribute="width" constant="40" id="MKA-dU-GRD"/>
                             </constraints>
                             <state key="normal" image="home_activeity_collect_icon"/>
+                            <connections>
+                                <action selector="collectBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="sE4-B3-I5R"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUP-xU-L1m" customClass="ATNeedBorderButton">
                             <rect key="frame" x="15" y="101" width="265" height="40"/>
@@ -80,6 +86,9 @@
                             <state key="normal" title="进入游戏">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="enterGameClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="mAn-dM-Jze"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_activity_hot_icon" translatesAutoresizingMaskIntoConstraints="NO" id="gzu-fJ-Mw4">
                             <rect key="frame" x="265" y="0.0" width="30" height="30"/>

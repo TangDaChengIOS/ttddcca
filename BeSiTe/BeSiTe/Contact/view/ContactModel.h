@@ -25,6 +25,6 @@
 @property (nonatomic,copy) NSString * paraCode;//	string	参数名
 @property (nonatomic,assign) NSInteger type;//	int	1:文本 2:图片
 @property (nonatomic,copy) NSString * content;//	string	内容
-@property (nonatomic,copy) NSString * description;//	string	描述
+@property (nonatomic,copy) NSString * descri;//	string	描述
 
 @end

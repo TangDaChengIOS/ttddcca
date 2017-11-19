@@ -11,5 +11,7 @@
 @interface AppDelegate (Setting)
 
 -(void)setRootViewController;
+-(void)test;
+-(void)autoLogin;
 
 @end

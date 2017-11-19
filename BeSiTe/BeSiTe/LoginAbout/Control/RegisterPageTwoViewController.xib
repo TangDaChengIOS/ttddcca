@@ -12,8 +12,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterPageTwoViewController">
             <connections>
+                <outlet property="bankAddrTF" destination="jNp-dr-qKX" id="TGi-10-dt0"/>
+                <outlet property="bankCardTF" destination="Heu-bZ-CZQ" id="TKM-F2-reA"/>
+                <outlet property="bankImageView" destination="ujA-CH-DO6" id="lTJ-z0-FA9"/>
+                <outlet property="bankNameLab" destination="fYN-GF-250" id="l0a-Uu-nrd"/>
+                <outlet property="birthdayTF" destination="Vkc-hI-L3k" id="Go5-LB-0XY"/>
                 <outlet property="boomRightBtn" destination="lw2-Cz-HDq" id="dut-TH-Mb5"/>
+                <outlet property="emailTF" destination="yvh-fg-qba" id="zCr-Fu-YFb"/>
                 <outlet property="firstBtn" destination="mv7-pT-Sub" id="7W8-Sh-JP9"/>
+                <outlet property="nameTF" destination="AMX-31-FGz" id="o8j-3j-rNW"/>
+                <outlet property="qqTF" destination="0rj-Fo-yTb" id="wre-hT-sav"/>
                 <outlet property="scrollView" destination="XQF-yB-o2v" id="lHc-ft-Oc1"/>
                 <outlet property="scrollViewFirstChildView" destination="xhC-gE-fPL" id="fJC-zg-INz"/>
                 <outlet property="scrollViewHeightConstraint" destination="JrD-Xh-z6d" id="YEu-sG-3y4"/>
@@ -221,15 +229,25 @@
                                                 <constraint firstAttribute="height" constant="13" id="qma-av-AwL"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8g-Dt-nX5">
+                                            <rect key="frame" x="58" y="4" width="252" height="30"/>
+                                            <connections>
+                                                <action selector="selectBirthDayClick:" destination="-1" eventType="touchUpInside" id="pv5-Al-Ljh"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="Vkc-hI-L3k" firstAttribute="top" secondItem="XM1-tX-lKe" secondAttribute="top" constant="12" id="1b8-ds-4QF"/>
+                                        <constraint firstItem="A8g-Dt-nX5" firstAttribute="leading" secondItem="vUw-yc-xVa" secondAttribute="trailing" constant="13" id="2d3-So-va4"/>
                                         <constraint firstItem="XCZ-mp-1nK" firstAttribute="top" secondItem="XM1-tX-lKe" secondAttribute="top" constant="12" id="FBX-QE-fYd"/>
                                         <constraint firstAttribute="trailing" secondItem="Vkc-hI-L3k" secondAttribute="trailing" constant="5" id="JDO-lt-iVf"/>
+                                        <constraint firstAttribute="trailing" secondItem="A8g-Dt-nX5" secondAttribute="trailing" constant="13" id="KeI-yh-8XE"/>
+                                        <constraint firstAttribute="bottom" secondItem="A8g-Dt-nX5" secondAttribute="bottom" constant="4" id="NpG-dh-aML"/>
                                         <constraint firstAttribute="height" constant="38" id="Xet-OH-uIN"/>
                                         <constraint firstAttribute="bottom" secondItem="vUw-yc-xVa" secondAttribute="bottom" constant="12" id="ZUi-hE-DDN"/>
                                         <constraint firstItem="vUw-yc-xVa" firstAttribute="top" secondItem="XM1-tX-lKe" secondAttribute="top" constant="12" id="cE8-a8-bi3"/>
+                                        <constraint firstItem="A8g-Dt-nX5" firstAttribute="top" secondItem="XM1-tX-lKe" secondAttribute="top" constant="4" id="kpn-0f-WxZ"/>
                                         <constraint firstAttribute="trailing" secondItem="XCZ-mp-1nK" secondAttribute="trailing" constant="34" id="mrs-3f-rtq"/>
                                         <constraint firstAttribute="bottom" secondItem="Vkc-hI-L3k" secondAttribute="bottom" constant="12" id="nZo-Qv-mID"/>
                                         <constraint firstItem="Vkc-hI-L3k" firstAttribute="leading" secondItem="vUw-yc-xVa" secondAttribute="trailing" constant="13" id="wLS-c8-szM"/>
@@ -329,15 +347,15 @@
                                             <color key="textColor" red="0.39607843139999999" green="0.39607843139999999" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common_bank_gongshang_icon" translatesAutoresizingMaskIntoConstraints="NO" id="ujA-CH-DO6">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ujA-CH-DO6">
                                             <rect key="frame" x="109" y="14" width="35" height="23"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="23" id="Vzd-YI-IfU"/>
                                                 <constraint firstAttribute="width" constant="35" id="ekX-hN-8HI"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中国工商银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYN-GF-250">
-                                            <rect key="frame" x="154" y="15" width="80" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYN-GF-250">
+                                            <rect key="frame" x="154" y="15" width="0.0" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="A1w-Y0-rrg"/>
                                             </constraints>
@@ -352,17 +370,27 @@
                                                 <constraint firstAttribute="width" constant="7" id="ide-PV-dTO"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3h8-we-Li8">
+                                            <rect key="frame" x="107" y="5" width="263" height="40"/>
+                                            <connections>
+                                                <action selector="selectBankClick:" destination="-1" eventType="touchUpInside" id="YxE-17-22u"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="1HO-7D-AJj" firstAttribute="leading" secondItem="DmZ-Ol-hYr" secondAttribute="leading" constant="44" id="0lY-A6-b6K"/>
                                         <constraint firstAttribute="height" constant="50" id="3rp-ds-c3K"/>
                                         <constraint firstItem="fYN-GF-250" firstAttribute="centerY" secondItem="DmZ-Ol-hYr" secondAttribute="centerY" id="94H-JP-aIx"/>
+                                        <constraint firstAttribute="bottom" secondItem="3h8-we-Li8" secondAttribute="bottom" constant="5" id="9Tf-gI-F97"/>
                                         <constraint firstItem="fYN-GF-250" firstAttribute="leading" secondItem="ujA-CH-DO6" secondAttribute="trailing" constant="10" id="HEv-fL-1hB"/>
                                         <constraint firstItem="ujA-CH-DO6" firstAttribute="centerY" secondItem="DmZ-Ol-hYr" secondAttribute="centerY" id="TjB-o3-XBe"/>
                                         <constraint firstAttribute="trailing" secondItem="Hib-3p-SUd" secondAttribute="trailing" constant="69" id="Y8F-68-hSL"/>
+                                        <constraint firstAttribute="trailing" secondItem="3h8-we-Li8" secondAttribute="trailing" constant="13" id="r1z-mG-YM2"/>
                                         <constraint firstItem="Hib-3p-SUd" firstAttribute="centerY" secondItem="DmZ-Ol-hYr" secondAttribute="centerY" id="rJJ-WM-6Oa"/>
+                                        <constraint firstItem="3h8-we-Li8" firstAttribute="top" secondItem="DmZ-Ol-hYr" secondAttribute="top" constant="5" id="sZX-kd-Z7q"/>
                                         <constraint firstItem="ujA-CH-DO6" firstAttribute="leading" secondItem="1HO-7D-AJj" secondAttribute="trailing" constant="15" id="z9A-OD-BTt"/>
+                                        <constraint firstItem="3h8-we-Li8" firstAttribute="leading" secondItem="1HO-7D-AJj" secondAttribute="trailing" constant="13" id="zFQ-M2-2W2"/>
                                         <constraint firstItem="1HO-7D-AJj" firstAttribute="centerY" secondItem="DmZ-Ol-hYr" secondAttribute="centerY" id="zba-OD-5ku"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
@@ -485,7 +513,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="finishRegisterBtnClick:" destination="-1" eventType="touchUpInside" id="jnb-L5-Rkl"/>
+                                        <action selector="finishRegistClick:" destination="-1" eventType="touchUpInside" id="Hd2-6h-Xub"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -560,7 +588,6 @@
         </view>
     </objects>
     <resources>
-        <image name="common_bank_gongshang_icon" width="35" height="27"/>
         <image name="common_next_icon" width="7" height="13"/>
         <image name="home_register_gift_icon" width="13" height="15"/>
         <image name="navgartion_back_btn" width="27" height="21"/>

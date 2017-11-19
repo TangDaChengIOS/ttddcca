@@ -35,6 +35,16 @@
     }
     return self;
 }
+- (IBAction)tryPlayBtnClick:(id)sender {
+    [self removeFromSuperview];
+    if (self.tryPlayBlock) {
+        self.tryPlayBlock();
+    }
+}
+- (IBAction)collectBtnClick:(id)sender {
+}
+- (IBAction)enterGameClick:(id)sender {
+}
 
 +(void)show{
     UIWindow * window = [[UIApplication sharedApplication].windows lastObject];

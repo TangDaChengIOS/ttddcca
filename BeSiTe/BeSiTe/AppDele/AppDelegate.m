@@ -19,6 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self setRootViewController];
+    [self autoLogin];
+    
  /*
     // 1> 实例化指纹识别对象
     LAContext *laCtx = [[LAContext alloc] init];
@@ -45,6 +47,11 @@
     return YES;
 }
 
+#pragma mark -- 横屏支持相关代码
+-(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    return _isCanRotationWindow ? UIInterfaceOrientationMaskAll: UIInterfaceOrientationMaskPortrait;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -36,19 +36,13 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BeSiTe/LoginAbout/Control/RegisterPageOneViewController.m"
-            timestampString = "531912081.090367"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "-registerBtnDidClicked:"
-            landmarkType = "7">
+            scope = "0"
+            stopOnStyle = "1">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

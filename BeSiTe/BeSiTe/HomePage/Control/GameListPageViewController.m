@@ -16,6 +16,7 @@
 @property (nonatomic,strong) GameListPageHeaderView * headerView;
 @property (nonatomic,strong) UICollectionView * collectionView;
 @property (nonatomic,strong) UILabel * sectionHeadLab;
+@property (nonatomic,strong) UILabel * collectionHeaderView;//展示搜索结果时显示
 @end
 
 @implementation GameListPageViewController
@@ -24,7 +25,8 @@
     [super viewDidLoad];
     [self configSubViews];
     self.automaticallyAdjustsScrollViewInsets = NO;
-
+    [self.collectionView setY_offset:20];
+    [self.view addSubview:self.collectionHeaderView];
 }
 
 -(void)requestData{
@@ -36,6 +38,10 @@
 }
 
 #pragma mark -- collectionView delegates
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 3;
+}
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 28;
@@ -49,20 +55,58 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [GamesMenuView show];
+    UIWindow * window = [[UIApplication sharedApplication].windows lastObject];
+    GamesMenuView * view = [[[NSBundle mainBundle]loadNibNamed:@"GamesMenuView" owner:self options:nil] firstObject];
+    kWeakSelf
+    view.tryPlayBlock = ^(){
+        WebDetailViewController * webVC = [[WebDetailViewController alloc]init];
+        webVC.url = @"http://lobby.sgplayfun.com/touch/spadenew/?game=S-HY01&language=en_US&menumode=on&token=876f6d102760ad11c7ba6e4ce990506f3ea9635bcecfa33be0e43bd6419198bfee6924f5ffafd09d26c18acc06fb9b4abb49542ca0aa9a225b79e4dc4b76e3b7";
+        [weak_self pushVC:webVC];
+    };
+    view.frame = window.bounds;
+    [window addSubview:view];
+//    [GamesMenuView show];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     if (kind == UICollectionElementKindSectionHeader ) {
         UICollectionReusableView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableViewkey2" forIndexPath:indexPath];
-        if (view.subviews.count ==0) {
-            UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 15, 15)];
-            imageView.image = KIMAGE(@"home_gameTypeName_icon");
-            [view addSubview:imageView];
-            [view addSubview:self.sectionHeadLab];
-            _sectionHeadLab.left = imageView.maxX + 3;
-            //[view addSubview:self.headerView];
+        [view removeAllSubviews];
+        switch (indexPath.section) {
+            case 0:
+            {
+                view.backgroundColor = kWhiteColor;
+                UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 15, 15)];
+                imageView.image = KIMAGE(@"home_gameTypeName_icon");
+                [view addSubview:imageView];
+                [view addSubview:self.sectionHeadLab];
+                _sectionHeadLab.left = imageView.maxX + 3;
+            }
+                break;
+            case 1:
+            {
+                view.backgroundColor = UIColorFromINTValue(231, 231, 231);
+                UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 100, 15)];
+                lab.text = @"PNG游戏28款";
+                lab.textColor = kBlackColor;// UIColorFromINTValue(142, 146, 149);
+                lab.font = kFont(12);
+                [view addSubview:lab];
+            }
+                break;
+            case 2:
+            {
+                view.backgroundColor = UIColorFromINTValue(231, 231, 231);
+                UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 100, 15)];
+                lab.text = @"PNG游戏28款";
+                lab.textColor = kBlackColor;// UIColorFromINTValue(142, 146, 149);
+                lab.font = kFont(12);
+                [view addSubview:lab];
+            }
+                break;
+            default:
+                break;
         }
+
         return view;
     }
     return nil;
@@ -91,7 +135,7 @@
 }
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0, 15, 0, 15);
+    return UIEdgeInsetsMake(10, 15, 10, 15);
 }
 
 #pragma mark -- Lazy
@@ -129,6 +173,20 @@
     }
     return _sectionHeadLab;
 }
+-(UILabel *)collectionHeaderView
+{
+    if (!_collectionHeaderView) {
+        _collectionHeaderView = [[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionView.top - 20, MAXWIDTH, 20)];
+        _collectionHeaderView.backgroundColor = kWhiteColor;
+        _collectionHeaderView.text = @"贝斯特为您找到相关结果4个";
+        _collectionHeaderView.textColor = kBlackColor;// UIColorFromINTValue(142, 146, 149);
+        _collectionHeaderView.font = kFont(12);
+        //        _sectionHeadLab.textAlignment = NSTextAlignmentCenter;
+        //        _sectionHeadLab.backgroundColor = UIColorFromINTValue(60, 90, 95);
+    }
+    return _collectionHeaderView;
+}
+
 #pragma mark -- subViews
 -(void)configSubViews
 {

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ActivityModel.h"
 
 #define kActivityTableViewCellReuseID @"kActivityTableViewCellReuseID"
 @interface ActivityTableViewCell : UITableViewCell
--(void)setIsOpenState:(BOOL)isOpen;
+
+-(void)setCellWithModel:(ActivityModel *)model isOpenState:(BOOL)isOpen;
 
 @end

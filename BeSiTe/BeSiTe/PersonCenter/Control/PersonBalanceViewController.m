@@ -24,7 +24,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
-    [self setTotalMoney:31780.80];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getBalanceData];
+}
+
+-(void)getBalanceData{
+    [RequestManager getWithPath:@"getGameBalance" params:nil success:^(id JSON) {
+        NSLog(@"%@",JSON);
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 -(void)configSubViews{

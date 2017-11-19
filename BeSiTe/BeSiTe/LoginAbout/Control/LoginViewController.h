@@ -10,4 +10,6 @@
 
 @interface LoginViewController : ATBaseViewController
 
++(void)presentLoginViewController;
+
 @end

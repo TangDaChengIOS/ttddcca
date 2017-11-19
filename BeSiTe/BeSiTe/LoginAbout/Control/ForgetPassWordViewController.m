@@ -10,15 +10,21 @@
 #import "UIButton_withBadge.h"
 
 @interface ForgetPassWordViewController ()
+
+//公共模块
 @property (weak, nonatomic) IBOutlet UIButton_withBadge *mailLookbtn;
 @property (weak, nonatomic) IBOutlet UIButton_withBadge *phoneLookBtn;
 @property (weak, nonatomic) IBOutlet UILabel *topLab;
+
+//邮件找回密码
 @property (weak, nonatomic) IBOutlet UIView *mailLookSuperView;
-@property (weak, nonatomic) IBOutlet UIView *phoneLookSuperView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *phoneLookSuperViewTopConstraint;
 @property (weak, nonatomic) IBOutlet UITextField *accoutTF_mail;
 @property (weak, nonatomic) IBOutlet UITextField *emailTF;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
+
+//手机找回密码
+@property (weak, nonatomic) IBOutlet UIView *phoneLookSuperView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *phoneLookSuperViewTopConstraint;
 @property (weak, nonatomic) IBOutlet UITextField *accountTF_phone;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UIButton *sendCodeBtn;
@@ -35,6 +41,7 @@
     [self refreshUI:YES];
  
 }
+#pragma mark -- 切换 邮件找回 / 手机找回
 -(void)refreshUI:(BOOL)isLeft
 {
     self.phoneLookBtn.backgroundColor = isLeft ?  UIColorFromINTValue(72, 190, 204) : kWhiteColor;
@@ -67,11 +74,87 @@
     [self refreshUI:NO];
 
 }
+#pragma mark -- 提交邮件验证
 - (IBAction)submitBtnClick:(id)sender {
+    if (self.accoutTF_mail.text.length <= 0) {
+        TTAlert(@"请输入账号");
+        return;
+    }
+    if (![ZZTextInput isEmailAddress:self.emailTF.text]) {
+        TTAlert(@"请输入正确的邮件地址");
+        return;
+    }
+    
+    NSDictionary * dict = @{@"email":self.emailTF.text,
+                            @"loginName":self.accoutTF_mail.text};
+    [RequestManager postWithPath:@"emailResetPwd" params:dict success:^(id JSON) {
+        BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
+        view.showType = ShowTypeWaitThreeSec;
+        view.isSuccessMsg = YES;
+        view.isNotAllowRemoveSelfByTouchSpace = YES;
+        view.msgTitle = @"提交成功";
+        view.msgDetail = @"请前往邮箱设置新密码！";
+        [view showInWindow];
+    } failure:^(NSError *error) {
+        
+    }];
 }
+
+#pragma mark -- 手机号找回，发送验证码
 - (IBAction)sendCodeBtnClick:(id)sender {
+    if (self.accountTF_phone.text.length <= 0) {
+        TTAlert(@"请输入账号");
+        return;
+    }
+    if (![ZZTextInput isValidateMobile:self.phoneTF.text]) {
+        TTAlert(@"请输入正确的手机号码");
+        return;
+    }
+    kWeakSelf
+    NSDictionary * dict = @{@"mobile":self.phoneTF.text,
+                            @"type":@"1",
+                            @"loginName":self.accountTF_phone.text};
+    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON) {
+        NSLog(@"%@",JSON);
+        [weak_self.sendCodeBtn countDownFromTime:60 completion:^(UIButton *countDownButton) {
+            
+        }];
+    } failure:^(NSError *error) {
+        
+    }];
+
 }
-- (IBAction)ensureBtnClick:(id)sender {
+
+#pragma mark -- 手机验证
+- (IBAction)ensureBtnClick:(id)sender
+{
+    if (self.accountTF_phone.text.length <= 0) {
+        TTAlert(@"请输入账号");
+        return;
+    }
+    if (![ZZTextInput isValidateMobile:self.phoneTF.text]) {
+        TTAlert(@"请输入正确的手机号码");
+        return;
+    }
+    if (self.coedTF.text.length <= 0) {
+        TTAlert(@"请输入验证码");
+        return;
+    }
+    
+    NSDictionary * dict = @{@"mobile":self.phoneTF.text,
+                            @"smsCode":self.coedTF.text,
+                            @"loginName":self.accountTF_phone.text};
+    [RequestManager postWithPath:@"mobileResetPwd" params:dict success:^(id JSON) {
+        BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
+        view.showType = ShowTypeWaitThreeSec;
+        view.isSuccessMsg = YES;
+        view.isNotAllowRemoveSelfByTouchSpace = YES;
+        view.msgTitle = @"验证成功";
+        view.msgDetail = @"您的新密码将会发送到手机，请查收。";
+        [view showInWindow];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

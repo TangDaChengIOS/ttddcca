@@ -10,5 +10,6 @@
 #import "BSTSingle.h"
 @interface ATBaseViewController : UIViewController
 
--(void)pushVC:(ATBaseViewController *)viewController;
+@property (nonatomic,assign) BOOL isNeedHiddenNav;
+-(void)pushVC:(UIViewController *)viewController;
 @end

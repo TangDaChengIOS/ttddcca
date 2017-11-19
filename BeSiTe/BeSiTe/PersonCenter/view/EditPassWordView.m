@@ -7,6 +7,18 @@
 //
 
 #import "EditPassWordView.h"
+#import "RSAEncryptor.h"
+
+@interface EditPassWordView ()<UIAlertViewDelegate>{
+
+    UITextField * oldPwdTF;
+
+    UITextField * newPwdTF;
+
+    UITextField * newPwdTF2;
+}
+
+@end
 
 @implementation EditPassWordView
 
@@ -36,20 +48,22 @@
     _titleLab.font = kFont(15);
     [whiteBack addSubview:_titleLab];
     
-    UITextField * oldPwdTF = [self createTextFieldWithFrame:CGRectMake(16,_titleLab.maxY + 25, whiteBack_W - 32, 38)];
+    oldPwdTF = [self createTextFieldWithFrame:CGRectMake(16,_titleLab.maxY + 25, whiteBack_W - 32, 38)];
     oldPwdTF.placeholder = @"请输入原始密码";
     [whiteBack addSubview:oldPwdTF];
     
-    UITextField * newPwdTF = [self createTextFieldWithFrame:CGRectMake(16,oldPwdTF.maxY + 6, whiteBack_W - 32, 38)];
+    newPwdTF = [self createTextFieldWithFrame:CGRectMake(16,oldPwdTF.maxY + 6, whiteBack_W - 32, 38)];
     newPwdTF.placeholder = @"请输入新密码";
     newPwdTF.rightView = [self createButtonWithTag:1001];
+    newPwdTF.secureTextEntry = YES;
     newPwdTF.rightViewMode = UITextFieldViewModeAlways;
     [whiteBack addSubview:newPwdTF];
     
-    UITextField * newPwdTF2 = [self createTextFieldWithFrame:CGRectMake(16,newPwdTF.maxY + 6, whiteBack_W - 32, 38)];
+    newPwdTF2 = [self createTextFieldWithFrame:CGRectMake(16,newPwdTF.maxY + 6, whiteBack_W - 32, 38)];
     newPwdTF2.placeholder = @"请确认新密码";
     newPwdTF2.rightView = [self createButtonWithTag:1002];
     newPwdTF2.rightViewMode = UITextFieldViewModeAlways;
+    newPwdTF2.secureTextEntry = YES;
     [whiteBack addSubview:newPwdTF2];
    
     
@@ -74,24 +88,53 @@
     
 }
 +(void)show{
-    UIWindow * window = [[UIApplication sharedApplication].windows lastObject];
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     EditPassWordView * view = [[EditPassWordView alloc]init];
     [window addSubview:view];
 }
 
--(void)saveBtnClick{
+-(void)saveBtnClick
+{
+    if (oldPwdTF.text.length <= 0 ) {
+        TTAlert(@"请输入原始密码");
+        return;
+    }
+    if (newPwdTF.text.length <= 0 ) {
+        TTAlert(@"请输入新密码");
+        return;
+    }
+    if (newPwdTF2.text.length <= 0 ) {
+        TTAlert(@"请确认新密码");
+        return;
+    }
+    if (![newPwdTF.text isEqualToString:newPwdTF2.text]) {
+        TTAlert(@"两次输入的新密码不一致！");
+        return;
+    }
     
+    NSString * oldPassWord = [RSAEncryptor encryptStringUseLocalFile:oldPwdTF.text];
+    NSString * newPassWord = [RSAEncryptor encryptStringUseLocalFile:newPwdTF.text];
+    NSDictionary * dict = @{@"oldPwd":oldPassWord,
+                            @"newPwd":newPassWord};
+
+    [RequestManager postWithPath:@"modifyPwd" params:dict success:^(id JSON) {
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"密码修改成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self removeFromSuperview];
 }
 
 
 -(void)cancelBtnClick{
-    
+    [self removeFromSuperview];
 }
 
 
--(void)getCodeBtnClick{
-    
-}
 -(UIButton *)createButtonWithTag:(NSInteger)tag{
     UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 35, 30)];
 //    button.backgroundColor = [UIColor redColor];
@@ -104,7 +147,12 @@
 
 -(void)showOrHiddenPassword:(UIButton *)button
 {
-    
+    button.selected = !button.selected;
+    if (button.tag == 1001) {
+        newPwdTF.secureTextEntry = !button.selected;
+    }else{
+        newPwdTF2.secureTextEntry = !button.selected;
+    }
 }
 
 @end

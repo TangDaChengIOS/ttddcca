@@ -71,7 +71,7 @@
 
 }
 +(void)show{
-    UIWindow * window = [[UIApplication sharedApplication].windows lastObject];
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     EditNameView * view = [[EditNameView alloc]init];
     [window addSubview:view];
 }

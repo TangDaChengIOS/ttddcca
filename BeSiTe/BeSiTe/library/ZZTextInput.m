@@ -73,6 +73,14 @@
     return [phoneTest evaluateWithObject:mobile];
 }
 
++ (BOOL)isEmailAddress:(NSString *)emailAddr
+{
+    NSString *emailRegex = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",emailRegex];
+
+    return [emailTest evaluateWithObject:emailAddr];
+}
+
 void TTAlert(NSString* message) {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                     message:message

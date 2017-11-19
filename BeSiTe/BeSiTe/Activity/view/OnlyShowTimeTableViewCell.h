@@ -13,4 +13,5 @@
 
 @interface OnlyShowTimeTableViewCell : UITableViewCell
 
+-(void)setTimeStr:(NSString *)timeStr;
 @end

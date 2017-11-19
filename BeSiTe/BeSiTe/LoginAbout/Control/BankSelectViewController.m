@@ -7,7 +7,6 @@
 //
 
 #import "BankSelectViewController.h"
-#import "BankTableViewCell.h"
 
 @interface BankSelectViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView * tableView;
@@ -37,6 +36,15 @@
 
 
 #pragma mark -- tableView delegate/dataSource
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BankModel * model = self.dataSource[indexPath.row];
+    if (self.selectBankBlock) {
+        self.selectBankBlock(model);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return _isHaveOtherData ? 2 : 1;
@@ -94,6 +102,8 @@
 
 #pragma mark -- 配置页面
 -(void)configSubViews{
+    self.title = @"选择银行卡";
+    
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, MAXWIDTH, MAXHEIGHT - 64) style:UITableViewStyleGrouped];
     
     _tableView.delegate = self;

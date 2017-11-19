@@ -14,7 +14,7 @@
     static NSCalendar *Instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Instance = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+        Instance = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierChinese];
     });
     return Instance;
 }
@@ -62,7 +62,9 @@
     static NSArray *Strings;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Strings = @[@"Jan.", @"Feb.", @"Mar.", @"Apr.", @"May.", @"Jun.", @"Jul.", @"Aug.", @"Sept.", @"Oct.", @"Nov.", @"Dec."];
+//        Strings = @[@"Jan.", @"Feb.", @"Mar.", @"Apr.", @"May.", @"Jun.", @"Jul.", @"Aug.", @"Sept.", @"Oct.", @"Nov.", @"Dec."];
+        Strings = @[@"一月.", @"二月.", @"三月.", @"四月.", @"五月.", @"六月.", @"七月.", @"八月.", @"九月.", @"十月.", @"十一月.", @"十二月."];
+
     });
     
     return Strings[month - 1];

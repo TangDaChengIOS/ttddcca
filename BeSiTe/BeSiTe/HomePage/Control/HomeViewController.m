@@ -15,6 +15,7 @@
 #import "GameListPageViewController.h"
 #import "LoginViewController.h"
 #import "RegisterPageOneViewController.h"
+#import "EditPhoneNumberView.h"
 
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -42,10 +43,9 @@
     [self.headerView addObserverBlockForKeyPath:@"isRequestData" block:^(id  _Nonnull obj, id  _Nullable oldVal, id  _Nullable newVal) {
         NSLog(@"%@",newVal);
     }];
-
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [GamesMenuView show];
-//    });
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationNeedVerifyPhoneNum) name:@"ApplicationNeedVerifyPhoneNum" object:nil];
+//    [self applicationNeedVerifyPhoneNum];
 }
 
 -(void)requestData
@@ -134,17 +134,19 @@
     [self xw_transition];
 }
 
--(void)rightBarButtonItemClick{
+-(void)rightBarButtonItemClick
+{
 //    UITabBarController * tabBar = self.tabBarController;
 //    [tabBar setSelectedIndex:2];
 //    return;
 //    GameListPageViewController * menuVC = [[GameListPageViewController alloc]init];
+    [LoginViewController presentLoginViewController];
     
-    LoginViewController * loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+//    LoginViewController * loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
 
 //    RegisterPageOneViewController * menuVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];
 
-    [self pushVC:loginVC];
+//    [self pushVC:loginVC];
 
 }
 
@@ -214,7 +216,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
 
     [self.navigationController.navigationBar addSubview:self.navRightCornImg];
     [self.collectionView.mj_header beginRefreshing];
@@ -224,6 +225,13 @@
     [super viewWillDisappear:animated];
     [self.navRightCornImg removeFromSuperview];
 }
+
+#pragma mark -- applicationNeedVerifyPhoneNum
+-(void)applicationNeedVerifyPhoneNum{
+    self.tabBarController.selectedIndex = 2;
+    [EditPhoneNumberView showWithEditPhoneType:EditPhoneNumberViewTypeVerify];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

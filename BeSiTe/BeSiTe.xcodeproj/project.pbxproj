@@ -10,6 +10,8 @@
 		11115D241F9ADC7E00AB8856 /* UIView+ATADD.m in Sources */ = {isa = PBXBuildFile; fileRef = 11115D231F9ADC7E00AB8856 /* UIView+ATADD.m */; };
 		11115D271F9B287B00AB8856 /* LastPlayCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11115D261F9B287B00AB8856 /* LastPlayCollectionViewCell.m */; };
 		11115D2A1F9B4F0600AB8856 /* HomeItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11115D291F9B4F0600AB8856 /* HomeItemCollectionViewCell.m */; };
+		1112EF461FBED6A600B46A8C /* UIButton+TimerCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1112EF451FBED6A600B46A8C /* UIButton+TimerCount.m */; };
+		1112EF491FBEE27600B46A8C /* ASBirthSelectSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1112EF481FBEE27600B46A8C /* ASBirthSelectSheet.m */; };
 		112435311F9BAC9B00C5EAAE /* GamesMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112435301F9BAC9B00C5EAAE /* GamesMenuView.m */; };
 		112435331F9BACA900C5EAAE /* GamesMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 112435321F9BACA900C5EAAE /* GamesMenuView.xib */; };
 		112B16D01FA6C2C300CE4555 /* ATTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112B16CF1FA6C2C300CE4555 /* ATTranslucentView.m */; };
@@ -86,10 +88,11 @@
 		1182AF2A1F95B4A3001CE114 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1182AF291F95B4A3001CE114 /* RequestManager.m */; };
 		118A36651FB2030700FD6193 /* MoneyMoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118A36631FB2030700FD6193 /* MoneyMoveViewController.m */; };
 		118A36661FB2030700FD6193 /* MoneyMoveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 118A36641FB2030700FD6193 /* MoneyMoveViewController.xib */; };
+		118C69821FB6AAD4005D095A /* WebDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118C69811FB6AAD4005D095A /* WebDetailViewController.m */; };
 		118E79B51FAB66A600DE053B /* BannerADSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E79B41FAB66A600DE053B /* BannerADSModel.m */; };
 		118E79B81FAB6D1600DE053B /* GamesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E79B71FAB6D1600DE053B /* GamesModel.m */; };
-		1190EC531F9EE00B007A1D05 /* RegisterSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1190EC521F9EE00B007A1D05 /* RegisterSuccessView.m */; };
-		1190EC551F9EE019007A1D05 /* RegisterSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1190EC541F9EE019007A1D05 /* RegisterSuccessView.xib */; };
+		1190EC531F9EE00B007A1D05 /* BSTMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1190EC521F9EE00B007A1D05 /* BSTMessageView.m */; };
+		1190EC551F9EE019007A1D05 /* BSTMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1190EC541F9EE019007A1D05 /* BSTMessageView.xib */; };
 		1190EC5B1F9EF1E3007A1D05 /* MoneyListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1190EC5A1F9EF1E3007A1D05 /* MoneyListTableViewCell.m */; };
 		1190EC5F1F9F2087007A1D05 /* PersonBalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1190EC5D1F9F2087007A1D05 /* PersonBalanceViewController.m */; };
 		1190EC601F9F2087007A1D05 /* PersonBalanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1190EC5E1F9F2087007A1D05 /* PersonBalanceViewController.xib */; };
@@ -103,6 +106,7 @@
 		119EAF2E1FA6179D00E6C2CA /* PersonSavingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 119EAF2D1FA6179D00E6C2CA /* PersonSavingTableViewCell.m */; };
 		11AC1B701F99DC9400C06D85 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC1B6F1F99DC9400C06D85 /* HomeHeaderView.m */; };
 		11AC1B741F99F5DC00C06D85 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC1B731F99F5DC00C06D85 /* LMJScrollTextView.m */; };
+		11AC9F0C1FC1D2D90016F3E5 /* ATDAYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F0B1FC1D2D90016F3E5 /* ATDAYCalendarView.m */; };
 		11B20C081FA9C8F500009977 /* PersonGetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B20C061FA9C8F500009977 /* PersonGetingViewController.m */; };
 		11B20C091FA9C8F500009977 /* PersonGetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B20C071FA9C8F500009977 /* PersonGetingViewController.xib */; };
 		11B211261FB3FC33003CE6ED /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B211251FB3FC33003CE6ED /* ContactModel.m */; };
@@ -125,6 +129,8 @@
 		11CBCCF11F9CD2EB000E4D01 /* PersonMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11CBCCEF1F9CD2EB000E4D01 /* PersonMessageViewController.xib */; };
 		11CBCCF91F9CEC03000E4D01 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CBCCF71F9CEC03000E4D01 /* LoginViewController.m */; };
 		11CBCCFA1F9CEC03000E4D01 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11CBCCF81F9CEC03000E4D01 /* LoginViewController.xib */; };
+		11E2BF571FB540AA00180762 /* ActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E2BF561FB540AA00180762 /* ActivityModel.m */; };
+		11E2BF5A1FB59E2C00180762 /* ATCombineStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E2BF591FB59E2C00180762 /* ATCombineStrings.m */; };
 		11ECA9401F9D93C600CF84CB /* RegisterPageOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11ECA93E1F9D93C600CF84CB /* RegisterPageOneViewController.m */; };
 		11ECA9411F9D93C600CF84CB /* RegisterPageOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11ECA93F1F9D93C600CF84CB /* RegisterPageOneViewController.xib */; };
 		11ECA9451F9D93F100CF84CB /* RegisterPageTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11ECA9431F9D93F100CF84CB /* RegisterPageTwoViewController.m */; };
@@ -145,6 +151,10 @@
 		11115D261F9B287B00AB8856 /* LastPlayCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastPlayCollectionViewCell.m; sourceTree = "<group>"; };
 		11115D281F9B4F0600AB8856 /* HomeItemCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeItemCollectionViewCell.h; sourceTree = "<group>"; };
 		11115D291F9B4F0600AB8856 /* HomeItemCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeItemCollectionViewCell.m; sourceTree = "<group>"; };
+		1112EF441FBED6A600B46A8C /* UIButton+TimerCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+TimerCount.h"; sourceTree = "<group>"; };
+		1112EF451FBED6A600B46A8C /* UIButton+TimerCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TimerCount.m"; sourceTree = "<group>"; };
+		1112EF471FBEE27600B46A8C /* ASBirthSelectSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASBirthSelectSheet.h; sourceTree = "<group>"; };
+		1112EF481FBEE27600B46A8C /* ASBirthSelectSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASBirthSelectSheet.m; sourceTree = "<group>"; };
 		1124352F1F9BAC9B00C5EAAE /* GamesMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamesMenuView.h; sourceTree = "<group>"; };
 		112435301F9BAC9B00C5EAAE /* GamesMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamesMenuView.m; sourceTree = "<group>"; };
 		112435321F9BACA900C5EAAE /* GamesMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesMenuView.xib; sourceTree = "<group>"; };
@@ -289,13 +299,15 @@
 		118A36621FB2030700FD6193 /* MoneyMoveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyMoveViewController.h; sourceTree = "<group>"; };
 		118A36631FB2030700FD6193 /* MoneyMoveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyMoveViewController.m; sourceTree = "<group>"; };
 		118A36641FB2030700FD6193 /* MoneyMoveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoneyMoveViewController.xib; sourceTree = "<group>"; };
+		118C69801FB6AAD4005D095A /* WebDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebDetailViewController.h; sourceTree = "<group>"; };
+		118C69811FB6AAD4005D095A /* WebDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebDetailViewController.m; sourceTree = "<group>"; };
 		118E79B31FAB66A600DE053B /* BannerADSModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerADSModel.h; sourceTree = "<group>"; };
 		118E79B41FAB66A600DE053B /* BannerADSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerADSModel.m; sourceTree = "<group>"; };
 		118E79B61FAB6D1600DE053B /* GamesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamesModel.h; sourceTree = "<group>"; };
 		118E79B71FAB6D1600DE053B /* GamesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamesModel.m; sourceTree = "<group>"; };
-		1190EC511F9EE00B007A1D05 /* RegisterSuccessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterSuccessView.h; sourceTree = "<group>"; };
-		1190EC521F9EE00B007A1D05 /* RegisterSuccessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterSuccessView.m; sourceTree = "<group>"; };
-		1190EC541F9EE019007A1D05 /* RegisterSuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterSuccessView.xib; sourceTree = "<group>"; };
+		1190EC511F9EE00B007A1D05 /* BSTMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTMessageView.h; sourceTree = "<group>"; };
+		1190EC521F9EE00B007A1D05 /* BSTMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTMessageView.m; sourceTree = "<group>"; };
+		1190EC541F9EE019007A1D05 /* BSTMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BSTMessageView.xib; sourceTree = "<group>"; };
 		1190EC591F9EF1E3007A1D05 /* MoneyListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyListTableViewCell.h; sourceTree = "<group>"; };
 		1190EC5A1F9EF1E3007A1D05 /* MoneyListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyListTableViewCell.m; sourceTree = "<group>"; };
 		1190EC5C1F9F2087007A1D05 /* PersonBalanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonBalanceViewController.h; sourceTree = "<group>"; };
@@ -319,6 +331,8 @@
 		11AC1B6F1F99DC9400C06D85 /* HomeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderView.m; sourceTree = "<group>"; };
 		11AC1B721F99F5DC00C06D85 /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
 		11AC1B731F99F5DC00C06D85 /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
+		11AC9F0A1FC1D2D90016F3E5 /* ATDAYCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATDAYCalendarView.h; sourceTree = "<group>"; };
+		11AC9F0B1FC1D2D90016F3E5 /* ATDAYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATDAYCalendarView.m; sourceTree = "<group>"; };
 		11B20C051FA9C8F500009977 /* PersonGetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonGetingViewController.h; sourceTree = "<group>"; };
 		11B20C061FA9C8F500009977 /* PersonGetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonGetingViewController.m; sourceTree = "<group>"; };
 		11B20C071FA9C8F500009977 /* PersonGetingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonGetingViewController.xib; sourceTree = "<group>"; };
@@ -355,6 +369,10 @@
 		11CBCCF61F9CEC03000E4D01 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		11CBCCF71F9CEC03000E4D01 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		11CBCCF81F9CEC03000E4D01 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		11E2BF551FB540AA00180762 /* ActivityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityModel.h; sourceTree = "<group>"; };
+		11E2BF561FB540AA00180762 /* ActivityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityModel.m; sourceTree = "<group>"; };
+		11E2BF581FB59E2C00180762 /* ATCombineStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCombineStrings.h; sourceTree = "<group>"; };
+		11E2BF591FB59E2C00180762 /* ATCombineStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCombineStrings.m; sourceTree = "<group>"; };
 		11ECA93D1F9D93C600CF84CB /* RegisterPageOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPageOneViewController.h; sourceTree = "<group>"; };
 		11ECA93E1F9D93C600CF84CB /* RegisterPageOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPageOneViewController.m; sourceTree = "<group>"; };
 		11ECA93F1F9D93C600CF84CB /* RegisterPageOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterPageOneViewController.xib; sourceTree = "<group>"; };
@@ -569,6 +587,8 @@
 				1164635B1F91E1FC004ECC79 /* MenuViewController.xib */,
 				11CBCCE71F9C6C5B000E4D01 /* GameListPageViewController.h */,
 				11CBCCE81F9C6C5B000E4D01 /* GameListPageViewController.m */,
+				118C69801FB6AAD4005D095A /* WebDetailViewController.h */,
+				118C69811FB6AAD4005D095A /* WebDetailViewController.m */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -709,6 +729,8 @@
 				1154D1181FAAB39200E05734 /* RecordSelectToolView.m */,
 				1154D11D1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.h */,
 				1154D11E1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m */,
+				11AC9F0A1FC1D2D90016F3E5 /* ATDAYCalendarView.h */,
+				11AC9F0B1FC1D2D90016F3E5 /* ATDAYCalendarView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -725,6 +747,8 @@
 		116463441F91AA21004ECC79 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				11E2BF551FB540AA00180762 /* ActivityModel.h */,
+				11E2BF561FB540AA00180762 /* ActivityModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -755,6 +779,8 @@
 		116463551F91E15D004ECC79 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				1112EF471FBEE27600B46A8C /* ASBirthSelectSheet.h */,
+				1112EF481FBEE27600B46A8C /* ASBirthSelectSheet.m */,
 				1154D1201FAAD0D800E05734 /* Calendar */,
 				11CBCCE11F9C51E4000E4D01 /* XHStarRateView.h */,
 				11CBCCE21F9C51E4000E4D01 /* XHStarRateView.m */,
@@ -766,6 +792,10 @@
 				11F5E2361FB155E100A23523 /* ZZTextInput.m */,
 				11F5E23E1FB199FB00A23523 /* RSAEncryptor.h */,
 				11F5E23F1FB199FB00A23523 /* RSAEncryptor.m */,
+				11E2BF581FB59E2C00180762 /* ATCombineStrings.h */,
+				11E2BF591FB59E2C00180762 /* ATCombineStrings.m */,
+				1112EF441FBED6A600B46A8C /* UIButton+TimerCount.h */,
+				1112EF451FBED6A600B46A8C /* UIButton+TimerCount.m */,
 			);
 			path = library;
 			sourceTree = "<group>";
@@ -991,9 +1021,9 @@
 		11CBCCF51F9CEB43000E4D01 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				1190EC511F9EE00B007A1D05 /* RegisterSuccessView.h */,
-				1190EC521F9EE00B007A1D05 /* RegisterSuccessView.m */,
-				1190EC541F9EE019007A1D05 /* RegisterSuccessView.xib */,
+				1190EC511F9EE00B007A1D05 /* BSTMessageView.h */,
+				1190EC521F9EE00B007A1D05 /* BSTMessageView.m */,
+				1190EC541F9EE019007A1D05 /* BSTMessageView.xib */,
 				114BC1AD1FAFF8AB00C1A46D /* BankTableViewCell.h */,
 				114BC1AE1FAFF8AB00C1A46D /* BankTableViewCell.m */,
 				114BC1AF1FAFF8AB00C1A46D /* BankTableViewCell.xib */,
@@ -1066,7 +1096,7 @@
 				TargetAttributes = {
 					113227A61F909DC500E5EE7E = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = V49UEZK69H;
+						DevelopmentTeam = GJ5TSNN2KB;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -1103,7 +1133,7 @@
 				116463A71F91F634004ECC79 /* restrictedshine.tiff in Resources */,
 				11CBCCFA1F9CEC03000E4D01 /* LoginViewController.xib in Resources */,
 				11B20C091FA9C8F500009977 /* PersonGetingViewController.xib in Resources */,
-				1190EC551F9EE019007A1D05 /* RegisterSuccessView.xib in Resources */,
+				1190EC551F9EE019007A1D05 /* BSTMessageView.xib in Resources */,
 				112435331F9BACA900C5EAAE /* GamesMenuView.xib in Resources */,
 				11CBCCF11F9CD2EB000E4D01 /* PersonMessageViewController.xib in Resources */,
 				1190EC601F9F2087007A1D05 /* PersonBalanceViewController.xib in Resources */,
@@ -1194,6 +1224,7 @@
 				113F71D71FB2B33900EB4567 /* AppDelegate.m in Sources */,
 				11AC1B701F99DC9400C06D85 /* HomeHeaderView.m in Sources */,
 				1154D1191FAAB39200E05734 /* RecordSelectToolView.m in Sources */,
+				11AC9F0C1FC1D2D90016F3E5 /* ATDAYCalendarView.m in Sources */,
 				114389921FAC1803008840EC /* UserModel.m in Sources */,
 				116463A21F91F634004ECC79 /* UIViewController+XWTransition.m in Sources */,
 				1164633C1F91A9B1004ECC79 /* ATBaseViewController.m in Sources */,
@@ -1210,7 +1241,9 @@
 				11B211261FB3FC33003CE6ED /* ContactModel.m in Sources */,
 				11C38DFA1FB3567900D75823 /* ContactViewController.m in Sources */,
 				11CBCCE31F9C51E4000E4D01 /* XHStarRateView.m in Sources */,
-				1190EC531F9EE00B007A1D05 /* RegisterSuccessView.m in Sources */,
+				1112EF461FBED6A600B46A8C /* UIButton+TimerCount.m in Sources */,
+				1190EC531F9EE00B007A1D05 /* BSTMessageView.m in Sources */,
+				11E2BF5A1FB59E2C00180762 /* ATCombineStrings.m in Sources */,
 				11713E201FA2D76300303AD8 /* OnlyShowImageButton.m in Sources */,
 				11115D2A1F9B4F0600AB8856 /* HomeItemCollectionViewCell.m in Sources */,
 				116463AE1F91F634004ECC79 /* XWCoolAnimator+XWPortal.m in Sources */,
@@ -1218,6 +1251,7 @@
 				1154D1301FAAD0D800E05734 /* DAYUtils.m in Sources */,
 				116463A81F91F634004ECC79 /* XWCircleSpreadAnimator.m in Sources */,
 				116463AF1F91F634004ECC79 /* XWCoolAnimator+XWScanning.m in Sources */,
+				118C69821FB6AAD4005D095A /* WebDetailViewController.m in Sources */,
 				11115D271F9B287B00AB8856 /* LastPlayCollectionViewCell.m in Sources */,
 				116463BB1F91F634004ECC79 /* XWFilterAnimator.m in Sources */,
 				1194B1E31FA7732900241E49 /* MoneyRecordHomeViewController.m in Sources */,
@@ -1289,9 +1323,11 @@
 				119589C81F98F57F0070AC16 /* MenuTableViewCell.m in Sources */,
 				116463B51F91F634004ECC79 /* XWFilterAnimator+XWFlash.m in Sources */,
 				11BF3BBA1FAA04C500195D1C /* ATTextField.m in Sources */,
+				11E2BF571FB540AA00180762 /* ActivityModel.m in Sources */,
 				11B2112A1FB405CF003CE6ED /* ForgetPassWordViewController.m in Sources */,
 				11B2112E1FB430B7003CE6ED /* ATNeedBorderButton.m in Sources */,
 				1154D1361FAB229B00E05734 /* BSTSingle.m in Sources */,
+				1112EF491FBEE27600B46A8C /* ASBirthSelectSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1406,7 +1442,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BeSiTe/BeSiTe.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = V49UEZK69H;
+				DEVELOPMENT_TEAM = GJ5TSNN2KB;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BeSiTe/Tools/PrefixHeader.pch;
 				INFOPLIST_FILE = BeSiTe/Info.plist;
@@ -1424,7 +1460,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BeSiTe/BeSiTe.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = V49UEZK69H;
+				DEVELOPMENT_TEAM = GJ5TSNN2KB;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BeSiTe/Tools/PrefixHeader.pch;
 				INFOPLIST_FILE = BeSiTe/Info.plist;
