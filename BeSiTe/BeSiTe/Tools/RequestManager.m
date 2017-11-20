@@ -19,7 +19,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    NSSet *set = [[NSSet alloc] initWithObjects:@"text/plain", @"application/json", nil];
+    NSSet *set = [[NSSet alloc] initWithObjects:@"text/plain",@"text/html", @"application/json", nil];
     manager.responseSerializer.acceptableContentTypes = set;
     
     if ([BSTSingle defaultSingle].user) {

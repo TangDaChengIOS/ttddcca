@@ -11,4 +11,6 @@
 #define kRecordSearchTypeTableViewCellReuseID @"kRecordSearchTypeTableViewCellReuseID"
 @interface RecordSearchTypeTableViewCell : UITableViewCell
 @property (nonatomic,assign) BOOL isSingleLine;
+@property (nonatomic,strong) UILabel * titleLab;
+
 @end

@@ -10,4 +10,6 @@
 
 @interface MoneyRecordHomeViewController : VTMagicController
 
+@property (nonatomic,assign) NSInteger selectPageIndex;
+
 @end

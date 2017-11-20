@@ -15,8 +15,6 @@
 #import "PersonGetingViewController.h"
 #import "PersonRecordSearchViewController.h"
 
-#import "MoneyRecordHomeViewController.h"
-
 #import "OnlyShowImageButton.h"
 
 @interface PersonViewController (){
@@ -156,10 +154,7 @@
     [self pushVC:msgVC];
 
     return;
-    MoneyRecordHomeViewController * homeVC = [[MoneyRecordHomeViewController alloc]init];
-    homeVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:homeVC animated:YES];
-    return;
+
     _badgeValue +=3;
     [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:_badgeValue];
 }

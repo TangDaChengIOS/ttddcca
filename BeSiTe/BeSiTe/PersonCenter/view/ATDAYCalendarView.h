@@ -7,9 +7,12 @@
 //
 
 #import "ATTranslucentView.h"
-#import "DAYCalendarView.h"
+#import "SKConstant.h"
 
+typedef void (^finishSelectBlock)(NSString * dateStr);
 @interface ATDAYCalendarView : ATTranslucentView
-+(void)show;
+@property (nonatomic,copy) finishSelectBlock block;
+
++(void)showWithFinishBlock:(finishSelectBlock)block;
 
 @end

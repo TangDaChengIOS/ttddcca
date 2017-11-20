@@ -38,11 +38,6 @@
 		1154D1191FAAB39200E05734 /* RecordSelectToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1181FAAB39200E05734 /* RecordSelectToolView.m */; };
 		1154D11C1FAAB8FC00E05734 /* PersonRecordSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D11B1FAAB8FC00E05734 /* PersonRecordSearchViewController.m */; };
 		1154D11F1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D11E1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m */; };
-		1154D12C1FAAD0D800E05734 /* DAYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1221FAAD0D800E05734 /* DAYCalendarView.m */; };
-		1154D12D1FAAD0D800E05734 /* DAYComponentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1251FAAD0D800E05734 /* DAYComponentView.m */; };
-		1154D12E1FAAD0D800E05734 /* DAYIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1271FAAD0D800E05734 /* DAYIndicatorView.m */; };
-		1154D12F1FAAD0D800E05734 /* DAYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1291FAAD0D800E05734 /* DAYNavigationBar.m */; };
-		1154D1301FAAD0D800E05734 /* DAYUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D12B1FAAD0D800E05734 /* DAYUtils.m */; };
 		1154D1331FAAF6EB00E05734 /* GamesCompanyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1321FAAF6EB00E05734 /* GamesCompanyModel.m */; };
 		1154D1361FAB229B00E05734 /* BSTSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1351FAB229B00E05734 /* BSTSingle.m */; };
 		115893321FA81374008E90C1 /* RecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115893311FA81374008E90C1 /* RecordTableViewCell.m */; };
@@ -107,6 +102,12 @@
 		11AC1B701F99DC9400C06D85 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC1B6F1F99DC9400C06D85 /* HomeHeaderView.m */; };
 		11AC1B741F99F5DC00C06D85 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC1B731F99F5DC00C06D85 /* LMJScrollTextView.m */; };
 		11AC9F0C1FC1D2D90016F3E5 /* ATDAYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F0B1FC1D2D90016F3E5 /* ATDAYCalendarView.m */; };
+		11AC9F1F1FC2A5860016F3E5 /* SKCalendarManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F101FC2A5860016F3E5 /* SKCalendarManage.m */; };
+		11AC9F201FC2A5860016F3E5 /* SKCalendarAnimationManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F131FC2A5860016F3E5 /* SKCalendarAnimationManage.m */; };
+		11AC9F211FC2A5860016F3E5 /* SKDateSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F171FC2A5860016F3E5 /* SKDateSecurity.m */; };
+		11AC9F221FC2A5860016F3E5 /* SKCalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F1A1FC2A5860016F3E5 /* SKCalendarCollectionViewCell.m */; };
+		11AC9F231FC2A5860016F3E5 /* SKCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F1C1FC2A5860016F3E5 /* SKCalendarView.m */; };
+		11AC9F241FC2A5860016F3E5 /* SKWeekCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F1E1FC2A5860016F3E5 /* SKWeekCollectionViewCell.m */; };
 		11B20C081FA9C8F500009977 /* PersonGetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B20C061FA9C8F500009977 /* PersonGetingViewController.m */; };
 		11B20C091FA9C8F500009977 /* PersonGetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B20C071FA9C8F500009977 /* PersonGetingViewController.xib */; };
 		11B211261FB3FC33003CE6ED /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B211251FB3FC33003CE6ED /* ContactModel.m */; };
@@ -202,16 +203,6 @@
 		1154D11B1FAAB8FC00E05734 /* PersonRecordSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonRecordSearchViewController.m; sourceTree = "<group>"; };
 		1154D11D1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordSearchTypeTableViewCell.h; sourceTree = "<group>"; };
 		1154D11E1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordSearchTypeTableViewCell.m; sourceTree = "<group>"; };
-		1154D1211FAAD0D800E05734 /* DAYCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYCalendarView.h; sourceTree = "<group>"; };
-		1154D1221FAAD0D800E05734 /* DAYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYCalendarView.m; sourceTree = "<group>"; };
-		1154D1241FAAD0D800E05734 /* DAYComponentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYComponentView.h; sourceTree = "<group>"; };
-		1154D1251FAAD0D800E05734 /* DAYComponentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYComponentView.m; sourceTree = "<group>"; };
-		1154D1261FAAD0D800E05734 /* DAYIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYIndicatorView.h; sourceTree = "<group>"; };
-		1154D1271FAAD0D800E05734 /* DAYIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYIndicatorView.m; sourceTree = "<group>"; };
-		1154D1281FAAD0D800E05734 /* DAYNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYNavigationBar.h; sourceTree = "<group>"; };
-		1154D1291FAAD0D800E05734 /* DAYNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYNavigationBar.m; sourceTree = "<group>"; };
-		1154D12A1FAAD0D800E05734 /* DAYUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYUtils.h; sourceTree = "<group>"; };
-		1154D12B1FAAD0D800E05734 /* DAYUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYUtils.m; sourceTree = "<group>"; };
 		1154D1311FAAF6EB00E05734 /* GamesCompanyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamesCompanyModel.h; sourceTree = "<group>"; };
 		1154D1321FAAF6EB00E05734 /* GamesCompanyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamesCompanyModel.m; sourceTree = "<group>"; };
 		1154D1341FAB229B00E05734 /* BSTSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTSingle.h; sourceTree = "<group>"; };
@@ -333,6 +324,19 @@
 		11AC1B731F99F5DC00C06D85 /* LMJScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMJScrollTextView.m; sourceTree = "<group>"; };
 		11AC9F0A1FC1D2D90016F3E5 /* ATDAYCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATDAYCalendarView.h; sourceTree = "<group>"; };
 		11AC9F0B1FC1D2D90016F3E5 /* ATDAYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATDAYCalendarView.m; sourceTree = "<group>"; };
+		11AC9F0F1FC2A5860016F3E5 /* SKCalendarManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCalendarManage.h; sourceTree = "<group>"; };
+		11AC9F101FC2A5860016F3E5 /* SKCalendarManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCalendarManage.m; sourceTree = "<group>"; };
+		11AC9F121FC2A5860016F3E5 /* SKCalendarAnimationManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCalendarAnimationManage.h; sourceTree = "<group>"; };
+		11AC9F131FC2A5860016F3E5 /* SKCalendarAnimationManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCalendarAnimationManage.m; sourceTree = "<group>"; };
+		11AC9F151FC2A5860016F3E5 /* SKConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKConstant.h; sourceTree = "<group>"; };
+		11AC9F161FC2A5860016F3E5 /* SKDateSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDateSecurity.h; sourceTree = "<group>"; };
+		11AC9F171FC2A5860016F3E5 /* SKDateSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDateSecurity.m; sourceTree = "<group>"; };
+		11AC9F191FC2A5860016F3E5 /* SKCalendarCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCalendarCollectionViewCell.h; sourceTree = "<group>"; };
+		11AC9F1A1FC2A5860016F3E5 /* SKCalendarCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCalendarCollectionViewCell.m; sourceTree = "<group>"; };
+		11AC9F1B1FC2A5860016F3E5 /* SKCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCalendarView.h; sourceTree = "<group>"; };
+		11AC9F1C1FC2A5860016F3E5 /* SKCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCalendarView.m; sourceTree = "<group>"; };
+		11AC9F1D1FC2A5860016F3E5 /* SKWeekCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKWeekCollectionViewCell.h; sourceTree = "<group>"; };
+		11AC9F1E1FC2A5860016F3E5 /* SKWeekCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKWeekCollectionViewCell.m; sourceTree = "<group>"; };
 		11B20C051FA9C8F500009977 /* PersonGetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonGetingViewController.h; sourceTree = "<group>"; };
 		11B20C061FA9C8F500009977 /* PersonGetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonGetingViewController.m; sourceTree = "<group>"; };
 		11B20C071FA9C8F500009977 /* PersonGetingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonGetingViewController.xib; sourceTree = "<group>"; };
@@ -498,26 +502,9 @@
 		1154D1201FAAD0D800E05734 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				1154D1211FAAD0D800E05734 /* DAYCalendarView.h */,
-				1154D1221FAAD0D800E05734 /* DAYCalendarView.m */,
-				1154D1231FAAD0D800E05734 /* Internal */,
+				11AC9F0D1FC2A5860016F3E5 /* SKCalendarView */,
 			);
 			path = Calendar;
-			sourceTree = "<group>";
-		};
-		1154D1231FAAD0D800E05734 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				1154D1241FAAD0D800E05734 /* DAYComponentView.h */,
-				1154D1251FAAD0D800E05734 /* DAYComponentView.m */,
-				1154D1261FAAD0D800E05734 /* DAYIndicatorView.h */,
-				1154D1271FAAD0D800E05734 /* DAYIndicatorView.m */,
-				1154D1281FAAD0D800E05734 /* DAYNavigationBar.h */,
-				1154D1291FAAD0D800E05734 /* DAYNavigationBar.m */,
-				1154D12A1FAAD0D800E05734 /* DAYUtils.h */,
-				1154D12B1FAAD0D800E05734 /* DAYUtils.m */,
-			);
-			path = Internal;
 			sourceTree = "<group>";
 		};
 		116463311F91A947004ECC79 /* Activity */ = {
@@ -976,6 +963,58 @@
 			path = LMJScrollTextView;
 			sourceTree = "<group>";
 		};
+		11AC9F0D1FC2A5860016F3E5 /* SKCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				11AC9F0E1FC2A5860016F3E5 /* Algorithm */,
+				11AC9F111FC2A5860016F3E5 /* Animation */,
+				11AC9F141FC2A5860016F3E5 /* Tool */,
+				11AC9F181FC2A5860016F3E5 /* View */,
+			);
+			path = SKCalendarView;
+			sourceTree = "<group>";
+		};
+		11AC9F0E1FC2A5860016F3E5 /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				11AC9F0F1FC2A5860016F3E5 /* SKCalendarManage.h */,
+				11AC9F101FC2A5860016F3E5 /* SKCalendarManage.m */,
+			);
+			path = Algorithm;
+			sourceTree = "<group>";
+		};
+		11AC9F111FC2A5860016F3E5 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				11AC9F121FC2A5860016F3E5 /* SKCalendarAnimationManage.h */,
+				11AC9F131FC2A5860016F3E5 /* SKCalendarAnimationManage.m */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		11AC9F141FC2A5860016F3E5 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				11AC9F151FC2A5860016F3E5 /* SKConstant.h */,
+				11AC9F161FC2A5860016F3E5 /* SKDateSecurity.h */,
+				11AC9F171FC2A5860016F3E5 /* SKDateSecurity.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		11AC9F181FC2A5860016F3E5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				11AC9F191FC2A5860016F3E5 /* SKCalendarCollectionViewCell.h */,
+				11AC9F1A1FC2A5860016F3E5 /* SKCalendarCollectionViewCell.m */,
+				11AC9F1B1FC2A5860016F3E5 /* SKCalendarView.h */,
+				11AC9F1C1FC2A5860016F3E5 /* SKCalendarView.m */,
+				11AC9F1D1FC2A5860016F3E5 /* SKWeekCollectionViewCell.h */,
+				11AC9F1E1FC2A5860016F3E5 /* SKWeekCollectionViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		11CBCCF21F9CEB43000E4D01 /* LoginAbout */ = {
 			isa = PBXGroup;
 			children = (
@@ -1235,8 +1274,9 @@
 				116463AB1F91F634004ECC79 /* XWCoolAnimator+XWLines.m in Sources */,
 				112B16D31FA6C43600CE4555 /* EditNameView.m in Sources */,
 				114BC1B01FAFF8AB00C1A46D /* BankTableViewCell.m in Sources */,
-				1154D12C1FAAD0D800E05734 /* DAYCalendarView.m in Sources */,
+				11AC9F211FC2A5860016F3E5 /* SKDateSecurity.m in Sources */,
 				11CBCCE61F9C6938000E4D01 /* GameListPageHeaderView.m in Sources */,
+				11AC9F241FC2A5860016F3E5 /* SKWeekCollectionViewCell.m in Sources */,
 				11ECA9491F9DA34400CF84CB /* ATNeedBorderView.m in Sources */,
 				11B211261FB3FC33003CE6ED /* ContactModel.m in Sources */,
 				11C38DFA1FB3567900D75823 /* ContactViewController.m in Sources */,
@@ -1248,10 +1288,10 @@
 				11115D2A1F9B4F0600AB8856 /* HomeItemCollectionViewCell.m in Sources */,
 				116463AE1F91F634004ECC79 /* XWCoolAnimator+XWPortal.m in Sources */,
 				1164634B1F91AA53004ECC79 /* PersonViewController.m in Sources */,
-				1154D1301FAAD0D800E05734 /* DAYUtils.m in Sources */,
 				116463A81F91F634004ECC79 /* XWCircleSpreadAnimator.m in Sources */,
 				116463AF1F91F634004ECC79 /* XWCoolAnimator+XWScanning.m in Sources */,
 				118C69821FB6AAD4005D095A /* WebDetailViewController.m in Sources */,
+				11AC9F221FC2A5860016F3E5 /* SKCalendarCollectionViewCell.m in Sources */,
 				11115D271F9B287B00AB8856 /* LastPlayCollectionViewCell.m in Sources */,
 				116463BB1F91F634004ECC79 /* XWFilterAnimator.m in Sources */,
 				1194B1E31FA7732900241E49 /* MoneyRecordHomeViewController.m in Sources */,
@@ -1287,17 +1327,17 @@
 				112435311F9BAC9B00C5EAAE /* GamesMenuView.m in Sources */,
 				116463B41F91F634004ECC79 /* XWFilterAnimator+XWCopyMachine.m in Sources */,
 				1154D1331FAAF6EB00E05734 /* GamesCompanyModel.m in Sources */,
+				11AC9F201FC2A5860016F3E5 /* SKCalendarAnimationManage.m in Sources */,
 				118E79B51FAB66A600DE053B /* BannerADSModel.m in Sources */,
-				1154D12F1FAAD0D800E05734 /* DAYNavigationBar.m in Sources */,
 				116463AD1F91F634004ECC79 /* XWCoolAnimator+XWPageFlip.m in Sources */,
 				114BC1B41FAFFB9100C1A46D /* BankModel.m in Sources */,
+				11AC9F1F1FC2A5860016F3E5 /* SKCalendarManage.m in Sources */,
 				1154D11F1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m in Sources */,
 				113F71E71FB2B5FC00EB4567 /* UIButton_withBadge.m in Sources */,
 				116463B31F91F634004ECC79 /* XWFilterAnimator+XWBoxBlur.m in Sources */,
 				11CBCCEC1F9CB94F000E4D01 /* GameItemCollectionViewCell.m in Sources */,
 				116463B91F91F634004ECC79 /* XWFilterAnimator+XWRipple.m in Sources */,
 				116463481F91AA3E004ECC79 /* HomeViewController.m in Sources */,
-				1154D12E1FAAD0D800E05734 /* DAYIndicatorView.m in Sources */,
 				11B8F0EF1FB4A02000D7E662 /* ActivityTableViewCell.m in Sources */,
 				116463B01F91F634004ECC79 /* XWCoolAnimator.m in Sources */,
 				112B16D91FA727CC00CE4555 /* EditPassWordView.m in Sources */,
@@ -1311,9 +1351,9 @@
 				116463B81F91F634004ECC79 /* XWFilterAnimator+XWPageCurl.m in Sources */,
 				11CBCCF01F9CD2EB000E4D01 /* PersonMessageViewController.m in Sources */,
 				116463B71F91F634004ECC79 /* XWFilterAnimator+XWMod.m in Sources */,
+				11AC9F231FC2A5860016F3E5 /* SKCalendarView.m in Sources */,
 				11930F261FA8CA5300AB33F4 /* JiFenDetailViewController.m in Sources */,
 				116463A91F91F634004ECC79 /* XWCoolAnimator+XWExplode.m in Sources */,
-				1154D12D1FAAD0D800E05734 /* DAYComponentView.m in Sources */,
 				115893351FA852CB008E90C1 /* MoneyRecordDetailViewController.m in Sources */,
 				114BC1B71FAFFDE600C1A46D /* BankSelectViewController.m in Sources */,
 				1182AF2A1F95B4A3001CE114 /* RequestManager.m in Sources */,

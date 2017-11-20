@@ -53,12 +53,17 @@
 
 -(void)selectBtnClick{
     if (_isCanOpen) {
-        _isOpen = !_isOpen;
-        _rightImageView.image = _isOpen ? KIMAGE(@"common_open_icon") : KIMAGE(@"common_next_icon");
+        self.isOpen = !_isOpen;
     }
     if ( self.eventBlock) {
         self.eventBlock(_isOpen);
     }
+}
+
+-(void)setIsOpen:(BOOL)isOpen
+{
+    _isOpen = isOpen;
+    _rightImageView.image = _isOpen ? KIMAGE(@"common_open_icon") : KIMAGE(@"common_next_icon");
 }
 
 @end

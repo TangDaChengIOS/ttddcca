@@ -9,7 +9,7 @@
 #import "RecordSearchTypeTableViewCell.h"
 
 @interface RecordSearchTypeTableViewCell ()
-@property (nonatomic,strong) UILabel * titleLab;
+
 @end
 @implementation RecordSearchTypeTableViewCell
 
@@ -22,7 +22,6 @@
         _titleLab.center = self.contentView.center;
         _titleLab.textAlignment = NSTextAlignmentCenter;
         _titleLab.font  =kFont(14);
-        _titleLab.text = @"取款记录";
 
         [self.contentView addSubview:_titleLab];
     }

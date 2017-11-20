@@ -9,8 +9,8 @@
 #import "PersonRecordSearchViewController.h"
 #import "RecordSelectToolView.h"
 #import "RecordSearchTypeTableViewCell.h"
-#import "DAYCalendarView.h"
 #import "ATDAYCalendarView.h"
+#import "MoneyRecordHomeViewController.h"
 
 @interface PersonRecordSearchViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -22,17 +22,23 @@
 @property (nonatomic,strong) RecordSelectToolView * beginDateSelectView;
 @property (nonatomic,strong) RecordSelectToolView * endDateSelectView;
 @property (nonatomic,strong) UIButton * searchBtn;
-
 @end
 
 @implementation PersonRecordSearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = kWhiteColor;
-//    DAYCalendarView * view = [[DAYCalendarView alloc]initWithFrame:CGRectMake(0, 0, MAXWIDTH, 300)];
-//    [self.view addSubview:view];
+    _dataSource = @[@"取款记录",@"存款记录",@"转账记录",@"优惠记录",@"积分记录",@"推荐礼金"];
     [self configSubViews];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self readDataFromSingleLeton];
+}
+
+-(void)readDataFromSingleLeton{
+    self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
 }
 
 -(void)configSubViews{
@@ -42,7 +48,6 @@
     
     _totalMoneyLab = [[UILabel alloc]initWithFrame:CGRectMake(0 , 0, MAXWIDTH, 35)];
     _totalMoneyLab.backgroundColor = UIColorFromINTValue(245, 245, 245);
-    _totalMoneyLab.text = @"05/06/2017";
     _totalMoneyLab.textAlignment = NSTextAlignmentCenter;
     [_scrollView addSubview:_totalMoneyLab];
     
@@ -72,8 +77,9 @@
     _beginDateSelectView.titleLab.text = @"开始日期";
     _beginDateSelectView.dateLab.text = @"";
     _beginDateSelectView.eventBlock = ^(BOOL isOpen){
-        DAYCalendarView * view = [[DAYCalendarView alloc]init];
-        [weak_self.view addSubview:view];
+        [ATDAYCalendarView showWithFinishBlock:^(NSString *dateStr) {
+            weak_self.beginDateSelectView.dateLab.text = dateStr;
+        }];
     };
     [_scrollView addSubview:_beginDateSelectView];
     
@@ -82,8 +88,10 @@
     _endDateSelectView.titleLab.text = @"结束日期";
     _endDateSelectView.dateLab.text = @"";
     _endDateSelectView.eventBlock = ^(BOOL isOpen){
-        DAYCalendarView * view = [[DAYCalendarView alloc]init];
-        [weak_self.view addSubview:view];
+        [ATDAYCalendarView showWithFinishBlock:^(NSString *dateStr) {
+            weak_self.endDateSelectView.dateLab.text = dateStr;
+
+        }];
     };
     [_scrollView addSubview:_endDateSelectView];
     
@@ -98,10 +106,32 @@
     [self refreshSubView:NO];
 }
 
--(void)searchBtnClick{
-    [ATDAYCalendarView show];
-//    DAYCalendarView * view = [[DAYCalendarView alloc]initWithFrame:self.view.bounds];
-//    [self.view addSubview:view];
+-(void)searchBtnClick
+{
+    if (_recordTypeSelectView.dateLab.text.length <= 0) {
+        TTAlert(@"请选择交易类型！");
+        return;
+    }
+    
+    if (_beginDateSelectView.dateLab.text.length <= 0 || _endDateSelectView.dateLab.text.length <= 0) {
+        TTAlert(@"请选择查询的日期范围！");
+        return;
+    }
+    NSString * beginStr = [_beginDateSelectView.dateLab.text stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    NSString * endStr = [_endDateSelectView.dateLab.text stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    if ([beginStr compare:endStr options:NSLiteralSearch] == NSOrderedDescending) {
+        TTAlert(@"开始日期不能大于结束日期！");
+        return;
+    }
+    [[BSTSingle defaultSingle].moneyRecordSearchPara setValue:beginStr forKey:@"beginDate"];
+    [[BSTSingle defaultSingle].moneyRecordSearchPara setValue:endStr forKey:@"endDate"];
+
+    NSLog(@"%@",[BSTSingle defaultSingle].moneyRecordSearchPara);
+
+    MoneyRecordHomeViewController * homeVC = [[MoneyRecordHomeViewController alloc]init];
+    homeVC.hidesBottomBarWhenPushed = YES;
+    homeVC.selectPageIndex = [_dataSource indexOfObject:_recordTypeSelectView.dateLab.text];
+    [self.navigationController pushViewController:homeVC animated:YES];
 }
 
 
@@ -129,19 +159,25 @@
 #pragma mark -- tableView delegate/dataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return _dataSource.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecordSearchTypeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kRecordSearchTypeTableViewCellReuseID forIndexPath:indexPath];
     cell.isSingleLine = (indexPath.row + 1) % 2 ;
+    cell.titleLab.text = _dataSource[indexPath.row];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 35;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.recordTypeSelectView.dateLab.text = _dataSource[indexPath.row];
+    self.recordTypeSelectView.isOpen = NO;
+    [self refreshSubView:NO];
+}
 
 
 -(UITableView *)tableView

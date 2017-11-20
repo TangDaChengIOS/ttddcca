@@ -26,4 +26,12 @@
     }
     return self;
 }
+
+-(NSMutableDictionary *)moneyRecordSearchPara
+{
+    if (!_moneyRecordSearchPara) {
+        _moneyRecordSearchPara = [NSMutableDictionary dictionary];
+    }
+    return _moneyRecordSearchPara;
+}
 @end

@@ -12,7 +12,7 @@
 @interface MoneyRecordDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) RecordTableViewCell * headerView;
 @property (nonatomic,strong) UITableView * tableView;
-
+@property (nonatomic,assign) NSInteger page;
 @end
 
 @implementation MoneyRecordDetailViewController
@@ -20,8 +20,102 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
-
+    kWeakSelf
+    self.tableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+        weak_self.page = 1;
+        [weak_self requestData];
+    }];
+    
+    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+        weak_self.page += 1;
+        [weak_self requestData];
+    }];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView.mj_header beginRefreshing];
+}
+-(void)requestData{
+    switch (_detailControlType) {
+        case RecordDetailControlType_QuKuan:
+            [self requestDataForQuKuan];
+            break;
+        case RecordDetailControlType_CunKuan:
+            [self requestDataForCunKuan];
+            break;
+        case RecordDetailControlType_ZhuanZhang:
+            [self requestDataForZhuanZhang];
+            break;
+        case RecordDetailControlType_YouHui:
+            [self requestDataForYouHui];
+            break;
+            
+        case RecordDetailControlType_TJLJ:
+            [self requestDataForTuiJianLiJin];
+            break;
+        default:
+            [self requestDataForQuKuan];
+            break;
+    }
+ 
+}
+
+-(NSDictionary *)para{
+    NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:[BSTSingle defaultSingle].moneyRecordSearchPara];
+    [dict setValue:@(self.page) forKey:@"pageNo"];
+    [dict setValue:@(20) forKey:@"pageSize"];
+    return dict;
+}
+
+
+#pragma mark -- 请求取款数据
+-(void)requestDataForQuKuan{
+    [RequestManager getWithPath:@"getUserWithdrawInfos" params:[self para] success:^(id JSON) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark -- 请求存款数据
+-(void)requestDataForCunKuan{
+    [RequestManager getWithPath:@"" params:[self para] success:^(id JSON) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark -- 请求转账数据
+-(void)requestDataForZhuanZhang{
+    [RequestManager getWithPath:@"" params:[self para] success:^(id JSON) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark -- 请求优惠数据
+-(void)requestDataForYouHui{
+    [RequestManager getWithPath:@"" params:[self para] success:^(id JSON) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark -- 请求推荐礼金数据
+-(void)requestDataForTuiJianLiJin{
+    [RequestManager getWithPath:@"" params:[self para] success:^(id JSON) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
+#pragma mark -- 设置列表 标题栏，因界面复用，根据宏展示不同样式
 -(void)setDetailControlType:(RecordDetailControlType)detailControlType{
     _detailControlType = detailControlType;
     dispatch_async(dispatch_get_main_queue(), ^{
