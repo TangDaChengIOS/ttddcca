@@ -33,16 +33,18 @@
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if (success == nil) return;
-            if ([responseObject[@"retCode"] integerValue] == 0) {
-                success(responseObject[@"data"]);
+            if ([responseObject[@"retCode"] integerValue] == 0)
+            {
+                if ([responseObject objectForKey:@"data"]) {
+                    success(responseObject[@"data"]);
+                }else{
+                    success(responseObject[@"page"]);
+                }
             }
-            else{
+            else
+            {
                 MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
-
                 TTAlert(responseObject[@"retMsg"]);
-//                NSError * error = [NSError errorWithDomain:NSLocalizedDescriptionKey code:0 userInfo:@{@"msg":responseObject[@"retMsg"]}];
-//                MyLog(@"Error:%@",responseObject[@"retMsg"]);
-//                if (failure != nil) failure(error);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
@@ -59,17 +61,19 @@
             
             MyLog(@"SUCCESS URL:%@",[task.response valueForKey:@"URL"]);
             if (success == nil) return;
-            if ([responseObject[@"retCode"] integerValue] == 0) {
-                success(responseObject[@"data"]);
+            if ([responseObject[@"retCode"] integerValue] == 0)
+            {
+                if ([responseObject objectForKey:@"data"]) {
+                    success(responseObject[@"data"]);
+                }else{
+                    success(responseObject[@"page"]);
+                }
             }
-            else{
+            else
+            {
+                MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
                 TTAlert(responseObject[@"retMsg"]);
-
-//                NSError * error = [NSError errorWithDomain:NSLocalizedDescriptionKey code:0 userInfo:@{@"msg":responseObject[@"retMsg"]}];
-//                MyLog(@"Error:%@",responseObject[@"retMsg"]);
-//                if (failure != nil) failure(error);
             }
-//            success(responseObject);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             MyLog(@"ERROR URL:%@",[task.response valueForKey:@"URL"]);

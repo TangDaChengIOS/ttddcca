@@ -13,5 +13,7 @@
 -(void)setRootViewController;
 -(void)test;
 -(void)autoLogin;
++(UINavigationController *)getBoomNavigation;
++(UITabBarController *)getTabBarController;
 
 @end

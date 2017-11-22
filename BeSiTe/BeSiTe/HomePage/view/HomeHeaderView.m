@@ -12,6 +12,7 @@
 #import "LastPlayCollectionViewCell.h"
 #import "BannerADSModel.h"
 #import "GamesModel.h"
+#import "GamesMenuView.h"
 
 #define kCollectionItemWidth 56
 
@@ -26,6 +27,7 @@
 
 @property (nonatomic,strong) NSMutableArray * collectionViewDataSource;//最近游戏数据源
 @property (nonatomic,assign) NSInteger totalFinishRequest;//记录完成几个接口的请求（失败、成功不管）
+@property (nonatomic,copy) NSAttributedString * scrollText;
 @end
 
 @implementation HomeHeaderView
@@ -54,7 +56,6 @@
         _collectionView.delegate = self;
         _collectionView.backgroundColor = UIColorFromINTValue(24, 101, 114);
         _collectionView.showsHorizontalScrollIndicator = NO;
-//        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableViewkey"];
         [_collectionView registerClass:[LastPlayCollectionViewCell class] forCellWithReuseIdentifier:kLastPlayCollectionViewCellReuseID];
         [self addSubview:_collectionView];
         
@@ -65,7 +66,6 @@
         CGFloat leftMargin = _scrollTextLeftImage.maxX + 10;
         _scrollTextView = [[LMJScrollTextView alloc]initWithFrame:CGRectMake(leftMargin,_collectionView.maxY , MAXWIDTH - leftMargin, 21) textScrollModel:LMJTextScrollContinuous direction:LMJTextScrollMoveLeft];
         [self addSubview:_scrollTextView];
-        [_scrollTextView startScrollWithAttributedString:[self getAttributeString:@"尊贵的XXX会员，贡献。会员。尊贵的。我爱你们啊 啊jhdbajdnkndkankjdajksndkasndiajsndknas"]];
         self.height = _scrollTextView.maxY;
         [self setNeedsDisplay];
     }
@@ -101,7 +101,7 @@
 
     }];
     [RequestManager getWithPath:@"notices" params:nil success:^(id JSON) {
-        NSLog(@"%@",JSON);
+        [weak_self handleNotices:JSON];
         weak_self.totalFinishRequest ++;
 
     } failure:^(NSError *error) {
@@ -118,9 +118,33 @@
     }
 }
 
+#pragma mark -- 处理滚屏公告
+-(void)handleNotices:(id)json{
+    if ([[json class]isSubclassOfClass:[NSArray class]])
+    {
+        NSMutableAttributedString * mAttStr = [[NSMutableAttributedString alloc]init];
+        for (NSDictionary * dict  in json) {
+            NSString * content = dict[@"content"];
+           [mAttStr appendAttributedString: [self  getAttributeString:content]];
+        }
+        [self.scrollTextView startScrollWithAttributedString:mAttStr];
+
+    }else{
+        
+    }
+}
+
+
 #pragma mark -- 选中某一页轮播图
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
-
+    BannerADSModel * model = self.bannerDataSource[index];
+    if (model.type == 1)//普通H5
+    {
+        [self.viewController.navigationController pushViewController:[WebDetailViewController quickCreateWithUrl:model.webUrl] animated:YES];
+    }else{//游戏
+//        [GamesMenuView ]
+#warning 此处不通
+    }
 }
 
 #pragma mark -- collectionView delegates
@@ -137,29 +161,13 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [GamesMenuView showWithModel:self.collectionViewDataSource[indexPath.row]];
 }
-
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-//    if (kind == UICollectionElementKindSectionHeader ) {
-//        UICollectionReusableView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableViewkey" forIndexPath:indexPath];
-//        view.backgroundColor = UIColorFromINTValue(6, 68, 75);
-//        if (view.subviews.count ==0) {
-//            [view addSubview:[self createLabe]];
-//        }
-//        return view;
-//    }
-//    return nil;
-//}
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(75, kCollectionItemWidth);
 }
-
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-//    return CGSizeMake(20, kCollectionItemWidth);
-//}
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
@@ -170,11 +178,6 @@
 {
     return 0.01;
 }
-//-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-//{
-//    return UIEdgeInsetsMake(0, 10, 20, 10);
-//}
-
 
 -(UILabel *)createLabe{
     UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 20, kCollectionItemWidth)];

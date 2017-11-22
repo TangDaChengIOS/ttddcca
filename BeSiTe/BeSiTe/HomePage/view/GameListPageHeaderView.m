@@ -59,7 +59,7 @@
         _searchBtn.layer.cornerRadius = 2.0f;
         _searchBtn.clipsToBounds = YES;
         [_searchBtn addSubview:btnImage];
-        
+        [_searchBtn addTarget:self action:@selector(searchBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_searchBtn];
    
         self.height = _scrollTextView.maxY ;
@@ -67,15 +67,21 @@
     }
     return self;
 }
-
--(void)requestData{
-//    [RequestManager postWithPath:@"/sendSmsCode" params:@{@"mobile":@"18026767853",@"type":@"1"} method:@"post" success:^(id JSON) {
-//        MyLog(@"%@", JSON);
-//    } failure:^(NSError *error) {
-//        MyLog(@"%@", error.description);
-//    }];
+-(void)setSelectedItem:(NSInteger)selectedItem
+{
+    if (selectedItem > [BSTSingle defaultSingle].companysArray.count) {
+        selectedItem =0 ;
+    }
+    _selectedItem = selectedItem;
+    [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:selectedItem inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 }
 
+
+-(void)searchBtnClick{
+    if (self.gotoSearchBlock) {
+        self.gotoSearchBlock();
+    }
+}
 
 #pragma mark -- collectionView delegates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -86,35 +92,30 @@
 {
     LastPlayCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:kLastPlayCollectionViewCellReuseID2 forIndexPath:indexPath];
     [cell setCellWithCompanyModel:[BSTSingle defaultSingle].companysArray[indexPath.item]];
-  //  [cell setCellWithModel:self.collectionViewDataSource[indexPath.row]];
+    if (indexPath.item == self.selectedItem) {
+        [cell setSelected:YES];
+    }
+    else{
+        [cell setSelected:NO];
+    }
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    _selectedItem = indexPath.item;
+    [self.collectionView reloadData];
+    GamesCompanyModel * model = [BSTSingle defaultSingle].companysArray[indexPath.item];
+    NSLog(@"%@",model.companyCode);
+    if (self.selectGameCompanyBlock) {
+        self.selectGameCompanyBlock(model.companyCode);
+    }
 }
-
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-//    if (kind == UICollectionElementKindSectionHeader ) {
-//        UICollectionReusableView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableViewkey" forIndexPath:indexPath];
-//        view.backgroundColor = UIColorFromINTValue(6, 68, 75);
-//        if (view.subviews.count ==0) {
-//            [view addSubview:[self createLabe]];
-//        }
-//        return view;
-//    }
-//    return nil;
-//}
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(kCollectionItemWidth ,kCollectionItemHeight);
 }
-
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-//    return CGSizeMake(20, kCollectionItemWidth);
-//}
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
@@ -125,13 +126,6 @@
 {
     return 0.01;
 }
-//-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-//{
-//    return UIEdgeInsetsMake(0, 10, 20, 10);
-//}
-
-
-
 
 #pragma mark -- 将滚动文字转为带属性的文字
 -(NSAttributedString *)getAttributeString:(NSString *)sourceString

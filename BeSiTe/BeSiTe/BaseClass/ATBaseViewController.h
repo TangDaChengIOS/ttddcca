@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BSTSingle.h"
+#import "RecordTableViewCell.h"
+
+
 @interface ATBaseViewController : UIViewController
 
 @property (nonatomic,assign) BOOL isNeedHiddenNav;

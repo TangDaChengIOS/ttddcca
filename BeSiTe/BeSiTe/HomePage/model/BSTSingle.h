@@ -21,6 +21,10 @@
 /**存放查询记录的起止日期*/
 @property (nonatomic,strong)NSMutableDictionary * moneyRecordSearchPara;
 
+@property (nonatomic,copy) NSString * registerAgreementUrl;//注册协议
+@property (nonatomic,copy) NSString * aboutUSUrl;//关于我们
+@property (nonatomic,copy) NSString * vipExplainUrl;//VIP介绍
+
 +(instancetype)defaultSingle;
 
 @end

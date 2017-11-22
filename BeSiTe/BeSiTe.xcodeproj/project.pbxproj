@@ -18,6 +18,8 @@
 		112B16D31FA6C43600CE4555 /* EditNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112B16D21FA6C43600CE4555 /* EditNameView.m */; };
 		112B16D61FA6D68D00CE4555 /* EditPhoneNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112B16D51FA6D68D00CE4555 /* EditPhoneNumberView.m */; };
 		112B16D91FA727CC00CE4555 /* EditPassWordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112B16D81FA727CC00CE4555 /* EditPassWordView.m */; };
+		112BEADB1FC422E900EDD756 /* APPStartRunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112BEADA1FC422E900EDD756 /* APPStartRunViewController.m */; };
+		112BEADE1FC5CECC00EDD756 /* GameSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112BEADD1FC5CECC00EDD756 /* GameSearchViewController.m */; };
 		113227AC1F909DC500E5EE7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 113227AB1F909DC500E5EE7E /* main.m */; };
 		113227B71F909DC500E5EE7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 113227B61F909DC500E5EE7E /* Assets.xcassets */; };
 		113227BA1F909DC500E5EE7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113227B81F909DC500E5EE7E /* LaunchScreen.storyboard */; };
@@ -41,7 +43,6 @@
 		1154D1331FAAF6EB00E05734 /* GamesCompanyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1321FAAF6EB00E05734 /* GamesCompanyModel.m */; };
 		1154D1361FAB229B00E05734 /* BSTSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1351FAB229B00E05734 /* BSTSingle.m */; };
 		115893321FA81374008E90C1 /* RecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115893311FA81374008E90C1 /* RecordTableViewCell.m */; };
-		115893351FA852CB008E90C1 /* MoneyRecordDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 115893341FA852CB008E90C1 /* MoneyRecordDetailViewController.m */; };
 		1164633C1F91A9B1004ECC79 /* ATBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1164633B1F91A9B1004ECC79 /* ATBaseViewController.m */; };
 		116463481F91AA3E004ECC79 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116463471F91AA3E004ECC79 /* HomeViewController.m */; };
 		1164634B1F91AA53004ECC79 /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1164634A1F91AA53004ECC79 /* PersonViewController.m */; };
@@ -108,6 +109,12 @@
 		11AC9F221FC2A5860016F3E5 /* SKCalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F1A1FC2A5860016F3E5 /* SKCalendarCollectionViewCell.m */; };
 		11AC9F231FC2A5860016F3E5 /* SKCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F1C1FC2A5860016F3E5 /* SKCalendarView.m */; };
 		11AC9F241FC2A5860016F3E5 /* SKWeekCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F1E1FC2A5860016F3E5 /* SKWeekCollectionViewCell.m */; };
+		11AC9F271FC30B940016F3E5 /* MoneyRecord_QK_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F261FC30B940016F3E5 /* MoneyRecord_QK_ViewController.m */; };
+		11AC9F2A1FC30BAA0016F3E5 /* MoneyRecord_CK_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F291FC30BAA0016F3E5 /* MoneyRecord_CK_ViewController.m */; };
+		11AC9F2D1FC30BC00016F3E5 /* MoneyRecord_ZZ_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F2C1FC30BC00016F3E5 /* MoneyRecord_ZZ_ViewController.m */; };
+		11AC9F301FC30BD40016F3E5 /* MoneyRecord_YH_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F2F1FC30BD40016F3E5 /* MoneyRecord_YH_ViewController.m */; };
+		11AC9F331FC30C020016F3E5 /* MoneyRecord_TJLJ_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F321FC30C020016F3E5 /* MoneyRecord_TJLJ_ViewController.m */; };
+		11AC9F481FC31B870016F3E5 /* MoneyRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F471FC31B870016F3E5 /* MoneyRecordModel.m */; };
 		11B20C081FA9C8F500009977 /* PersonGetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B20C061FA9C8F500009977 /* PersonGetingViewController.m */; };
 		11B20C091FA9C8F500009977 /* PersonGetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B20C071FA9C8F500009977 /* PersonGetingViewController.xib */; };
 		11B211261FB3FC33003CE6ED /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B211251FB3FC33003CE6ED /* ContactModel.m */; };
@@ -167,6 +174,10 @@
 		112B16D51FA6D68D00CE4555 /* EditPhoneNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPhoneNumberView.m; sourceTree = "<group>"; };
 		112B16D71FA727CC00CE4555 /* EditPassWordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPassWordView.h; sourceTree = "<group>"; };
 		112B16D81FA727CC00CE4555 /* EditPassWordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPassWordView.m; sourceTree = "<group>"; };
+		112BEAD91FC422E900EDD756 /* APPStartRunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPStartRunViewController.h; sourceTree = "<group>"; };
+		112BEADA1FC422E900EDD756 /* APPStartRunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPStartRunViewController.m; sourceTree = "<group>"; };
+		112BEADC1FC5CECC00EDD756 /* GameSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSearchViewController.h; sourceTree = "<group>"; };
+		112BEADD1FC5CECC00EDD756 /* GameSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameSearchViewController.m; sourceTree = "<group>"; };
 		113227A71F909DC500E5EE7E /* BeSiTe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeSiTe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		113227AB1F909DC500E5EE7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		113227B61F909DC500E5EE7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -209,8 +220,6 @@
 		1154D1351FAB229B00E05734 /* BSTSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTSingle.m; sourceTree = "<group>"; };
 		115893301FA81374008E90C1 /* RecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordTableViewCell.h; sourceTree = "<group>"; };
 		115893311FA81374008E90C1 /* RecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordTableViewCell.m; sourceTree = "<group>"; };
-		115893331FA852CB008E90C1 /* MoneyRecordDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyRecordDetailViewController.h; sourceTree = "<group>"; };
-		115893341FA852CB008E90C1 /* MoneyRecordDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyRecordDetailViewController.m; sourceTree = "<group>"; };
 		1164633A1F91A9B1004ECC79 /* ATBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATBaseViewController.h; sourceTree = "<group>"; };
 		1164633B1F91A9B1004ECC79 /* ATBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATBaseViewController.m; sourceTree = "<group>"; };
 		116463461F91AA3E004ECC79 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -337,6 +346,18 @@
 		11AC9F1C1FC2A5860016F3E5 /* SKCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCalendarView.m; sourceTree = "<group>"; };
 		11AC9F1D1FC2A5860016F3E5 /* SKWeekCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKWeekCollectionViewCell.h; sourceTree = "<group>"; };
 		11AC9F1E1FC2A5860016F3E5 /* SKWeekCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKWeekCollectionViewCell.m; sourceTree = "<group>"; };
+		11AC9F251FC30B940016F3E5 /* MoneyRecord_QK_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyRecord_QK_ViewController.h; sourceTree = "<group>"; };
+		11AC9F261FC30B940016F3E5 /* MoneyRecord_QK_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyRecord_QK_ViewController.m; sourceTree = "<group>"; };
+		11AC9F281FC30BAA0016F3E5 /* MoneyRecord_CK_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyRecord_CK_ViewController.h; sourceTree = "<group>"; };
+		11AC9F291FC30BAA0016F3E5 /* MoneyRecord_CK_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyRecord_CK_ViewController.m; sourceTree = "<group>"; };
+		11AC9F2B1FC30BC00016F3E5 /* MoneyRecord_ZZ_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyRecord_ZZ_ViewController.h; sourceTree = "<group>"; };
+		11AC9F2C1FC30BC00016F3E5 /* MoneyRecord_ZZ_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyRecord_ZZ_ViewController.m; sourceTree = "<group>"; };
+		11AC9F2E1FC30BD40016F3E5 /* MoneyRecord_YH_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyRecord_YH_ViewController.h; sourceTree = "<group>"; };
+		11AC9F2F1FC30BD40016F3E5 /* MoneyRecord_YH_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyRecord_YH_ViewController.m; sourceTree = "<group>"; };
+		11AC9F311FC30C020016F3E5 /* MoneyRecord_TJLJ_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyRecord_TJLJ_ViewController.h; sourceTree = "<group>"; };
+		11AC9F321FC30C020016F3E5 /* MoneyRecord_TJLJ_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyRecord_TJLJ_ViewController.m; sourceTree = "<group>"; };
+		11AC9F461FC31B870016F3E5 /* MoneyRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoneyRecordModel.h; sourceTree = "<group>"; };
+		11AC9F471FC31B870016F3E5 /* MoneyRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoneyRecordModel.m; sourceTree = "<group>"; };
 		11B20C051FA9C8F500009977 /* PersonGetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonGetingViewController.h; sourceTree = "<group>"; };
 		11B20C061FA9C8F500009977 /* PersonGetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonGetingViewController.m; sourceTree = "<group>"; };
 		11B20C071FA9C8F500009977 /* PersonGetingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonGetingViewController.xib; sourceTree = "<group>"; };
@@ -576,6 +597,8 @@
 				11CBCCE81F9C6C5B000E4D01 /* GameListPageViewController.m */,
 				118C69801FB6AAD4005D095A /* WebDetailViewController.h */,
 				118C69811FB6AAD4005D095A /* WebDetailViewController.m */,
+				112BEADC1FC5CECC00EDD756 /* GameSearchViewController.h */,
+				112BEADD1FC5CECC00EDD756 /* GameSearchViewController.m */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -635,6 +658,8 @@
 				113F71D41FB2B33900EB4567 /* AppDelegate.m */,
 				113F71D51FB2B33900EB4567 /* AppDelegate+Setting.h */,
 				113F71D61FB2B33900EB4567 /* AppDelegate+Setting.m */,
+				112BEAD91FC422E900EDD756 /* APPStartRunViewController.h */,
+				112BEADA1FC422E900EDD756 /* APPStartRunViewController.m */,
 			);
 			path = AppDele;
 			sourceTree = "<group>";
@@ -930,10 +955,18 @@
 			children = (
 				1194B1E11FA7732900241E49 /* MoneyRecordHomeViewController.h */,
 				1194B1E21FA7732900241E49 /* MoneyRecordHomeViewController.m */,
-				115893331FA852CB008E90C1 /* MoneyRecordDetailViewController.h */,
-				115893341FA852CB008E90C1 /* MoneyRecordDetailViewController.m */,
 				11930F241FA8CA5300AB33F4 /* JiFenDetailViewController.h */,
 				11930F251FA8CA5300AB33F4 /* JiFenDetailViewController.m */,
+				11AC9F251FC30B940016F3E5 /* MoneyRecord_QK_ViewController.h */,
+				11AC9F261FC30B940016F3E5 /* MoneyRecord_QK_ViewController.m */,
+				11AC9F281FC30BAA0016F3E5 /* MoneyRecord_CK_ViewController.h */,
+				11AC9F291FC30BAA0016F3E5 /* MoneyRecord_CK_ViewController.m */,
+				11AC9F2B1FC30BC00016F3E5 /* MoneyRecord_ZZ_ViewController.h */,
+				11AC9F2C1FC30BC00016F3E5 /* MoneyRecord_ZZ_ViewController.m */,
+				11AC9F2E1FC30BD40016F3E5 /* MoneyRecord_YH_ViewController.h */,
+				11AC9F2F1FC30BD40016F3E5 /* MoneyRecord_YH_ViewController.m */,
+				11AC9F311FC30C020016F3E5 /* MoneyRecord_TJLJ_ViewController.h */,
+				11AC9F321FC30C020016F3E5 /* MoneyRecord_TJLJ_ViewController.m */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -941,6 +974,8 @@
 		1194B1DF1FA772EB00241E49 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				11AC9F461FC31B870016F3E5 /* MoneyRecordModel.h */,
+				11AC9F471FC31B870016F3E5 /* MoneyRecordModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1261,6 +1296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				113F71D71FB2B33900EB4567 /* AppDelegate.m in Sources */,
+				112BEADB1FC422E900EDD756 /* APPStartRunViewController.m in Sources */,
 				11AC1B701F99DC9400C06D85 /* HomeHeaderView.m in Sources */,
 				1154D1191FAAB39200E05734 /* RecordSelectToolView.m in Sources */,
 				11AC9F0C1FC1D2D90016F3E5 /* ATDAYCalendarView.m in Sources */,
@@ -1290,6 +1326,8 @@
 				1164634B1F91AA53004ECC79 /* PersonViewController.m in Sources */,
 				116463A81F91F634004ECC79 /* XWCircleSpreadAnimator.m in Sources */,
 				116463AF1F91F634004ECC79 /* XWCoolAnimator+XWScanning.m in Sources */,
+				11AC9F331FC30C020016F3E5 /* MoneyRecord_TJLJ_ViewController.m in Sources */,
+				11AC9F2A1FC30BAA0016F3E5 /* MoneyRecord_CK_ViewController.m in Sources */,
 				118C69821FB6AAD4005D095A /* WebDetailViewController.m in Sources */,
 				11AC9F221FC2A5860016F3E5 /* SKCalendarCollectionViewCell.m in Sources */,
 				11115D271F9B287B00AB8856 /* LastPlayCollectionViewCell.m in Sources */,
@@ -1322,6 +1360,7 @@
 				11B20C081FA9C8F500009977 /* PersonGetingViewController.m in Sources */,
 				1190EC5B1F9EF1E3007A1D05 /* MoneyListTableViewCell.m in Sources */,
 				116463A11F91F634004ECC79 /* UIView+Snapshot.m in Sources */,
+				112BEADE1FC5CECC00EDD756 /* GameSearchViewController.m in Sources */,
 				114BC1BE1FB0604A00C1A46D /* SavingByCardViewController.m in Sources */,
 				116463BA1F91F634004ECC79 /* XWFilterAnimator+XWSwipe.m in Sources */,
 				112435311F9BAC9B00C5EAAE /* GamesMenuView.m in Sources */,
@@ -1354,20 +1393,23 @@
 				11AC9F231FC2A5860016F3E5 /* SKCalendarView.m in Sources */,
 				11930F261FA8CA5300AB33F4 /* JiFenDetailViewController.m in Sources */,
 				116463A91F91F634004ECC79 /* XWCoolAnimator+XWExplode.m in Sources */,
-				115893351FA852CB008E90C1 /* MoneyRecordDetailViewController.m in Sources */,
 				114BC1B71FAFFDE600C1A46D /* BankSelectViewController.m in Sources */,
 				1182AF2A1F95B4A3001CE114 /* RequestManager.m in Sources */,
 				113F71EA1FB2B94B00EB4567 /* MessageTableViewCell.m in Sources */,
 				1182AF271F95A9E1001CE114 /* ATBaseModel.m in Sources */,
 				118E79B81FAB6D1600DE053B /* GamesModel.m in Sources */,
 				119589C81F98F57F0070AC16 /* MenuTableViewCell.m in Sources */,
+				11AC9F481FC31B870016F3E5 /* MoneyRecordModel.m in Sources */,
 				116463B51F91F634004ECC79 /* XWFilterAnimator+XWFlash.m in Sources */,
 				11BF3BBA1FAA04C500195D1C /* ATTextField.m in Sources */,
+				11AC9F2D1FC30BC00016F3E5 /* MoneyRecord_ZZ_ViewController.m in Sources */,
+				11AC9F271FC30B940016F3E5 /* MoneyRecord_QK_ViewController.m in Sources */,
 				11E2BF571FB540AA00180762 /* ActivityModel.m in Sources */,
 				11B2112A1FB405CF003CE6ED /* ForgetPassWordViewController.m in Sources */,
 				11B2112E1FB430B7003CE6ED /* ATNeedBorderButton.m in Sources */,
 				1154D1361FAB229B00E05734 /* BSTSingle.m in Sources */,
 				1112EF491FBEE27600B46A8C /* ASBirthSelectSheet.m in Sources */,
+				11AC9F301FC30BD40016F3E5 /* MoneyRecord_YH_ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

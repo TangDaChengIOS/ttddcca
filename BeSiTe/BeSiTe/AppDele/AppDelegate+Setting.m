@@ -18,6 +18,8 @@
 
 -(void)setRootViewController
 {
+    [[UINavigationBar appearance]setBarTintColor:kMainColor];
+
     UITabBarController *tab = [[UITabBarController alloc]init];
     //设置标签栏文字和图片的颜色
     
@@ -55,7 +57,8 @@
     self.window.rootViewController = tab;
     [self.window makeKeyAndVisible];
     
-    [[UINavigationBar appearance]setBarTintColor:kMainColor];
+    [self getWebUrls];
+    
 }
 -(void)test{
    NSDictionary * dict =  [[NSUserDefaults standardUserDefaults]objectForKey:@"UserMessage"];
@@ -84,5 +87,35 @@
         
     }];
 }
+
+
+-(void)getWebUrls{
+    [RequestManager getManagerDataWithPath:@"appwebUrls" params:nil success:^(id JSON) {
+        for (NSDictionary * dict in JSON) {
+            if ([dict[@"paraCode"] isEqualToString:@"register_prot"]) {
+                [BSTSingle defaultSingle].registerAgreementUrl = dict[@"url"];
+            }
+            else if ([dict[@"paraCode"] isEqualToString:@"about"]) {
+                [BSTSingle defaultSingle].aboutUSUrl = dict[@"url"];
+            }
+            else if ([dict[@"paraCode"] isEqualToString:@"vip_about"]) {
+                [BSTSingle defaultSingle].vipExplainUrl = dict[@"url"];
+            }
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
++(UINavigationController *)getBoomNavigation{
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    UITabBarController * tabBar = (UITabBarController * )window.rootViewController;
+    return tabBar.selectedViewController;
+}
++(UITabBarController *)getTabBarController{
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    UITabBarController * tabBar = (UITabBarController * )window.rootViewController;
+    return tabBar;
+}
+
 
 @end

@@ -8,6 +8,12 @@
 
 #import "MenuViewController.h"
 #import "MenuTableViewCell.h"
+#import "XWInteractiveTransition.h"
+#import "AppDelegate+Setting.h"
+#import "GameListPageViewController.h"
+#import "RegisterPageOneViewController.h"
+#import "LoginViewController.h"
+
 
 @interface MenuViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *backView;
@@ -24,6 +30,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+@property (weak, nonatomic) IBOutlet ATNeedBorderButton *exitBtn;
 
 @property (nonatomic,copy) NSArray * secondSectionArr;
 @end
@@ -34,7 +41,25 @@
     [super viewDidLoad];
     _secondSectionArr = @[@"优惠活动",@"客服中心",@"条款规则",@"关于我们"];
     [self configSubViews];
+    [self setIfLoginState];
 }
+
+
+-(void)setIfLoginState{
+    self.headImageView.contentMode = UIViewContentModeCenter;
+    if ([BSTSingle defaultSingle].user) {
+        self.registerBtn.hidden = self.loginBtn.hidden = YES;
+        self.exitBtn.hidden = NO;
+        self.headImageView.image = KIMAGE(@"common_avatar_img");
+        self.vipImageView.image = KIMAGE([[BSTSingle defaultSingle].user getVipImageStr]);
+    }else{
+        self.registerBtn.hidden = self.loginBtn.hidden = NO;
+        self.exitBtn.hidden = YES;
+        self.headImageView.image = KIMAGE_Ori(@"home_navgraion_loginOut_icon");
+        self.vipImageView.image = nil;
+    }
+}
+
 
 #pragma mark -- tableView delegate/dataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -54,6 +79,61 @@
         [cell setCellWith:_secondSectionArr[indexPath.row] isSingleLine:(indexPath.row+1) %2 cellShowTypeImage:CellShowTypeImgaeNone num:2];
     }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            GameListPageViewController * menuVC = [[GameListPageViewController alloc]init];
+            menuVC.selectIndex = indexPath.item;
+            GamesCompanyModel * model = [BSTSingle defaultSingle].companysArray[indexPath.row];
+            menuVC.selectCompanyCode = model.companyCode;
+            [[AppDelegate getBoomNavigation] pushViewController:menuVC animated:YES];
+        }];
+    }else
+    {
+        switch (indexPath.row) {
+            case 0://优惠活动
+            {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [[AppDelegate getTabBarController]setSelectedIndex:1];
+                }];
+            }
+                break;
+            case 1://客服中心
+            {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [[AppDelegate getTabBarController]setSelectedIndex:3];
+                }];
+            }
+                break;
+            case 2://条款规则
+            {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    WebDetailViewController * webVC = [[WebDetailViewController alloc]init];
+                    webVC.url = [BSTSingle defaultSingle].registerAgreementUrl;
+                    webVC.hidesBottomBarWhenPushed = YES;
+                    [[AppDelegate getBoomNavigation]pushViewController:webVC animated:YES];
+                }];
+
+            }
+                break;
+            case 3://关于我们
+            {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    WebDetailViewController * webVC = [[WebDetailViewController alloc]init];
+                    webVC.url = [BSTSingle defaultSingle].aboutUSUrl;
+                    webVC.hidesBottomBarWhenPushed = YES;
+                    [[AppDelegate getBoomNavigation]pushViewController:webVC animated:YES];
+                }];
+
+            }
+                break;
+            default:
+                break;
+        }
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -98,11 +178,23 @@
 
 
 - (IBAction)registerBtnDidClicked:(id)sender {
-    
+    [self dismissViewControllerAnimated:YES completion:^{
+        RegisterPageOneViewController * registerVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];
+        [[AppDelegate getBoomNavigation]pushViewController:registerVC animated:YES];
+    }];
+
 }
 
 - (IBAction)loginBtnDidClicked:(id)sender {
-    
+    [self dismissViewControllerAnimated:YES completion:^{
+        [LoginViewController presentLoginViewController];
+    }];
+}
+- (IBAction)exitBtnClick:(id)sender {
+    [BSTSingle defaultSingle].user = nil;
+    [self dismissViewControllerAnimated:YES completion:^{
+        [LoginViewController presentLoginViewController];
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated

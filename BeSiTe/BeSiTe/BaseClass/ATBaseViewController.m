@@ -45,9 +45,16 @@
     [self.navigationController setNavigationBarHidden:NO];
 }
 
--(void)pushVC:(UIViewController *)viewController{
-    viewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:viewController animated:YES];
+-(void)pushVC:(UIViewController *)viewController
+{
+    if (self.navigationController) {
+        viewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }else{
+        UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:viewController];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

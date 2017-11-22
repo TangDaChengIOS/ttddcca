@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 #import "AppDelegate+Setting.h"
-#import <LocalAuthentication/LocalAuthentication.h>
+//#import <LocalAuthentication/LocalAuthentication.h>
+#import "APPStartRunViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,33 +18,30 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [self setRootViewController];
-    [self autoLogin];
-    
- /*
-    // 1> 实例化指纹识别对象
-    LAContext *laCtx = [[LAContext alloc] init];
-    
-    // 2> 判断当前设备是否支持指纹识别功能.
-    if (![laCtx canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:NULL]) {
-        
-        // 如果设备不支持指纹识别功能
-        NSLog(@"该设备不支持指纹识别功能");
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
+    if (![ud boolForKey:@"FirstRunAPP"]) {
+        [ud setBool:YES forKey:@"FirstRunAPP"];
+        [ud synchronize];
+        //加载启动页
+        APPStartRunViewController * runVC = [[APPStartRunViewController alloc]init];
+        kWeakSelf
+        runVC.finishBlock = ^{
+            [weak_self setRootViewController];
+        };
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window.backgroundColor = [UIColor whiteColor];
+        self.window.rootViewController = runVC;
+        [self.window makeKeyAndVisible];
     }
     else{
-    [laCtx evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:@"指纹登陆" reply:^(BOOL success, NSError *error) {
-        // 如果成功,表示指纹输入正确.
-        if (success) {
-            NSLog(@"指纹识别成功!");
-            
-        } else {
-            NSLog(@"指纹识别错误,请再次尝试");
-        }
-    }];
+        [self setRootViewController];
+
     }
-    
-    */
+
+    [self autoLogin];
+
     return YES;
 }
 

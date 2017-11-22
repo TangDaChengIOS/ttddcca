@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController">
             <connections>
                 <outlet property="backView" destination="xQ3-kl-VW2" id="Clu-OG-V22"/>
+                <outlet property="exitBtn" destination="tue-mA-3T4" id="Yb5-gS-FjC"/>
                 <outlet property="headBackView" destination="ND0-wq-6wt" id="NYI-N2-XK2"/>
                 <outlet property="headImageView" destination="YLR-oc-ccK" id="oB6-Yh-IqY"/>
                 <outlet property="loginBtn" destination="hJW-1p-8Ok" id="5mQ-xb-JiY"/>
@@ -116,12 +117,35 @@
                                 <action selector="loginBtnDidClicked:" destination="-1" eventType="touchUpInside" id="CQ4-dL-IG6"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tue-mA-3T4" customClass="ATNeedBorderButton">
+                            <rect key="frame" x="20" y="623" width="90" height="36"/>
+                            <color key="backgroundColor" red="0.35449267579999999" green="0.54268499560000005" blue="0.25013108220000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="0Vt-kb-Qln"/>
+                                <constraint firstAttribute="width" constant="90" id="Z6r-pY-Fe2"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="注销">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="exitBtnClick:" destination="-1" eventType="touchUpInside" id="HJa-pw-18H"/>
+                                <action selector="loginBtnDidClicked:" destination="-1" eventType="touchUpInside" id="KZw-Tb-QQe"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.14509803921568626" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="tue-mA-3T4" secondAttribute="bottom" constant="8" id="25y-5N-wiU"/>
                         <constraint firstItem="V9F-Ch-CPj" firstAttribute="leading" secondItem="xQ3-kl-VW2" secondAttribute="leading" id="7aS-7H-EBY"/>
                         <constraint firstItem="oc6-yk-uKe" firstAttribute="leading" secondItem="xQ3-kl-VW2" secondAttribute="leading" constant="20" id="8XD-8J-t7b"/>
                         <constraint firstAttribute="bottom" secondItem="V9F-Ch-CPj" secondAttribute="bottom" constant="50" id="Aa3-YI-rCD"/>
+                        <constraint firstItem="tue-mA-3T4" firstAttribute="leading" secondItem="xQ3-kl-VW2" secondAttribute="leading" constant="20" id="Esu-iY-ykg"/>
                         <constraint firstItem="V9F-Ch-CPj" firstAttribute="top" secondItem="ND0-wq-6wt" secondAttribute="bottom" id="GXr-ih-bXE"/>
                         <constraint firstAttribute="bottom" secondItem="hJW-1p-8Ok" secondAttribute="bottom" constant="8" id="HqM-5p-QWL"/>
                         <constraint firstItem="ND0-wq-6wt" firstAttribute="leading" secondItem="xQ3-kl-VW2" secondAttribute="leading" id="Qqi-Fy-YDo"/>

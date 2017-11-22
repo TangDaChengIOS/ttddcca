@@ -11,7 +11,6 @@
 #import "XWDrawerAnimator.h"
 #import "HomeHeaderView.h"
 #import "HomeItemCollectionViewCell.h"
-#import "GamesMenuView.h"
 #import "GameListPageViewController.h"
 #import "LoginViewController.h"
 #import "RegisterPageOneViewController.h"
@@ -45,7 +44,6 @@
     }];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationNeedVerifyPhoneNum) name:@"ApplicationNeedVerifyPhoneNum" object:nil];
-//    [self applicationNeedVerifyPhoneNum];
 }
 
 -(void)requestData
@@ -82,6 +80,9 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     GameListPageViewController * menuVC = [[GameListPageViewController alloc]init];
+    menuVC.selectIndex = indexPath.item;
+    GamesCompanyModel * model = self.dataSource[indexPath.row];
+    menuVC.selectCompanyCode = model.companyCode;
     [self pushVC:menuVC];
 }
 
@@ -136,18 +137,11 @@
 
 -(void)rightBarButtonItemClick
 {
-//    UITabBarController * tabBar = self.tabBarController;
-//    [tabBar setSelectedIndex:2];
-//    return;
-//    GameListPageViewController * menuVC = [[GameListPageViewController alloc]init];
-    [LoginViewController presentLoginViewController];
-    
-//    LoginViewController * loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
-
-//    RegisterPageOneViewController * menuVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];
-
-//    [self pushVC:loginVC];
-
+    if ([BSTSingle defaultSingle].user) {
+        [self.tabBarController setSelectedIndex:2];
+    }else{
+        [LoginViewController presentLoginViewController];
+    }
 }
 
 #pragma mark -- Lazy

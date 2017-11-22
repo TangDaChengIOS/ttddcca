@@ -20,24 +20,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"navgartion_back_btn") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
+
+    
     _webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
     _webView.scalesPageToFit = YES;
 
     _webView.delegate = self;
     [self.view addSubview:_webView];
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
-    [self openRotaion];
+    if (_isOpenRotaion) {
+        [self openRotaion];
+    }
+    
 }
+
+-(void)leftBarButtonItemClick{
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     return YES;
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    NSLog(@"111111");
+
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    NSLog(@"2222222");
+    NSString * title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.title = title;
 }
+
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     NSLog(@"%@",error);
 }
@@ -98,6 +115,22 @@
     [self interfaceOrientation:UIInterfaceOrientationPortrait];
 
 }
+
++(WebDetailViewController *)quickCreateWithUrl:(NSString *)url{
+    WebDetailViewController * webVC = [[WebDetailViewController alloc]init];
+    webVC.url = url;
+    webVC.hidesBottomBarWhenPushed = YES;
+    return webVC;
+}
++(WebDetailViewController *)quickCreateGamePageWithUrl:(NSString *)url{
+    WebDetailViewController * webVC = [[WebDetailViewController alloc]init];
+    webVC.url = url;
+    webVC.isOpenRotaion = YES;
+    webVC.hidesBottomBarWhenPushed = YES;
+    return webVC;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

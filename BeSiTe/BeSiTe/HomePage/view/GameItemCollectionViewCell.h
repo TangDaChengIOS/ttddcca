@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GamesModel.h"
 
 #define kGameItemCollectionViewCellReuseID @"kGameItemCollectionViewCellReuseID"
 /**游戏cell*/
 @interface GameItemCollectionViewCell : UICollectionViewCell
--(void)setCell;
+-(void)setCellWithModel:(GamesModel *)model;
 
 @end

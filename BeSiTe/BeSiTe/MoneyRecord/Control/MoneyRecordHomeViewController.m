@@ -7,7 +7,13 @@
 //
 
 #import "MoneyRecordHomeViewController.h"
-#import "MoneyRecordDetailViewController.h"
+
+#import "MoneyRecord_QK_ViewController.h"
+#import "MoneyRecord_CK_ViewController.h"
+#import "MoneyRecord_ZZ_ViewController.h"
+#import "MoneyRecord_YH_ViewController.h"
+#import "MoneyRecord_TJLJ_ViewController.h"
+
 #import "JiFenDetailViewController.h"
 
 @interface MoneyRecordHomeViewController ()
@@ -50,22 +56,73 @@
 
 - (UIViewController *)magicView:(VTMagicView *)magicView viewControllerAtPage:(NSUInteger)pageIndex
 {
-    if (4 == pageIndex) {
-        static NSString *jiFenrecomId = @"Jifen.identifier";
-        JiFenDetailViewController *detailViewController = [magicView dequeueReusablePageWithIdentifier:jiFenrecomId];
-        if (!detailViewController) {
-            detailViewController = [[JiFenDetailViewController alloc] init];
+    switch (pageIndex) {
+        case 0:
+        {
+            static NSString *recordID_QK = @"QK.identifier";
+            MoneyRecord_QK_ViewController *detailViewController = [magicView dequeueReusablePageWithIdentifier:recordID_QK];
+            if (!detailViewController) {
+                detailViewController = [[MoneyRecord_QK_ViewController alloc] init];
+            }
+            return detailViewController;
         }
-        return detailViewController;
+            break;
+        case 1:
+        {
+            static NSString *recordID_CK = @"CK.identifier";
+            MoneyRecord_CK_ViewController *detailViewController = [magicView dequeueReusablePageWithIdentifier:recordID_CK];
+            if (!detailViewController) {
+                detailViewController = [[MoneyRecord_CK_ViewController alloc] init];
+            }
+            return detailViewController;
+        }
+            break;
+        case 2:
+        {
+            static NSString *recordID_ZZ = @"ZZ.identifier";
+            MoneyRecord_ZZ_ViewController *detailViewController = [magicView dequeueReusablePageWithIdentifier:recordID_ZZ];
+            if (!detailViewController) {
+                detailViewController = [[MoneyRecord_ZZ_ViewController alloc] init];
+            }
+            return detailViewController;
+        }
+            break;
+        case 3:
+        {
+            static NSString *recordID_YH = @"YH.identifier";
+            MoneyRecord_YH_ViewController *detailViewController = [magicView dequeueReusablePageWithIdentifier:recordID_YH];
+            if (!detailViewController) {
+                detailViewController = [[MoneyRecord_YH_ViewController alloc] init];
+            }
+            return detailViewController;
+        }
+            break;
+        case 4:
+        {
+            static NSString *jiFenrecomId = @"Jifen.identifier";
+            JiFenDetailViewController *detailViewController = [magicView dequeueReusablePageWithIdentifier:jiFenrecomId];
+            if (!detailViewController) {
+                detailViewController = [[JiFenDetailViewController alloc] init];
+            }
+            return detailViewController;
+        }
+            break;
+        case 5:
+        {
+            static NSString *recordID_TJLJ = @"TJLJ.identifier";
+            MoneyRecord_TJLJ_ViewController *detailViewController = [magicView dequeueReusablePageWithIdentifier:recordID_TJLJ];
+            if (!detailViewController) {
+                detailViewController = [[MoneyRecord_TJLJ_ViewController alloc] init];
+            }
+            return detailViewController;
+        }
+            break;
+
+        default:
+            return nil;
+            break;
     }
-    static NSString *recomId = @"detail.identifier";
-    MoneyRecordDetailViewController *detailViewController = [magicView dequeueReusablePageWithIdentifier:recomId];
-    if (!detailViewController) {
-        detailViewController = [[MoneyRecordDetailViewController alloc] init];
-    }
-    detailViewController.detailControlType = pageIndex;
-    return detailViewController;
- 
+    
 }
 
 

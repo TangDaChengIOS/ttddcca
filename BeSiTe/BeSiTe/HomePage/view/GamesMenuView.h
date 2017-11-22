@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GamesModel.h"
+
 /**展示游戏菜单页面*/
 @interface GamesMenuView : UIView
 @property (nonatomic,copy) void (^tryPlayBlock)();
-+(void)show;
+@property (nonatomic,strong) GamesModel * model;
++(void)showWithModel:(GamesModel *)model;
 
 @end

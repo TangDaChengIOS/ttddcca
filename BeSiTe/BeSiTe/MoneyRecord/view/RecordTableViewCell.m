@@ -151,6 +151,8 @@
 -(void)setTopCellWithVCType:(RecordDetailControlType)detailVCType{
     self.accessoryType = UITableViewCellAccessoryNone;
     self.height = 28;
+    self.width = MAXWIDTH;
+
     _firstLab.textAlignment = NSTextAlignmentCenter;
     _secLab.textAlignment = NSTextAlignmentCenter;
     _thirdLab.textAlignment = NSTextAlignmentCenter;

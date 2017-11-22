@@ -10,5 +10,6 @@
 
 /**游戏列表页*/
 @interface GameListPageViewController : ATBaseViewController
-
+@property (nonatomic,assign) NSInteger selectIndex;
+@property (nonatomic,copy) NSString * selectCompanyCode;
 @end

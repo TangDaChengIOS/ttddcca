@@ -11,6 +11,7 @@
 @interface GameItemCollectionViewCell ()
 @property (nonatomic,strong) UIImageView * mainImage;
 @property (nonatomic,strong) UILabel * boomLab;
+@property (nonatomic,strong) GamesModel * model;
 @end
 
 @implementation GameItemCollectionViewCell
@@ -33,8 +34,9 @@
 }
 
 
--(void)setCell{
-    _boomLab.text = @"扑鱼达人";
+-(void)setCellWithModel:(GamesModel *)model{
+    [_mainImage setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholder:nil];
+    _boomLab.text = model.gameName;
 }
 
 

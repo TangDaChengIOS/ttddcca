@@ -10,4 +10,9 @@
 
 @interface WebDetailViewController : ATBaseViewController
 @property (nonatomic,copy) NSString * url;
+@property (nonatomic,assign) BOOL isOpenRotaion;
+
++(WebDetailViewController *)quickCreateWithUrl:(NSString *)url;
++(WebDetailViewController *)quickCreateGamePageWithUrl:(NSString *)url;
+
 @end

@@ -10,6 +10,7 @@
 #import "GameListPageHeaderView.h"
 #import "GameItemCollectionViewCell.h"
 #import "GamesMenuView.h"
+#import "GameSearchViewController.h"
 
 @interface GameListPageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -17,6 +18,9 @@
 @property (nonatomic,strong) UICollectionView * collectionView;
 @property (nonatomic,strong) UILabel * sectionHeadLab;
 @property (nonatomic,strong) UILabel * collectionHeaderView;//展示搜索结果时显示
+@property (nonatomic,strong) NSMutableArray * dataSource;
+
+@property (nonatomic,assign) BOOL isShowSearchResult;//当前是展示搜索结果
 @end
 
 @implementation GameListPageViewController
@@ -25,47 +29,53 @@
     [super viewDidLoad];
     [self configSubViews];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.collectionView setY_offset:20];
-    [self.view addSubview:self.collectionHeaderView];
+   
+    if (self.isShowSearchResult) {
+        [self.collectionView setY_offset:20];
+        [self.view addSubview:self.collectionHeaderView];
+    }
+
+    
+    [self.headerView setSelectedItem:self.selectIndex];
+    [self requestData];
 }
 
--(void)requestData{
-//    [RequestManager postWithPath:@"/sendSmsCode" params:@{@"mobile":@"18026767853",@"type":@"1"} method:@"post" success:^(id JSON) {
-//        MyLog(@"%@", JSON);
-//    } failure:^(NSError *error) {
-//        MyLog(@"%@", error.description);
-//    }];
+-(void)requestData
+{
+    NSMutableDictionary * mDict = [NSMutableDictionary dictionary];
+    [mDict setValue:_selectCompanyCode forKey:@"companyCode"];
+//    [mDict setValue:@"猴" forKey:@"key"];
+//    [mDict setValue:@"AG" forKey:@"userId"];
+
+    [RequestManager getManagerDataWithPath:@"games" params:mDict success:^(id JSON) {
+        NSLog(@"%@",JSON);
+        self.dataSource = [GamesModel jsonToArray:JSON];
+        [self.collectionView reloadData];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark -- collectionView delegates
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 3;
+    return 1;
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 28;
+    return self.dataSource.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     GameItemCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:kGameItemCollectionViewCellReuseID forIndexPath:indexPath];
-    [cell setCell];
+    
+    [cell setCellWithModel:self.dataSource[indexPath.item]];
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIWindow * window = [[UIApplication sharedApplication].windows lastObject];
-    GamesMenuView * view = [[[NSBundle mainBundle]loadNibNamed:@"GamesMenuView" owner:self options:nil] firstObject];
-    kWeakSelf
-    view.tryPlayBlock = ^(){
-        WebDetailViewController * webVC = [[WebDetailViewController alloc]init];
-        webVC.url = @"http://lobby.sgplayfun.com/touch/spadenew/?game=S-HY01&language=en_US&menumode=on&token=876f6d102760ad11c7ba6e4ce990506f3ea9635bcecfa33be0e43bd6419198bfee6924f5ffafd09d26c18acc06fb9b4abb49542ca0aa9a225b79e4dc4b76e3b7";
-        [weak_self pushVC:webVC];
-    };
-    view.frame = window.bounds;
-    [window addSubview:view];
-//    [GamesMenuView show];
+    [GamesMenuView showWithModel:self.dataSource[indexPath.item]];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
@@ -80,6 +90,7 @@
                 imageView.image = KIMAGE(@"home_gameTypeName_icon");
                 [view addSubview:imageView];
                 [view addSubview:self.sectionHeadLab];
+                _sectionHeadLab.text = [NSString stringWithFormat:@"%@游戏%ld款",self.selectCompanyCode,self.dataSource.count];
                 _sectionHeadLab.left = imageView.maxX + 3;
             }
                 break;
@@ -158,6 +169,15 @@
 {
     if (!_headerView) {
         _headerView = [[GameListPageHeaderView alloc]init];
+        kWeakSelf
+        _headerView.selectGameCompanyBlock = ^(NSString * companyCode){
+            weak_self.selectCompanyCode = companyCode;
+            [weak_self requestData];
+        };
+        _headerView.gotoSearchBlock = ^(){
+            GameSearchViewController * contro = [[GameSearchViewController alloc]init];
+            [weak_self pushVC:contro];
+        };
     }
     return _headerView;
 }
@@ -187,6 +207,13 @@
     return _collectionHeaderView;
 }
 
+-(NSMutableArray *)dataSource
+{
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
 #pragma mark -- subViews
 -(void)configSubViews
 {
@@ -196,7 +223,7 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"navgartion_back_btn") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"common_navgation_right_img") style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClick)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"common_navgation_right_img") style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClick)];
     [self.view addSubview:self.headerView];
     [self.view addSubview:self.collectionView];
 }
@@ -205,9 +232,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)rightBarButtonItemClick{
-
-}
+//-(void)rightBarButtonItemClick{
+//
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
