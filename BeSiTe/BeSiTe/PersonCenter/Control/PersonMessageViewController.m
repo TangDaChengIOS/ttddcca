@@ -37,8 +37,10 @@
 }
 
 
--(void)getFavGameData{
-    [RequestManager getWithPath:@"getFavGames" params:nil success:^(id JSON) {
+-(void)getFavGameData
+{
+    
+    [RequestManager getWithPath:@"getFavGames" params:@{@"token":[BSTSingle defaultSingle].user.token} success:^(id JSON) {
         NSLog(@"%@",JSON);
     } failure:^(NSError *error) {
         

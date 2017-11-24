@@ -9,5 +9,5 @@
 #import "ATBaseViewController.h"
 
 @interface GameSearchViewController : ATBaseViewController
-
+@property (nonatomic,copy) void (^searchBlock)(NSString * searchKey);
 @end

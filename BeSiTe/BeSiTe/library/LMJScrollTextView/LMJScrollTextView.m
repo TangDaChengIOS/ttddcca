@@ -89,11 +89,14 @@
 -(void)startScrollWithAttributedString:(NSAttributedString *)attributeString
 {
     //清空self上的子视图
-    for (int i = 0; i < self.subviews.count; i++) {
-        UIView * view = [self.subviews objectAtIndex:i];
-        [view removeFromSuperview];
-        view = nil;
+    if (self.subviews.count > 0) {
+        for (NSInteger i = self.subviews.count -1; i >=0; i--) {
+            UIView * view = [self.subviews objectAtIndex:i];
+            [view removeFromSuperview];
+            view = nil;
+        }
     }
+
     _attributeText = attributeString;
     _text = nil;
     

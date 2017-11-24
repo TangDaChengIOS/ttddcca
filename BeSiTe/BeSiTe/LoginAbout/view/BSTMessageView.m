@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *stateImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *deailMsgLab;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailMsgLabHeightConstraint;
+
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
@@ -61,7 +63,8 @@
 -(void)setShowType:(ShowType)showType
 {
     _showType = showType;
-
+    _deailMsgLab.numberOfLines = 1;
+    _detailMsgLabHeightConstraint.constant = 15;
     switch (_showType) {
         case ShowTypeWaitThreeSec:{
             _timeLab.hidden = NO;
@@ -74,6 +77,9 @@
         }
           break;
         case ShowTypeWaitThreeSec_TLD:{
+            _deailMsgLab.numberOfLines = 2;
+            _detailMsgLabHeightConstraint.constant = 35;
+
             _timeLab.hidden = NO;
             _leftBtn.hidden = _rightBtn.hidden = _onlyOneBtn.hidden = !_timeLab.hidden;
             _maxWaitSeconds = 4;

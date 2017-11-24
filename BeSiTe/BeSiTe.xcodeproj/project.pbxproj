@@ -14,6 +14,7 @@
 		1112EF491FBEE27600B46A8C /* ASBirthSelectSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1112EF481FBEE27600B46A8C /* ASBirthSelectSheet.m */; };
 		112435311F9BAC9B00C5EAAE /* GamesMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112435301F9BAC9B00C5EAAE /* GamesMenuView.m */; };
 		112435331F9BACA900C5EAAE /* GamesMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 112435321F9BACA900C5EAAE /* GamesMenuView.xib */; };
+		1124D9671FC7150A007149BE /* BalanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1124D9661FC7150A007149BE /* BalanceModel.m */; };
 		112B16D01FA6C2C300CE4555 /* ATTranslucentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112B16CF1FA6C2C300CE4555 /* ATTranslucentView.m */; };
 		112B16D31FA6C43600CE4555 /* EditNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112B16D21FA6C43600CE4555 /* EditNameView.m */; };
 		112B16D61FA6D68D00CE4555 /* EditPhoneNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112B16D51FA6D68D00CE4555 /* EditPhoneNumberView.m */; };
@@ -87,6 +88,8 @@
 		118C69821FB6AAD4005D095A /* WebDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118C69811FB6AAD4005D095A /* WebDetailViewController.m */; };
 		118E79B51FAB66A600DE053B /* BannerADSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E79B41FAB66A600DE053B /* BannerADSModel.m */; };
 		118E79B81FAB6D1600DE053B /* GamesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E79B71FAB6D1600DE053B /* GamesModel.m */; };
+		11908E5F1FC80FFB005715F4 /* GameCompanySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11908E5E1FC80FFB005715F4 /* GameCompanySelectViewController.m */; };
+		11908E621FC811B5005715F4 /* GameCompanyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11908E611FC811B5005715F4 /* GameCompanyTableViewCell.m */; };
 		1190EC531F9EE00B007A1D05 /* BSTMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1190EC521F9EE00B007A1D05 /* BSTMessageView.m */; };
 		1190EC551F9EE019007A1D05 /* BSTMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1190EC541F9EE019007A1D05 /* BSTMessageView.xib */; };
 		1190EC5B1F9EF1E3007A1D05 /* MoneyListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1190EC5A1F9EF1E3007A1D05 /* MoneyListTableViewCell.m */; };
@@ -166,6 +169,8 @@
 		1124352F1F9BAC9B00C5EAAE /* GamesMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamesMenuView.h; sourceTree = "<group>"; };
 		112435301F9BAC9B00C5EAAE /* GamesMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamesMenuView.m; sourceTree = "<group>"; };
 		112435321F9BACA900C5EAAE /* GamesMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesMenuView.xib; sourceTree = "<group>"; };
+		1124D9651FC7150A007149BE /* BalanceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceModel.h; sourceTree = "<group>"; };
+		1124D9661FC7150A007149BE /* BalanceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceModel.m; sourceTree = "<group>"; };
 		112B16CE1FA6C2C300CE4555 /* ATTranslucentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTranslucentView.h; sourceTree = "<group>"; };
 		112B16CF1FA6C2C300CE4555 /* ATTranslucentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTranslucentView.m; sourceTree = "<group>"; };
 		112B16D11FA6C43600CE4555 /* EditNameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNameView.h; sourceTree = "<group>"; };
@@ -305,6 +310,10 @@
 		118E79B41FAB66A600DE053B /* BannerADSModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerADSModel.m; sourceTree = "<group>"; };
 		118E79B61FAB6D1600DE053B /* GamesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamesModel.h; sourceTree = "<group>"; };
 		118E79B71FAB6D1600DE053B /* GamesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamesModel.m; sourceTree = "<group>"; };
+		11908E5D1FC80FFB005715F4 /* GameCompanySelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCompanySelectViewController.h; sourceTree = "<group>"; };
+		11908E5E1FC80FFB005715F4 /* GameCompanySelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCompanySelectViewController.m; sourceTree = "<group>"; };
+		11908E601FC811B5005715F4 /* GameCompanyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCompanyTableViewCell.h; sourceTree = "<group>"; };
+		11908E611FC811B5005715F4 /* GameCompanyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCompanyTableViewCell.m; sourceTree = "<group>"; };
 		1190EC511F9EE00B007A1D05 /* BSTMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTMessageView.h; sourceTree = "<group>"; };
 		1190EC521F9EE00B007A1D05 /* BSTMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTMessageView.m; sourceTree = "<group>"; };
 		1190EC541F9EE019007A1D05 /* BSTMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BSTMessageView.xib; sourceTree = "<group>"; };
@@ -720,6 +729,8 @@
 		116463411F91AA14004ECC79 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				1124D9651FC7150A007149BE /* BalanceModel.h */,
+				1124D9661FC7150A007149BE /* BalanceModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -743,6 +754,8 @@
 				1154D11E1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m */,
 				11AC9F0A1FC1D2D90016F3E5 /* ATDAYCalendarView.h */,
 				11AC9F0B1FC1D2D90016F3E5 /* ATDAYCalendarView.m */,
+				11908E601FC811B5005715F4 /* GameCompanyTableViewCell.h */,
+				11908E611FC811B5005715F4 /* GameCompanyTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1114,6 +1127,8 @@
 				118A36621FB2030700FD6193 /* MoneyMoveViewController.h */,
 				118A36631FB2030700FD6193 /* MoneyMoveViewController.m */,
 				118A36641FB2030700FD6193 /* MoneyMoveViewController.xib */,
+				11908E5D1FC80FFB005715F4 /* GameCompanySelectViewController.h */,
+				11908E5E1FC80FFB005715F4 /* GameCompanySelectViewController.m */,
 			);
 			path = SubController;
 			sourceTree = "<group>";
@@ -1363,6 +1378,7 @@
 				112BEADE1FC5CECC00EDD756 /* GameSearchViewController.m in Sources */,
 				114BC1BE1FB0604A00C1A46D /* SavingByCardViewController.m in Sources */,
 				116463BA1F91F634004ECC79 /* XWFilterAnimator+XWSwipe.m in Sources */,
+				11908E5F1FC80FFB005715F4 /* GameCompanySelectViewController.m in Sources */,
 				112435311F9BAC9B00C5EAAE /* GamesMenuView.m in Sources */,
 				116463B41F91F634004ECC79 /* XWFilterAnimator+XWCopyMachine.m in Sources */,
 				1154D1331FAAF6EB00E05734 /* GamesCompanyModel.m in Sources */,
@@ -1371,6 +1387,7 @@
 				116463AD1F91F634004ECC79 /* XWCoolAnimator+XWPageFlip.m in Sources */,
 				114BC1B41FAFFB9100C1A46D /* BankModel.m in Sources */,
 				11AC9F1F1FC2A5860016F3E5 /* SKCalendarManage.m in Sources */,
+				1124D9671FC7150A007149BE /* BalanceModel.m in Sources */,
 				1154D11F1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m in Sources */,
 				113F71E71FB2B5FC00EB4567 /* UIButton_withBadge.m in Sources */,
 				116463B31F91F634004ECC79 /* XWFilterAnimator+XWBoxBlur.m in Sources */,
@@ -1388,6 +1405,7 @@
 				119EAF2E1FA6179D00E6C2CA /* PersonSavingTableViewCell.m in Sources */,
 				112B16D01FA6C2C300CE4555 /* ATTranslucentView.m in Sources */,
 				116463B81F91F634004ECC79 /* XWFilterAnimator+XWPageCurl.m in Sources */,
+				11908E621FC811B5005715F4 /* GameCompanyTableViewCell.m in Sources */,
 				11CBCCF01F9CD2EB000E4D01 /* PersonMessageViewController.m in Sources */,
 				116463B71F91F634004ECC79 /* XWFilterAnimator+XWMod.m in Sources */,
 				11AC9F231FC2A5860016F3E5 /* SKCalendarView.m in Sources */,

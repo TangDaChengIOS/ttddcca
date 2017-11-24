@@ -7,11 +7,13 @@
 //
 
 #import "MoneyRecord_CK_ViewController.h"
+#import "MoneyRecordModel.h"
 
 @interface MoneyRecord_CK_ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) RecordTableViewCell * headerView;
 @property (nonatomic,strong) UITableView * tableView;
 @property (nonatomic,assign) NSInteger page;
+@property (nonatomic,strong) NSMutableArray * dataSource;
 
 @end
 
@@ -34,7 +36,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [self.tableView.mj_header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 -(NSDictionary *)para{
@@ -47,8 +49,16 @@
 
 #pragma mark -- 请求存款数据
 -(void)requestDataForCunKuan{
-    [RequestManager getWithPath:@"" params:[self para] success:^(id JSON) {
-        
+    [RequestManager getWithPath:@"getUserDepositInfos" params:[self para] success:^(id JSON) {
+        [self.tableView.mj_header endRefreshing];
+
+        self.dataSource = [MoneyRecordModel jsonToArray:JSON[@"data"]];
+        [self.tableView reloadData];
+        if ([JSON[@"hasNext"] integerValue] == 0) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        _page = [JSON[@"currentPage"] integerValue];
+        NSLog(@"%@",JSON);
     } failure:^(NSError *error) {
         
     }];
@@ -61,13 +71,12 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataSource.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecordTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kRecordTableViewCellReuseID forIndexPath:indexPath];
-    cell.cellType = RecordCellType_QuKuan;
-    [cell setCell];
+    [cell setCellWithModel:self.dataSource[indexPath.row] andCellType:RecordCellType_CunKuan];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,6 +98,14 @@
     [_tableView registerClass:[RecordTableViewCell class] forCellReuseIdentifier:kRecordTableViewCellReuseID];
     
     [self.view addSubview:_tableView];
+}
+
+-(NSMutableArray *)dataSource
+{
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
 }
 
 - (void)didReceiveMemoryWarning {

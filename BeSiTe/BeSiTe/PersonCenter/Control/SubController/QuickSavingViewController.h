@@ -8,7 +8,15 @@
 
 #import "ATBaseViewController.h"
 
+typedef NS_ENUM(NSInteger,QuickSavingType) {
+    QuickSavingType_Bank = 0,//秒存银行
+    QuickSavingType_ZFB//秒存支付宝
+    
+};
+
 /**秒存*/
 @interface QuickSavingViewController : ATBaseViewController
+
+@property (nonatomic,assign) QuickSavingType savingType ;
 
 @end

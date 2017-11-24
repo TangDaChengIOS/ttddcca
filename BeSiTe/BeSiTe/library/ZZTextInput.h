@@ -15,6 +15,8 @@
 +(BOOL)onlyInputChineseCharacters:(NSString*)string;
 /**只能为数字*/
 +(BOOL)onlyInputTheNumber:(NSString*)string;
+/**只能输入最多两位小数的金额*/
++(BOOL)onlyInputMoney:(NSString*)string;
 /**只能为小写*/
 +(BOOL)onlyInputLowercaseLetter:(NSString*)string;
 

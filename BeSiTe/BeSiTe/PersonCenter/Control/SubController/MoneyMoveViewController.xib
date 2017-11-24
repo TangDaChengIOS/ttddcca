@@ -33,6 +33,9 @@
                         <constraint firstAttribute="height" constant="42" id="J4s-kg-VSH"/>
                     </constraints>
                     <state key="normal" title="转入到游戏"/>
+                    <connections>
+                        <action selector="moveToGameBtnClick:" destination="-1" eventType="touchUpInside" id="fyp-HW-PJi"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aq1-qo-RVo">
                     <rect key="frame" x="187.5" y="0.0" width="187.5" height="42"/>
@@ -44,6 +47,9 @@
                     <state key="normal" title="转出到主账户" image="common_tab_select_icon">
                         <color key="titleColor" red="0.14117647059999999" green="0.76470588240000004" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="moveToMainAccountClick:" destination="-1" eventType="touchUpInside" id="P9a-Qy-eZy"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Fz-ti-bPg" customClass="ATNeedBorderView">
                     <rect key="frame" x="-4" y="42" width="383" height="45"/>
@@ -57,8 +63,8 @@
                             <color key="textColor" red="0.76470588235294112" green="0.76470588235294112" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BBIN 游戏平台" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HcK-wm-bsl">
-                            <rect key="frame" x="176" y="15" width="100" height="15"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HcK-wm-bsl">
+                            <rect key="frame" x="176" y="15" width="0.0" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="UgZ-x6-kS1"/>
                             </constraints>
@@ -67,7 +73,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common_next_icon" translatesAutoresizingMaskIntoConstraints="NO" id="NdG-3g-H0P">
-                            <rect key="frame" x="296" y="15" width="9" height="15"/>
+                            <rect key="frame" x="324" y="15" width="9" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="5YG-KS-F1a"/>
                                 <constraint firstAttribute="width" constant="9" id="Uzo-wf-S9n"/>
@@ -86,11 +92,11 @@
                         <constraint firstAttribute="height" constant="45" id="1F3-oL-Wle"/>
                         <constraint firstItem="NdG-3g-H0P" firstAttribute="centerY" secondItem="HcK-wm-bsl" secondAttribute="centerY" id="6Hr-2l-Mi4"/>
                         <constraint firstAttribute="bottom" secondItem="L50-I9-yB2" secondAttribute="bottom" constant="5" id="8kU-ic-dcW"/>
+                        <constraint firstAttribute="trailing" secondItem="NdG-3g-H0P" secondAttribute="trailing" constant="50" id="E5l-C6-D1e"/>
                         <constraint firstItem="HcK-wm-bsl" firstAttribute="leading" secondItem="0Mj-Fb-aeB" secondAttribute="trailing" constant="20" id="KSG-ba-RBc"/>
                         <constraint firstAttribute="trailing" secondItem="L50-I9-yB2" secondAttribute="trailing" constant="20" id="Ntp-dK-XAa"/>
                         <constraint firstItem="0Mj-Fb-aeB" firstAttribute="centerY" secondItem="8Fz-ti-bPg" secondAttribute="centerY" id="Nxm-pL-aKg"/>
                         <constraint firstItem="L50-I9-yB2" firstAttribute="top" secondItem="8Fz-ti-bPg" secondAttribute="top" constant="5" id="edL-0y-d14"/>
-                        <constraint firstItem="NdG-3g-H0P" firstAttribute="leading" secondItem="HcK-wm-bsl" secondAttribute="trailing" constant="20" id="hWA-AV-PLC"/>
                         <constraint firstItem="HcK-wm-bsl" firstAttribute="centerY" secondItem="0Mj-Fb-aeB" secondAttribute="centerY" id="tkA-5v-OR1"/>
                         <constraint firstItem="L50-I9-yB2" firstAttribute="leading" secondItem="0Mj-Fb-aeB" secondAttribute="trailing" constant="20" id="yOt-Bv-cKt"/>
                     </constraints>

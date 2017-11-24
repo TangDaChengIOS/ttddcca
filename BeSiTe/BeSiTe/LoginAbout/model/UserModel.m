@@ -23,8 +23,8 @@
     NSLog(@"%@",[NSNumber numberWithFloat:money]);
     NSString *convertNumber = [formatter stringFromNumber:[NSNumber numberWithDouble:money]];
     
-    NSMutableAttributedString * mAtStr = [[NSMutableAttributedString alloc]initWithString:@"主账户余额 " attributes:@{NSFontAttributeName:kFont(12),NSForegroundColorAttributeName:UIColorFromINTValue(124, 124, 124)}];
-    NSAttributedString * atStr = [[NSAttributedString alloc]initWithString:convertNumber attributes:@{NSFontAttributeName:kFont(12),NSForegroundColorAttributeName:UIColorFromINTValue(24, 119, 1)}];
+    NSMutableAttributedString * mAtStr = [[NSMutableAttributedString alloc]initWithString:@"主账户余额 " attributes:@{NSFontAttributeName:kFont(15),NSForegroundColorAttributeName:UIColorFromINTValue(124, 124, 124)}];
+    NSAttributedString * atStr = [[NSAttributedString alloc]initWithString:convertNumber attributes:@{NSFontAttributeName:kFont(15),NSForegroundColorAttributeName:UIColorFromINTValue(24, 119, 1)}];
     [mAtStr appendAttributedString:atStr];
     return mAtStr;
 }

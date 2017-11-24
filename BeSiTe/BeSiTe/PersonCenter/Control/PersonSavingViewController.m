@@ -22,6 +22,11 @@
     [super viewDidLoad];
     [self configSubViews];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
+}
 
 -(void)configSubViews
 {
@@ -48,6 +53,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QuickSavingViewController * quickSavingVC = [[QuickSavingViewController alloc]initWithNibName:@"QuickSavingViewController" bundle:nil];
+    if (indexPath.row == 0) {
+        quickSavingVC.savingType = QuickSavingType_Bank;
+    }else if (indexPath.row == 1){
+        quickSavingVC.savingType = QuickSavingType_ZFB;
+    }
     [self pushVC:quickSavingVC];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

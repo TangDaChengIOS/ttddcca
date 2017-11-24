@@ -37,14 +37,20 @@
 
     
     [self.headerView setSelectedItem:self.selectIndex];
-    [self requestData];
+    [self.headerView.scrollTextView  startScrollWithAttributedString:[BSTSingle defaultSingle].notices];
+
+    [self requestDataWithKey:nil];
 }
 
--(void)requestData
+-(void)requestDataWithKey:(NSString *)key
 {
     NSMutableDictionary * mDict = [NSMutableDictionary dictionary];
-    [mDict setValue:_selectCompanyCode forKey:@"companyCode"];
-//    [mDict setValue:@"猴" forKey:@"key"];
+    if (key) {
+        [mDict setValue:key forKey:@"key"];
+    }
+    else{
+        [mDict setValue:_selectCompanyCode forKey:@"companyCode"];
+    }
 //    [mDict setValue:@"AG" forKey:@"userId"];
 
     [RequestManager getManagerDataWithPath:@"games" params:mDict success:^(id JSON) {
@@ -172,10 +178,13 @@
         kWeakSelf
         _headerView.selectGameCompanyBlock = ^(NSString * companyCode){
             weak_self.selectCompanyCode = companyCode;
-            [weak_self requestData];
+            [weak_self requestDataWithKey:nil];
         };
         _headerView.gotoSearchBlock = ^(){
             GameSearchViewController * contro = [[GameSearchViewController alloc]init];
+            contro.searchBlock = ^(NSString * searchKey){
+                [weak_self requestDataWithKey:searchKey];
+            };
             [weak_self pushVC:contro];
         };
     }

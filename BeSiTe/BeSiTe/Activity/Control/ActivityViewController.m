@@ -21,6 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"优惠活动";
+
     _selectedRow = -1;
     [self configSubViews];
     

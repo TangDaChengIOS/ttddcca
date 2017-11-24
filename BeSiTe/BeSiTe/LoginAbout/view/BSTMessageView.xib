@@ -34,16 +34,16 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="AtX-kG-GzV"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <color key="textColor" red="0.043137254901960784" green="0.76862745098039209" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜成为贝斯特会员！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6N-1M-ayk">
-                            <rect key="frame" x="126" y="142" width="123" height="15"/>
+                            <rect key="frame" x="116" y="142" width="143" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="cNE-XU-fIt"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.4823529411764706" green="0.4823529411764706" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -131,6 +131,7 @@
             </constraints>
             <connections>
                 <outlet property="deailMsgLab" destination="I6N-1M-ayk" id="o35-Lk-zhd"/>
+                <outlet property="detailMsgLabHeightConstraint" destination="cNE-XU-fIt" id="p7T-gO-C2g"/>
                 <outlet property="leftBtn" destination="Mxb-zC-w3E" id="QfQ-PI-E5g"/>
                 <outlet property="onlyOneBtn" destination="pLD-Pc-Ghz" id="dBc-oL-zqx"/>
                 <outlet property="rightBtn" destination="667-jT-Z3f" id="7SP-Gs-7hE"/>

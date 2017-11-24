@@ -9,6 +9,7 @@
 #import "PersonBalanceViewController.h"
 #import "MoneyListTableViewCell.h"
 #import "MoneyMoveViewController.h"
+#import "BalanceModel.h"
 
 @interface PersonBalanceViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *totalMoneyLab;
@@ -24,25 +25,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
+    [self getBalanceData];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getBalanceData];
+    self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
+    [self.tableView reloadData];
 }
 
 -(void)getBalanceData{
-    [RequestManager getWithPath:@"getGameBalance" params:nil success:^(id JSON) {
-        NSLog(@"%@",JSON);
-    } failure:^(NSError *error) {
-        
-    }];
+    NSArray * arr = @[@"SG",@"BBIN",@"PS",@"PT",@"AG",@"PNG",@"GG",@"MG",@"OS",@"TTG"];
+    [[BSTSingle defaultSingle].gameCompanysBalanceArr removeAllObjects];
+    
+    for (NSString * code in arr) {
+        NSDictionary * dict = @{@"gamePlatformCode":code};
+        [RequestManager getWithPath:@"getGameBalance" params:dict success:^(id JSON) {
+            NSDictionary * resultDict = JSON[0];
+            BalanceModel * model = [[BalanceModel alloc]init];
+            [model setValuesForKeysWithDictionary:resultDict];
+            [[BSTSingle defaultSingle].gameCompanysBalanceArr addObject:model];
+
+            [self.tableView reloadData];
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+
+#warning --需要换回来
+//    [RequestManager getWithPath:@"getGameBalance" params:nil success:^(id JSON) {
+//        self.dataSource = [BalanceModel jsonToArray:JSON];
+//        [self.tableView reloadData];
+//        NSLog(@"%@",JSON);
+//    } failure:^(NSError *error) {
+//        
+//    }];
 }
 
 -(void)configSubViews{
     self.view.backgroundColor = kWhiteColor;
-    //_aplyMoneyBtn.layer.cornerRadius = _turnInBtn.layer.cornerRadius = _turnOutBtn.layer.cornerRadius = 4;
     _aplyMoneyBtn.backgroundColor = UIColorFromINTValue(251, 138, 113);
 
     _tableView.delegate = self;
@@ -56,12 +78,18 @@
 #pragma mark -- UITableViewDelegate / DataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return [BSTSingle defaultSingle].gameCompanysBalanceArr.count + 1;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MoneyListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kMoneyListTableViewCellReuseID forIndexPath:indexPath];
     cell.cellTye = indexPath.row;
-    [cell setCell:nil money:nil whiteBack:(indexPath.row % 2)];
+    if (indexPath.row == 0) {
+        [cell setCell:@"游戏平台" money:@"余额(元)" whiteBack:(indexPath.row % 2)];
+
+    }else{
+        BalanceModel * model = [BSTSingle defaultSingle].gameCompanysBalanceArr[indexPath.row -1];
+        [cell setCell:model.gamePlatformCode money:model.balance whiteBack:(indexPath.row % 2)];
+    }
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,16 +114,29 @@
 
 #pragma mark -- ButtonEvents
 - (IBAction)aplyBtnClick:(id)sender {
+    [RequestManager postWithPath:@"applyFund" params:nil success:^(id JSON) {
+        BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
+        view.showType = ShowTypeWaitThreeSec;
+        view.isSuccessMsg = YES;
+        view.isNotAllowRemoveSelfByTouchSpace = YES;
+        view.msgTitle = @"恭喜";
+        view.msgDetail = @"申请救援金成功！";
+        [view showInWindow];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (IBAction)turnInBtnClick:(id)sender {
     MoneyMoveViewController * moneyMoveVC = [[MoneyMoveViewController alloc]initWithNibName:@"MoneyMoveViewController" bundle:nil];
+    moneyMoveVC.isMoveToGame = YES;
     [self pushVC:moneyMoveVC];
 }
 - (IBAction)turnOutBtnClick:(id)sender {
-    
+    MoneyMoveViewController * moneyMoveVC = [[MoneyMoveViewController alloc]initWithNibName:@"MoneyMoveViewController" bundle:nil];
+    moneyMoveVC.isMoveToGame = NO;
+    [self pushVC:moneyMoveVC];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

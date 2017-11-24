@@ -11,4 +11,6 @@
 /**转入到游戏、转出到主账户*/
 @interface MoneyMoveViewController : ATBaseViewController
 
+@property (nonatomic,assign) BOOL isMoveToGame;
+
 @end

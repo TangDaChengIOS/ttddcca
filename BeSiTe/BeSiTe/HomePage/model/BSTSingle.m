@@ -34,4 +34,23 @@
     }
     return _moneyRecordSearchPara;
 }
+
+-(void)updateGameCompany:(NSString *)gamePlatformCode balance:(NSString *)balance{
+    if (gamePlatformCode.length == 0 || self.gameCompanysBalanceArr.count == 0) {
+        return;
+    }
+    for (BalanceModel * model in self.gameCompanysBalanceArr)
+    {
+        if ([model.gamePlatformCode isEqualToString:gamePlatformCode]) {
+            model.balance = balance;
+        }
+    }
+}
+-(NSMutableArray<BalanceModel *> *)gameCompanysBalanceArr
+{
+    if (!_gameCompanysBalanceArr) {
+        _gameCompanysBalanceArr = [NSMutableArray array];
+    }
+    return _gameCompanysBalanceArr;
+}
 @end

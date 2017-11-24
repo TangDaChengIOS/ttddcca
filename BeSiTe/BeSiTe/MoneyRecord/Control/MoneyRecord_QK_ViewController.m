@@ -7,6 +7,7 @@
 //
 
 #import "MoneyRecord_QK_ViewController.h"
+#import "MoneyRecordHomeViewController.h"
 
 @interface MoneyRecord_QK_ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) RecordTableViewCell * headerView;
@@ -34,7 +35,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView.mj_header beginRefreshing];
+    MoneyRecordHomeViewController * homeVC = self.magicController;
+    if (homeVC.selectPageIndex == 0) {
+        [self.tableView.mj_header beginRefreshing];
+    }
 }
 
 -(NSDictionary *)para{
@@ -64,7 +68,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return 0;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

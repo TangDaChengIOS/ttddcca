@@ -7,14 +7,12 @@
 //
 
 #import "GameListPageHeaderView.h"
-#import "LMJScrollTextView.h"
 #import "LastPlayCollectionViewCell.h"
 
 #define kCollectionItemWidth (56 *kPROPORTION)
 #define kCollectionItemHeight (75 *kPROPORTION)
 
 @interface GameListPageHeaderView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-@property (nonatomic,strong) LMJScrollTextView * scrollTextView;
 @property (nonatomic,strong) UIImageView * scrollTextLeftImage;
 @property (nonatomic,strong) UICollectionView * collectionView;
 @property (nonatomic,strong) UIButton * searchBtn;
@@ -43,7 +41,6 @@
         CGFloat leftMargin = _scrollTextLeftImage.maxX + 4;
         _scrollTextView = [[LMJScrollTextView alloc]initWithFrame:CGRectMake(leftMargin,_collectionView.maxY , MAXWIDTH - leftMargin - 104, 30) textScrollModel:LMJTextScrollContinuous direction:LMJTextScrollMoveLeft];
         [self addSubview:_scrollTextView];
-        [_scrollTextView startScrollWithAttributedString:[self getAttributeString:@"尊贵的XXX会员，贡献。会员。尊贵的。我爱你们啊 啊jhdbajdnkndkankjdajksndkasndiajsndknas"]];
         
         _searchBtn = [[UIButton alloc]initWithFrame:CGRectMake(_scrollTextView.maxX +10, _collectionView.maxY + 3, 90, 24)];
         UILabel * btnLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 66, 24)];
@@ -127,35 +124,35 @@
     return 0.01;
 }
 
-#pragma mark -- 将滚动文字转为带属性的文字
--(NSAttributedString *)getAttributeString:(NSString *)sourceString
-{
-    NSRange  range1 = [sourceString rangeOfString:@"尊贵的" options:NSLiteralSearch];
-    NSRange  range2 = [sourceString rangeOfString:@"会员" options:NSLiteralSearch];
-    
-    if (range1.length == 0 || range2.length == 0)
-    {
-        return [[NSAttributedString alloc]initWithString:sourceString attributes:@{NSForegroundColorAttributeName:kWhiteColor,NSFontAttributeName:kFont(13)}];
-    }
-    else
-    {
-        if (range2.location > (range1.location + range1.length))
-        {
-            NSRange range = NSMakeRange(range1.location + range1.length, range2.location - range1.location - range1.length);
-            
-            NSMutableAttributedString * mAStr = [[NSMutableAttributedString alloc]initWithString:sourceString attributes:@{NSForegroundColorAttributeName:kWhiteColor,NSFontAttributeName:kFont(13)}];
-            
-            NSAttributedString * aStr = [[NSAttributedString alloc]initWithString:[sourceString substringWithRange:range] attributes:@{NSForegroundColorAttributeName:UIColorFromINTValue(253, 192, 68),NSFontAttributeName:kFont(13)}];
-            
-            [mAStr replaceCharactersInRange:range withAttributedString:aStr];
-            return mAStr;
-        }
-        else
-        {
-            return [[NSAttributedString alloc]initWithString:sourceString attributes:@{NSForegroundColorAttributeName:kWhiteColor,NSFontAttributeName:kFont(13)}];
-        }
-    }
-}
+//#pragma mark -- 将滚动文字转为带属性的文字
+//-(NSAttributedString *)getAttributeString:(NSString *)sourceString
+//{
+//    NSRange  range1 = [sourceString rangeOfString:@"尊贵的" options:NSLiteralSearch];
+//    NSRange  range2 = [sourceString rangeOfString:@"会员" options:NSLiteralSearch];
+//    
+//    if (range1.length == 0 || range2.length == 0)
+//    {
+//        return [[NSAttributedString alloc]initWithString:sourceString attributes:@{NSForegroundColorAttributeName:kWhiteColor,NSFontAttributeName:kFont(13)}];
+//    }
+//    else
+//    {
+//        if (range2.location > (range1.location + range1.length))
+//        {
+//            NSRange range = NSMakeRange(range1.location + range1.length, range2.location - range1.location - range1.length);
+//            
+//            NSMutableAttributedString * mAStr = [[NSMutableAttributedString alloc]initWithString:sourceString attributes:@{NSForegroundColorAttributeName:kWhiteColor,NSFontAttributeName:kFont(13)}];
+//            
+//            NSAttributedString * aStr = [[NSAttributedString alloc]initWithString:[sourceString substringWithRange:range] attributes:@{NSForegroundColorAttributeName:UIColorFromINTValue(253, 192, 68),NSFontAttributeName:kFont(13)}];
+//            
+//            [mAStr replaceCharactersInRange:range withAttributedString:aStr];
+//            return mAStr;
+//        }
+//        else
+//        {
+//            return [[NSAttributedString alloc]initWithString:sourceString attributes:@{NSForegroundColorAttributeName:kWhiteColor,NSFontAttributeName:kFont(13)}];
+//        }
+//    }
+//}
 #pragma mark -- 重绘部分背景、UI
 -(void)drawRect:(CGRect)rect
 {

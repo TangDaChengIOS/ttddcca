@@ -140,6 +140,43 @@
     }
 }
 
+-(void)setCellWithModel:(MoneyRecordModel *)model andCellType:(RecordCellType)cellType
+{
+    self.cellType = cellType;
+    switch (cellType) {
+        case RecordCellType_QuKuan:
+        {
+            
+        }
+            break;
+            
+        case RecordCellType_CunKuan:
+        {
+            _firstLab.text = model.createdTime;
+            _secLab.text = model.type;
+            _thirdLab.text = model.amount;
+            _fourthLab.text = [model.status isEqualToString:@"0"] ? @"成功":@"失败";
+        }
+            break;
+        case RecordCellType_ZhuanZhang:
+        {
+            _firstLab.text = model.createdTime;
+            _secLab.text = model.type;
+            _thirdLab.text = model.amount;
+            _fourthLab.text = @"审核中";
+        }
+            break;
+        case RecordCellType_YouHui:
+        {
+            
+        }
+            break;
+        default:
+            break;
+    }
+
+}
+
 
 -(void)setCell{
     _firstLab.text = @"20170818 14:36\n6212***********5443";

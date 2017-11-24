@@ -123,10 +123,22 @@
     if ([[json class]isSubclassOfClass:[NSArray class]])
     {
         NSMutableAttributedString * mAttStr = [[NSMutableAttributedString alloc]init];
-        for (NSDictionary * dict  in json) {
+        for (int i = 0; i < [(NSArray *)json count]; i++) {
+            NSDictionary * dict = json[i];
             NSString * content = dict[@"content"];
-           [mAttStr appendAttributedString: [self  getAttributeString:content]];
+            if ([BSTSingle defaultSingle].user && i == 0) {
+                content = [NSString stringWithFormat:@"尊贵的%@会员,%@",[BSTSingle defaultSingle].user.accountName,content];
+            }
+            [mAttStr appendAttributedString: [self  getAttributeString:content]];
         }
+//        for (NSDictionary * dict  in json) {
+//            NSString * content = dict[@"content"];
+//            if ([BSTSingle defaultSingle].user) {
+//                content = [NSString stringWithFormat:@"尊贵的%@会员,%@",[BSTSingle defaultSingle].user.accountName,content];
+//            }
+//           [mAttStr appendAttributedString: [self  getAttributeString:content]];
+//        }
+        [BSTSingle defaultSingle].notices = mAttStr;
         [self.scrollTextView startScrollWithAttributedString:mAttStr];
 
     }else{

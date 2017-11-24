@@ -12,6 +12,8 @@
 
 @property (nonatomic,assign) NSInteger  userId;//	string	用户ID
 @property (nonatomic,copy) NSString * userName;//	string	用户姓名
+@property (nonatomic,copy) NSString * accountName;//	string	账户名
+
 @property (nonatomic,copy) NSString * mobile;//	string	手机号码
 @property (nonatomic,assign) NSInteger  mobileVerified;//	string	手机号码是否已验证 0:否，1:是
 @property (nonatomic,copy) NSString * email;//	string	邮箱地址

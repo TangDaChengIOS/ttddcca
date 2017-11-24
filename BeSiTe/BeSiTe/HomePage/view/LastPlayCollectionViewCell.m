@@ -70,7 +70,7 @@
     [super setSelected:selected];
     if (self.isMenuItem) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_mainImage setImageWithURL:[NSURL URLWithString:selected ? self.model.classIconSel : self.model.classIcon] placeholder:KIMAGE(@"home_tab_PNGType_img")];
+            [_mainImage setImageWithURL:[NSURL URLWithString:selected ? self.model.classIconSel : self.model.classIcon] placeholder:nil];
  
         });
     }

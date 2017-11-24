@@ -41,7 +41,7 @@
         TTAlert(@"请输入密码");
         return;
     }
-
+    kWeakSelf
     NSString * passWord = [RSAEncryptor encryptStringUseLocalFile:self.pwdTF.text];
     
     NSDictionary * dict = @{@"loginName":self.nameTF.text,
@@ -52,6 +52,7 @@
         
         UserModel * model = [[UserModel alloc]init];
         [model setValuesForKeysWithDictionary:JSON];
+        model.accountName = weak_self.nameTF.text;
         [BSTSingle defaultSingle].user = model;
         NSLog(@"登录成功");
     } failure:^(NSError *error) {

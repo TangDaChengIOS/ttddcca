@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MoneyRecordModel.h"
 
 typedef NS_ENUM(NSInteger,RecordDetailControlType) {
     RecordDetailControlType_QuKuan = 0,//取款
@@ -35,5 +35,7 @@ typedef NS_ENUM(NSInteger,RecordCellType) {
 
 @property (nonatomic,assign) RecordCellType cellType;
 -(void)setCell;
+-(void)setCellWithModel:(MoneyRecordModel *)model andCellType:(RecordCellType)cellType;
+
 -(void)setTopCellWithVCType:(RecordDetailControlType)detailVCType;
 @end

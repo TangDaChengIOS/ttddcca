@@ -30,6 +30,12 @@
     [super viewDidLoad];
     [self setUI];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [_titleViewBtn setImage:KIMAGE_Ori([[BSTSingle defaultSingle].user getVipImageStr]) forState:UIControlStateNormal];
+    [_titleViewBtn setTitle:[BSTSingle defaultSingle].user.accountName forState:UIControlStateNormal];
+}
 
 - (NSArray<NSString *> *)menuTitlesForMagicView:(VTMagicView *)magicView
 {
@@ -138,16 +144,16 @@
 {
     self.navigationItem.titleView = self.titleViewBtn;
     _badgeValue = 0;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"navgartion_back_btn") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"navgartion_back_btn") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem_withBadge alloc]initWithImage:KIMAGE_Ori(@"commmon_navgation_right_mail_icon") style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClick)];
 }
 
--(void)leftBarButtonItemClick{
-    _badgeValue -=3;
-    [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:_badgeValue];
-
-}
+//-(void)leftBarButtonItemClick{
+//    _badgeValue -=3;
+//    [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:_badgeValue];
+//
+//}
 
 -(void)rightBarButtonItemClick{
     MessageViewController * msgVC = [[MessageViewController alloc]initWithNibName:@"MessageViewController" bundle:nil];
@@ -162,8 +168,6 @@
 {
     if (!_titleViewBtn) {
         _titleViewBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 200, 44)];
-        [_titleViewBtn setImage:KIMAGE(@"common_VIP-0") forState:UIControlStateNormal];
-        [_titleViewBtn setTitle:@"ECGREATE" forState:UIControlStateNormal];
         [_titleViewBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
     }
     return _titleViewBtn;

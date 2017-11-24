@@ -26,7 +26,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
-    [self.magicView switchToPage:_selectPageIndex animated:YES];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.magicView.needPreloading = NO;
+    [self.magicView switchToPage:_selectPageIndex animated:NO];
 }
 
 - (NSArray<NSString *> *)menuTitlesForMagicView:(VTMagicView *)magicView

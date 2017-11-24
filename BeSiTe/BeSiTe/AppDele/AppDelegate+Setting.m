@@ -81,6 +81,7 @@
         
         UserModel * model = [[UserModel alloc]init];
         [model setValuesForKeysWithDictionary:JSON];
+        model.accountName = @"BCASDFG";
         [BSTSingle defaultSingle].user = model;
         NSLog(@"登录成功");
     } failure:^(NSError *error) {

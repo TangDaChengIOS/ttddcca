@@ -43,6 +43,5 @@
 #define KIMAGE(imageStr) [UIImage imageNamed:imageStr]
 #define KIMAGE_Ori(imageStr) [[UIImage imageNamed:imageStr] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
 
-#define PublicKey @"-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTnFDCD2WaiqorviW85gZu1YR8WaooEpuv8r8t+MI9HczZLVNpj2lgv5uN0HZkNmRS9bwQD/A3gJj/A6BHjo8xLaBjCQo8uvXAmOcFwBZ5m6wyyjG0Ic697gLbETfXqvmp9uBkHp7w42CoxnEvF1i2pPU1B7ygL0c412GkfiC+IwIDAQAB-----END PUBLIC KEY-----"
 
 #endif /* PrefixHeader_pch */

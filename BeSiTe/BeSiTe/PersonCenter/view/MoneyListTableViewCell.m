@@ -56,8 +56,8 @@
 -(void)setCell:(NSString *)name money:(NSString *)money whiteBack:(BOOL)isWhite{
     self.contentView.backgroundColor = isWhite ? kWhiteColor :UIColorFromINTValue(248, 246, 247);
 
-    _leftLab.text = @"SG游戏";
-    _rightLab.text = @"200.00";
+    _leftLab.text = name;
+    _rightLab.text = money;
 }
 
 - (void)awakeFromNib {
