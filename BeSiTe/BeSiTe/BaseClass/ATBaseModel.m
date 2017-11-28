@@ -7,6 +7,7 @@
 //
 
 #import "ATBaseModel.h"
+#import <MJExtension/NSObject+MJKeyValue.h>
 
 @implementation ATBaseModel
 
@@ -28,7 +29,8 @@
         NSMutableArray * mArr = [NSMutableArray array];
         for (NSDictionary * dict in json) {
             ATBaseModel * model = [[self alloc]init];
-            [model setValuesForKeysWithDictionary:dict];
+//            [model setValuesForKeysWithDictionary:dict];
+            [model mj_setKeyValues:dict];
             [mArr addObject:model];
         }
         return mArr;

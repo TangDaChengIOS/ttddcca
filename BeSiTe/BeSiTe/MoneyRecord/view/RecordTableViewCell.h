@@ -25,7 +25,9 @@ typedef NS_ENUM(NSInteger,RecordCellType) {
     RecordCellType_ZhuanZhang,//转账
     RecordCellType_YouHui,//优惠
     RecordCellType_JiFen,//积分
-    RecordCellType_TJLJ//推荐礼金
+    RecordCellType_TJLJ,//推荐礼金
+    RecordCellType_JiFenTop,
+    RecordCellType_JiFenBoom
 };
 
 #define kRecordTableViewCellReuseID @"kRecordTableViewCellReuseID"

@@ -65,8 +65,8 @@
 
     _firstLab.textColor = _secLab.textColor = _thirdLab.textColor = black;
     _fourthLab.textColor = green;
-    _thirdLab.textAlignment = NSTextAlignmentRight;
-    _fourthLab.textAlignment = NSTextAlignmentRight;
+    _thirdLab.textAlignment = NSTextAlignmentCenter;
+    _fourthLab.textAlignment = NSTextAlignmentCenter;
     _firstLab.textAlignment = NSTextAlignmentLeft;
 
     _firstLab.frame = CGRectMake( 0, 12, 1, 15);
@@ -97,6 +97,8 @@
 
         case RecordCellType_CunKuan:
         case RecordCellType_ZhuanZhang:
+        case RecordCellType_TJLJ:
+        case RecordCellType_JiFenTop:
         {
             leftMargin = 8;
             rightMargin = 30;
@@ -116,6 +118,7 @@
         }
             break;
         case RecordCellType_YouHui:
+        case RecordCellType_JiFenBoom:
         {
             leftMargin = 8;
             rightMargin = 30;
@@ -146,7 +149,9 @@
     switch (cellType) {
         case RecordCellType_QuKuan:
         {
-            
+            _firstLab.text = [NSString stringWithFormat:@"%@\n%@", model.createdTime,model.cardNo];
+            _secLab.text = model.amount;
+            _thirdLab.text = model.status;
         }
             break;
             
@@ -163,26 +168,43 @@
             _firstLab.text = model.createdTime;
             _secLab.text = model.type;
             _thirdLab.text = model.amount;
-            _fourthLab.text = @"审核中";
+            _fourthLab.text = model.status;
         }
             break;
         case RecordCellType_YouHui:
         {
-            
+            _firstLab.text = model.createdTime;
+            _secLab.text = model.amount;
+            _thirdLab.text = model.status;
+        }
+            break;
+        case RecordCellType_TJLJ:
+        {
+            _firstLab.text = model.createdTime;
+            _secLab.text = model.num;
+            _thirdLab.text = model.account;
+            _fourthLab.text = [model.status isEqualToString:@"0"] ? @"成功":@"失败";
+        }
+            break;
+        case RecordCellType_JiFenTop:
+        {
+            _firstLab.text = model.createdTime;
+            _secLab.text = model.amount;
+            _thirdLab.text = model.point;
+            _fourthLab.text = [model.status isEqualToString:@"0"] ? @"成功":@"失败";
+        }
+            break;
+        case RecordCellType_JiFenBoom:
+        {
+            _firstLab.text = model.createdTime;
+            _secLab.text = model.points;
+            _thirdLab.text = [model.status isEqualToString:@"0"] ? @"成功":@"失败";
         }
             break;
         default:
             break;
     }
 
-}
-
-
--(void)setCell{
-    _firstLab.text = @"20170818 14:36\n6212***********5443";
-    _secLab.text =@"秒存支付宝";
-    _thirdLab.text = @"15，00";
-    _fourthLab.text = @"审核中";
 }
 
 -(void)setTopCellWithVCType:(RecordDetailControlType)detailVCType{

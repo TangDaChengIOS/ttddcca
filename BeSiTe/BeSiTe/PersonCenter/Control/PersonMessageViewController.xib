@@ -263,11 +263,8 @@
                                     </constraints>
                                 </view>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="X0u-Qr-s2R">
-                                    <rect key="frame" x="0.0" y="325" width="375" height="128"/>
+                                    <rect key="frame" x="0.0" y="325" width="375" height="342"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="128" id="lhu-6d-cCu"/>
-                                    </constraints>
                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fW5-wm-vlZ">
                                         <size key="itemSize" width="50" height="50"/>
                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -292,6 +289,7 @@
                                 <constraint firstItem="Mci-LL-Lev" firstAttribute="top" secondItem="xGV-Tl-yIB" secondAttribute="bottom" constant="2" id="FwD-uJ-A2q"/>
                                 <constraint firstItem="Bjb-XM-0k3" firstAttribute="centerY" secondItem="gic-W8-XiX" secondAttribute="centerY" id="GYk-aO-uyP"/>
                                 <constraint firstItem="gic-W8-XiX" firstAttribute="top" secondItem="Ofl-71-UNj" secondAttribute="bottom" constant="15" id="JQm-mZ-Q3E"/>
+                                <constraint firstAttribute="bottom" secondItem="X0u-Qr-s2R" secondAttribute="bottom" id="Jcg-0x-mdu"/>
                                 <constraint firstItem="sn4-WO-q53" firstAttribute="top" secondItem="FHI-0h-bL5" secondAttribute="bottom" constant="14" id="KDf-A0-Yat"/>
                                 <constraint firstItem="1Ud-pL-5AL" firstAttribute="leading" secondItem="V2F-EZ-tbT" secondAttribute="leading" constant="20" id="Kf6-En-Ygd"/>
                                 <constraint firstItem="Ofl-71-UNj" firstAttribute="top" secondItem="ovH-Fk-dp5" secondAttribute="bottom" constant="15" id="L1f-iZ-eBo"/>

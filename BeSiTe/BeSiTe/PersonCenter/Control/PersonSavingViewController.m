@@ -9,6 +9,7 @@
 #import "PersonSavingViewController.h"
 #import "PersonSavingTableViewCell.h"
 #import "QuickSavingViewController.h"
+#import "OnlineSavingViewController.h"
 
 @interface PersonSavingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *totalMoneyLab;
@@ -52,13 +53,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    QuickSavingViewController * quickSavingVC = [[QuickSavingViewController alloc]initWithNibName:@"QuickSavingViewController" bundle:nil];
-    if (indexPath.row == 0) {
-        quickSavingVC.savingType = QuickSavingType_Bank;
-    }else if (indexPath.row == 1){
-        quickSavingVC.savingType = QuickSavingType_ZFB;
+    if (indexPath.row <= 1) {
+        QuickSavingViewController * quickSavingVC = [[QuickSavingViewController alloc]initWithNibName:@"QuickSavingViewController" bundle:nil];
+        quickSavingVC.savingType = (indexPath.row == 0 ? QuickSavingType_Bank : QuickSavingType_ZFB);
+        [self pushVC:quickSavingVC];
+    }else{
+        OnlineSavingViewController * onlineVC = [[OnlineSavingViewController alloc]init];
+        [self pushVC:onlineVC];
     }
-    [self pushVC:quickSavingVC];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

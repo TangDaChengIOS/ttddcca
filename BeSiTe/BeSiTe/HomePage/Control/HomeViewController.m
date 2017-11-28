@@ -79,6 +79,8 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.item >= self.dataSource.count) return;
+    
     GameListPageViewController * menuVC = [[GameListPageViewController alloc]init];
     menuVC.selectIndex = indexPath.item;
     GamesCompanyModel * model = self.dataSource[indexPath.row];

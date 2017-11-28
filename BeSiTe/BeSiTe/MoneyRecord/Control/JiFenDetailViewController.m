@@ -16,6 +16,11 @@
 @property (nonatomic,strong) UITableView * tableView_top;
 @property (nonatomic,strong) UITableView * tableView_boom;
 
+@property (nonatomic,strong) NSMutableArray * dataSource;
+@property (nonatomic,strong) NSMutableArray * dataSource_boom;
+@property (nonatomic,assign) NSInteger page;
+@property (nonatomic,assign) NSInteger page_boom;
+
 @end
 
 @implementation JiFenDetailViewController
@@ -24,53 +29,117 @@
     [super viewDidLoad];
     [self configSubViews];
     
+    kWeakSelf
+    self.tableView_top.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+        weak_self.page = 1;
+        [weak_self requestDataForDuiHuan];
+    }];
+    
+    self.tableView_top.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+        weak_self.page += 1;
+        [weak_self requestDataForDuiHuan];
+    }];
+    
+    self.tableView_boom.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+        weak_self.page_boom = 1;
+        [weak_self requestDataForHuoQu];
+    }];
+    
+    self.tableView_boom.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+        weak_self.page_boom += 1;
+        [weak_self requestDataForHuoQu];
+    }];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [self.tableView_top.mj_header beginRefreshing];
+    [self.tableView_boom.mj_header beginRefreshing];
+
 }
 
+-(NSDictionary *)para{
+    NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:[BSTSingle defaultSingle].moneyRecordSearchPara];
+    [dict setValue:@(self.page) forKey:@"pageNo"];
+    [dict setValue:@(20) forKey:@"pageSize"];
+    return dict;
+}
+
+
+#pragma mark -- 请求取款数据
+-(void)requestDataForDuiHuan{
+    [RequestManager getWithPath:@"getUserScoreExchangeInfos" params:[self para] success:^(id JSON) {
+        NSLog(@"%@",JSON);
+        [self.tableView_top.mj_header endRefreshing];
+        
+        self.dataSource = [MoneyRecordModel jsonToArray:JSON[@"data"]];
+        [self.tableView_top reloadData];
+        if ([JSON[@"hasNext"] integerValue] == 0) {
+            [self.tableView_top.mj_footer endRefreshingWithNoMoreData];
+        }
+        _page = [JSON[@"currentPage"] integerValue];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+-(NSDictionary *)para_boom{
+    NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:[BSTSingle defaultSingle].moneyRecordSearchPara];
+    [dict setValue:@(self.page_boom) forKey:@"pageNo"];
+    [dict setValue:@(20) forKey:@"pageSize"];
+    return dict;
+}
+
+
+#pragma mark -- 请求取款数据
+-(void)requestDataForHuoQu{
+    [RequestManager getWithPath:@"getUserGainScoreInfos" params:[self para_boom] success:^(id JSON) {
+        NSLog(@"%@",JSON);
+        [self.tableView_boom.mj_header endRefreshing];
+        
+        self.dataSource_boom = [MoneyRecordModel jsonToArray:JSON[@"data"]];
+        [self.tableView_boom reloadData];
+        if ([JSON[@"hasNext"] integerValue] == 0) {
+            [self.tableView_boom.mj_footer endRefreshingWithNoMoreData];
+        }
+        _page_boom = [JSON[@"currentPage"] integerValue];
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 #pragma mark -- tableView delegate/dataSource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    if (tableView == self.tableView_top) {
+        return self.dataSource.count;
+    }
+    else{
+        return self.dataSource_boom.count;
+    }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecordTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kRecordTableViewCellReuseID forIndexPath:indexPath];
-    if (tableView == _tableView_top) {
-        cell.cellType =  RecordCellType_CunKuan;
-    }else{
-        cell.cellType =  RecordCellType_YouHui;
+    
+    if (tableView == self.tableView_top) {
+        [cell setCellWithModel:self.dataSource[indexPath.row] andCellType:RecordCellType_JiFenTop];
     }
-    [cell setCell];
+    else{
+        [cell setCellWithModel:self.dataSource_boom[indexPath.row] andCellType:RecordCellType_JiFenBoom];
+    }
+
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;
 }
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 1) {
-//        UITableViewHeaderFooterView * header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"MenuViewSecitonHeaderID"];
-//        header.contentView.backgroundColor = UIColorFromINTValue(31, 31, 33);
-//        if (header.contentView.subviews.count == 0) {
-//            UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 100, 24)];
-//            lab.textColor = UIColorFromINTValue(78, 96, 98);
-//            lab.font = kFont(12);
-//            lab.text = @"关于贝斯特";
-//            [header.contentView addSubview:lab];
-//        }
-//        return header;
-//    }
-//    return nil;;
-//}
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return section == 1 ? 24 : 0;
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.01;
+}
 
 
 -(void)configSubViews
@@ -89,7 +158,7 @@
     [self.view addSubview:_headerView_top];
     
 //上部分tableview
-    _tableView_top = [[UITableView alloc]initWithFrame:CGRectMake(0, 52, MAXWIDTH, tableViewH) style:UITableViewStylePlain];
+    _tableView_top = [[UITableView alloc]initWithFrame:CGRectMake(0, 52, MAXWIDTH, tableViewH) style:UITableViewStyleGrouped];
     _tableView_top.delegate = self;
     _tableView_top.dataSource = self;
     [_tableView_top registerClass:[RecordTableViewCell class] forCellReuseIdentifier:kRecordTableViewCellReuseID];
@@ -107,7 +176,7 @@
     [self.view addSubview:_headerView_boom];
 
 //下部分tableview
-    _tableView_boom = [[UITableView alloc]initWithFrame:CGRectMake(0, boomLab.maxY + 28, MAXWIDTH, tableViewH) style:UITableViewStylePlain];
+    _tableView_boom = [[UITableView alloc]initWithFrame:CGRectMake(0, boomLab.maxY + 28, MAXWIDTH, tableViewH) style:UITableViewStyleGrouped];
     _tableView_boom.delegate = self;
     _tableView_boom.dataSource = self;
     [_tableView_boom registerClass:[RecordTableViewCell class] forCellReuseIdentifier:kRecordTableViewCellReuseID];
@@ -124,6 +193,21 @@
     return lable;
 }
 
+-(NSMutableArray *)dataSource
+{
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
+
+-(NSMutableArray *)dataSource_boom
+{
+    if (!_dataSource_boom) {
+        _dataSource_boom = [NSMutableArray array];
+    }
+    return _dataSource_boom;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

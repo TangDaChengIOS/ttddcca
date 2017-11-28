@@ -12,9 +12,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PersonGetingViewController">
             <connections>
                 <outlet property="accountTF" destination="S9l-rA-LYt" id="gLo-LB-g1F"/>
+                <outlet property="bankImageView" destination="BRb-za-O5p" id="bwL-JE-yOe"/>
+                <outlet property="bankNameLab" destination="HdL-E9-Hx9" id="GCT-GC-rYF"/>
                 <outlet property="cardAdressTF" destination="1mn-zl-S4I" id="cbc-OZ-LC3"/>
                 <outlet property="cardTF" destination="vLc-p4-WpD" id="X4D-sA-aBs"/>
                 <outlet property="contentViewHeightConstraint" destination="CZu-LC-iB3" id="BLh-hE-pXZ"/>
+                <outlet property="mainAccountLab" destination="cY6-Wy-oCP" id="mNl-Uf-bJ6"/>
                 <outlet property="managerCardBtn" destination="jPW-PL-lL7" id="Ds0-oo-xcL"/>
                 <outlet property="moneyTF" destination="8qC-Ub-FfH" id="pO3-ce-bt1"/>
                 <outlet property="pwdTF" destination="Cjl-QL-66a" id="3ri-xP-GK1"/>
@@ -100,15 +103,15 @@
                                             <color key="textColor" red="0.39607843139999999" green="0.39607843139999999" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common_bank_gongshang_icon" translatesAutoresizingMaskIntoConstraints="NO" id="BRb-za-O5p">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BRb-za-O5p">
                                             <rect key="frame" x="101" y="14" width="35" height="23"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="23" id="GPJ-cE-x83"/>
                                                 <constraint firstAttribute="width" constant="35" id="esQ-vg-gbY"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中国工商银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdL-E9-Hx9">
-                                            <rect key="frame" x="146" y="15" width="80" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdL-E9-Hx9">
+                                            <rect key="frame" x="146" y="15" width="0.0" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="DNY-zV-jgp"/>
                                             </constraints>
@@ -299,7 +302,6 @@
         </view>
     </objects>
     <resources>
-        <image name="common_bank_gongshang_icon" width="35" height="27"/>
         <image name="common_next_icon" width="7" height="13"/>
     </resources>
 </document>

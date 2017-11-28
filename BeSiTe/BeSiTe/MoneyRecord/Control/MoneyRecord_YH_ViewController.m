@@ -12,6 +12,7 @@
 @property (nonatomic,strong) RecordTableViewCell * headerView;
 @property (nonatomic,strong) UITableView * tableView;
 @property (nonatomic,assign) NSInteger page;
+@property (nonatomic,strong) NSMutableArray * dataSource;
 
 @end
 
@@ -34,7 +35,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [self.tableView.mj_header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 -(NSDictionary *)para{
@@ -46,46 +47,62 @@
 
 #pragma mark -- 请求优惠数据
 -(void)requestDataForYouHui{
-    [RequestManager getWithPath:@"" params:[self para] success:^(id JSON) {
+    [RequestManager getWithPath:@"getUserPromotionInfos" params:[self para] success:^(id JSON) {
+        [self.tableView.mj_header endRefreshing];
+        NSLog(@"%@",JSON);
         
+        self.dataSource = [MoneyRecordModel jsonToArray:JSON[@"data"]];
+        [self.tableView reloadData];
+        if ([JSON[@"hasNext"] integerValue] == 0) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        _page = [JSON[@"currentPage"] integerValue];
     } failure:^(NSError *error) {
         
     }];
 }
 
 #pragma mark -- tableView delegate/dataSource
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataSource.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecordTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kRecordTableViewCellReuseID forIndexPath:indexPath];
-    cell.cellType = RecordCellType_YouHui;
-    [cell setCell];
+    [cell setCellWithModel:self.dataSource[indexPath.row] andCellType:RecordCellType_YouHui];
+
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.01;
+}
 -(void)configSubViews{
     _headerView = [[RecordTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     _headerView.cellType = RecordCellType_YouHui;
     [_headerView setTopCellWithVCType:RecordDetailControlType_YouHui];
     [self.view addSubview:_headerView];
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 28, MAXWIDTH, MAXHEIGHT - 64 -28 - 50) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 28, MAXWIDTH, MAXHEIGHT - 64 -28 - 50) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerClass:[RecordTableViewCell class] forCellReuseIdentifier:kRecordTableViewCellReuseID];
     
     [self.view addSubview:_tableView];
+}
+
+-(NSMutableArray *)dataSource
+{
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
 }
 
 - (void)didReceiveMemoryWarning {

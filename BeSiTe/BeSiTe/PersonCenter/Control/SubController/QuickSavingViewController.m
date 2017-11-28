@@ -27,7 +27,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;
-    self.title = (_savingType == QuickSavingType_Bank ? @"秒存 网银转账" :@"秒存 支付宝");
+    if (_savingType == QuickSavingType_Bank) {
+        self.title =  @"秒存 网银转账";
+    }else{
+        self.title = @"秒存 支付宝";
+        self.giveNumberBackView.hidden = YES;
+    }
     [self requestReceivBankInfo];
 }
 
@@ -104,6 +109,7 @@
 }
 - (IBAction)helpClick:(id)sender {
     
+    [self pushVC:[WebDetailViewController quickCreateWithUrl:@"http://172.104.54.176:8080/check_bank_number"]];
 }
 
 - (void)didReceiveMemoryWarning {

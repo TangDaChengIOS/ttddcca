@@ -11,7 +11,7 @@
 @interface MoneyRecordModel : ATBaseModel
 
 @property (nonatomic,copy)NSString * cardNo;//	string	卡号
-@property (nonatomic,copy)NSString * amount;//	string	金额
+@property (nonatomic,copy)NSString * amount;//	string	金额 / 兑换数量
 @property (nonatomic,copy)NSString * status;//	string	状态:以接口返回的描述为准
 @property (nonatomic,copy)NSString * createdTime;//	string	时间
 @property (nonatomic,copy)NSString * seqNo;//	string	流水号
@@ -21,5 +21,6 @@
 @property (nonatomic,copy)NSString * point;//	string	使用积分数
 @property (nonatomic,copy)NSString * num;//	string	奖励数量
 @property (nonatomic,copy)NSString * account;//	string	朋友的账号
+@property (nonatomic,copy)NSString * points;//	string	获取积分数
 
 @end

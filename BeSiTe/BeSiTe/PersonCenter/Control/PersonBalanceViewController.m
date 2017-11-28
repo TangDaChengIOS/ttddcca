@@ -25,13 +25,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
-    [self getBalanceData];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
+    [self getBalanceData];
+
     [self.tableView reloadData];
 }
 

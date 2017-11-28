@@ -36,8 +36,6 @@
 		114BC1B11FAFF8AB00C1A46D /* BankTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 114BC1AF1FAFF8AB00C1A46D /* BankTableViewCell.xib */; };
 		114BC1B41FAFFB9100C1A46D /* BankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 114BC1B31FAFFB9100C1A46D /* BankModel.m */; };
 		114BC1B71FAFFDE600C1A46D /* BankSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114BC1B61FAFFDE600C1A46D /* BankSelectViewController.m */; };
-		114BC1BE1FB0604A00C1A46D /* SavingByCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 114BC1BC1FB0604A00C1A46D /* SavingByCardViewController.m */; };
-		114BC1BF1FB0604A00C1A46D /* SavingByCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 114BC1BD1FB0604A00C1A46D /* SavingByCardViewController.xib */; };
 		1154D1191FAAB39200E05734 /* RecordSelectToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D1181FAAB39200E05734 /* RecordSelectToolView.m */; };
 		1154D11C1FAAB8FC00E05734 /* PersonRecordSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D11B1FAAB8FC00E05734 /* PersonRecordSearchViewController.m */; };
 		1154D11F1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1154D11E1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m */; };
@@ -99,6 +97,7 @@
 		1194B1E31FA7732900241E49 /* MoneyRecordHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1194B1E21FA7732900241E49 /* MoneyRecordHomeViewController.m */; };
 		119589C81F98F57F0070AC16 /* MenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 119589C61F98F57F0070AC16 /* MenuTableViewCell.m */; };
 		119589C91F98F57F0070AC16 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 119589C71F98F57F0070AC16 /* MenuTableViewCell.xib */; };
+		1198212A1FCC5DD60091FA09 /* OnlinePayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 119821291FCC5DD60091FA09 /* OnlinePayModel.m */; };
 		119EAF261FA5C6BD00E6C2CA /* UIBarButtonItem_withBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 119EAF251FA5C6BD00E6C2CA /* UIBarButtonItem_withBadge.m */; };
 		119EAF2A1FA6142500E6C2CA /* PersonSavingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119EAF281FA6142500E6C2CA /* PersonSavingViewController.m */; };
 		119EAF2B1FA6142500E6C2CA /* PersonSavingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 119EAF291FA6142500E6C2CA /* PersonSavingViewController.xib */; };
@@ -140,6 +139,8 @@
 		11CBCCF11F9CD2EB000E4D01 /* PersonMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11CBCCEF1F9CD2EB000E4D01 /* PersonMessageViewController.xib */; };
 		11CBCCF91F9CEC03000E4D01 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CBCCF71F9CEC03000E4D01 /* LoginViewController.m */; };
 		11CBCCFA1F9CEC03000E4D01 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11CBCCF81F9CEC03000E4D01 /* LoginViewController.xib */; };
+		11D5EB9D1FCC155E0070BE9C /* OnlineSavingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D5EB9C1FCC155E0070BE9C /* OnlineSavingTableViewCell.m */; };
+		11D5EBA01FCC18130070BE9C /* OnlineSavingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D5EB9F1FCC18130070BE9C /* OnlineSavingViewController.m */; };
 		11E2BF571FB540AA00180762 /* ActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E2BF561FB540AA00180762 /* ActivityModel.m */; };
 		11E2BF5A1FB59E2C00180762 /* ATCombineStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E2BF591FB59E2C00180762 /* ATCombineStrings.m */; };
 		11ECA9401F9D93C600CF84CB /* RegisterPageOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11ECA93E1F9D93C600CF84CB /* RegisterPageOneViewController.m */; };
@@ -210,9 +211,6 @@
 		114BC1B31FAFFB9100C1A46D /* BankModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankModel.m; sourceTree = "<group>"; };
 		114BC1B51FAFFDE600C1A46D /* BankSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankSelectViewController.h; sourceTree = "<group>"; };
 		114BC1B61FAFFDE600C1A46D /* BankSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankSelectViewController.m; sourceTree = "<group>"; };
-		114BC1BB1FB0604A00C1A46D /* SavingByCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavingByCardViewController.h; sourceTree = "<group>"; };
-		114BC1BC1FB0604A00C1A46D /* SavingByCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavingByCardViewController.m; sourceTree = "<group>"; };
-		114BC1BD1FB0604A00C1A46D /* SavingByCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavingByCardViewController.xib; sourceTree = "<group>"; };
 		1154D1171FAAB39200E05734 /* RecordSelectToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordSelectToolView.h; sourceTree = "<group>"; };
 		1154D1181FAAB39200E05734 /* RecordSelectToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordSelectToolView.m; sourceTree = "<group>"; };
 		1154D11A1FAAB8FC00E05734 /* PersonRecordSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonRecordSearchViewController.h; sourceTree = "<group>"; };
@@ -329,6 +327,8 @@
 		119589C51F98F57F0070AC16 /* MenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewCell.h; sourceTree = "<group>"; };
 		119589C61F98F57F0070AC16 /* MenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewCell.m; sourceTree = "<group>"; };
 		119589C71F98F57F0070AC16 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
+		119821281FCC5DD60091FA09 /* OnlinePayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlinePayModel.h; sourceTree = "<group>"; };
+		119821291FCC5DD60091FA09 /* OnlinePayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlinePayModel.m; sourceTree = "<group>"; };
 		119EAF241FA5C6BD00E6C2CA /* UIBarButtonItem_withBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBarButtonItem_withBadge.h; sourceTree = "<group>"; };
 		119EAF251FA5C6BD00E6C2CA /* UIBarButtonItem_withBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItem_withBadge.m; sourceTree = "<group>"; };
 		119EAF271FA6142500E6C2CA /* PersonSavingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonSavingViewController.h; sourceTree = "<group>"; };
@@ -403,6 +403,10 @@
 		11CBCCF61F9CEC03000E4D01 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		11CBCCF71F9CEC03000E4D01 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		11CBCCF81F9CEC03000E4D01 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		11D5EB9B1FCC155E0070BE9C /* OnlineSavingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineSavingTableViewCell.h; sourceTree = "<group>"; };
+		11D5EB9C1FCC155E0070BE9C /* OnlineSavingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineSavingTableViewCell.m; sourceTree = "<group>"; };
+		11D5EB9E1FCC18130070BE9C /* OnlineSavingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineSavingViewController.h; sourceTree = "<group>"; };
+		11D5EB9F1FCC18130070BE9C /* OnlineSavingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineSavingViewController.m; sourceTree = "<group>"; };
 		11E2BF551FB540AA00180762 /* ActivityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityModel.h; sourceTree = "<group>"; };
 		11E2BF561FB540AA00180762 /* ActivityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityModel.m; sourceTree = "<group>"; };
 		11E2BF581FB59E2C00180762 /* ATCombineStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCombineStrings.h; sourceTree = "<group>"; };
@@ -719,9 +723,6 @@
 				11B20C071FA9C8F500009977 /* PersonGetingViewController.xib */,
 				1154D11A1FAAB8FC00E05734 /* PersonRecordSearchViewController.h */,
 				1154D11B1FAAB8FC00E05734 /* PersonRecordSearchViewController.m */,
-				114BC1BB1FB0604A00C1A46D /* SavingByCardViewController.h */,
-				114BC1BC1FB0604A00C1A46D /* SavingByCardViewController.m */,
-				114BC1BD1FB0604A00C1A46D /* SavingByCardViewController.xib */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -731,6 +732,8 @@
 			children = (
 				1124D9651FC7150A007149BE /* BalanceModel.h */,
 				1124D9661FC7150A007149BE /* BalanceModel.m */,
+				119821281FCC5DD60091FA09 /* OnlinePayModel.h */,
+				119821291FCC5DD60091FA09 /* OnlinePayModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -756,6 +759,8 @@
 				11AC9F0B1FC1D2D90016F3E5 /* ATDAYCalendarView.m */,
 				11908E601FC811B5005715F4 /* GameCompanyTableViewCell.h */,
 				11908E611FC811B5005715F4 /* GameCompanyTableViewCell.m */,
+				11D5EB9B1FCC155E0070BE9C /* OnlineSavingTableViewCell.h */,
+				11D5EB9C1FCC155E0070BE9C /* OnlineSavingTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1129,6 +1134,8 @@
 				118A36641FB2030700FD6193 /* MoneyMoveViewController.xib */,
 				11908E5D1FC80FFB005715F4 /* GameCompanySelectViewController.h */,
 				11908E5E1FC80FFB005715F4 /* GameCompanySelectViewController.m */,
+				11D5EB9E1FCC18130070BE9C /* OnlineSavingViewController.h */,
+				11D5EB9F1FCC18130070BE9C /* OnlineSavingViewController.m */,
 			);
 			path = SubController;
 			sourceTree = "<group>";
@@ -1240,7 +1247,6 @@
 				118A36661FB2030700FD6193 /* MoneyMoveViewController.xib in Resources */,
 				113227B71F909DC500E5EE7E /* Assets.xcassets in Resources */,
 				119589C91F98F57F0070AC16 /* MenuTableViewCell.xib in Resources */,
-				114BC1BF1FB0604A00C1A46D /* SavingByCardViewController.xib in Resources */,
 				1164635D1F91E1FC004ECC79 /* MenuViewController.xib in Resources */,
 				11ECA9411F9D93C600CF84CB /* RegisterPageOneViewController.xib in Resources */,
 				11B2112B1FB405CF003CE6ED /* ForgetPassWordViewController.xib in Resources */,
@@ -1313,6 +1319,7 @@
 				113F71D71FB2B33900EB4567 /* AppDelegate.m in Sources */,
 				112BEADB1FC422E900EDD756 /* APPStartRunViewController.m in Sources */,
 				11AC1B701F99DC9400C06D85 /* HomeHeaderView.m in Sources */,
+				1198212A1FCC5DD60091FA09 /* OnlinePayModel.m in Sources */,
 				1154D1191FAAB39200E05734 /* RecordSelectToolView.m in Sources */,
 				11AC9F0C1FC1D2D90016F3E5 /* ATDAYCalendarView.m in Sources */,
 				114389921FAC1803008840EC /* UserModel.m in Sources */,
@@ -1341,6 +1348,7 @@
 				1164634B1F91AA53004ECC79 /* PersonViewController.m in Sources */,
 				116463A81F91F634004ECC79 /* XWCircleSpreadAnimator.m in Sources */,
 				116463AF1F91F634004ECC79 /* XWCoolAnimator+XWScanning.m in Sources */,
+				11D5EBA01FCC18130070BE9C /* OnlineSavingViewController.m in Sources */,
 				11AC9F331FC30C020016F3E5 /* MoneyRecord_TJLJ_ViewController.m in Sources */,
 				11AC9F2A1FC30BAA0016F3E5 /* MoneyRecord_CK_ViewController.m in Sources */,
 				118C69821FB6AAD4005D095A /* WebDetailViewController.m in Sources */,
@@ -1376,7 +1384,6 @@
 				1190EC5B1F9EF1E3007A1D05 /* MoneyListTableViewCell.m in Sources */,
 				116463A11F91F634004ECC79 /* UIView+Snapshot.m in Sources */,
 				112BEADE1FC5CECC00EDD756 /* GameSearchViewController.m in Sources */,
-				114BC1BE1FB0604A00C1A46D /* SavingByCardViewController.m in Sources */,
 				116463BA1F91F634004ECC79 /* XWFilterAnimator+XWSwipe.m in Sources */,
 				11908E5F1FC80FFB005715F4 /* GameCompanySelectViewController.m in Sources */,
 				112435311F9BAC9B00C5EAAE /* GamesMenuView.m in Sources */,
@@ -1407,6 +1414,7 @@
 				116463B81F91F634004ECC79 /* XWFilterAnimator+XWPageCurl.m in Sources */,
 				11908E621FC811B5005715F4 /* GameCompanyTableViewCell.m in Sources */,
 				11CBCCF01F9CD2EB000E4D01 /* PersonMessageViewController.m in Sources */,
+				11D5EB9D1FCC155E0070BE9C /* OnlineSavingTableViewCell.m in Sources */,
 				116463B71F91F634004ECC79 /* XWFilterAnimator+XWMod.m in Sources */,
 				11AC9F231FC2A5860016F3E5 /* SKCalendarView.m in Sources */,
 				11930F261FA8CA5300AB33F4 /* JiFenDetailViewController.m in Sources */,

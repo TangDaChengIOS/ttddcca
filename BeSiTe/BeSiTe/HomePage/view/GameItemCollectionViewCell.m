@@ -12,6 +12,7 @@
 @property (nonatomic,strong) UIImageView * mainImage;
 @property (nonatomic,strong) UILabel * boomLab;
 @property (nonatomic,strong) GamesModel * model;
+//@property (nonatomic,strong) UIButton * cancelCollectButton;
 @end
 
 @implementation GameItemCollectionViewCell
@@ -29,15 +30,23 @@
         _boomLab.backgroundColor = UIColorFromINTValue(242, 240, 241);
         _boomLab.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:_boomLab];
+        
+//        [self.contentView addSubview:self.cancelCollectButton];
     }
     return self;
 }
 
 
 -(void)setCellWithModel:(GamesModel *)model{
-    [_mainImage setImageWithURL:[NSURL URLWithString:model.imgUrl] placeholder:nil];
+    [_mainImage setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
     _boomLab.text = model.gameName;
 }
-
+//-(UIButton *)cancelCollectButton{
+//    if (!_cancelCollectButton) {
+//        _cancelCollectButton = [[UIButton alloc]initWithFrame:CGRectMake(self.contentView.width - 33, 0, 33, 33)];
+//        [_cancelCollectButton setImage:KIMAGE_Ori(@"back_manager_cancel_icon") forState:UIControlStateNormal];
+//    }
+//    return _cancelCollectButton;
+//}
 
 @end
