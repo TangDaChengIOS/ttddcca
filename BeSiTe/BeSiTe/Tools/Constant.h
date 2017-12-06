@@ -25,6 +25,14 @@
 #import "WebDetailViewController.h"
 #import "UIButton+TimerCount.h"
 #import "BSTMessageView.h"
+#import <MJExtension/NSObject+MJKeyValue.h>
 
+/**成功登录通知名*/
+#define BSTLoginSuccessNotification @"BSTLoginSuccessNotification"
+/**登录失效通知名*/
+#define BSTLoginFailueNotification @"BSTLoginFailueNotification"
+
+/**注册成功通知名*/
+#define BSTRegisterSuccessNotification @"BSTRegisterSuccessNotification"
 
 #endif /* Constant_h */

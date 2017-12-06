@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^RequestSuccessBlock)(id JSON);
+typedef void (^RequestSuccessBlock)(id JSON,BOOL isSuccess);
 typedef void (^RequestFailureBlock)(NSError *error);
 
 //业务平台

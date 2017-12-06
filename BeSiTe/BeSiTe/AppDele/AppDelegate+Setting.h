@@ -10,9 +10,12 @@
 
 @interface AppDelegate (Setting)
 
--(void)setRootViewController;
--(void)test;
--(void)autoLogin;
+-(void)setDefaultRootViewController;
+//-(void)autoLogin;
+-(void)setNoLoginRootViewController;
+-(void)setLoginSuccessRootViewController;
+
+
 +(UINavigationController *)getBoomNavigation;
 +(UITabBarController *)getTabBarController;
 

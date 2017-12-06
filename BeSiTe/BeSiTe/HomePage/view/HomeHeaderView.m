@@ -7,7 +7,6 @@
 //
 
 #import "HomeHeaderView.h"
-#import <SDCycleScrollView/SDCycleScrollView.h>
 #import "LMJScrollTextView.h"
 #import "LastPlayCollectionViewCell.h"
 #import "BannerADSModel.h"
@@ -18,7 +17,6 @@
 
 @interface HomeHeaderView  ()<SDCycleScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic,strong) SDCycleScrollView * bannerView;//轮播图
 @property (nonatomic,strong) LMJScrollTextView * scrollTextView;//滚动文字
 @property (nonatomic,strong) UIImageView * scrollTextLeftImage;//滚动文字左边小图标
 @property (nonatomic,strong) UICollectionView * collectionView;//
@@ -37,7 +35,9 @@
         self.frame =CGRectMake(0, 0, MAXWIDTH, 300);
         
         _bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.width, 167 * kPROPORTION) delegate:self placeholderImage:nil];
-        _bannerView.autoScrollTimeInterval = 4;
+        if ([BSTSingle defaultSingle].adsRollTime > 0) {
+            _bannerView.autoScrollTimeInterval = [BSTSingle defaultSingle].adsRollTime;
+        }
         [self addSubview:_bannerView];
         
         UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(0, _bannerView.maxY, 20, kCollectionItemWidth)];
@@ -74,35 +74,53 @@
 
 -(void)refreshData
 {
+    if (self.isRequestData) {
+        return;
+    }
     self.isRequestData = YES;
     _totalFinishRequest = 0;
     kWeakSelf
-    [RequestManager getManagerDataWithPath:@"ads" params:nil success:^(id JSON) {
+    [RequestManager getManagerDataWithPath:@"ads" params:nil success:^(id JSON ,BOOL isSuccess) {
+        weak_self.totalFinishRequest ++;
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         weak_self.bannerDataSource = [BannerADSModel jsonToArray:JSON];
         [weak_self.bannerImagesArr removeAllObjects];
         for (BannerADSModel * model in self.bannerDataSource) {
             [weak_self.bannerImagesArr addObject:model.imgUrl];
         }
         weak_self.bannerView.imageURLStringsGroup = weak_self.bannerImagesArr;
-        weak_self.totalFinishRequest ++;
     } failure:^(NSError *error) {
         weak_self.totalFinishRequest ++;
 
     }];
     
-    //token
-    [RequestManager getManagerDataWithPath:@"lastGames" params:nil success:^(id JSON) {
+    //最近游戏
+    [RequestManager getManagerDataWithPath:@"lastGames" params:nil success:^(id JSON ,BOOL isSuccess) {
+        weak_self.totalFinishRequest ++;
+
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         weak_self.collectionViewDataSource = [GamesModel jsonToArray:JSON];
         [weak_self.collectionView reloadData];
-        weak_self.totalFinishRequest ++;
 
     } failure:^(NSError *error) {
         weak_self.totalFinishRequest ++;
 
     }];
-    [RequestManager getWithPath:@"notices" params:nil success:^(id JSON) {
-        [weak_self handleNotices:JSON];
+    //系统公告
+    [RequestManager getWithPath:@"notices" params:nil success:^(id JSON ,BOOL isSuccess) {
         weak_self.totalFinishRequest ++;
+
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        [weak_self handleNotices:JSON];
 
     } failure:^(NSError *error) {
         weak_self.totalFinishRequest ++;
@@ -112,7 +130,6 @@
 -(void)setTotalFinishRequest:(NSInteger)totalFinishRequest
 {
     _totalFinishRequest = totalFinishRequest;
-    NSLog(@"成功——————%ld",_totalFinishRequest);
     if (_totalFinishRequest == 3) {
         self.isRequestData = NO;
     }
@@ -131,13 +148,7 @@
             }
             [mAttStr appendAttributedString: [self  getAttributeString:content]];
         }
-//        for (NSDictionary * dict  in json) {
-//            NSString * content = dict[@"content"];
-//            if ([BSTSingle defaultSingle].user) {
-//                content = [NSString stringWithFormat:@"尊贵的%@会员,%@",[BSTSingle defaultSingle].user.accountName,content];
-//            }
-//           [mAttStr appendAttributedString: [self  getAttributeString:content]];
-//        }
+
         [BSTSingle defaultSingle].notices = mAttStr;
         [self.scrollTextView startScrollWithAttributedString:mAttStr];
 
@@ -154,8 +165,7 @@
     {
         [self.viewController.navigationController pushViewController:[WebDetailViewController quickCreateWithUrl:model.webUrl] animated:YES];
     }else{//游戏
-//        [GamesMenuView ]
-#warning 此处不通
+        [GamesMenuView showWithModel:model.game];
     }
 }
 

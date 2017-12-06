@@ -23,12 +23,12 @@
     [super viewDidLoad];
     [self configSubViews];
     kWeakSelf
-    self.tableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         weak_self.page = 1;
         [weak_self requestDataForTJLJ];
     }];
     
-    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         weak_self.page += 1;
         [weak_self requestDataForTJLJ];
     }];
@@ -48,10 +48,13 @@
 
 #pragma mark -- 请求优惠数据
 -(void)requestDataForTJLJ{
-    [RequestManager getWithPath:@"getUserRecommendInfos" params:[self para] success:^(id JSON) {
+    [RequestManager getWithPath:@"getUserRecommendInfos" params:[self para] success:^(id JSON ,BOOL isSuccess) {
         [self.tableView.mj_header endRefreshing];
         NSLog(@"%@",JSON);
-        
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         self.dataSource = [MoneyRecordModel jsonToArray:JSON[@"data"]];
         [self.tableView reloadData];
         if ([JSON[@"hasNext"] integerValue] == 0) {
@@ -79,6 +82,12 @@
 
     return cell;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [ShowRecordDetailView showWithModel:self.dataSource[indexPath.row] andRecordType:RecordCellType_TJLJ];
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;

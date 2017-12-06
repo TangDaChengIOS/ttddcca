@@ -18,34 +18,17 @@
 
 @implementation MenuTableViewCell
 
--(void)setCellWith:(NSString *)title isSingleLine:(BOOL)isSingleLine cellShowTypeImage:(CellShowTypeImgae)type num:(NSInteger)num
+-(void)setCellWith:(NSString *)title isSingleLine:(BOOL)isSingleLine num:(NSInteger)num
 {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.contentView.backgroundColor = isSingleLine? UIColorFromINTValue(40, 40, 42): UIColorFromINTValue(35, 35, 37);
     self.leftLab.textColor = isSingleLine ?kWhiteColor: UIColorFromINTValue(182, 182, 182);
     self.leftLab.text = title;
-    
-    _rightImageVIew.hidden = NO;
-    _numBtn.hidden = YES;
-    switch (type) {
-        case CellShowTypeImgaeNone:{
-            _rightImageVIew.hidden = YES;
-            if (num > 0) {
-                _numBtn.hidden  = NO;
-                [_numBtn setTitle:[NSString stringWithFormat:@"%ld",num] forState:UIControlStateNormal];
-            }
-        }
-            break;
-        case CellShowTypeImgaeHot:{
-            _rightImageVIew.image = KIMAGE(@"home_left_hot_icon");
-        }
-            break;
-        case CellShowTypeImgaeNew:{
-            _rightImageVIew.image = KIMAGE(@"home_left_new_icon");
-        }
-            break;
-        default:
-            break;
+    _rightImageVIew.hidden = YES;
+    _numBtn.hidden  = YES;
+    if (num > 0) {
+        _numBtn.hidden  = NO;
+        [_numBtn setTitle:[NSString stringWithFormat:@"%ld",num] forState:UIControlStateNormal];
     }
 }
 -(void)setCellWithModel:(GamesCompanyModel *)model :(BOOL)isSingleLine{
@@ -68,12 +51,6 @@
             _rightImageVIew.image = nil;
         }
     }
-    
- 
-//    if (num > 0) {
-//            _numBtn.hidden  = NO;
-//            [_numBtn setTitle:[NSString stringWithFormat:@"%ld",num] forState:UIControlStateNormal];
-//    }
 }
 
 

@@ -16,7 +16,7 @@
 @property (nonatomic,strong) ContactDetailModel * customer_hotline;
 @property (nonatomic,strong) ContactDetailModel * customer_online;
 @property (nonatomic,strong) ContactDetailModel * customer_qq;
-@property (nonatomic,strong) ContactDetailModel * hotline;
+@property (nonatomic,strong) ContactDetailModel * hotline;//服务热线
 @property (nonatomic,strong) ContactDetailModel * off_wechat;
 
 @end

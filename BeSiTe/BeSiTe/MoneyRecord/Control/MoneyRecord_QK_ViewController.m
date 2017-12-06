@@ -23,12 +23,12 @@
     [super viewDidLoad];
     [self configSubViews];
     kWeakSelf
-    self.tableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         weak_self.page = 1;
         [weak_self requestDataForQuKuan];
     }];
     
-    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         weak_self.page += 1;
         [weak_self requestDataForQuKuan];
     }];
@@ -52,10 +52,13 @@
 
 #pragma mark -- 请求取款数据
 -(void)requestDataForQuKuan{
-    [RequestManager getWithPath:@"getUserWithdrawInfos" params:[self para] success:^(id JSON) {
+    [RequestManager getWithPath:@"getUserWithdrawInfos" params:[self para] success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
         [self.tableView.mj_header endRefreshing];
-        
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         self.dataSource = [MoneyRecordModel jsonToArray:JSON[@"data"]];
         [self.tableView reloadData];
         if ([JSON[@"hasNext"] integerValue] == 0) {
@@ -90,6 +93,11 @@
 {
     return 0.01;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [ShowRecordDetailView showWithModel:self.dataSource[indexPath.row] andRecordType:RecordCellType_QuKuan];
+}
+
 -(void)configSubViews{
     _headerView = [[RecordTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     _headerView.cellType = RecordCellType_QuKuan;

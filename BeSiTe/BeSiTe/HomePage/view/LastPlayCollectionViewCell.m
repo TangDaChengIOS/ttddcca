@@ -51,7 +51,7 @@
 -(void)setCellWithCompanyModel:(GamesCompanyModel *)model{
     _isMenuItem = YES;
     _model = model;
-    [_mainImage setImageWithURL:[NSURL URLWithString:model.classIcon] placeholder:KIMAGE(@"home_tab_PNGType_img")];
+    [_mainImage setImageWithURL:[NSURL URLWithString:model.classIcon] placeholder:nil];
     
     if (model.isHot) {
         _typeImage.image = KIMAGE(@"home_activity_hot_icon");

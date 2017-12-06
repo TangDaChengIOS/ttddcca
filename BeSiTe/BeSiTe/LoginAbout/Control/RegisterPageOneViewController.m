@@ -103,10 +103,6 @@
 #pragma mark -- 按钮事件
 - (IBAction)registerBtnDidClicked:(id)sender
 {
-        [self.navigationController pushViewController:[[RegisterPageTwoViewController alloc]initWithNibName:@"RegisterPageTwoViewController" bundle:nil] animated:YES];
-    return;
-    
-    
     if (![ZZTextInput inputNumberOrLetters:self.nameTF.text]) {
         TTAlert(@"请输入以数字、字母、下划线组成的6-15位的账号");
         return;
@@ -128,17 +124,24 @@
         self.NotTurePwdLab.hidden = NO;
         return;
     }
+    if (!self.agreeBtn.selected) {
+        TTAlert(@"请阅读并同意《贝斯特相关条款和隐私权政策》");
+        return;
+    }
     NSString * passWord = [RSAEncryptor encryptStringUseLocalFile:self.pwdTF.text];
     NSDictionary * dict = @{@"loginName":self.nameTF.text,
                             @"mobile":self.phoneTF.text,
                             @"password":passWord,
                             @"smsCode":self.codeTF.text};
     kWeakSelf
-    [RequestManager postWithPath:@"register" params:dict success:^(id JSON) {
-
+    [RequestManager postWithPath:@"register" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         UserModel * user = [UserModel new];
-        [user setValuesForKeysWithDictionary:JSON];
-        NSLog(@"%@",user);
+        [user mj_setKeyValues:JSON];
+        [BSTSingle defaultSingle].user = user;
         [weak_self.navigationController pushViewController:[[RegisterPageTwoViewController alloc]initWithNibName:@"RegisterPageTwoViewController" bundle:nil] animated:YES];
     } failure:^(NSError *error) {
         
@@ -154,8 +157,13 @@
     kWeakSelf
     NSDictionary * dict = @{@"mobile":self.phoneTF.text,
                             @"type":@"1"};
-    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON) {
+    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON ,BOOL isSuccess) {
+        
         NSLog(@"%@",JSON);
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         [weak_self.getCodeBtn countDownFromTime:60 completion:^(UIButton *countDownButton) {
             
         }];
@@ -169,11 +177,18 @@
 }
 
 - (IBAction)readAgree:(id)sender {
-    
+    WebDetailViewController * webVC = [WebDetailViewController quickCreateWithUrl:[BSTSingle defaultSingle].registerAgreementUrl];
+    [self pushVC:webVC];
 }
 
 - (IBAction)leftBarButtonItemClick:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
++(void)presentRegisterController{
+    RegisterPageOneViewController * registerVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];
+    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:registerVC];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,6 +9,7 @@
 #import "ATBaseViewController.h"
 #import "GamesCompanyModel.h"
 
+/**游戏平台选择*/
 @interface GameCompanySelectViewController : ATBaseViewController
 
 @property (nonatomic,copy) void (^finshSelectCompanyBlock)(GamesCompanyModel * model);

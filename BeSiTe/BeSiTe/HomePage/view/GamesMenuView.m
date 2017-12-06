@@ -9,6 +9,7 @@
 #import "GamesMenuView.h"
 #import "XHStarRateView.h"
 #import "AppDelegate+Setting.h"
+#import "LoginViewController.h"
 
 @interface GamesMenuView ()
 
@@ -35,6 +36,7 @@
     }
     return self;
 }
+
 -(void)layoutSubviews
 {
     [super layoutSubviews];
@@ -50,11 +52,10 @@
     
     self.backImageView.userInteractionEnabled = YES;
     CGRect frame = self.StarViewContainer.frame;
-    self.starView = [[XHStarRateView alloc]initWithFrame:frame numberOfStars:5 rateStyle:WholeStar isAnination:YES delegate:nil];
+    self.starView = [[XHStarRateView alloc]initWithFrame:frame numberOfStars:5 rateStyle:IncompleteStar isAnination:YES delegate:nil];
     self.starView.userInteractionEnabled = NO;
+    [self.starView setCurrentScore:self.model.star];
     [self.msgBackView addSubview:self.starView];
-    
-    self.starView.currentScore = 3;
 }
 
 -(void)setModel:(GamesModel *)model
@@ -68,15 +69,28 @@
         [self.tryPlayBtn setTitle:@"收藏" forState:UIControlStateNormal];
 
     }
+    if (model.isFav) {
+        [self.collectBtn setImage:KIMAGE_Ori(@"home_collection_select_icon") forState:UIControlStateNormal];
+        if (!model.isTry) {
+            [self.tryPlayBtn setTitle:@"已收藏" forState:UIControlStateNormal];
+
+        }
+    }
     self.gameTypeImageView.image =  [model getTypeImage];
 }
 
 #pragma mark -- 试玩 or 收藏
 - (IBAction)tryPlayBtnClick:(id)sender
 {
-    if (self.model.isTry) {
-        [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:self.model.tryUrl] animated:YES];
-        [self removeFromSuperview];
+    if (self.model.isTry)
+    {
+        if ([self.model.companyCode isEqualToString:@"PT"]) {
+            [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:self.model.tryUrl] animated:YES];
+            [self removeFromSuperview];
+        }else{
+            [self requestGameUrlIsTry:YES];
+        }
+
     }else{
         [self collectBtnClick:nil];
     }
@@ -84,23 +98,99 @@
 #pragma mark -- 收藏
 - (IBAction)collectBtnClick:(id)sender
 {
+    if (![BSTSingle defaultSingle].user) {
+        [self removeFromSuperview];
+        [LoginViewController presentLoginViewController];
+        return;
+    }
+    if (self.model.isFav) {
+        TTAlert(@"您已收藏该游戏！");
+        return;
+    }
     NSDictionary * dict = @{@"gameCode":self.model.gameCode,
                             @"action":@"1",
                             @"gamePlatformCode":self.model.companyCode};
-    [RequestManager postWithPath:@"favGame" params:dict success:^(id JSON) {
+    kWeakSelf
+    [RequestManager postWithPath:@"favGame" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         TTAlert(@"收藏成功！");
+        weak_self.model.isFav = YES;
+        [weak_self.collectBtn setImage:KIMAGE_Ori(@"home_collection_select_icon") forState:UIControlStateNormal];
+        if (!weak_self.model.isTry) {
+            [weak_self.tryPlayBtn setTitle:@"已收藏" forState:UIControlStateNormal];
+        }
+        
     } failure:^(NSError *error) {
         
     }];
 }
 #pragma mark -- 进入游戏
 - (IBAction)enterGameClick:(id)sender {
-    [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:self.model.gameUrl] animated:YES];
-    [self removeFromSuperview];
+    if (![BSTSingle defaultSingle].user) {
+        [self removeFromSuperview];
+        [LoginViewController presentLoginViewController];
+        return;
+    }
+    if ([self.model.companyCode isEqualToString:@"PT"]) {
+        NSString * url = [self addParaToUrl:self.model.gameUrl];
+        [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:url] animated:YES];
+        [self removeFromSuperview];
+    }else{
+        [self requestGameUrlIsTry:NO];
+    }
 }
 
+-(NSString *)addParaToUrl:(NSString *)sourceUrl
+{
+    if ([self string:sourceUrl isHaveCharacter:'?']) {
+        return [sourceUrl stringByAppendingString:[NSString stringWithFormat:@"&loginName=%@",[BSTSingle defaultSingle].user.accountName]];
+    }else{
+        return [sourceUrl stringByAppendingString:[NSString stringWithFormat:@"?loginName=%@",[BSTSingle defaultSingle].user.accountName]];
+
+    }
+}
+
+-(BOOL)string:(NSString *)string isHaveCharacter:(char)ch
+{
+    for (int i = 0; i < string.length; i++) {
+        char child = [string characterAtIndex:i];
+        if (ch == child) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
+-(void)requestGameUrlIsTry:(BOOL)isTry
+{
+//    gamePlatformCode	string	是	游戏平台CODE
+//    gameCode	string	是	游戏CODE
+//    type	string	是	1:正式2:试玩
+
+    NSString * type = isTry ? @"2":@"1";
+    NSDictionary * dict = @{@"gamePlatformCode":self.model.companyCode,
+                            @"gameCode":self.model.gameCode,
+                            @"type":type};
+    kWeakSelf
+    [RequestManager postWithPath:@"gameLogin" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:JSON[@"gameUrl"]] animated:YES];
+        [weak_self removeFromSuperview];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
 +(void)showWithModel:(GamesModel *)model{
-    UIWindow * window = [[UIApplication sharedApplication].windows lastObject];
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
     GamesMenuView * view = [[[NSBundle mainBundle]loadNibNamed:@"GamesMenuView" owner:self options:nil] firstObject];
     view.frame = window.bounds;
     view.model = model;

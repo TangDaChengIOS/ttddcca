@@ -8,6 +8,7 @@
 
 #import "ATBaseViewController.h"
 
+/**在线存款*/
 @interface OnlineSavingViewController : ATBaseViewController
 
 @end

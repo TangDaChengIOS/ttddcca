@@ -92,6 +92,16 @@
     return [emailTest evaluateWithObject:emailAddr];
 }
 
++(NSString *)getBadgeValue:(NSInteger)value{
+    if (value <= 0) {
+        return nil;
+    }
+    else{
+        return [NSString stringWithFormat:@"%ld",value];
+    }
+}
+
+
 void TTAlert(NSString* message) {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                     message:message

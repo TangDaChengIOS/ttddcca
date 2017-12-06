@@ -7,7 +7,6 @@
 //
 
 #import "ATBaseModel.h"
-#import <MJExtension/NSObject+MJKeyValue.h>
 
 @implementation ATBaseModel
 

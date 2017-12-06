@@ -10,11 +10,13 @@
 #import "OnlyShowTimeTableViewCell.h"
 #import "ActivityTableViewCell.h"
 #import "ActivityModel.h"
+#import "GamesMenuView.h"
 
 @interface ActivityViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView * tableView;
 @property (nonatomic,strong) NSMutableArray * dataSource;
 @property (nonatomic,assign) NSInteger selectedRow;
+@property (nonatomic,assign) NSInteger page;
 @end
 
 @implementation ActivityViewController
@@ -25,8 +27,50 @@
 
     _selectedRow = -1;
     [self configSubViews];
+    kWeakSelf
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weak_self.page = 1;
+        [weak_self requestData];
+    }];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        weak_self.page += 1;
+        [weak_self requestData];
+    }];
+    [self.tableView.mj_header beginRefreshing];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
 }
+-(void)requestData{
+    
+    NSDictionary * dict = @{@"pageNo":@(_page),
+                            @"pageSize":@"10"};
+    kWeakSelf
+    [RequestManager getManagerDataWithPath:@"favActivity" params:dict success:^(id JSON,BOOL isSuccess) {
+        
+        [weak_self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_footer endRefreshing];
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        NSDictionary * dict = JSON[@"page"];
+        NSArray * data = dict[@"data"];
+        weak_self.dataSource = [ActivityModel jsonToArray:data];
+        [weak_self.tableView reloadData];
+        if ([dict[@"hasNext"] integerValue] == 0) {
+            [weak_self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        weak_self.page = [dict[@"currentPage"] integerValue];
+        NSLog(@"%@",JSON);
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+        
+    }];
+}
+
 
 
 #pragma mark -- tableView delegate/dataSource
@@ -60,6 +104,19 @@
     if (indexPath.row % 2  == 0) {
     
     }else{
+        ActivityModel * model = self.dataSource[indexPath.row /2];
+        if (model.isRead == 0 && [BSTSingle defaultSingle].user) {
+            [self readFavActiyityWithID:model.id];
+            model.isRead = 1;
+            [BSTSingle defaultSingle].activityUnreadNum -=1;
+            [self.tabBarItem setBadgeValue:[ZZTextInput getBadgeValue:[BSTSingle defaultSingle].activityUnreadNum]];
+        }
+        if (model.type == 2) {
+            if (model.game) {
+                [GamesMenuView showWithModel:model.game];
+            }
+            return;
+        }
         if (_selectedRow == indexPath.row) {
             _selectedRow =-1;
         }
@@ -68,6 +125,18 @@
         }
         [tableView reloadData];
     }
+}
+
+-(void)readFavActiyityWithID:(NSString *)activityID
+{
+    [RequestManager postManagerDataWithPath:@"favRead" params:@{@"actId":activityID} success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -105,26 +174,6 @@
         _dataSource = [NSMutableArray array];
     }
     return _dataSource;
-}
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self requestData];
-
-}
--(void)requestData{
-
-    NSDictionary * dict = @{@"pageNo":@"1",
-                            @"pageSize":@"10"};
-    [RequestManager getManagerDataWithPath:@"favActivity" params:dict success:^(id JSON) {
-        NSArray * data = JSON[@"page"][@"data"];
-        self.dataSource = [ActivityModel jsonToArray:data];
-        [self.tableView reloadData];
-        NSLog(@"%@",JSON);
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

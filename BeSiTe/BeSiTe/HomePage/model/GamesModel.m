@@ -24,12 +24,11 @@
         }
     }
 }
--(NSString *)tryUrl
-{
-    return @"http://lobby.sgplayfun.com/touch/spadenew/?game=S-HY01&language=en_US&menumode=on&token=876f6d102760ad11c7ba6e4ce990506f3ea9635bcecfa33be0e43bd6419198bfee6924f5ffafd09d26c18acc06fb9b4abb49542ca0aa9a225b79e4dc4b76e3b7";
-}
--(NSString *)gameUrl{
-    return @"http://lobby.sgplayfun.com/touch/spadenew/?game=S-HY01&language=en_US&menumode=on&token=876f6d102760ad11c7ba6e4ce990506f3ea9635bcecfa33be0e43bd6419198bfee6924f5ffafd09d26c18acc06fb9b4abb49542ca0aa9a225b79e4dc4b76e3b7";
+-(NSString *)companyCode{
+    if (!_companyCode) {
+        return @"";
+    }
+    return _companyCode;
 }
 
 @end

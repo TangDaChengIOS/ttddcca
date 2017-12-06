@@ -36,28 +36,34 @@
         [weakSelf xw_transition];
     } edgeSpacing: 80];
     kWeakSelf
-    self.collectionView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weak_self requestData];
-    }];
-    [self.headerView addObserverBlockForKeyPath:@"isRequestData" block:^(id  _Nonnull obj, id  _Nullable oldVal, id  _Nullable newVal) {
-        NSLog(@"%@",newVal);
     }];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationNeedVerifyPhoneNum) name:@"ApplicationNeedVerifyPhoneNum" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeADSRefreshTime) name:@"ADSRollTimeChangedNotification" object:nil];
+    
+    [self.collectionView.mj_header beginRefreshing];
+
 }
 
 -(void)requestData
 {
+    [self.headerView refreshData];
+
     kWeakSelf
-    [RequestManager getManagerDataWithPath:@"gameCompanys" params:nil success:^(id JSON) {
+    [RequestManager getManagerDataWithPath:@"gameCompanys" params:nil success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        //GamesCompanyModel jsonToArray 有重写父类方法，保存数据到单例
         weak_self.dataSource = [GamesCompanyModel jsonToArray:JSON];
         [weak_self.collectionView reloadData];
         [weak_self.collectionView.mj_header endRefreshing];
-        NSLog(@"hahhahah");
     } failure:^(NSError *error) {
         
     }];
-    [self.headerView refreshData];
 }
 
 #pragma mark -- collectionView delegates
@@ -214,7 +220,6 @@
     [super viewWillAppear:animated];
 
     [self.navigationController.navigationBar addSubview:self.navRightCornImg];
-    [self.collectionView.mj_header beginRefreshing];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -229,8 +234,16 @@
 }
 
 
+-(void)changeADSRefreshTime{
+    self.headerView.bannerView.autoScrollTimeInterval = [BSTSingle defaultSingle].adsRollTime ;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ApplicationNeedVerifyPhoneNum" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ADSRollTimeChangedNotification" object:nil];
+}
 @end

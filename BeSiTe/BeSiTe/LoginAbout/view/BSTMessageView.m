@@ -104,16 +104,16 @@
     }
 }
 
-+(void)showView:(ShowType)showType{
-    UIWindow * window = [[UIApplication sharedApplication].windows lastObject];
-    BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
-    view.frame = window.bounds;
-    view.showType = showType;
-    [window addSubview:view];
-}
+//+(void)showView:(ShowType)showType{
+//    UIWindow * window = [[UIApplication sharedApplication].windows lastObject];
+//    BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
+//    view.frame = window.bounds;
+//    view.showType = showType;
+//    [window addSubview:view];
+//}
 
 -(void)showInWindow{
-    UIWindow * window = [[UIApplication sharedApplication].windows lastObject];
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
     self.frame = window.bounds;
     [window addSubview:self];
 }

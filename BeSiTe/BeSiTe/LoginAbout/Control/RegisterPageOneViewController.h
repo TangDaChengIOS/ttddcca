@@ -9,5 +9,6 @@
 #import "ATBaseViewController.h"
 
 @interface RegisterPageOneViewController : ATBaseViewController
++(void)presentRegisterController;
 
 @end

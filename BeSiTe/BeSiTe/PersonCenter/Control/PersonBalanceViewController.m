@@ -42,7 +42,11 @@
     
     for (NSString * code in arr) {
         NSDictionary * dict = @{@"gamePlatformCode":code};
-        [RequestManager getWithPath:@"getGameBalance" params:dict success:^(id JSON) {
+        [RequestManager getWithPath:@"getGameBalance" params:dict success:^(id JSON ,BOOL isSuccess) {
+            if (!isSuccess) {
+                TTAlert(JSON);
+                return ;
+            }
             NSDictionary * resultDict = JSON[0];
             BalanceModel * model = [[BalanceModel alloc]init];
             [model setValuesForKeysWithDictionary:resultDict];
@@ -55,7 +59,11 @@
     }
 
 #warning --需要换回来
-//    [RequestManager getWithPath:@"getGameBalance" params:nil success:^(id JSON) {
+//    [RequestManager getWithPath:@"getGameBalance" params:nil success:^(id JSON ,BOOL isSuccess) {
+//        if (!isSuccess) {
+//            TTAlert(JSON);
+//            return ;
+//        }
 //        self.dataSource = [BalanceModel jsonToArray:JSON];
 //        [self.tableView reloadData];
 //        NSLog(@"%@",JSON);
@@ -115,7 +123,11 @@
 
 #pragma mark -- ButtonEvents
 - (IBAction)aplyBtnClick:(id)sender {
-    [RequestManager postWithPath:@"applyFund" params:nil success:^(id JSON) {
+    [RequestManager postWithPath:@"applyFund" params:nil success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
         view.showType = ShowTypeWaitThreeSec;
         view.isSuccessMsg = YES;

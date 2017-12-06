@@ -10,7 +10,7 @@
 
 @interface UserModel : ATBaseModel
 
-@property (nonatomic,assign) NSInteger  userId;//	string	用户ID
+@property (nonatomic,copy) NSString *  userId;//	string	用户ID
 @property (nonatomic,copy) NSString * userName;//	string	用户姓名
 @property (nonatomic,copy) NSString * accountName;//	string	账户名
 

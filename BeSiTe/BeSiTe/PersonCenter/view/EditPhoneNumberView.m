@@ -48,6 +48,7 @@
     //手机号码输入
     _phoneTF = [self createTextFieldWithFrame:CGRectMake(16, _titleLab.maxY + 25, whiteBack_W - 32, 38)];
     _phoneTF.placeholder = @"请输入手机号码";
+    _phoneTF.keyboardType = UIKeyboardTypePhonePad;
     [whiteBack addSubview:_phoneTF];
   
     //获取验证码按钮
@@ -56,6 +57,7 @@
     _getCodeBtn.layer.borderWidth = 1.0f;
     [_getCodeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     [_getCodeBtn setTitleColor:UIColorFromINTValue(244, 144, 30) forState:UIControlStateNormal];
+    _getCodeBtn.titleLabel.font = kFont(14);
     _getCodeBtn.layer.cornerRadius = 4.0f;
     _getCodeBtn.titleLabel.adjustsFontSizeToFitWidth = YES;
     [_getCodeBtn addTarget:self action:@selector(getCodeBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -112,17 +114,47 @@
         TTAlert(@"请输入验证码");
         return;
     }
-    NSDictionary * dict  = @{@"type":@"1",
-                             @"smsCode":self.codeTF.text,
-                             @"validateParam":self.phoneTF.text};
+    if (self.editType == EditPhoneNumberViewTypeEdit) {
+        [self changePhone];
+    }else{
+        [self verifyPhone];
+    }
+}
+
+-(void)changePhone{
+    NSDictionary * dict  = @{@"smsCode":self.codeTF.text,
+                             @"mobile":self.phoneTF.text};
     kWeakSelf
-    [RequestManager postWithPath:@"verify" params:dict success:^(id JSON) {
-        NSLog(@"验证成");
+    [RequestManager postWithPath:@"modifyMobile" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        TTAlert(@"修改手机号成功");
         [weak_self removeFromSuperview];
     } failure:^(NSError *error) {
         
     }];
 }
+
+
+-(void)verifyPhone{
+    NSDictionary * dict  = @{@"type":@"1",
+                             @"smsCode":self.codeTF.text,
+                             @"validateParam":self.phoneTF.text};
+    kWeakSelf
+    [RequestManager postWithPath:@"verify" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        TTAlert(@"验证手机号成功");
+        [weak_self removeFromSuperview];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 
 -(void)cancelBtnClick{
@@ -138,9 +170,13 @@
     kWeakSelf
     NSDictionary * dict = @{@"mobile":self.phoneTF.text,
                             @"type":@"1"};
-    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON) {
+    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         NSLog(@"%@",JSON);
-        [weak_self.getCodeBtn countDownFromTime:5 completion:^(UIButton *countDownButton) {
+        [weak_self.getCodeBtn countDownFromTime:60 completion:^(UIButton *countDownButton) {
             
         }];
     } failure:^(NSError *error) {

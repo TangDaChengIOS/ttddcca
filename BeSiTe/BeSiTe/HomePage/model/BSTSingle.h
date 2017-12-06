@@ -22,6 +22,9 @@
 /**存放查询记录的起止日期*/
 @property (nonatomic,strong)NSMutableDictionary * moneyRecordSearchPara;
 
+/**存放银行code对应的图标*/
+@property (nonatomic,strong)NSMutableDictionary * bankCodeIcon;
+
 /**存放滚屏公告*/
 @property (nonatomic,strong) NSMutableAttributedString * notices;
 
@@ -31,6 +34,13 @@
 @property (nonatomic,copy) NSString * registerAgreementUrl;//注册协议
 @property (nonatomic,copy) NSString * aboutUSUrl;//关于我们
 @property (nonatomic,copy) NSString * vipExplainUrl;//VIP介绍
+
+@property (nonatomic,assign) NSInteger adsRollTime;//首页轮播图滚动时间间隔
+@property (nonatomic,assign) NSInteger activityUnreadNum;//活动未读数量
+
+@property (nonatomic,assign) NSInteger noticeNums;//系统公告未读数
+@property (nonatomic,assign) NSInteger msgNums;//个人消息未读数
+@property (nonatomic,assign) NSInteger totalNums;//系统公告未读数+个人消息未读数
 
 +(instancetype)defaultSingle;
 

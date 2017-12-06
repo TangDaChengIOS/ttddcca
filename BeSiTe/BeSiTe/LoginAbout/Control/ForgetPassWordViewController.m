@@ -53,12 +53,12 @@
         [self.mailLookbtn setImage:[KIMAGE(@"common_tab_select_icon") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         [self.mailLookbtn setImageEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
         [self.phoneLookBtn setImage:nil forState:UIControlStateNormal];
-        
+        self.topLab.text = @"输入正确的账号及邮件地址，可前往邮箱设置新密码";
     }else{
         [self.phoneLookBtn setImage:[KIMAGE(@"common_tab_select_icon")imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         [self.phoneLookBtn setImageEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
         [self.mailLookbtn setImage:nil forState:UIControlStateNormal];
-        
+        self.topLab.text = @"输入账号及手机号，获取验证码短信后可获得新密码";
     }
     _mailLookSuperView.hidden = !isLeft;
     _phoneLookSuperView.hidden = isLeft;
@@ -87,7 +87,11 @@
     
     NSDictionary * dict = @{@"email":self.emailTF.text,
                             @"loginName":self.accoutTF_mail.text};
-    [RequestManager postWithPath:@"emailResetPwd" params:dict success:^(id JSON) {
+    [RequestManager postWithPath:@"emailResetPwd" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
         view.showType = ShowTypeWaitThreeSec;
         view.isSuccessMsg = YES;
@@ -112,9 +116,13 @@
     }
     kWeakSelf
     NSDictionary * dict = @{@"mobile":self.phoneTF.text,
-                            @"type":@"1",
+                            @"type":@"2",
                             @"loginName":self.accountTF_phone.text};
-    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON) {
+    [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         NSLog(@"%@",JSON);
         [weak_self.sendCodeBtn countDownFromTime:60 completion:^(UIButton *countDownButton) {
             
@@ -144,7 +152,11 @@
     NSDictionary * dict = @{@"mobile":self.phoneTF.text,
                             @"smsCode":self.coedTF.text,
                             @"loginName":self.accountTF_phone.text};
-    [RequestManager postWithPath:@"mobileResetPwd" params:dict success:^(id JSON) {
+    [RequestManager postWithPath:@"mobileResetPwd" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
         view.showType = ShowTypeWaitThreeSec;
         view.isSuccessMsg = YES;

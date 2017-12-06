@@ -76,7 +76,12 @@
     if (indexPath.section == 0) {
         [cell setCellWithModel:[BSTSingle defaultSingle].companysArray[indexPath.row] :(indexPath.row+1) %2];
     }else{
-        [cell setCellWith:_secondSectionArr[indexPath.row] isSingleLine:(indexPath.row+1) %2 cellShowTypeImage:CellShowTypeImgaeNone num:2];
+        if (indexPath.row == 0) {
+            [cell setCellWith:_secondSectionArr[indexPath.row] isSingleLine:(indexPath.row+1) %2 num:[BSTSingle defaultSingle].activityUnreadNum];
+        }else
+        {
+            [cell setCellWith:_secondSectionArr[indexPath.row] isSingleLine:(indexPath.row+1) %2 num:0];
+        }
     }
     return cell;
 }
@@ -179,8 +184,9 @@
 
 - (IBAction)registerBtnDidClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{
-        RegisterPageOneViewController * registerVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];
-        [[AppDelegate getBoomNavigation]pushViewController:registerVC animated:YES];
+        [RegisterPageOneViewController presentRegisterController];
+//        RegisterPageOneViewController * registerVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];
+//        [[AppDelegate getBoomNavigation]pushViewController:registerVC animated:YES];
     }];
 
 }
@@ -192,6 +198,7 @@
 }
 - (IBAction)exitBtnClick:(id)sender {
     [BSTSingle defaultSingle].user = nil;
+    [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginFailueNotification object:nil];
     [self dismissViewControllerAnimated:YES completion:^{
         [LoginViewController presentLoginViewController];
     }];

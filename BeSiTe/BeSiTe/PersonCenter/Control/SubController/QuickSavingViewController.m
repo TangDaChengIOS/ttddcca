@@ -39,7 +39,11 @@
 -(void)requestReceivBankInfo
 {
     kWeakSelf
-    [RequestManager getWithPath:@"getReceivBankInfo" params:nil success:^(id JSON) {
+    [RequestManager getWithPath:@"getReceivBankInfo" params:nil success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         NSString * type = (weak_self.savingType == QuickSavingType_Bank ? @"1" :@"2");
         for (NSDictionary * dict in JSON) {
             if ([dict[@"type"] isEqualToString:type]) {
@@ -80,13 +84,16 @@
     [mDict setValue:self.giveMoneyTF.text forKey:@"amount"];
     
     if (self.giveNumberTF.text.length > 0) {
-        [mDict setValue:self.giveNumberTF forKey:@"orderNo"];
+        [mDict setValue:self.giveNumberTF.text forKey:@"orderNo"];
     }
     
     [mDict setValue:@"1" forKey:@"isApplyDiscnt"];
 
-    [RequestManager postWithPath:@"quickPay" params:mDict success:^(id JSON) {
-        
+    [RequestManager postWithPath:@"quickPay" params:mDict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
         view.showType = ShowTypeWaitThreeSec_TLD;
         view.isSuccessMsg = YES;

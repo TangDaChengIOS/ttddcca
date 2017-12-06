@@ -17,7 +17,10 @@
 
 +(NSAttributedString *)getTotalMoneyAttributeString
 {
-    CGFloat money = [BSTSingle defaultSingle].user.userAmount;
+    CGFloat money = 0;
+    if ([BSTSingle defaultSingle].user) {
+         money = [BSTSingle defaultSingle].user.userAmount;
+    }
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setPositiveFormat:@",###.00"];
     NSLog(@"%@",[NSNumber numberWithFloat:money]);

@@ -103,7 +103,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="点击填写姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PeY-SW-EMN">
-                                    <rect key="frame" x="81" y="95" width="78" height="14"/>
+                                    <rect key="frame" x="81" y="95" width="284" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="14" id="AF4-cC-MLO"/>
                                     </constraints>
@@ -153,6 +153,9 @@
                                     <state key="normal" title="验证">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="phoneEditBtnClick:" destination="-1" eventType="touchUpInside" id="jkc-j8-Zgq"/>
+                                    </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ofl-71-UNj">
                                     <rect key="frame" x="0.0" y="169" width="375" height="1"/>
@@ -196,6 +199,9 @@
                                     <state key="normal" title="修改">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="emailEditBtnClick:" destination="-1" eventType="touchUpInside" id="oYx-f8-lmH"/>
+                                    </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="coL-qQ-q6x">
                                     <rect key="frame" x="0.0" y="214" width="375" height="1"/>
@@ -272,12 +278,24 @@
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
                                 </collectionView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFn-JH-M2d">
+                                    <rect key="frame" x="285" y="220" width="90" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="QfM-0N-kr8"/>
+                                        <constraint firstAttribute="width" constant="90" id="fHs-Ay-J5S"/>
+                                    </constraints>
+                                    <state key="normal" image="profile_info_integral_btn_img"/>
+                                    <connections>
+                                        <action selector="recordExchangeBtnClick:" destination="-1" eventType="touchUpInside" id="TE4-Dm-QuA"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="Mci-LL-Lev" secondAttribute="trailing" id="1Ze-u1-Cvr"/>
                                 <constraint firstAttribute="trailing" secondItem="lKQ-ez-7uq" secondAttribute="trailing" constant="7" id="3tv-4L-ecA"/>
                                 <constraint firstAttribute="height" constant="667" id="550-gD-Hxv"/>
+                                <constraint firstItem="KFn-JH-M2d" firstAttribute="top" secondItem="coL-qQ-q6x" secondAttribute="bottom" constant="5" id="55s-u3-PxK"/>
                                 <constraint firstItem="Ha8-bn-4Pq" firstAttribute="top" secondItem="Mci-LL-Lev" secondAttribute="bottom" constant="15" id="7FR-Q7-t5n"/>
                                 <constraint firstItem="C6v-gj-A8k" firstAttribute="leading" secondItem="Bjb-XM-0k3" secondAttribute="trailing" constant="10" id="7gu-ex-mX4"/>
                                 <constraint firstItem="coL-qQ-q6x" firstAttribute="top" secondItem="Bjb-XM-0k3" secondAttribute="bottom" constant="15" id="8fT-mb-mqL"/>
@@ -315,6 +333,7 @@
                                 <constraint firstItem="FHI-0h-bL5" firstAttribute="leading" secondItem="V2F-EZ-tbT" secondAttribute="leading" id="ZPc-qB-lk1"/>
                                 <constraint firstItem="Bjb-XM-0k3" firstAttribute="leading" secondItem="sn4-WO-q53" secondAttribute="leading" id="ZkC-bI-ift"/>
                                 <constraint firstAttribute="trailing" secondItem="X0u-Qr-s2R" secondAttribute="trailing" id="a03-rj-qLg"/>
+                                <constraint firstAttribute="trailing" secondItem="PeY-SW-EMN" secondAttribute="trailing" constant="10" id="dqj-oJ-MyJ"/>
                                 <constraint firstItem="qBa-QT-oGs" firstAttribute="leading" secondItem="V2F-EZ-tbT" secondAttribute="leading" id="efB-QS-HwV"/>
                                 <constraint firstItem="olR-dz-dYS" firstAttribute="top" secondItem="coL-qQ-q6x" secondAttribute="bottom" id="f6s-eo-ZRO"/>
                                 <constraint firstItem="asM-6J-tn5" firstAttribute="centerY" secondItem="Dk5-aO-yUa" secondAttribute="centerY" id="fNy-bh-AP2"/>
@@ -335,6 +354,7 @@
                                 <constraint firstItem="1Ud-pL-5AL" firstAttribute="top" secondItem="FHI-0h-bL5" secondAttribute="bottom" constant="2" id="xME-Cp-Xuz"/>
                                 <constraint firstItem="X0u-Qr-s2R" firstAttribute="top" secondItem="oGg-nR-SPc" secondAttribute="bottom" id="xN9-FS-05U"/>
                                 <constraint firstItem="xGV-Tl-yIB" firstAttribute="top" secondItem="FHI-0h-bL5" secondAttribute="bottom" constant="27" id="ygF-bY-ujB"/>
+                                <constraint firstAttribute="trailing" secondItem="KFn-JH-M2d" secondAttribute="trailing" id="yzo-cc-YzS"/>
                                 <constraint firstAttribute="trailing" secondItem="0pA-39-qiS" secondAttribute="trailing" constant="7" id="z0N-uS-vUO"/>
                             </constraints>
                         </view>
@@ -363,6 +383,7 @@
         <image name="common_avatar_img" width="38" height="38"/>
         <image name="porfile_vip_btn_img" width="141" height="30"/>
         <image name="profile_collect_title_imgprofile_" width="12" height="10"/>
+        <image name="profile_info_integral_btn_img" width="83" height="33"/>
         <image name="profile_verification_img_false" width="33" height="13"/>
         <image name="profile_verification_img_true" width="33" height="13"/>
     </resources>

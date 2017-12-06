@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BankModel.h"
+#import "MyBankModel.h"
 
 #define kBankTableViewCellReuseID @"kBankTableViewCellReuseID"
 @interface BankTableViewCell : UITableViewCell
 
 -(void)setCellWithModel:(BankModel *)model;
+
+-(void)setMyBankCellWithModel:(MyBankModel *)model;
 
 @end

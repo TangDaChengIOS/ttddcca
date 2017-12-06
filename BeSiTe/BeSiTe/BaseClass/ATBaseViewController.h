@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BSTSingle.h"
 #import "RecordTableViewCell.h"
+#import "ShowRecordDetailView.h"
 
 
 @interface ATBaseViewController : UIViewController

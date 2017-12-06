@@ -42,9 +42,15 @@
 }
 
 
--(void)reloadData{
-    [_titleViewBtn setImage:KIMAGE_Ori([[BSTSingle defaultSingle].user getVipImageStr]) forState:UIControlStateNormal];
-    [_titleViewBtn setTitle:[BSTSingle defaultSingle].user.accountName forState:UIControlStateNormal];
+-(void)reloadData
+{
+    if ([BSTSingle defaultSingle].user) {
+        [_titleViewBtn setImage:KIMAGE_Ori([[BSTSingle defaultSingle].user getVipImageStr]) forState:UIControlStateNormal];
+        [_titleViewBtn setTitle:[BSTSingle defaultSingle].user.accountName forState:UIControlStateNormal];
+    }else{
+        [_titleViewBtn setImage:nil forState:UIControlStateNormal];
+        [_titleViewBtn setTitle:@"未登录" forState:UIControlStateNormal];
+    }
     self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
     [self.tableView reloadData];
 }
@@ -126,7 +132,11 @@
     NSDictionary * dict = @{@"gamePlatformCode":_selectCompanyCode,
                             @"amount":self.moneyTF.text,
                             @"type":(_isMoveToGame ? @"1":@"2")};
-    [RequestManager postWithPath:@"acctTransfer" params:dict success:^(id JSON) {
+    [RequestManager postWithPath:@"acctTransfer" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         TTAlert(@"转账成功!");
         [BSTSingle defaultSingle].user.userAmount = [JSON[@"balance"] floatValue];
         NSDictionary * resultDict = JSON[@"gameBalance"][0];

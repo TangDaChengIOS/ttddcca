@@ -16,5 +16,9 @@ typedef NS_ENUM(NSUInteger, BankSelectVCEnterType) {
 
 @interface BankSelectViewController : ATBaseViewController
 @property (nonatomic,assign) BOOL isHaveOtherData;
+@property (nonatomic,copy) NSArray * myBankDataSource;
+
 @property (nonatomic,copy) void (^selectBankBlock)(BankModel * model);
+@property (nonatomic,copy) void (^selectMyBankBlock)(MyBankModel * model);
+
 @end

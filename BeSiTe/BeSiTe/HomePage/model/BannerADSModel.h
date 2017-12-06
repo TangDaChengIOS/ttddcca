@@ -7,6 +7,7 @@
 //
 
 #import "ATBaseModel.h"
+#import "GamesModel.h"
 /**首页广告model*/
 @interface BannerADSModel : ATBaseModel
 @property (nonatomic,copy) NSString * title;//	string	标题
@@ -15,6 +16,7 @@
 @property (nonatomic,copy) NSString * gameCode;//	string	游戏CODE
 @property (nonatomic,copy) NSString * companyCode;//	string	平台CODE
 @property (nonatomic,copy) NSString * webUrl;//	string	H5页面地址
+@property (nonatomic,strong) GamesModel * game;//	游戏model
 
 
 @end

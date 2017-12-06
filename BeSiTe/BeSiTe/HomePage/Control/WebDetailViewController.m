@@ -24,7 +24,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"navgartion_back_btn") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
 
     
-    _webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
+    _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, MAXWIDTH, MAXHEIGHT - 64)];
     _webView.scalesPageToFit = YES;
 
     _webView.delegate = self;
@@ -101,7 +101,7 @@
 
     if (toInterfaceOrientation == UIInterfaceOrientationPortrait) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
-        _webView.frame = CGRectMake(0, 0, smaller, bigger);
+        _webView.frame = CGRectMake(0, 0, smaller, bigger - 64);
     }else{
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         _webView.frame = CGRectMake(0, 0, bigger, smaller);

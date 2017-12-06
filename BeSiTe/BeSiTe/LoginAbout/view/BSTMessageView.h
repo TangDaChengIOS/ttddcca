@@ -35,6 +35,5 @@ typedef NS_ENUM(NSInteger,EventType) {
 
 @property (nonatomic,copy) void (^eventBlock)(EventType eventType);
 
-+(void)showView:(ShowType)showType;
 -(void)showInWindow;
 @end

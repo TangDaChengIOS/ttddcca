@@ -7,11 +7,11 @@
 //
 
 #import "BankSelectViewController.h"
+#import "MyBankModel.h"
 
 @interface BankSelectViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView * tableView;
 @property (nonatomic,strong) NSMutableArray * dataSource;
-@property (nonatomic,strong) NSMutableArray * haveUseBankDataSource;
 
 @end
 
@@ -20,13 +20,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
+    if (self.myBankDataSource.count == 0) {
+        self.isHaveOtherData = NO;
+    }
     [self requestData];
 }
 
 
 -(void)requestData{
     kWeakSelf
-    [RequestManager getManagerDataWithPath:@"banks" params:nil success:^(id JSON) {
+    [RequestManager getManagerDataWithPath:@"banks" params:nil success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         weak_self.dataSource = [BankModel jsonToArray:JSON];
         [weak_self.tableView reloadData];
     } failure:^(NSError *error) {
@@ -38,9 +45,16 @@
 #pragma mark -- tableView delegate/dataSource
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BankModel * model = self.dataSource[indexPath.row];
-    if (self.selectBankBlock) {
-        self.selectBankBlock(model);
+    if (_isHaveOtherData && indexPath.section == 0) {
+        MyBankModel * model = self.myBankDataSource[indexPath.row];
+        if (self.selectMyBankBlock) {
+            self.selectMyBankBlock(model);
+        }
+    }else{
+        BankModel * model = self.dataSource[indexPath.row];
+        if (self.selectBankBlock) {
+            self.selectBankBlock(model);
+        }
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -52,7 +66,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (_isHaveOtherData && section == 0) {
-        return   self.haveUseBankDataSource.count ;
+        return   self.myBankDataSource.count ;
     }
 
     return self.dataSource.count;
@@ -60,7 +74,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BankTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kBankTableViewCellReuseID forIndexPath:indexPath];
-    [cell setCellWithModel:self.dataSource[indexPath.row]];
+    if (_isHaveOtherData && indexPath.section == 0) {
+        [cell setMyBankCellWithModel:self.myBankDataSource[indexPath.row]];
+    }else{
+        [cell setCellWithModel:self.dataSource[indexPath.row]];
+    }
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,13 +130,6 @@
     [_tableView registerNib:[UINib nibWithNibName:@"BankTableViewCell" bundle:nil] forCellReuseIdentifier:kBankTableViewCellReuseID];
     [self.view addSubview:_tableView];
     [_tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"bankViewSecitonHeaderID"];
-}
--(NSMutableArray *)haveUseBankDataSource
-{
-    if (!_haveUseBankDataSource) {
-        _haveUseBankDataSource = [NSMutableArray array];
-    }
-    return _haveUseBankDataSource;
 }
 
 -(NSMutableArray *)dataSource

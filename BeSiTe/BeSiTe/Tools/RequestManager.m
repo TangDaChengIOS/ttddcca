@@ -36,15 +36,14 @@
             if ([responseObject[@"retCode"] integerValue] == 0)
             {
                 if ([responseObject objectForKey:@"data"]) {
-                    success(responseObject[@"data"]);
+                    success(responseObject[@"data"],YES);
                 }else{
-                    success(responseObject[@"page"]);
+                    success(responseObject[@"page"],YES);
                 }
             }
-            else
-            {
+            else{
+                success(responseObject[@"retMsg"],NO);
                 MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
-                TTAlert(responseObject[@"retMsg"]);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
@@ -64,15 +63,14 @@
             if ([responseObject[@"retCode"] integerValue] == 0)
             {
                 if ([responseObject objectForKey:@"data"]) {
-                    success(responseObject[@"data"]);
+                    success(responseObject[@"data"],YES);
                 }else{
-                    success(responseObject[@"page"]);
+                    success(responseObject[@"page"],YES);
                 }
             }
-            else
-            {
+            else{
+                success(responseObject[@"retMsg"],NO);
                 MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
-                TTAlert(responseObject[@"retMsg"]);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             

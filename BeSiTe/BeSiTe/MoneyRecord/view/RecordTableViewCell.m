@@ -151,7 +151,7 @@
         {
             _firstLab.text = [NSString stringWithFormat:@"%@\n%@", model.createdTime,model.cardNo];
             _secLab.text = model.amount;
-            _thirdLab.text = model.status;
+            _thirdLab.text = model.statusDesc;
         }
             break;
             
@@ -160,7 +160,7 @@
             _firstLab.text = model.createdTime;
             _secLab.text = model.type;
             _thirdLab.text = model.amount;
-            _fourthLab.text = [model.status isEqualToString:@"0"] ? @"成功":@"失败";
+            _fourthLab.text = model.statusDesc;
         }
             break;
         case RecordCellType_ZhuanZhang:
@@ -168,14 +168,14 @@
             _firstLab.text = model.createdTime;
             _secLab.text = model.type;
             _thirdLab.text = model.amount;
-            _fourthLab.text = model.status;
+            _fourthLab.text = model.statusDesc;
         }
             break;
         case RecordCellType_YouHui:
         {
             _firstLab.text = model.createdTime;
             _secLab.text = model.amount;
-            _thirdLab.text = model.status;
+            _thirdLab.text = model.statusDesc;
         }
             break;
         case RecordCellType_TJLJ:
@@ -183,7 +183,7 @@
             _firstLab.text = model.createdTime;
             _secLab.text = model.num;
             _thirdLab.text = model.account;
-            _fourthLab.text = [model.status isEqualToString:@"0"] ? @"成功":@"失败";
+            _fourthLab.text = model.statusDesc;
         }
             break;
         case RecordCellType_JiFenTop:
@@ -191,14 +191,14 @@
             _firstLab.text = model.createdTime;
             _secLab.text = model.amount;
             _thirdLab.text = model.point;
-            _fourthLab.text = [model.status isEqualToString:@"0"] ? @"成功":@"失败";
+            _fourthLab.text = model.statusDesc;
         }
             break;
         case RecordCellType_JiFenBoom:
         {
             _firstLab.text = model.createdTime;
             _secLab.text = model.points;
-            _thirdLab.text = [model.status isEqualToString:@"0"] ? @"成功":@"失败";
+            _thirdLab.text = model.statusDesc;
         }
             break;
         default:

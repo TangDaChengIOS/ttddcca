@@ -10,6 +10,8 @@
 #import "ATTextField.h"
 #import "BankSelectViewController.h"
 #import "RSAEncryptor.h"
+#import "BankManagerViewController.h"
+#import "MyBankModel.h"
 
 @interface PersonGetingViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *mainAccountLab;
@@ -30,6 +32,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeightConstraint;
 
 @property (nonatomic,copy) NSString * bankCode;
+
+@property (nonatomic,strong) NSMutableArray * myBankDataSource;
+@property (nonatomic,strong) NSMutableArray * bankDataSource;
+
 @end
 
 @implementation PersonGetingViewController
@@ -43,19 +49,65 @@
     _submitBtn.layer.cornerRadius = _managerCardBtn.layer.cornerRadius = 4.0f;
     _pwdTF.secureTextEntry = YES;
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
+    [self requestBankData];
 }
+
+-(void)requestBankData
+{
+    kWeakSelf
+
+    [RequestManager getWithPath:@"getUserBankInfo" params:nil success:^(id JSON ,BOOL isSuccess) {
+        NSLog(@"%@",JSON);
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        weak_self.myBankDataSource = [MyBankModel jsonToArray:JSON];
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    [RequestManager getManagerDataWithPath:@"banks" params:nil success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        weak_self.bankDataSource = [BankModel jsonToArray:JSON];
+        [weak_self dealBankCodeAndIcons];
+    } failure:^(NSError *error) {
+            
+    }];
+}
+-(void)dealBankCodeAndIcons{
+    NSMutableDictionary * mDict = [NSMutableDictionary dictionary];
+    for (BankModel  * model in self.bankDataSource) {
+        [mDict setValue:model.icon forKey:model.bankCode];
+    }
+    [BSTSingle defaultSingle].bankCodeIcon = mDict;
+}
+
 
 - (IBAction)selectBankBtnClick:(id)sender {
     BankSelectViewController * selectVC = [[BankSelectViewController alloc]init];
+    selectVC.myBankDataSource = self.myBankDataSource;
+    selectVC.isHaveOtherData = YES;
     kWeakSelf
     selectVC.selectBankBlock = ^(BankModel * model){
         [weak_self.bankImageView setImageURL:[NSURL URLWithString:model.icon]];
         weak_self.bankNameLab.text = model.bankName;
         weak_self.bankCode = model.bankCode;
+    };
+    selectVC.selectMyBankBlock = ^(MyBankModel * model){
+        [weak_self.bankImageView setImageURL:[NSURL URLWithString:model.icon]];
+        weak_self.bankNameLab.text = model.bankName;
+        weak_self.bankCode = model.bankCode;
+        weak_self.cardTF.text = model.cardNo;
+        weak_self.cardAdressTF.text = model.bankAddr;
     };
     [self pushVC:selectVC];
 }
@@ -95,15 +147,37 @@
         [mDict setValue:self.cardAdressTF.text forKey:@"bankAddr"];
     }
 
-    [RequestManager postWithPath:@"userWithdraw" params:mDict success:^(id JSON) {
+    [RequestManager postWithPath:@"userWithdraw" params:mDict success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+#warning --需要干点什么
     } failure:^(NSError *error) {
         
     }];
 }
 - (IBAction)managerCardBtnClick:(id)sender {
+    BankManagerViewController * bankManagerVC = [[BankManagerViewController alloc]initWithNibName:@"BankManagerViewController" bundle:nil];
+    bankManagerVC.banksArr = self.myBankDataSource;
+    [self pushVC:bankManagerVC];
+}
+-(NSMutableArray *)myBankDataSource
+{
+    if (!_myBankDataSource) {
+        _myBankDataSource = [NSMutableArray array];
+    }
+    return _myBankDataSource;
 }
 
+-(NSMutableArray *)bankDataSource
+{
+    if (!_bankDataSource) {
+        _bankDataSource = [NSMutableArray array];
+    }
+    return _bankDataSource;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

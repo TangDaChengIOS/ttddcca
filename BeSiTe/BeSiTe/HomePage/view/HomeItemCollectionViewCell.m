@@ -31,13 +31,11 @@
         
         CGFloat w = 25 * kPROPORTION;
         _typeImage = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width - w, 0, w, w)];
-        _typeImage.image = KIMAGE(@"home_gameType_new_img");
         [self.contentView addSubview:_typeImage];
         
         _titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, _mainImage.maxY + 10 * kPROPORTION, self.contentView.width, 15)];
         _titleLab.textColor = UIColorFromINTValue(65, 121, 130);
         _titleLab.font = kFont(14);
-        _titleLab.text = @"SG游戏";
         _titleLab.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:_titleLab];
         
@@ -47,7 +45,6 @@
         _nodataLab.text = @"敬请期待";
         _nodataLab.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:_nodataLab];
-//        [self setItemType:HomeItemTypeNodata];
     }
     return self;
 }

@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *wexinLab;
 @property (weak, nonatomic) IBOutlet UIImageView *erCodeImageView;
 
+@property (nonatomic,strong) ContactModel * model;
 @end
 
 @implementation ContactViewController
@@ -29,9 +30,14 @@
 
 -(void)requestData{
     kWeakSelf
-    [RequestManager getManagerDataWithPath:@"customerConfig" params:nil success:^(id JSON) {
+    [RequestManager getManagerDataWithPath:@"customerConfig" params:nil success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         ContactModel * model = [[ContactModel alloc]init];
-        [model setValuesForKeysWithDictionary:JSON];
+        [model mj_setKeyValues:JSON];
+        weak_self.model = model;
         [weak_self setDataWithModel:model];
     } failure:^(NSError *error) {
         
@@ -49,7 +55,8 @@
 
 
 - (IBAction)onLineKefuBtnClick:(id)sender {
-    
+    WebDetailViewController * webVC = [WebDetailViewController quickCreateWithUrl:self.model.customer_online.content];
+    [self pushVC:webVC];
 }
 
 - (void)didReceiveMemoryWarning {

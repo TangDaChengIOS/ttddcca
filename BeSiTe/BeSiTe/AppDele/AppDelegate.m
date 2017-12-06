@@ -10,6 +10,7 @@
 #import "AppDelegate+Setting.h"
 //#import <LocalAuthentication/LocalAuthentication.h>
 #import "APPStartRunViewController.h"
+#import "RSAEncryptor.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
+    //第一次运行APP，先加载启动页
     if (![ud boolForKey:@"FirstRunAPP"]) {
         [ud setBool:YES forKey:@"FirstRunAPP"];
         [ud synchronize];
@@ -28,7 +30,7 @@
         APPStartRunViewController * runVC = [[APPStartRunViewController alloc]init];
         kWeakSelf
         runVC.finishBlock = ^{
-            [weak_self setRootViewController];
+            [weak_self setDefaultRootViewController];
         };
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window.backgroundColor = [UIColor whiteColor];
@@ -36,11 +38,10 @@
         [self.window makeKeyAndVisible];
     }
     else{
-        [self setRootViewController];
-
+        [self setDefaultRootViewController];
     }
-
-    [self autoLogin];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNoLoginRootViewController) name:BSTLoginFailueNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setLoginSuccessRootViewController) name:BSTLoginSuccessNotification object:nil];
 
     return YES;
 }

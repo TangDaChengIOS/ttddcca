@@ -38,6 +38,7 @@
 /**验证是正确的邮箱号*/
 + (BOOL)isEmailAddress:(NSString *)emailAddr;
 
++(NSString *)getBadgeValue:(NSInteger)value;
 
 void TTAlert(NSString* message);
 @end

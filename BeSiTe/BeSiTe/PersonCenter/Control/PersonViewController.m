@@ -17,9 +17,8 @@
 
 #import "OnlyShowImageButton.h"
 
-@interface PersonViewController (){
-    NSUInteger _badgeValue;
-}
+@interface PersonViewController ()
+
 @property (nonatomic,copy) NSArray * menuList;
 @property (nonatomic,strong) UIButton * titleViewBtn;
 @end
@@ -33,8 +32,30 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [_titleViewBtn setImage:KIMAGE_Ori([[BSTSingle defaultSingle].user getVipImageStr]) forState:UIControlStateNormal];
-    [_titleViewBtn setTitle:[BSTSingle defaultSingle].user.accountName forState:UIControlStateNormal];
+    if ([BSTSingle defaultSingle].user) {
+        [_titleViewBtn setImage:KIMAGE_Ori([[BSTSingle defaultSingle].user getVipImageStr]) forState:UIControlStateNormal];
+        [_titleViewBtn setTitle:[BSTSingle defaultSingle].user.accountName forState:UIControlStateNormal];
+    }else{
+        [_titleViewBtn setImage:nil forState:UIControlStateNormal];
+        [_titleViewBtn setTitle:@"未登录" forState:UIControlStateNormal];
+    }
+
+    [self requestData];
+}
+
+-(void)requestData{
+    kWeakSelf
+    [RequestManager getManagerDataWithPath:@"user/msgNums" params:nil success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        [[BSTSingle defaultSingle] mj_setKeyValues:JSON];
+        [(UIBarButtonItem_withBadge *)weak_self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
+
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (NSArray<NSString *> *)menuTitlesForMagicView:(VTMagicView *)magicView
@@ -47,20 +68,14 @@
     static NSString *itemIdentifier = @"itemIdentifier";
     OnlyShowImageButton *menuItem = [magicView dequeueReusableItemWithIdentifier:itemIdentifier];
     if (!menuItem) {
-//        menuItem = [UIButton buttonWithType:UIButtonTypeCustom];
         menuItem = [[OnlyShowImageButton alloc] init];
-
-
         [menuItem setTitleColor:RGBCOLOR(50, 50, 50) forState:UIControlStateNormal];
-//        [menuItem setTitleColor:RGBCOLOR(169, 37, 37) forState:UIControlStateSelected];
         menuItem.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:16.f];
     }
     NSString * imageStr = [NSString stringWithFormat:@"profile_tab%ld",itemIndex];
     NSString * selImageStr = [NSString stringWithFormat:@"profile_tab%ld_sel",itemIndex];
     menuItem.selectImage = selImageStr;
     menuItem.normalImage = imageStr;
-//    [menuItem setImage:KIMAGE(imageStr) forState:UIControlStateNormal];
-//    [menuItem setImage:KIMAGE(selImageStr) forState:UIControlStateSelected];
     menuItem.contentMode = UIViewContentModeScaleAspectFit;
     return menuItem;
 }
@@ -143,26 +158,12 @@
 -(void)configNavi
 {
     self.navigationItem.titleView = self.titleViewBtn;
-    _badgeValue = 0;
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"navgartion_back_btn") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem_withBadge alloc]initWithImage:KIMAGE_Ori(@"commmon_navgation_right_mail_icon") style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClick)];
 }
-
-//-(void)leftBarButtonItemClick{
-//    _badgeValue -=3;
-//    [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:_badgeValue];
-//
-//}
 
 -(void)rightBarButtonItemClick{
     MessageViewController * msgVC = [[MessageViewController alloc]initWithNibName:@"MessageViewController" bundle:nil];
     [self pushVC:msgVC];
-
-    return;
-
-    _badgeValue +=3;
-    [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:_badgeValue];
 }
 -(UIButton *)titleViewBtn
 {

@@ -10,4 +10,16 @@
 
 @implementation ActivityModel
 
+-(void)setValue:(id)value forKey:(NSString *)key
+{
+    if ([key isEqualToString:@"game"]) {
+        GamesModel * model = [GamesModel new];
+        [model mj_setKeyValues:value];
+        [super setValue:model forKey:key];
+    }else{
+        [super setValue:value forKey:key];
+    }
+    
+}
+
 @end

@@ -8,11 +8,12 @@
 
 #import "GameItemCollectionViewCell.h"
 
-@interface GameItemCollectionViewCell ()
+@interface GameItemCollectionViewCell ()<UIAlertViewDelegate>
 @property (nonatomic,strong) UIImageView * mainImage;
 @property (nonatomic,strong) UILabel * boomLab;
 @property (nonatomic,strong) GamesModel * model;
-//@property (nonatomic,strong) UIButton * cancelCollectButton;
+@property (nonatomic,strong) UILongPressGestureRecognizer * longPressGes;
+@property (nonatomic,copy) void (^finishCancelCollectBlock)();
 @end
 
 @implementation GameItemCollectionViewCell
@@ -30,23 +31,61 @@
         _boomLab.backgroundColor = UIColorFromINTValue(242, 240, 241);
         _boomLab.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:_boomLab];
-        
-//        [self.contentView addSubview:self.cancelCollectButton];
     }
     return self;
 }
 
 
 -(void)setCellWithModel:(GamesModel *)model{
+    _model = model;
     [_mainImage setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
     _boomLab.text = model.gameName;
+    self.contentView.gestureRecognizers = nil;
 }
-//-(UIButton *)cancelCollectButton{
-//    if (!_cancelCollectButton) {
-//        _cancelCollectButton = [[UIButton alloc]initWithFrame:CGRectMake(self.contentView.width - 33, 0, 33, 33)];
-//        [_cancelCollectButton setImage:KIMAGE_Ori(@"back_manager_cancel_icon") forState:UIControlStateNormal];
-//    }
-//    return _cancelCollectButton;
-//}
+
+-(UILongPressGestureRecognizer *)longPressGes
+{
+    if (!_longPressGes) {
+        _longPressGes = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+    }
+    return _longPressGes;
+}
+
+-(void)longPress:(UILongPressGestureRecognizer *)ges{
+    if (ges.state == UIGestureRecognizerStateBegan) {
+        NSString * string = [NSString stringWithFormat:@"确定要取消收藏“%@”么？",self.model.gameName];
+        UIAlertView * alter = [[UIAlertView alloc]initWithTitle:@"提示" message:string delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alter show];
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        NSDictionary * dict = @{@"gameCode":self.model.gameCode,
+                                @"action":@"2",
+                                @"gamePlatformCode":self.model.companyCode};
+        kWeakSelf
+        [RequestManager postWithPath:@"favGame" params:dict success:^(id JSON ,BOOL isSuccess) {
+            if (!isSuccess) {
+                TTAlert(JSON);
+                return ;
+            }
+            TTAlert(@"取消收藏成功！");
+            if (weak_self.finishCancelCollectBlock) {
+                weak_self.finishCancelCollectBlock();
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }
+}
+
+-(void)setCanCancelCollecWithFinishBlock:(void (^)())finishCancel
+{
+    [self.contentView addGestureRecognizer:self.longPressGes];
+    self.finishCancelCollectBlock = finishCancel;
+}
+
 
 @end

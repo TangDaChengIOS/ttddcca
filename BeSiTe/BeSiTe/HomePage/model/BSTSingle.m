@@ -53,4 +53,44 @@
     }
     return _gameCompanysBalanceArr;
 }
+
+//@property (nonatomic,assign) NSInteger adsRollTime;//首页轮播图滚动时间间隔
+
+-(void)setAdsRollTime:(NSInteger)adsRollTime
+{
+    if (_adsRollTime != adsRollTime) {
+        _adsRollTime = adsRollTime;
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"ADSRollTimeChangedNotification" object:nil];
+    }
+}
+
+-(void)setActivityUnreadNum:(NSInteger)activityUnreadNum
+{
+    if (activityUnreadNum <0) {
+        _activityUnreadNum = 0;
+    }
+    else{
+        _activityUnreadNum = activityUnreadNum;
+    }
+}
+
+-(void)setNoticeNums:(NSInteger)noticeNums
+{
+    if (noticeNums < 0) {
+        _noticeNums = 0;
+    }else{
+        _noticeNums = noticeNums;
+    }
+    _totalNums = _noticeNums + _msgNums;
+}
+
+-(void)setMsgNums:(NSInteger)msgNums{
+    if (msgNums < 0) {
+        _msgNums = 0;
+    }else{
+        _msgNums = msgNums;
+    }
+    _totalNums = _noticeNums + _msgNums;
+}
+
 @end

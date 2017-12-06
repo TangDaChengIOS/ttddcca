@@ -23,12 +23,12 @@
     [super viewDidLoad];
     [self configSubViews];
     kWeakSelf
-    self.tableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         weak_self.page = 1;
         [weak_self requestDataForCunKuan];
     }];
     
-    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         weak_self.page += 1;
         [weak_self requestDataForCunKuan];
     }];
@@ -49,9 +49,12 @@
 
 #pragma mark -- 请求存款数据
 -(void)requestDataForCunKuan{
-    [RequestManager getWithPath:@"getUserDepositInfos" params:[self para] success:^(id JSON) {
+    [RequestManager getWithPath:@"getUserDepositInfos" params:[self para] success:^(id JSON ,BOOL isSuccess) {
         [self.tableView.mj_header endRefreshing];
-
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         self.dataSource = [MoneyRecordModel jsonToArray:JSON[@"data"]];
         [self.tableView reloadData];
         if ([JSON[@"hasNext"] integerValue] == 0) {
@@ -79,6 +82,12 @@
     [cell setCellWithModel:self.dataSource[indexPath.row] andCellType:RecordCellType_CunKuan];
     return cell;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [ShowRecordDetailView showWithModel:self.dataSource[indexPath.row] andRecordType:RecordCellType_CunKuan];
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;

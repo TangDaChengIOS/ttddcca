@@ -86,12 +86,12 @@
         [weak_self.bankImageView setImageURL:[NSURL URLWithString:model.icon]];
         weak_self.bankNameLab.text = model.bankName;
     };
-    //    vc.isHaveOtherData = (arc4random()+1) % 2;
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark -- 返回
-- (IBAction)back:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+- (IBAction)back:(id)sender
+{
+    [self registerSuccessExit];
 }
 #pragma mark -- 完成注册
 - (IBAction)finishRegistClick:(id)sender
@@ -145,8 +145,12 @@
         [mDict setValue:self.bankAddrTF.text forKey:@"bankAddr"];
     }
 
-    [RequestManager postWithPath:@"completeUserInfo" params:mDict success:^(id JSON) {
+    [RequestManager postWithPath:@"completeUserInfo" params:mDict success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         kWeakSelf
         
         [weak_self finishRefreshUI];
@@ -161,10 +165,10 @@
         view.isNotAllowRemoveSelfByTouchSpace = YES;
         view.eventBlock = ^(EventType eventType){
             if (eventType == EventTypeLeftBtnClick) {
-                [weak_self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                [weak_self registerSuccessExit];
             }
             else{
-                [weak_self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                [weak_self registerSuccessExit];
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"ApplicationNeedVerifyPhoneNum" object:nil];
             }
         };
@@ -177,9 +181,15 @@
 
 #pragma mark -- 跳过
 - (IBAction)passBtnClick:(id)sender {
+    [self registerSuccessExit];
+}
+-(void)registerSuccessExit{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:BSTRegisterSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginSuccessNotification object:nil];
 
 }
+
 #pragma mark -- 完成注册,刷新界面
 -(void)finishRefreshUI{
     self.threeBtn.backgroundColor = kWhiteColor;

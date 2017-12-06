@@ -38,8 +38,12 @@
 -(void)requestData
 {
     kWeakSelf
-    [RequestManager getManagerDataWithPath:@"payChannel" params:nil success:^(id JSON) {
+    [RequestManager getManagerDataWithPath:@"payChannel" params:nil success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         weak_self.dataSource = [OnlinePayModel jsonToArray:JSON];
         [weak_self.tableView reloadData];
     } failure:^(NSError *error) {
@@ -83,7 +87,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 100;
+    return 150;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -115,6 +119,7 @@
     _moneyTF = [[UITextField alloc]init];
     _moneyTF.placeholder = @"请输入存款数额";
     _moneyTF.font = kFont(14);
+    _moneyTF.keyboardType = UIKeyboardTypeNumberPad;
     [topBackView addSubview:_moneyTF];
     
     [topBackView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -190,7 +195,8 @@
 
 
 -(void)readAgreementBtnClick{
-    
+    WebDetailViewController * webVC = [WebDetailViewController quickCreateWithUrl:[BSTSingle defaultSingle].registerAgreementUrl];
+    [self pushVC:webVC];
 }
 
 -(void)comitBtnClick
@@ -211,16 +217,23 @@
         return;
     }
     NSMutableDictionary * mDict = [NSMutableDictionary dictionary];
-    [mDict setValue:[NSString stringWithFormat:@"%ld",model.data_id] forKey:@"payType"];
+    [mDict setValue:model.payCode forKey:@"payType"];
     [mDict setValue:self.moneyTF.text forKey:@"amount"];
     if (self.agreeBtn.selected) {
         [mDict setValue:@"1" forKey:@"isApplyDiscnt"];
     }else{
         [mDict setValue:@"0" forKey:@"isApplyDiscnt"];
     }
-
-    [RequestManager postWithPath:@"pay" params:mDict success:^(id JSON) {
+    kWeakSelf
+    [RequestManager postWithPath:@"pay" params:mDict success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        NSString * payUrl = JSON[@"payUrl"];
+        WebDetailViewController * webVC = [WebDetailViewController quickCreateWithUrl:payUrl];
+        [weak_self pushVC:webVC];
 
     } failure:^(NSError *error) {
         

@@ -30,22 +30,22 @@
     [self configSubViews];
     
     kWeakSelf
-    self.tableView_top.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+    self.tableView_top.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         weak_self.page = 1;
         [weak_self requestDataForDuiHuan];
     }];
     
-    self.tableView_top.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+    self.tableView_top.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         weak_self.page += 1;
         [weak_self requestDataForDuiHuan];
     }];
     
-    self.tableView_boom.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+    self.tableView_boom.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         weak_self.page_boom = 1;
         [weak_self requestDataForHuoQu];
     }];
     
-    self.tableView_boom.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+    self.tableView_boom.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         weak_self.page_boom += 1;
         [weak_self requestDataForHuoQu];
     }];
@@ -69,10 +69,13 @@
 
 #pragma mark -- 请求取款数据
 -(void)requestDataForDuiHuan{
-    [RequestManager getWithPath:@"getUserScoreExchangeInfos" params:[self para] success:^(id JSON) {
+    [RequestManager getWithPath:@"getUserScoreExchangeInfos" params:[self para] success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
         [self.tableView_top.mj_header endRefreshing];
-        
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         self.dataSource = [MoneyRecordModel jsonToArray:JSON[@"data"]];
         [self.tableView_top reloadData];
         if ([JSON[@"hasNext"] integerValue] == 0) {
@@ -94,9 +97,13 @@
 
 #pragma mark -- 请求取款数据
 -(void)requestDataForHuoQu{
-    [RequestManager getWithPath:@"getUserGainScoreInfos" params:[self para_boom] success:^(id JSON) {
+    [RequestManager getWithPath:@"getUserGainScoreInfos" params:[self para_boom] success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
         [self.tableView_boom.mj_header endRefreshing];
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         
         self.dataSource_boom = [MoneyRecordModel jsonToArray:JSON[@"data"]];
         [self.tableView_boom reloadData];
@@ -132,6 +139,19 @@
 
     return cell;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if (tableView == self.tableView_top) {
+        [ShowRecordDetailView showWithModel:self.dataSource[indexPath.row] andRecordType:RecordCellType_JiFenTop];
+    }
+    else{
+        [ShowRecordDetailView showWithModel:self.dataSource_boom[indexPath.row] andRecordType:RecordCellType_JiFenBoom];
+    }
+}
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;

@@ -29,6 +29,14 @@
     _bankCardLab.hidden = YES;
 }
 
+-(void)setMyBankCellWithModel:(MyBankModel *)model{
+    [_bankImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
+    _bankNameLab.text = model.bankName;
+    _bankCardLab.hidden = NO;
+    _bankCardLab.text = [NSString stringWithFormat:@"尾号%@",[model.cardNo substringFromIndex:model.cardNo.length - 4]];
+}
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

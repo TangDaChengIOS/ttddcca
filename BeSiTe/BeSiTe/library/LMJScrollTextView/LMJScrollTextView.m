@@ -100,22 +100,22 @@
     _attributeText = attributeString;
     _text = nil;
     
-    _textWidth = [attributeString.string sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFont(13), NSFontAttributeName, nil]].width;
+    _textWidth = [attributeString.string sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFont(13), NSFontAttributeName, nil]].width+ 30;
     
-    if (_textWidth > self.frame.size.width) {
+//    if (_textWidth > self.frame.size.width) {
         if (_currentMoveDirection == LMJTextScrollMoveLeft) {
             [self creatLabel1AndLabel2WithFrame1:CGRectMake(0, 0, _textWidth, self.frame.size.height) frame2:CGRectMake(_textWidth, 0, _textWidth, self.frame.size.height)];
         }else{
             [self creatLabel1AndLabel2WithFrame1:CGRectMake(self.frame.size.width -_textWidth, 0, _textWidth, self.frame.size.height) frame2:CGRectMake(self.frame.size.width -_textWidth -_textWidth, 0, _textWidth, self.frame.size.height)];
         }
-    }else{//如果字符串长度小于控件宽度，只创建一个字符串label
-        if (_currentMoveDirection == LMJTextScrollMoveLeft) {
-            [self creatLabel1WithFrame:CGRectMake(0, 0, _textWidth, self.frame.size.height)];
-        }else{
-            [self creatLabel1WithFrame:CGRectMake(self.frame.size.width -_textWidth, 0, _textWidth, self.frame.size.height)];
-        }
-        
-    }
+//    }else{//如果字符串长度小于控件宽度，只创建一个字符串label
+//        if (_currentMoveDirection == LMJTextScrollMoveLeft) {
+//            [self creatLabel1WithFrame:CGRectMake(0, 0, _textWidth, self.frame.size.height)];
+//        }else{
+//            [self creatLabel1WithFrame:CGRectMake(self.frame.size.width -_textWidth, 0, _textWidth, self.frame.size.height)];
+//        }
+//        
+//    }
     [self setMoveSpeed:0.1];;
 
 }
@@ -237,13 +237,13 @@
 #pragma mark - 内容移动
 - (void)contentMove {
 
-    if (_textWidth < self.frame.size.width) {//如果字符串长度小于控件宽度，不滚动
-        
-        if (_currentScrollModel == LMJTextScrollWandering) {//往返模式除外
-            [self moveWandering];
-        }
-        return;
-    }
+//    if (_textWidth < self.frame.size.width) {//如果字符串长度小于控件宽度，不滚动
+//        
+//        if (_currentScrollModel == LMJTextScrollWandering) {//往返模式除外
+//            [self moveWandering];
+//        }
+//        return;
+//    }
     switch (_currentScrollModel) {
             
         case LMJTextScrollContinuous:

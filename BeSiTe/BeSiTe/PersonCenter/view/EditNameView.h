@@ -10,6 +10,9 @@
 
 /**编辑姓名*/
 @interface EditNameView : ATTranslucentView
-+(void)show;
+
+@property (nonatomic,copy) void (^completeBlock)();
+
++(void)showWithFinshBlock:(void(^)()) completeBlock;
 
 @end

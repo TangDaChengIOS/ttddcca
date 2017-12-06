@@ -14,4 +14,6 @@
 @property (nonatomic,copy) NSString * bankCode;//	string	银行CODE
 @property (nonatomic,copy) NSString * icon;//	string	图标
 
+
+
 @end

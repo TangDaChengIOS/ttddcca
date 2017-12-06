@@ -50,6 +50,7 @@
     
     oldPwdTF = [self createTextFieldWithFrame:CGRectMake(16,_titleLab.maxY + 25, whiteBack_W - 32, 38)];
     oldPwdTF.placeholder = @"请输入原始密码";
+    oldPwdTF.secureTextEntry = YES;
     [whiteBack addSubview:oldPwdTF];
     
     newPwdTF = [self createTextFieldWithFrame:CGRectMake(16,oldPwdTF.maxY + 6, whiteBack_W - 32, 38)];
@@ -117,7 +118,11 @@
     NSDictionary * dict = @{@"oldPwd":oldPassWord,
                             @"newPwd":newPassWord};
 
-    [RequestManager postWithPath:@"modifyPwd" params:dict success:^(id JSON) {
+    [RequestManager postWithPath:@"modifyPwd" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"密码修改成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     } failure:^(NSError *error) {

@@ -13,5 +13,5 @@
 /**游戏cell*/
 @interface GameItemCollectionViewCell : UICollectionViewCell
 -(void)setCellWithModel:(GamesModel *)model;
-
+-(void)setCanCancelCollecWithFinishBlock:(void (^)())finishCancel;
 @end

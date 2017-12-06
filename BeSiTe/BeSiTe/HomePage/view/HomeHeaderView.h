@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SDCycleScrollView/SDCycleScrollView.h>
 
 /**首页顶部*/
 @interface HomeHeaderView : UIView
+
+@property (nonatomic,strong) SDCycleScrollView * bannerView;//轮播图
 
 @property (nonatomic,assign) BOOL isRequestData;
 

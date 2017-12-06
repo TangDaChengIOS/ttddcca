@@ -28,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
+    self.nameTF.text = @"BCASDFG";
+    self.pwdTF.text = @"5k8b22";
 }
 
 - (IBAction)loginBtnDidClicked:(id)sender
@@ -46,22 +48,28 @@
     
     NSDictionary * dict = @{@"loginName":self.nameTF.text,
                             @"password":passWord};
-    [RequestManager getWithPath:@"login" params:dict success:^(id JSON) {
-        [[NSUserDefaults standardUserDefaults]setObject:JSON forKey:@"UserMessage"];
-        [[NSUserDefaults standardUserDefaults]synchronize];
-        
+    [RequestManager getWithPath:@"login" params:dict success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
         UserModel * model = [[UserModel alloc]init];
-        [model setValuesForKeysWithDictionary:JSON];
+        [model mj_setKeyValues:JSON];
         model.accountName = weak_self.nameTF.text;
         [BSTSingle defaultSingle].user = model;
-        NSLog(@"登录成功");
+        [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginSuccessNotification object:nil];
+        [weak_self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
     } failure:^(NSError *error) {
     
     }];
 }
-- (IBAction)registerDidClicked:(id)sender {
+- (IBAction)registerDidClicked:(id)sender
+{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(leftBarButtonItemClick) name:BSTRegisterSuccessNotification object:nil];
     RegisterPageOneViewController * registerVC = [[RegisterPageOneViewController alloc]initWithNibName:@"RegisterPageOneViewController" bundle:nil];
-    [self pushVC:registerVC];
+    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:registerVC];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark -- subViews
@@ -92,6 +100,11 @@
     LoginViewController * loginVC = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
     UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:loginVC];
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
+}
+
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:BSTRegisterSuccessNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

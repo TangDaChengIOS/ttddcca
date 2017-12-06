@@ -20,9 +20,9 @@
 
 @property (nonatomic,copy) NSString * gameUrl;//游戏链接
 @property (nonatomic,copy) NSString * tryUrl;//试玩链接
-@property (nonatomic,assign) NSInteger  star;//星级
+@property (nonatomic,assign) CGFloat  star;//星级
 @property (nonatomic,assign) BOOL  isTry;//是否可以试玩
-@property (nonatomic,assign) NSInteger  isFav;//是否收藏
+@property (nonatomic,assign) BOOL  isFav;//是否收藏
 
 
 -(UIImage *)getTypeImage;

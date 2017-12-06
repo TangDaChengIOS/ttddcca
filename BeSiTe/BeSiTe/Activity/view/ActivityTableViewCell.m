@@ -30,6 +30,7 @@
         _webView.hidden = YES;
     }else{
         _webView.hidden = NO;
+        _webView.backgroundColor = kWhiteColor;
         _webViewHeightConstraint.constant = 260;
         _rightImageView.image =KIMAGE(@"common_open_icon");
         [_webView loadHTMLString:model.content baseURL:nil];
