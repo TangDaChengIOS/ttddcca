@@ -12,10 +12,9 @@ typedef void (^RequestSuccessBlock)(id JSON,BOOL isSuccess);
 typedef void (^RequestFailureBlock)(NSError *error);
 
 //业务平台
-//#define ProfessionalBaseURL @"http://172.104.68.95/app/"
+#define ProfessionalBaseURL @"http://172.104.68.95/app/"
 //#define ProfessionalBaseURL @"http://139.162.90.172/app/"
-#define ProfessionalBaseURL @"http://172.104.54.176:8080/app/"
-
+#define SendCodeURL @"http://172.104.54.176:8080/app/"
 
 
 //管理平台

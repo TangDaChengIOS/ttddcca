@@ -112,8 +112,6 @@
         TTAlert(@"请选择交易类型！");
         return;
     }
-    _beginDateSelectView.dateLab.text =@"2017-11-01";
-    _endDateSelectView.dateLab.text =@"2017-11-30";
     
     if (_beginDateSelectView.dateLab.text.length <= 0 || _endDateSelectView.dateLab.text.length <= 0) {
         TTAlert(@"请选择查询的日期范围！");

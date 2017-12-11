@@ -101,10 +101,13 @@
     _text = nil;
     
     _textWidth = [attributeString.string sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kFont(13), NSFontAttributeName, nil]].width+ 30;
+    if (_textWidth < MAXWIDTH) {
+        _textWidth = MAXWIDTH;
+    }
     
 //    if (_textWidth > self.frame.size.width) {
         if (_currentMoveDirection == LMJTextScrollMoveLeft) {
-            [self creatLabel1AndLabel2WithFrame1:CGRectMake(0, 0, _textWidth, self.frame.size.height) frame2:CGRectMake(_textWidth, 0, _textWidth, self.frame.size.height)];
+            [self creatLabel1AndLabel2WithFrame1:CGRectMake(MAXWIDTH, 0, _textWidth, self.frame.size.height) frame2:CGRectMake(MAXWIDTH + _textWidth, 0, _textWidth, self.frame.size.height)];
         }else{
             [self creatLabel1AndLabel2WithFrame1:CGRectMake(self.frame.size.width -_textWidth, 0, _textWidth, self.frame.size.height) frame2:CGRectMake(self.frame.size.width -_textWidth -_textWidth, 0, _textWidth, self.frame.size.height)];
         }
@@ -116,7 +119,7 @@
 //        }
 //        
 //    }
-    [self setMoveSpeed:0.1];;
+    [self setMoveSpeed:0.02];;
 
 }
 

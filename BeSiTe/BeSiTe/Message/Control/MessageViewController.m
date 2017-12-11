@@ -33,6 +33,7 @@
 @property (nonatomic,assign) NSInteger page;//系统消息页码
 @property (nonatomic,assign) NSInteger person_page;//个人消息页码
 
+@property (nonatomic,strong) BSTNoDataView * noDataView;
 @end
 
 @implementation MessageViewController
@@ -91,21 +92,33 @@
 {
     NSDictionary * dict = @{@"pageNo":[NSString stringWithFormat:@"%ld",_page],
                             @"pageSize":@"20"};
+    kWeakSelf
     [RequestManager getWithPath:@"querySystemNotices" params:dict success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
-        [self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_footer endRefreshing];
+
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
-        self.dataSource = [SystemNoticesModel jsonToArray:JSON[@"data"]];
-        [self.tableView reloadData];
+        if (weak_self.page == 1) {
+            [weak_self.dataSource removeAllObjects];
+        }
+        [weak_self.dataSource addObjectsFromArray: [SystemNoticesModel jsonToArray:JSON[@"data"]]];
+        [weak_self.tableView reloadData];
         if ([JSON[@"hasNext"] integerValue] == 0) {
-            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            [weak_self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        if (weak_self.dataSource.count == 0) {
+            [weak_self.tableView addSubview:weak_self.noDataView];
+        }else{
+            [weak_self.noDataView removeFromSuperview];
         }
         _page = [JSON[@"currentPage"] integerValue];
     } failure:^(NSError *error) {
-        
+        [weak_self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_footer endRefreshing];
     }];
 }
 
@@ -113,22 +126,33 @@
 {
     NSDictionary * dict = @{@"pageNo":[NSString stringWithFormat:@"%ld",_person_page],
                             @"pageSize":@"20"};
+    kWeakSelf
     [RequestManager getManagerDataWithPath:@"user/msgs" params:dict success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
-        [self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_footer endRefreshing];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
         NSDictionary * resultDict = JSON[@"page"];
-        self.personMsgDataSource = [UserMsgModel jsonToArray:resultDict[@"data"]];
-        [self.tableView reloadData];
-        if ([resultDict[@"hasNext"] integerValue] == 0) {
-            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        if (weak_self.person_page == 1) {
+            [weak_self.personMsgDataSource removeAllObjects];
         }
+        [weak_self.personMsgDataSource addObjectsFromArray: [UserMsgModel jsonToArray:resultDict[@"data"]]];
+        [weak_self.tableView reloadData];
+        if ([resultDict[@"hasNext"] integerValue] == 0) {
+            [weak_self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+//        if (weak_self.personMsgDataSource.count == 0) {
+//            [weak_self.tableView addSubview:weak_self.noDataView];
+//        }else{
+//            [weak_self.noDataView removeFromSuperview];
+//        }
         _person_page = [resultDict[@"currentPage"] integerValue];
     } failure:^(NSError *error) {
-        
+        [weak_self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_footer endRefreshing];
     }];
 
 }
@@ -253,7 +277,8 @@
 
     if (self.dataSource.count) {
         [self.tableView reloadData];
-
+        [self.noDataView removeFromSuperview];
+        
     }else{
         [self.tableView.mj_header beginRefreshing];
     }
@@ -264,7 +289,7 @@
     [self refreshUI:NO];
     if (self.personMsgDataSource.count) {
         [self.tableView reloadData];
-        
+        [self.noDataView removeFromSuperview];
     }else{
         [self.tableView.mj_header beginRefreshing];
     }
@@ -288,9 +313,11 @@
         [self.systemMsgBtn setImage:nil forState:UIControlStateNormal];
         
     }
-    
-    [self.personMsgBtn setBadgeValue:[BSTSingle defaultSingle].msgNums];
-    [self.systemMsgBtn setBadgeValue:[BSTSingle defaultSingle].noticeNums];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.personMsgBtn setBadgeValue:[BSTSingle defaultSingle].msgNums];
+        [self.systemMsgBtn setBadgeValue:[BSTSingle defaultSingle].noticeNums];
+    });
+
 }
 
 #pragma mark -- 初始化操作
@@ -332,6 +359,13 @@
     [self pushVC:newVC];
 }
 
+-(BSTNoDataView *)noDataView{
+    if (!_noDataView) {
+        _noDataView = [[BSTNoDataView alloc]initWithFrame:self.tableView.bounds];
+        _noDataView.isMsg = YES;
+    }
+    return _noDataView;
+}
 
 -(NSMutableArray *)dataSource
 {

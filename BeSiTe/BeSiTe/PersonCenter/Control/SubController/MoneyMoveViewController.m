@@ -132,7 +132,10 @@
     NSDictionary * dict = @{@"gamePlatformCode":_selectCompanyCode,
                             @"amount":self.moneyTF.text,
                             @"type":(_isMoveToGame ? @"1":@"2")};
+    
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"acctTransfer" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -144,7 +147,7 @@
         [self reloadData];
         NSLog(@"%@",JSON);
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
     }];
 }
 

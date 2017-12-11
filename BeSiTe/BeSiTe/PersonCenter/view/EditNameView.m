@@ -83,7 +83,9 @@
         return;
     }
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"completeUserInfo" params:@{@"userName":self.nameTF.text} success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -92,7 +94,7 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"姓名保存成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
     }];
 }
 

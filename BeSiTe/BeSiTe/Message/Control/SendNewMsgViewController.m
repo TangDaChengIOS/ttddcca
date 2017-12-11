@@ -63,7 +63,9 @@
                             @"title":self.typeLab.text,
                             @"content":self.msgTextView.text};
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postManagerDataWithPath:@"user/msg" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -77,7 +79,7 @@
         view.msgDetail = @"我们将在24小时内给您及时回复，请耐心的等待...";
         [view showInWindow];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
     }];
 }
 

@@ -10,10 +10,12 @@
 #import "BSTSingle.h"
 #import "RecordTableViewCell.h"
 #import "ShowRecordDetailView.h"
+#import "BSTNoDataView.h"
 
 
 @interface ATBaseViewController : UIViewController
 
 @property (nonatomic,assign) BOOL isNeedHiddenNav;
+
 -(void)pushVC:(UIViewController *)viewController;
 @end

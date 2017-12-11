@@ -28,8 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
-    self.nameTF.text = @"BCASDFG";
-    self.pwdTF.text = @"5k8b22";
+//    self.nameTF.text = @"BCASDFG";
+//    self.pwdTF.text = @"qwerty";
 }
 
 - (IBAction)loginBtnDidClicked:(id)sender
@@ -48,7 +48,10 @@
     
     NSDictionary * dict = @{@"loginName":self.nameTF.text,
                             @"password":passWord};
+    [self.view endEditing:YES];
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager getWithPath:@"login" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -61,7 +64,8 @@
         [weak_self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
     } failure:^(NSError *error) {
-    
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 - (IBAction)registerDidClicked:(id)sender

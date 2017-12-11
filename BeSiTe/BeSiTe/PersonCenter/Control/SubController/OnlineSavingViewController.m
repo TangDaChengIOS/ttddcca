@@ -225,7 +225,9 @@
         [mDict setValue:@"0" forKey:@"isApplyDiscnt"];
     }
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"pay" params:mDict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         NSLog(@"%@",JSON);
         if (!isSuccess) {
             TTAlert(JSON);
@@ -236,7 +238,7 @@
         [weak_self pushVC:webVC];
 
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
     }];
 }
 

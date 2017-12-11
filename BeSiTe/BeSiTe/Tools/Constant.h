@@ -26,6 +26,7 @@
 #import "UIButton+TimerCount.h"
 #import "BSTMessageView.h"
 #import <MJExtension/NSObject+MJKeyValue.h>
+#import "MBProgressHUD+ATADD.h"
 
 /**成功登录通知名*/
 #define BSTLoginSuccessNotification @"BSTLoginSuccessNotification"
@@ -34,5 +35,6 @@
 
 /**注册成功通知名*/
 #define BSTRegisterSuccessNotification @"BSTRegisterSuccessNotification"
+
 
 #endif /* Constant_h */

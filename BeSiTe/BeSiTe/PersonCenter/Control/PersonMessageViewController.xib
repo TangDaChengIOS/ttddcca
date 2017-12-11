@@ -22,6 +22,7 @@
                 <outlet property="phoneEditBtn" destination="lKQ-ez-7uq" id="SAs-Ra-LUT"/>
                 <outlet property="phoneLab" destination="ovH-Fk-dp5" id="gkn-BB-BhF"/>
                 <outlet property="phoneStateImageView" destination="asM-6J-tn5" id="Scp-Na-3dP"/>
+                <outlet property="scrollView" destination="f1Y-Ks-hNA" id="nOX-by-bjc"/>
                 <outlet property="specialVIPImageView" destination="GrM-zA-KGk" id="BK5-pk-lra"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="vipImageView" destination="xGV-Tl-yIB" id="3Bd-KJ-dgx"/>

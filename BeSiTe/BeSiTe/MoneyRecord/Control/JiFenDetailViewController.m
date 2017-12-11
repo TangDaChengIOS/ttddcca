@@ -21,6 +21,10 @@
 @property (nonatomic,assign) NSInteger page;
 @property (nonatomic,assign) NSInteger page_boom;
 
+@property (nonatomic,strong) BSTNoDataView * noDataView;
+@property (nonatomic,strong) BSTNoDataView * noDataView_boom;
+
+
 @end
 
 @implementation JiFenDetailViewController
@@ -67,23 +71,35 @@
 }
 
 
-#pragma mark -- 请求取款数据
+#pragma mark -- 请求积分兑换数据
 -(void)requestDataForDuiHuan{
+    kWeakSelf
     [RequestManager getWithPath:@"getUserScoreExchangeInfos" params:[self para] success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
-        [self.tableView_top.mj_header endRefreshing];
+        [weak_self.tableView_top.mj_header endRefreshing];
+        [weak_self.tableView_top.mj_footer endRefreshing];
+
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
-        self.dataSource = [MoneyRecordModel jsonToArray:JSON[@"data"]];
-        [self.tableView_top reloadData];
+        if (weak_self.page == 1) {
+            [weak_self.dataSource removeAllObjects];
+        }
+        [weak_self.dataSource addObjectsFromArray: [MoneyRecordModel jsonToArray:JSON[@"data"]]];
+        [weak_self.tableView_top reloadData];
+        if (weak_self.dataSource.count == 0) {
+            [weak_self.tableView_top addSubview:weak_self.noDataView];
+        }else{
+            [weak_self.noDataView removeFromSuperview];
+        }
         if ([JSON[@"hasNext"] integerValue] == 0) {
-            [self.tableView_top.mj_footer endRefreshingWithNoMoreData];
+            [weak_self.tableView_top.mj_footer endRefreshingWithNoMoreData];
         }
         _page = [JSON[@"currentPage"] integerValue];
     } failure:^(NSError *error) {
-        
+        [weak_self.tableView_top.mj_header endRefreshing];
+        [weak_self.tableView_top.mj_footer endRefreshing];
     }];
 }
 
@@ -95,24 +111,38 @@
 }
 
 
-#pragma mark -- 请求取款数据
+#pragma mark -- 请求积分获取数据
 -(void)requestDataForHuoQu{
+    kWeakSelf
     [RequestManager getWithPath:@"getUserGainScoreInfos" params:[self para_boom] success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
-        [self.tableView_boom.mj_header endRefreshing];
+        [weak_self.tableView_boom.mj_header endRefreshing];
+        [weak_self.tableView_boom.mj_footer endRefreshing];
+
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
-        
-        self.dataSource_boom = [MoneyRecordModel jsonToArray:JSON[@"data"]];
-        [self.tableView_boom reloadData];
-        if ([JSON[@"hasNext"] integerValue] == 0) {
-            [self.tableView_boom.mj_footer endRefreshingWithNoMoreData];
+        if (weak_self.page_boom == 1) {
+            [weak_self.dataSource_boom removeAllObjects];
         }
+        [weak_self.dataSource_boom addObjectsFromArray: [MoneyRecordModel jsonToArray:JSON[@"data"]]];
+        
+        [weak_self.tableView_boom reloadData];
+        if ([JSON[@"hasNext"] integerValue] == 0) {
+            [weak_self.tableView_boom.mj_footer endRefreshingWithNoMoreData];
+        }
+        
+        if (weak_self.dataSource_boom.count == 0) {
+            [weak_self.tableView_boom addSubview:weak_self.noDataView_boom];
+        }else{
+            [weak_self.noDataView_boom removeFromSuperview];
+        }
+        
         _page_boom = [JSON[@"currentPage"] integerValue];
     } failure:^(NSError *error) {
-        
+        [weak_self.tableView_boom.mj_header endRefreshing];
+        [weak_self.tableView_boom.mj_footer endRefreshing];
     }];
 }
 
@@ -212,7 +242,22 @@
     lable.text = title;
     return lable;
 }
-
+-(BSTNoDataView *)noDataView
+{
+    if (!_noDataView) {
+        _noDataView = [[BSTNoDataView alloc]initWithFrame:self.tableView_top.bounds];
+        _noDataView.isMsg = NO;
+    }
+    return _noDataView;
+}
+-(BSTNoDataView *)noDataView_boom
+{
+    if (!_noDataView_boom) {
+        _noDataView_boom = [[BSTNoDataView alloc]initWithFrame:self.tableView_boom.bounds];
+        _noDataView_boom.isMsg = NO;
+    }
+    return _noDataView_boom;
+}
 -(NSMutableArray *)dataSource
 {
     if (!_dataSource) {

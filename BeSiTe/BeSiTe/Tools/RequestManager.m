@@ -13,7 +13,11 @@
 
 + (void)commonRequestWithPath:(NSString *)path params:(NSDictionary *)params method:(NSString *)method success:(RequestSuccessBlock)success failure:(RequestFailureBlock)failure :(BOOL)isManagerData{
     
-    NSString *url = [NSString stringWithFormat:@"%@%@",(isManagerData ? ManagerBaseURL : ProfessionalBaseURL),path];
+    NSString * baseUrl = (isManagerData ? ManagerBaseURL : ProfessionalBaseURL);
+    if ([path isEqualToString:@"sendSmsCode"]) {
+        baseUrl = SendCodeURL;
+    }
+    NSString *url = [NSString stringWithFormat:@"%@%@",baseUrl,path];
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

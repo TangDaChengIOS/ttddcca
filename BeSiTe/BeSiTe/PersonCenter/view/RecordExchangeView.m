@@ -8,7 +8,9 @@
 
 #import "RecordExchangeView.h"
 
-@interface RecordExchangeView ()
+@interface RecordExchangeView (){
+    BOOL _isRequested;
+}
 
 @property (nonatomic,strong) UILabel * recordLab;
 @property (nonatomic,strong) UITextField * moneyTF;
@@ -92,9 +94,18 @@
     [whiteBack addSubview:cancelBtn];
     
 }
-- (void)didMoveToWindow{
+//- (void)didMoveToWindow
+- (void)didMoveToSuperview
+{
+    if (_isRequested) {
+        return;
+    }
+    _isRequested = YES;
     kWeakSelf
+    [MBProgressHUD showMessage:@"数据加载中..." toView:nil];
     [RequestManager getWithPath:@"getUserScore" params:nil success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
+
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -102,7 +113,8 @@
         weak_self.recordLab.text = JSON[@"postring"];
         weak_self.tipsLab.text = JSON[@"ruleDesc"];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 
@@ -129,7 +141,10 @@
         return;
     }
     
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"completeUserInfo" params:@{@"userName":self.moneyTF.text} success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
+
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -137,16 +152,17 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"积分兑换成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [self removeFromSuperview];
-//    if (self.completeBlock) {
-//        self.completeBlock();
-//    }
+    if (self.completeBlock) {
+        self.completeBlock();
+    }
 }
 
 -(void)cancelBtnClick{

@@ -11,7 +11,7 @@
 #import "ASBirthSelectSheet.h"
 #import "ZZTextInput.h"
 
-@interface RegisterPageTwoViewController ()
+@interface RegisterPageTwoViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *firstBtn;
 @property (weak, nonatomic) IBOutlet UIButton *secBtn;
 @property (weak, nonatomic) IBOutlet UIButton *threeBtn;
@@ -65,6 +65,32 @@
     self.threeBtn.layer.cornerRadius = cornerRadius;
     self.threeBtn.layer.borderWidth = 1;
     
+    self.nameTF.delegate = self;
+    self.emailTF.delegate = self;
+    self.qqTF.delegate = self;
+    self.bankCardTF.delegate = self;
+    self.bankAddrTF.delegate = self;
+    
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.nameTF) {
+        [self.view endEditing:YES];
+        return YES;
+    }else if (textField == self.emailTF){
+        [self.qqTF becomeFirstResponder];
+        return YES;
+    }else if (textField == self.qqTF){
+        [self.view endEditing:YES];
+        return YES;
+    }else if (textField == self.bankCardTF){
+        [self.bankAddrTF becomeFirstResponder];
+        return YES;
+    }else if (textField == self.bankAddrTF){
+        [self.view endEditing:YES];
+        return YES;
+    }
+    return YES;
 }
 #pragma mark -- 选择出生日期
 - (IBAction)selectBirthDayClick:(id)sender {

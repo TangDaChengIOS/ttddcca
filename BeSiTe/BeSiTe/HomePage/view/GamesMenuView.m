@@ -111,7 +111,9 @@
                             @"action":@"1",
                             @"gamePlatformCode":self.model.companyCode};
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"favGame" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -124,7 +126,7 @@
         }
         
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
     }];
 }
 #pragma mark -- 进入游戏
@@ -176,7 +178,9 @@
                             @"gameCode":self.model.gameCode,
                             @"type":type};
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"gameLogin" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -184,7 +188,7 @@
         [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:JSON[@"gameUrl"]] animated:YES];
         [weak_self removeFromSuperview];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
     }];
 }
 

@@ -18,6 +18,7 @@
 
 @interface PersonMessageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *mainAccountLab;
 @property (weak, nonatomic) IBOutlet UIImageView *vipImageView;
 @property (weak, nonatomic) IBOutlet UILabel *accountNameLab;
@@ -53,23 +54,49 @@
         [weak_self pushVC:webVC];
     }];
     [_specialVIPImageView addGestureRecognizer:tap];
+    
+    
+    self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weak_self getFavGameData];
+        [weak_self getUserMsg];
+    }];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationNeedVerifyPhoneNum) name:@"ApplicationNeedVerifyPhoneNum" object:nil];
+    [self.scrollView.mj_header beginRefreshing];
 }
 
-#pragma mark -- 界面显示时，读取单例中的个人信息，获取收藏的游戏
+#pragma mark -- applicationNeedVerifyPhoneNum
+-(void)applicationNeedVerifyPhoneNum
+{
+    self.tabBarController.selectedIndex = 2;
+    [EditPhoneNumberView showWithEditPhoneType:EditPhoneNumberViewTypeVerify withFinshBlock:nil];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
     [self readDataFromSingleLeton];
-    [self getFavGameData];
-    
 }
+
+
+-(void)getUserMsg{
+    kWeakSelf
+    [RequestManager getWithPath:@"userInfo" params:nil success:^(id JSON, BOOL isSuccess) {
+        [weak_self.scrollView.mj_header endRefreshing];
+        NSLog(@"%@",JSON);
+        [[BSTSingle defaultSingle].user mj_setKeyValues:JSON];
+        [weak_self readDataFromSingleLeton];
+    } failure:^(NSError *error) {
+        [weak_self.scrollView.mj_header endRefreshing];
+    }];
+}
+
 
 -(void)readDataFromSingleLeton
 {
     UserModel * user = [BSTSingle defaultSingle].user;
     if (!user)
     {
-        self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
         self.vipImageView.image = KIMAGE(@"common_VIP-0");
         self.accountNameLab.text = @"未登录";
 
@@ -86,7 +113,6 @@
     }
     else
     {
-        self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
         self.vipImageView.image = KIMAGE([user getVipImageStr]);
         self.accountNameLab.text = user.accountName;
         if (user.userName.length <= 0) {
@@ -101,22 +127,56 @@
         
         self.phoneEditBtn.hidden = NO;
         self.emailEditBtn.hidden = NO;
-        self.phoneLab.text = user.mobile;
+        self.phoneLab.text = [self dealPhoneNum:user.mobile];
         self.phoneStateImageView.image = user.mobileVerified == 0 ? KIMAGE(@"profile_verification_img_false") : KIMAGE(@"profile_verification_img_true");
         if (user.mobile.length <= 0) {
-            [self refreshButton:self.phoneEditBtn state:NO];
+            [self refreshButton:self.phoneEditBtn state:YES];
 
         }else{
             [self refreshButton:self.phoneEditBtn state:user.mobileVerified];
         }
-        self.emailLab.text = user.email;
+        self.emailLab.text = [self dealEmail:user.email];
         self.emailStateImageView.image = user.emailVerified == 0 ? KIMAGE(@"profile_verification_img_false") : KIMAGE(@"profile_verification_img_true");
         if (user.email.length <= 0) {
-            [self refreshButton:self.emailEditBtn state:NO];
+            [self refreshButton:self.emailEditBtn state:YES];
         }else{
             [self refreshButton:self.emailEditBtn state:user.emailVerified];
         }
     }
+}
+
+-(NSString *)dealPhoneNum:(NSString *)phone{
+    if (!phone || phone.length == 0) {
+        return @"";
+    }
+   return [phone stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+}
+
+-(NSString *)dealEmail:(NSString *)email{
+    if (!email || email.length == 0) {
+        return @"";
+    }
+    NSArray * array = [email componentsSeparatedByString:@"@"];
+    if (array.count == 1) {
+        return email;
+    }
+    else{
+        NSString * string1 = array[0];
+        if (string1.length <=3) {
+            string1 = [string1 stringByReplacingCharactersInRange:NSMakeRange(string1.length - 1, 1) withString:@"*"];
+        }else{
+            string1 = [string1 stringByReplacingCharactersInRange:NSMakeRange(3, string1.length -3) withString:[self numberOfStar:string1.length - 3]];
+        }
+        return [string1 stringByAppendingFormat:@"@%@",array[1]];
+    }
+}
+
+-(NSString *)numberOfStar:(NSInteger)num{
+    NSString * string = @"";
+    for (int i = 1; i<= num; i++) {
+        string = [string stringByAppendingString:@"*"];
+    }
+    return string;
 }
 
 -(void)refreshButton:(UIButton *)button state:(BOOL)isOK{
@@ -128,7 +188,7 @@
     if (textField == self.nameLab) {
         kWeakSelf
         [EditNameView showWithFinshBlock:^{
-            [weak_self readDataFromSingleLeton];
+            [weak_self.scrollView.mj_header beginRefreshing];
         }];
         return NO;
     }
@@ -199,7 +259,7 @@
 #pragma mark -- Buttons Events
 //修改密码
 - (IBAction)changePWDBtnClick:(id)sender {
-    [EditPassWordView show];
+    [EditPassWordView showWithFinshBlock:nil];
 }
 //推荐有礼
 - (IBAction)recommendBtnClick:(id)sender {
@@ -208,18 +268,24 @@
 //修改、验证手机号码
 - (IBAction)phoneEditBtnClick:(UIButton *)sender {
 //    @"修改": @"验证"
+    kWeakSelf
     if ([sender.titleLabel.text isEqualToString:@"修改"]) {
-        [EditPhoneNumberView showWithEditPhoneType:EditPhoneNumberViewTypeEdit];
+        [EditPhoneNumberView showWithEditPhoneType:EditPhoneNumberViewTypeEdit withFinshBlock:^{
+            [weak_self.scrollView.mj_header beginRefreshing];
+        }];
     }else{
-        [EditPhoneNumberView showWithEditPhoneType:EditPhoneNumberViewTypeVerify];
+        [EditPhoneNumberView showWithEditPhoneType:EditPhoneNumberViewTypeVerify withFinshBlock:^{
+            [weak_self.scrollView.mj_header beginRefreshing];
+        }];
     }
 }
 //修改、验证邮箱
 - (IBAction)emailEditBtnClick:(UIButton *)sender
 {
+    kWeakSelf
     if ([sender.titleLabel.text isEqualToString:@"修改"]) {
         [EditEmailView showWithFinshBlock:^{
-            
+            [weak_self.scrollView.mj_header beginRefreshing];
         }];
     }else{
         [self verifyEmail];
@@ -229,8 +295,10 @@
 -(void)verifyEmail
 {
     NSDictionary * dict  = @{@"type":@"2",
-                             @"validateParam":self.emailLab.text};
+                             @"validateParam":[BSTSingle defaultSingle].user.email};
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"verify" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -243,7 +311,8 @@
         view.msgDetail = @"请登录您的邮箱进行验证。";
         [view showInWindow];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 //积分兑换
@@ -256,6 +325,10 @@
         _dataSource = [NSMutableArray array];
     }
     return _dataSource;
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ApplicationNeedVerifyPhoneNum" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

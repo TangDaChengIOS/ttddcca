@@ -100,7 +100,9 @@
     [mDict setValue:self.cardNumTF.text forKey:@"cardNo"];
     [mDict setValue:self.addressTF.text forKey:@"bankAddr"];
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"addUserBankInfo" params:mDict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -108,7 +110,8 @@
         TTAlert(@"保存银行卡信息成功！");
         [weak_self resetDataAfterSave];
     } failure:^(NSError *error) {
-    
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 
@@ -139,7 +142,9 @@
 - (IBAction)delBtnClick:(id)sender
 {
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"deleteUserBankInfo" params:@{@"tagId":[NSString stringWithFormat:@"%ld",_selectItem]} success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -147,7 +152,8 @@
         TTAlert(@"删除银行卡信息成功！");
         [weak_self resetDataAfterDelete];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 

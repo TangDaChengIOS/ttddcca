@@ -35,7 +35,10 @@
 
 -(void)requestData{
     kWeakSelf
+    [MBProgressHUD showMessage:@"数据加载中..." toView:nil];
     [RequestManager postManagerDataWithPath:@"user/msgReplys" params:@{@"msgId":self.model.msgId } success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
+
         NSLog(@"%@",JSON);
         if (!isSuccess) {
             TTAlert(JSON);
@@ -47,7 +50,8 @@
         [weak_self dealHistoryMsg];
 
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 
@@ -94,7 +98,7 @@
     }
 
     _msgsTextView.attributedText = mString;
-    [_msgsTextView scrollRangeToVisible:NSMakeRange(mString.length - 2, 1)];
+    [_msgsTextView scrollRangeToVisible:NSMakeRange(mString.length - 1, 1)];
 }
 
 -(NSAttributedString *)getCommonAttributeString:(NSString *)string{
@@ -124,7 +128,9 @@
                             @"content":self.textView.text,
                             @"msgId":self.model.msgId};
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postManagerDataWithPath:@"user/msg" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -139,7 +145,7 @@
         view.msgDetail = @"我们将在24小时内给您及时回复，请耐心的等待...";
         [view showInWindow];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
     }];
 }
 

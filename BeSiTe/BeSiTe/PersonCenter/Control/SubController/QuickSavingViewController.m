@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet ATNeedBorderView *giveNumberBackView;
 @property (weak, nonatomic) IBOutlet UITextField *giveNumberTF;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *subMitBtnTopConstraint;
 @end
 
 @implementation QuickSavingViewController
@@ -32,6 +33,7 @@
     }else{
         self.title = @"秒存 支付宝";
         self.giveNumberBackView.hidden = YES;
+        self.subMitBtnTopConstraint.constant -= 50;
     }
     [self requestReceivBankInfo];
 }
@@ -48,8 +50,8 @@
         for (NSDictionary * dict in JSON) {
             if ([dict[@"type"] isEqualToString:type]) {
                 weak_self.bankNameLab.text = dict[@"bankName"];
-                weak_self.bankCardLab.text = dict[@"bankNum"];
-                weak_self.bankUserNameLab.text = dict[@"payeeName"];
+                weak_self.bankCardLab.text = dict[@"bankCode"];
+                weak_self.bankUserNameLab.text = dict[@"acctName"];
             }
         }
         NSLog(@"%@",JSON);
@@ -88,8 +90,10 @@
     }
     
     [mDict setValue:@"1" forKey:@"isApplyDiscnt"];
-
+    
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"quickPay" params:mDict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -103,16 +107,24 @@
         [view showInWindow];
         
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
     }];
 }
 - (IBAction)copyBankCardClick:(id)sender {
     UIPasteboard *pboard = [UIPasteboard generalPasteboard];
-    pboard.string = self.bankCardLab.text;
+    if (self.bankCardLab.text.length >0) {
+        pboard.string = self.bankCardLab.text;
+    }else{
+        pboard.string = @"";
+    }
 }
 - (IBAction)copyUserNameClick:(id)sender {
     UIPasteboard *pboard = [UIPasteboard generalPasteboard];
-    pboard.string = self.bankUserNameLab.text;
+    if (self.bankUserNameLab.text.length >0) {
+        pboard.string = self.bankUserNameLab.text;
+    }else{
+        pboard.string = @"";
+    }
 }
 - (IBAction)helpClick:(id)sender {
     

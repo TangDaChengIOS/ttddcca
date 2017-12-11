@@ -15,7 +15,11 @@ typedef NS_ENUM(NSInteger,EditPhoneNumberViewType) {
 
 /**修改、验证手机号*/
 @interface EditPhoneNumberView : ATTranslucentView
+
+@property (nonatomic,strong) UILabel * titleLab;
 @property (nonatomic,assign) EditPhoneNumberViewType editType ;
-+(void)showWithEditPhoneType:(EditPhoneNumberViewType)type;
+@property (nonatomic,copy) void (^completeBlock)();
+
++(void)showWithEditPhoneType:(EditPhoneNumberViewType)type withFinshBlock:(void(^)()) completeBlock;
 
 @end

@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *scrollViewFirstChildView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 
 @end
 
@@ -59,7 +60,10 @@
     self.threeBtn.layer.borderWidth = 1;
     
     self.nameTF.delegate = self;
+    self.phoneTF.delegate = self;
+    self.codeTF.delegate = self;
     self.pwdSecTF.delegate = self;
+    self.pwdTF.delegate = self;
     self.NotTurePwdLab.hidden = YES;
 
     self.getCodeBtn.layer.borderColor = UIColorFromINTValue(244, 144, 30).CGColor;
@@ -100,32 +104,75 @@
         }
     }
 }
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.nameTF && range.location <2) {
+        textField.text = @"BC";
+        return NO;
+    }
+    return YES;
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.nameTF) {
+        [self.phoneTF becomeFirstResponder];
+        return YES;
+    }else if (textField == self.phoneTF){
+        [self.codeTF becomeFirstResponder];
+        return YES;
+    }else if (textField == self.codeTF){
+        [self.pwdTF becomeFirstResponder];
+        return YES;
+    }else if (textField == self.pwdTF){
+        [self.pwdSecTF becomeFirstResponder];
+        return YES;
+    }else if (textField == self.pwdSecTF){
+        [self.view endEditing:YES];
+        return YES;
+    }
+    return YES;
+}
 #pragma mark -- 按钮事件
 - (IBAction)registerBtnDidClicked:(id)sender
 {
+    _registerBtn.enabled = NO;
+    
     if (![ZZTextInput inputNumberOrLetters:self.nameTF.text]) {
         TTAlert(@"请输入以数字、字母、下划线组成的6-15位的账号");
+        _registerBtn.enabled = YES;
         return;
     }
     if (![ZZTextInput isValidateMobile:self.phoneTF.text]) {
         TTAlert(@"请输入正确的手机号码");
+        _registerBtn.enabled = YES;
         return;
     }
     if (self.codeTF.text.length <= 0) {
         TTAlert(@"请输入验证码");
+        _registerBtn.enabled = YES;
         return;
     }
-    if (self.pwdTF.text.length <= 0 || self.pwdSecTF.text.length <= 0) {
-        TTAlert(@"请输入密码");
+    if (self.pwdTF.text.length < 6 || self.pwdTF.text.length > 10) {
+        TTAlert(@"请输入正确长度的密码(6~10位)");
+        _registerBtn.enabled = YES;
+        return;
+    }
+    
+    if (self.pwdSecTF.text.length < 6 || self.pwdSecTF.text.length > 10) {
+        TTAlert(@"请再次输入正确长度的密码(6~10位)");
+        _registerBtn.enabled = YES;
         return;
     }
     if (![self.pwdTF.text isEqualToString:self.pwdSecTF.text]) {
         self.pwdSecBackView.layer.borderColor = UIColorFromINTValue(252, 25, 26).CGColor;
         self.NotTurePwdLab.hidden = NO;
+        _registerBtn.enabled = YES;
         return;
     }
     if (!self.agreeBtn.selected) {
         TTAlert(@"请阅读并同意《贝斯特相关条款和隐私权政策》");
+        _registerBtn.enabled = YES;
         return;
     }
     NSString * passWord = [RSAEncryptor encryptStringUseLocalFile:self.pwdTF.text];
@@ -134,17 +181,23 @@
                             @"password":passWord,
                             @"smsCode":self.codeTF.text};
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"register" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
+        weak_self.registerBtn.enabled = YES;
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
         UserModel * user = [UserModel new];
         [user mj_setKeyValues:JSON];
+        user.accountName = weak_self.nameTF.text;
         [BSTSingle defaultSingle].user = user;
+        
         [weak_self.navigationController pushViewController:[[RegisterPageTwoViewController alloc]initWithNibName:@"RegisterPageTwoViewController" bundle:nil] animated:YES];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
+        weak_self.registerBtn.enabled = YES;
     }];
 }
 #pragma mark -- 获取验证码
@@ -157,8 +210,9 @@
     kWeakSelf
     NSDictionary * dict = @{@"mobile":self.phoneTF.text,
                             @"type":@"1"};
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON ,BOOL isSuccess) {
-        
+        [MBProgressHUD hideHUDForView:nil];
         NSLog(@"%@",JSON);
         if (!isSuccess) {
             TTAlert(JSON);
@@ -168,7 +222,7 @@
             
         }];
     } failure:^(NSError *error) {
-
+        [MBProgressHUD hideHUDForView:nil];
     }];
 }
 

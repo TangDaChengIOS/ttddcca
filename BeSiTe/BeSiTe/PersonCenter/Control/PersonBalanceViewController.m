@@ -37,10 +37,11 @@
 }
 
 -(void)getBalanceData{
-    NSArray * arr = @[@"SG",@"BBIN",@"PS",@"PT",@"AG",@"PNG",@"GG",@"MG",@"OS",@"TTG"];
+//    NSArray * arr = @[@"SG",@"BBIN",@"PS",@"PT",@"AG",@"PNG",@"GG",@"MG",@"OS",@"TTG"];
     [[BSTSingle defaultSingle].gameCompanysBalanceArr removeAllObjects];
     
-    for (NSString * code in arr) {
+    for (GamesCompanyModel * model in [BSTSingle defaultSingle].companysArray) {
+        NSString * code = model.companyCode;
         NSDictionary * dict = @{@"gamePlatformCode":code};
         [RequestManager getWithPath:@"getGameBalance" params:dict success:^(id JSON ,BOOL isSuccess) {
             if (!isSuccess) {
@@ -58,18 +59,6 @@
         }];
     }
 
-#warning --需要换回来
-//    [RequestManager getWithPath:@"getGameBalance" params:nil success:^(id JSON ,BOOL isSuccess) {
-//        if (!isSuccess) {
-//            TTAlert(JSON);
-//            return ;
-//        }
-//        self.dataSource = [BalanceModel jsonToArray:JSON];
-//        [self.tableView reloadData];
-//        NSLog(@"%@",JSON);
-//    } failure:^(NSError *error) {
-//        
-//    }];
 }
 
 -(void)configSubViews{
@@ -122,8 +111,12 @@
 
 
 #pragma mark -- ButtonEvents
-- (IBAction)aplyBtnClick:(id)sender {
+- (IBAction)aplyBtnClick:(id)sender
+{
+    [MBProgressHUD showMessage:@"" toView:nil];
+    
     [RequestManager postWithPath:@"applyFund" params:nil success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD  hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -136,7 +129,7 @@
         view.msgDetail = @"申请救援金成功！";
         [view showInWindow];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD  hideHUDForView:nil];
     }];
 }
 

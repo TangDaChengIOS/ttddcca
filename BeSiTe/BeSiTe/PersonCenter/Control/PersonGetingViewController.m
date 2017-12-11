@@ -134,7 +134,7 @@
         TTAlert(@"请输入银行卡/折号");
         return;
     }
-    kWeakSelf
+    
     NSString * passWord = [RSAEncryptor encryptStringUseLocalFile:self.pwdTF.text];
     NSMutableDictionary * mDict = [NSMutableDictionary dictionary];
     [mDict setValue:self.accountTF.text forKey:@"loginName"];
@@ -146,16 +146,20 @@
     if (self.cardAdressTF.text.length > 0) {
         [mDict setValue:self.cardAdressTF.text forKey:@"bankAddr"];
     }
-
+    [MBProgressHUD showMessage:@"" toView:nil];
+    kWeakSelf
     [RequestManager postWithPath:@"userWithdraw" params:mDict success:^(id JSON ,BOOL isSuccess) {
-        NSLog(@"%@",JSON);
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
-#warning --需要干点什么
+        [BSTSingle defaultSingle].user.userAmount = [JSON[@"balance"] floatValue];
+        weak_self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
+        TTAlert(@"取款申请提交成功！");
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 - (IBAction)managerCardBtnClick:(id)sender {

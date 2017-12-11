@@ -10,7 +10,6 @@
 
 @interface EditPhoneNumberView ()
 
-@property (nonatomic,strong) UILabel * titleLab;
 @property (nonatomic,strong) UITextField * phoneTF;
 @property (nonatomic,strong) UITextField * codeTF;
 @property (nonatomic,strong) UIButton * getCodeBtn;
@@ -96,12 +95,13 @@
     [whiteBack addSubview:cancelBtn];
     
 }
-+(void)showWithEditPhoneType:(EditPhoneNumberViewType)type
++(void)showWithEditPhoneType:(EditPhoneNumberViewType)type withFinshBlock:(void(^)()) completeBlock
 {
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     EditPhoneNumberView * view = [[EditPhoneNumberView alloc]init];
     view.editType = type;
     view.titleLab.text = type == EditPhoneNumberViewTypeEdit ? @"修改手机号码":@"验证手机号码";
+    view.completeBlock = completeBlock;
     [window addSubview:view];
 }
 
@@ -110,6 +110,12 @@
         TTAlert(@"请输入正确的手机号码");
         return;
     }
+
+    if ([self.phoneTF.text isEqualToString:[BSTSingle defaultSingle].user.mobile] && self.editType == EditPhoneNumberViewTypeEdit) {
+        TTAlert(@"您输入的新手机号与原手机号码一致！");
+        return;
+    }
+    
     if (self.codeTF.text.length <= 0) {
         TTAlert(@"请输入验证码");
         return;
@@ -131,6 +137,9 @@
             return ;
         }
         TTAlert(@"修改手机号成功");
+        if (weak_self.completeBlock) {
+            weak_self.completeBlock();
+        }
         [weak_self removeFromSuperview];
     } failure:^(NSError *error) {
         
@@ -143,15 +152,22 @@
                              @"smsCode":self.codeTF.text,
                              @"validateParam":self.phoneTF.text};
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"verify" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
+
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
         TTAlert(@"验证手机号成功");
+        if (weak_self.completeBlock) {
+            weak_self.completeBlock();
+        }
         [weak_self removeFromSuperview];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 

@@ -10,6 +10,9 @@
 
 /**修改密码*/
 @interface EditPassWordView : ATTranslucentView
-+(void)show;
+
+@property (nonatomic,copy) void (^completeBlock)();
+
++(void)showWithFinshBlock:(void(^)()) completeBlock;
 
 @end

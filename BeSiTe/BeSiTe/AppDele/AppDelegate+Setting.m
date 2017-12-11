@@ -41,6 +41,7 @@
 -(void)setLoginSuccessRootViewController
 {
     [[AppDelegate getTabBarController]setViewControllers:[self setTabBarControllerViewControllers:YES] animated:YES];
+    [AppDelegate getTabBarController].selectedIndex = 2;
     [self getWebUrls];
 }
 
@@ -128,6 +129,7 @@
         
     }];
 }
+
 +(UINavigationController *)getBoomNavigation{
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     UITabBarController * tabBar = (UITabBarController * )window.rootViewController;

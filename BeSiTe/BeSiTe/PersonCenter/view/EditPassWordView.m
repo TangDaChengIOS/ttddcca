@@ -88,9 +88,11 @@
     [whiteBack addSubview:cancelBtn];
     
 }
-+(void)show{
++(void)showWithFinshBlock:(void(^)()) completeBlock
+{
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     EditPassWordView * view = [[EditPassWordView alloc]init];
+    view.completeBlock = completeBlock;
     [window addSubview:view];
 }
 
@@ -100,14 +102,15 @@
         TTAlert(@"请输入原始密码");
         return;
     }
-    if (newPwdTF.text.length <= 0 ) {
-        TTAlert(@"请输入新密码");
+    if (newPwdTF.text.length < 6 || newPwdTF.text.length > 10) {
+        TTAlert(@"请输入正确长度的新密码(6~10位)");
         return;
     }
-    if (newPwdTF2.text.length <= 0 ) {
-        TTAlert(@"请确认新密码");
+    if (newPwdTF2.text.length < 6 || newPwdTF2.text.length > 10) {
+        TTAlert(@"请再次输入正确长度的新密码(6~10位)");
         return;
     }
+
     if (![newPwdTF.text isEqualToString:newPwdTF2.text]) {
         TTAlert(@"两次输入的新密码不一致！");
         return;
@@ -117,8 +120,11 @@
     NSString * newPassWord = [RSAEncryptor encryptStringUseLocalFile:newPwdTF.text];
     NSDictionary * dict = @{@"oldPwd":oldPassWord,
                             @"newPwd":newPassWord};
-
+    
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"modifyPwd" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
+
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -126,12 +132,13 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"密码修改成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self removeFromSuperview];
+    [self removeFromSuperview];    
 }
 
 

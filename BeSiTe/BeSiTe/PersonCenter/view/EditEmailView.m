@@ -83,7 +83,10 @@
         return;
     }
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"completeUserInfo" params:@{@"email":self.emailTF.text} success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
+
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -92,7 +95,8 @@
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邮箱号保存成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
+
     }];
 }
 

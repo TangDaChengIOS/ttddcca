@@ -13,6 +13,7 @@
 @property (nonatomic,strong) UITableView * tableView;
 @property (nonatomic,assign) NSInteger page;
 @property (nonatomic,strong) NSMutableArray * dataSource;
+@property (nonatomic,strong) BSTNoDataView * noDataView;
 
 @end
 
@@ -47,22 +48,34 @@
 }
 
 #pragma mark -- 请求转账数据
--(void)requestDataForZhuanZhang{
+-(void)requestDataForZhuanZhang
+{
+    kWeakSelf
     [RequestManager getWithPath:@"getUserTransfersInfos" params:[self para] success:^(id JSON ,BOOL isSuccess) {
-        [self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_footer endRefreshing];
         NSLog(@"%@",JSON);
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
-        self.dataSource = [MoneyRecordModel jsonToArray:JSON[@"data"]];
-        [self.tableView reloadData];
+        if (weak_self.page == 1) {
+            [weak_self.dataSource removeAllObjects];
+        }
+        [weak_self.dataSource addObjectsFromArray: [MoneyRecordModel jsonToArray:JSON[@"data"]]];
+        [weak_self.tableView reloadData];
         if ([JSON[@"hasNext"] integerValue] == 0) {
-            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            [weak_self.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        if (weak_self.dataSource.count == 0) {
+            [weak_self.tableView addSubview:weak_self.noDataView];
+        }else{
+            [weak_self.noDataView removeFromSuperview];
         }
         _page = [JSON[@"currentPage"] integerValue];
     } failure:^(NSError *error) {
-        
+        [weak_self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_footer endRefreshing];
     }];
 }
 
@@ -115,7 +128,14 @@
     }
     return _dataSource;
 }
-
+-(BSTNoDataView *)noDataView
+{
+    if (!_noDataView) {
+        _noDataView = [[BSTNoDataView alloc]initWithFrame:self.tableView.bounds];
+        _noDataView.isMsg = NO;
+    }
+    return _noDataView;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

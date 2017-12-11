@@ -56,9 +56,13 @@
             TTAlert(JSON);
             return ;
         }
+        
         NSDictionary * dict = JSON[@"page"];
         NSArray * data = dict[@"data"];
-        weak_self.dataSource = [ActivityModel jsonToArray:data];
+        if (weak_self.page == 1) {
+            [weak_self.dataSource removeAllObjects];
+        }
+        [weak_self.dataSource addObjectsFromArray: [ActivityModel jsonToArray:data]];
         [weak_self.tableView reloadData];
         if ([dict[@"hasNext"] integerValue] == 0) {
             [weak_self.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -67,7 +71,8 @@
         NSLog(@"%@",JSON);
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
-        
+        [weak_self.tableView.mj_header endRefreshing];
+        [weak_self.tableView.mj_footer endRefreshing];
     }];
 }
 

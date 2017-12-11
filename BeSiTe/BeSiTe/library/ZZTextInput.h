@@ -33,7 +33,7 @@
 +(BOOL)inputNumberOrLetters:(NSString*)name;
 
 /**验证是否手机号*/
-+ (BOOL)isValidateMobile:(NSString *)mobile;
++ (BOOL)isValidateMobile:(NSString *)mobileNum;
 
 /**验证是正确的邮箱号*/
 + (BOOL)isEmailAddress:(NSString *)emailAddr;
