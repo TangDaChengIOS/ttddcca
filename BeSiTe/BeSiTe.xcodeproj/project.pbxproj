@@ -91,6 +91,7 @@
 		116463BC1F91F634004ECC79 /* XWFilterTransitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1164639C1F91F634004ECC79 /* XWFilterTransitionView.m */; };
 		116463BD1F91F634004ECC79 /* XWMagicMoveAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1164639F1F91F634004ECC79 /* XWMagicMoveAnimator.m */; };
 		11713E201FA2D76300303AD8 /* OnlyShowImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11713E1F1FA2D76300303AD8 /* OnlyShowImageButton.m */; };
+		117799081FDE368D00F722E3 /* BSTLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 117799071FDE368D00F722E3 /* BSTLoadingView.m */; };
 		1180453E1FD049F800EA8E76 /* ReplyMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1180453C1FD049F800EA8E76 /* ReplyMsgViewController.m */; };
 		1180453F1FD049F800EA8E76 /* ReplyMsgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1180453D1FD049F800EA8E76 /* ReplyMsgViewController.xib */; };
 		1182AF271F95A9E1001CE114 /* ATBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1182AF261F95A9E1001CE114 /* ATBaseModel.m */; };
@@ -333,6 +334,8 @@
 		1164639F1F91F634004ECC79 /* XWMagicMoveAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWMagicMoveAnimator.m; sourceTree = "<group>"; };
 		11713E1E1FA2D76300303AD8 /* OnlyShowImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlyShowImageButton.h; sourceTree = "<group>"; };
 		11713E1F1FA2D76300303AD8 /* OnlyShowImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlyShowImageButton.m; sourceTree = "<group>"; };
+		117799061FDE368D00F722E3 /* BSTLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTLoadingView.h; sourceTree = "<group>"; };
+		117799071FDE368D00F722E3 /* BSTLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTLoadingView.m; sourceTree = "<group>"; };
 		1180453B1FD049F800EA8E76 /* ReplyMsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyMsgViewController.h; sourceTree = "<group>"; };
 		1180453C1FD049F800EA8E76 /* ReplyMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyMsgViewController.m; sourceTree = "<group>"; };
 		1180453D1FD049F800EA8E76 /* ReplyMsgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReplyMsgViewController.xib; sourceTree = "<group>"; };
@@ -893,6 +896,8 @@
 				1112EF451FBED6A600B46A8C /* UIButton+TimerCount.m */,
 				11348D261FD79136009482DE /* MBProgressHUD+ATADD.h */,
 				11348D271FD79136009482DE /* MBProgressHUD+ATADD.m */,
+				117799061FDE368D00F722E3 /* BSTLoadingView.h */,
+				117799071FDE368D00F722E3 /* BSTLoadingView.m */,
 			);
 			path = library;
 			sourceTree = "<group>";
@@ -1490,6 +1495,7 @@
 				116463481F91AA3E004ECC79 /* HomeViewController.m in Sources */,
 				11B8F0EF1FB4A02000D7E662 /* ActivityTableViewCell.m in Sources */,
 				116463B01F91F634004ECC79 /* XWCoolAnimator.m in Sources */,
+				117799081FDE368D00F722E3 /* BSTLoadingView.m in Sources */,
 				112B16D91FA727CC00CE4555 /* EditPassWordView.m in Sources */,
 				11B8F0EB1FB49E7100D7E662 /* OnlyShowTimeTableViewCell.m in Sources */,
 				116463BD1F91F634004ECC79 /* XWMagicMoveAnimator.m in Sources */,

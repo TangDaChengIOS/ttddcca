@@ -124,6 +124,9 @@
                 
                 [[AppDelegate getTabBarController].viewControllers[1].tabBarItem setBadgeValue:[ZZTextInput getBadgeValue:[BSTSingle defaultSingle].activityUnreadNum]];
             }
+            else if ([dict[@"paraCode"] isEqualToString:@"remit"]){
+                [BSTSingle defaultSingle].remitUrl = dict[@"url"];                
+            }
         }
     } failure:^(NSError *error) {
         

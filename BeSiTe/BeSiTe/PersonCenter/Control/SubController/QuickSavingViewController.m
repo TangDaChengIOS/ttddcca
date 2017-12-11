@@ -128,7 +128,7 @@
 }
 - (IBAction)helpClick:(id)sender {
     
-    [self pushVC:[WebDetailViewController quickCreateWithUrl:@"http://172.104.54.176:8080/check_bank_number"]];
+    [self pushVC:[WebDetailViewController quickCreateWithUrl:[BSTSingle defaultSingle].remitUrl]];
 }
 
 - (void)didReceiveMemoryWarning {

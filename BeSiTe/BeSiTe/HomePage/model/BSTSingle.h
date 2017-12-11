@@ -34,6 +34,7 @@
 @property (nonatomic,copy) NSString * registerAgreementUrl;//注册协议
 @property (nonatomic,copy) NSString * aboutUSUrl;//关于我们
 @property (nonatomic,copy) NSString * vipExplainUrl;//VIP介绍
+@property (nonatomic,copy) NSString * remitUrl;//汇款单号查询链接
 
 @property (nonatomic,assign) NSInteger adsRollTime;//首页轮播图滚动时间间隔
 @property (nonatomic,assign) NSInteger activityUnreadNum;//活动未读数量

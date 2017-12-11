@@ -17,7 +17,7 @@
 @interface RecordTableViewCell : UITableViewCell
 
 @property (nonatomic,assign) RecordCellType cellType;
--(void)setCell;
+
 -(void)setCellWithModel:(MoneyRecordModel *)model andCellType:(RecordCellType)cellType;
 
 -(void)setTopCellWithVCType:(RecordDetailControlType)detailVCType;

@@ -60,8 +60,8 @@
     _fourthLab.hidden = NO;
     UIColor * black = UIColorFromINTValue(110, 110, 110);//浅黑色
     UIColor * green = UIColorFromINTValue(68, 152, 47);//浅绿色
-    UIColor * blue = UIColorFromINTValue(0, 149, 213);//浅蓝色
-    UIColor * red = UIColorFromINTValue(192, 96, 98);//浅红色
+//    UIColor * blue = UIColorFromINTValue(0, 149, 213);//浅蓝色
+//    UIColor * red = UIColorFromINTValue(192, 96, 98);//浅红色
 
     _firstLab.textColor = _secLab.textColor = _thirdLab.textColor = black;
     _fourthLab.textColor = green;
