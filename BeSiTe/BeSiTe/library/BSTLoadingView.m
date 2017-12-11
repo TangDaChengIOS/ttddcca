@@ -66,7 +66,7 @@
 {
     NSMutableArray *imgArray = [NSMutableArray array];
     
-    for (int i = 1; i < 12; i ++) {
+    for (int i = 1; i < 13; i ++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"loading%d",i]];
         [imgArray addObject:image];
     }
@@ -89,14 +89,14 @@
 
 + (void)hideHUDForView:(UIView *)view
 {
-//    if (view == nil) {
-//        view = [UIApplication sharedApplication].keyWindow;
-//    }
-//    for (UIView *itemView in view.subviews) {
-//        if ([itemView isKindOfClass:[BSTLoadingView class]]) {
-//            [itemView removeFromSuperview];
-//        }
-//    }
+    if (view == nil) {
+        view = [UIApplication sharedApplication].keyWindow;
+    }
+    for (UIView *itemView in view.subviews) {
+        if ([itemView isKindOfClass:[BSTLoadingView class]]) {
+            [itemView removeFromSuperview];
+        }
+    }
 }
 
 

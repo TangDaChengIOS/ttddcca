@@ -15,5 +15,6 @@ pod 'JSONModel'
 pod 'VTMagic'
 pod 'SDCycleScrollView'
 pod 'Masonry'
+pod 'Instabug'
 
 end

@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - FontAwesome+iOS (0.1.4)
+  - Instabug (7.3.14)
   - IQKeyboardManager (5.0.6)
   - JSONModel (1.7.0)
   - Masonry (1.1.0)
@@ -37,6 +38,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
+  - Instabug
   - IQKeyboardManager
   - JSONModel
   - Masonry
@@ -52,6 +54,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   FontAwesome+iOS: 9070b682a9255ca0fdc34bcfb129ad0ba2b73b87
+  Instabug: fe069e071bd6457dc6a76e20dfd52622434ee759
   IQKeyboardManager: 077b7f691dfa9d69db9cff66f2bed68ebfc02d9b
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -64,6 +67,6 @@ SPEC CHECKSUMS:
   VTMagic: b49e5f456dbcbfd9a3588ba92417233a105bc193
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 710bbaad0943a51470ef7e41ebab146728b15c36
+PODFILE CHECKSUM: 92d973fe1f867d955fe2785f3bdb762d9cc5ddfe
 
 COCOAPODS: 1.4.0.beta.1

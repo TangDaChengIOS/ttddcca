@@ -11,6 +11,7 @@
 //#import <LocalAuthentication/LocalAuthentication.h>
 #import "APPStartRunViewController.h"
 #import "RSAEncryptor.h"
+#import <Instabug/Instabug.h>
 
 @interface AppDelegate ()
 
@@ -43,6 +44,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNoLoginRootViewController) name:BSTLoginFailueNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setLoginSuccessRootViewController) name:BSTLoginSuccessNotification object:nil];
 
+    [Instabug startWithToken:@"5e0d2401c0059818a8321a1955cd1744" invocationEvent:IBGInvocationEventShake];
     return YES;
 }
 
