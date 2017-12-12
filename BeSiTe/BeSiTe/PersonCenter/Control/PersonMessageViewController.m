@@ -16,7 +16,10 @@
 #import "RecordExchangeView.h"
 #import "EditEmailView.h"
 
-@interface PersonMessageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate>
+@interface PersonMessageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate>{
+    CGFloat _itemWidth;
+    CGFloat _itemHeight;
+}
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *mainAccountLab;
@@ -40,6 +43,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _itemWidth = (MAXWIDTH - 60)/3;
+    _itemHeight = _itemWidth * 78 / 104 + 20;
     
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
@@ -239,8 +244,7 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat w = (MAXWIDTH - 60)/3;
-    return CGSizeMake(w, w + 20);
+    return CGSizeMake(_itemWidth, _itemHeight);
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section

@@ -11,8 +11,12 @@
 #import "GameItemCollectionViewCell.h"
 #import "GamesMenuView.h"
 #import "GameSearchViewController.h"
+#include "GamesCanScrollTipsView.h"
 
-@interface GameListPageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface GameListPageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>{
+    CGFloat _itemWidth;
+    CGFloat _itemHeight;
+}
 
 @property (nonatomic,strong) GameListPageHeaderView * headerView;
 @property (nonatomic,strong) UICollectionView * collectionView;
@@ -21,20 +25,22 @@
 @property (nonatomic,strong) NSMutableArray * dataSource;
 
 @property (nonatomic,assign) BOOL isShowSearchResult;//当前是展示搜索结果
+
+@property (nonatomic,assign) BOOL isHaveShowTips;//显示可滑动提示
+
 @end
 
 @implementation GameListPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _itemWidth = (MAXWIDTH - 60)/3;
+    _itemHeight = _itemWidth * 78 / 104 + 20;
+    
     [self configSubViews];
     self.automaticallyAdjustsScrollViewInsets = NO;
    
-//    if (self.isShowSearchResult) {
-//        [self.collectionView setY_offset:20];
-//        [self.view addSubview:self.collectionHeaderView];
-//    }
-
+    self.isHaveShowTips = [[NSUserDefaults standardUserDefaults] boolForKey:kFirstEnterGameListPage];
     
     [self.headerView setSelectedItem:self.selectIndex];
     [self.headerView.scrollTextView  startScrollWithAttributedString:[BSTSingle defaultSingle].notices];
@@ -51,19 +57,40 @@
     else{
         [mDict setValue:_selectCompanyCode forKey:@"companyCode"];
     }
-
+    kWeakSelf
     [RequestManager getManagerDataWithPath:@"games" params:mDict success:^(id JSON ,BOOL isSuccess) {
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
         NSLog(@"%@",JSON);
-        self.dataSource = [GamesModel jsonToArray:JSON];
-        [self.collectionView reloadData];
+        weak_self.dataSource = [GamesModel jsonToArray:JSON];
+        [weak_self.collectionView reloadData];
+        [weak_self ensureCanScroll];
     } failure:^(NSError *error) {
         
     }];
 }
+
+
+-(void)ensureCanScroll
+{
+    if (self.isHaveShowTips || self.dataSource.count == 0) {
+        return;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+            kWeakSelf
+            [GamesCanScrollTipsView showWithFinshBlock:^{
+                [weak_self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:weak_self.dataSource.count -1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+            }];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstEnterGameListPage];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            self.isHaveShowTips = YES;
+    });
+
+}
+
 
 #pragma mark -- collectionView delegates
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -91,47 +118,22 @@
     if (kind == UICollectionElementKindSectionHeader ) {
         UICollectionReusableView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableViewkey2" forIndexPath:indexPath];
         [view removeAllSubviews];
-//        switch (indexPath.section) {
-//            case 0:
-//            {
-                view.backgroundColor = kWhiteColor;
-                UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 15, 15)];
-                imageView.image = KIMAGE(@"home_gameTypeName_icon");
-                [view addSubview:imageView];
-                [view addSubview:self.sectionHeadLab];
-                
-                if (self.isShowSearchResult) {
-                    _sectionHeadLab.text = [NSString stringWithFormat:@"贝斯特为您找到相关结果%ld个",self.dataSource.count];
 
-                }else{
-                    _sectionHeadLab.text = [NSString stringWithFormat:@"%@游戏%ld款",self.selectCompanyCode,self.dataSource.count];
-                }
-                _sectionHeadLab.left = imageView.maxX + 3;
-//            }
-//                break;
-//            case 1:
-//            {
-//                view.backgroundColor = UIColorFromINTValue(231, 231, 231);
-//                UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 100, 15)];
-//                lab.text = @"PNG游戏28款";
-//                lab.textColor = kBlackColor;// UIColorFromINTValue(142, 146, 149);
-//                lab.font = kFont(12);
-//                [view addSubview:lab];
-//            }
-//                break;
-//            case 2:
-//            {
-//                view.backgroundColor = UIColorFromINTValue(231, 231, 231);
-//                UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(15, 5, 100, 15)];
-//                lab.text = @"PNG游戏28款";
-//                lab.textColor = kBlackColor;// UIColorFromINTValue(142, 146, 149);
-//                lab.font = kFont(12);
-//                [view addSubview:lab];
-//            }
-//                break;
-//            default:
-//                break;
-//        }
+       view.backgroundColor = kWhiteColor;
+       UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 15, 15)];
+       imageView.image = KIMAGE(@"home_gameTypeName_icon");
+       [view addSubview:imageView];
+       [view addSubview:self.sectionHeadLab];
+       
+       if (self.isShowSearchResult)
+       {
+           _sectionHeadLab.text = [NSString stringWithFormat:@"贝斯特为您找到相关结果%ld个",self.dataSource.count];
+
+       }else{
+           _sectionHeadLab.text = [NSString stringWithFormat:@"%@游戏%ld款",self.selectCompanyCode,self.dataSource.count];
+       }
+       _sectionHeadLab.left = imageView.maxX + 3;
+
 
         return view;
     }
@@ -140,8 +142,7 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat w = (MAXWIDTH - 60)/3;
-    return CGSizeMake(w, w + 20);
+    return CGSizeMake(_itemWidth,_itemHeight);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{

@@ -165,6 +165,7 @@
 		11ECA9451F9D93F100CF84CB /* RegisterPageTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11ECA9431F9D93F100CF84CB /* RegisterPageTwoViewController.m */; };
 		11ECA9461F9D93F100CF84CB /* RegisterPageTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11ECA9441F9D93F100CF84CB /* RegisterPageTwoViewController.xib */; };
 		11ECA9491F9DA34400CF84CB /* ATNeedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11ECA9481F9DA34400CF84CB /* ATNeedBorderView.m */; };
+		11F1B7861FDF698F00F85535 /* GamesCanScrollTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F1B7851FDF698F00F85535 /* GamesCanScrollTipsView.m */; };
 		11F5E2371FB155E100A23523 /* ZZTextInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F5E2361FB155E100A23523 /* ZZTextInput.m */; };
 		11F5E2391FB1996F00A23523 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11F5E2381FB1996F00A23523 /* Security.framework */; };
 		11F5E2401FB199FB00A23523 /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F5E23F1FB199FB00A23523 /* RSAEncryptor.m */; };
@@ -467,6 +468,8 @@
 		11ECA9441F9D93F100CF84CB /* RegisterPageTwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterPageTwoViewController.xib; sourceTree = "<group>"; };
 		11ECA9471F9DA34400CF84CB /* ATNeedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATNeedBorderView.h; sourceTree = "<group>"; };
 		11ECA9481F9DA34400CF84CB /* ATNeedBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATNeedBorderView.m; sourceTree = "<group>"; };
+		11F1B7841FDF698F00F85535 /* GamesCanScrollTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamesCanScrollTipsView.h; sourceTree = "<group>"; };
+		11F1B7851FDF698F00F85535 /* GamesCanScrollTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamesCanScrollTipsView.m; sourceTree = "<group>"; };
 		11F5E2351FB155E100A23523 /* ZZTextInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZTextInput.h; sourceTree = "<group>"; };
 		11F5E2361FB155E100A23523 /* ZZTextInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZTextInput.m; sourceTree = "<group>"; };
 		11F5E2381FB1996F00A23523 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -710,6 +713,8 @@
 				11CBCCE51F9C6938000E4D01 /* GameListPageHeaderView.m */,
 				11CBCCEA1F9CB94F000E4D01 /* GameItemCollectionViewCell.h */,
 				11CBCCEB1F9CB94F000E4D01 /* GameItemCollectionViewCell.m */,
+				11F1B7841FDF698F00F85535 /* GamesCanScrollTipsView.h */,
+				11F1B7851FDF698F00F85535 /* GamesCanScrollTipsView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1444,6 +1449,7 @@
 				111455061FCF991800996BA1 /* UserMsgModel.m in Sources */,
 				1180453E1FD049F800EA8E76 /* ReplyMsgViewController.m in Sources */,
 				11D5EBA01FCC18130070BE9C /* OnlineSavingViewController.m in Sources */,
+				11F1B7861FDF698F00F85535 /* GamesCanScrollTipsView.m in Sources */,
 				11AC9F331FC30C020016F3E5 /* MoneyRecord_TJLJ_ViewController.m in Sources */,
 				11AC9F2A1FC30BAA0016F3E5 /* MoneyRecord_CK_ViewController.m in Sources */,
 				118C69821FB6AAD4005D095A /* WebDetailViewController.m in Sources */,

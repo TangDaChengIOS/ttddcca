@@ -32,9 +32,10 @@
 #define BSTLoginSuccessNotification @"BSTLoginSuccessNotification"
 /**登录失效通知名*/
 #define BSTLoginFailueNotification @"BSTLoginFailueNotification"
-
 /**注册成功通知名*/
 #define BSTRegisterSuccessNotification @"BSTRegisterSuccessNotification"
 
+/**第一次进入游戏列表页*/
+#define kFirstEnterGameListPage @"kFirstEnterGameListPage"
 
 #endif /* Constant_h */
