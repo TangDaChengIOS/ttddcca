@@ -122,7 +122,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [GamesMenuView showWithModel:self.dataSource[indexPath.item]];
+    [GamesMenuView showWithModel:self.dataSource[indexPath.section][indexPath.item]];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{

@@ -57,6 +57,7 @@
     if (self.searchBlock) {
         self.searchBlock(self.dataSource[indexPath.item]);
     }
+    [self.searchBar resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,6 +127,8 @@
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    [self.searchBar resignFirstResponder];
+    
     [self.dataSource addObject:searchBar.text];
     [[NSUserDefaults standardUserDefaults]setObject:self.dataSource forKey:kSearchHistoryKey];
     [[NSUserDefaults standardUserDefaults]synchronize];

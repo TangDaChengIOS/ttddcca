@@ -91,7 +91,7 @@
                                 <action selector="enterGameClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="mAn-dM-Jze"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_activity_hot_icon" translatesAutoresizingMaskIntoConstraints="NO" id="gzu-fJ-Mw4">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_left_hot_icon" translatesAutoresizingMaskIntoConstraints="NO" id="gzu-fJ-Mw4">
                             <rect key="frame" x="265" y="0.0" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="J3T-oQ-CJX"/>
@@ -152,6 +152,6 @@
     <resources>
         <image name="home_activeity_collect_icon" width="22" height="18"/>
         <image name="home_activity_background_img" width="311" height="210"/>
-        <image name="home_activity_hot_icon" width="30" height="31"/>
+        <image name="home_left_hot_icon" width="36" height="36"/>
     </resources>
 </document>

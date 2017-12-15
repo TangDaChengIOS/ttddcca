@@ -18,6 +18,7 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         CGFloat labWidth = self.contentView.width /2 -  50 * kPROPORTION;
         _leftLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, labWidth, 20)];
