@@ -10,9 +10,13 @@
 
 @interface WebDetailViewController : ATBaseViewController
 @property (nonatomic,copy) NSString * url;
-@property (nonatomic,assign) BOOL isOpenRotaion;
+@property (nonatomic,assign) BOOL isOpenRotaion;//是否支持转屏
 
-+(WebDetailViewController *)quickCreateWithUrl:(NSString *)url;
-+(WebDetailViewController *)quickCreateGamePageWithUrl:(NSString *)url;
+@property (nonatomic,assign) BOOL isNeedAgreeBtn;//是否需要显示同意按钮
+@property (nonatomic,copy) void (^agreeBtnClickBlock)();//点击同意按钮的Block
+
++(WebDetailViewController *)quickCreateWithUrl:(NSString *)url;//根据URL快速创建webviewController
++(WebDetailViewController *)quickCreateGamePageWithUrl:(NSString *)url;//根据游戏URL快速创建webviewController
+
 
 @end

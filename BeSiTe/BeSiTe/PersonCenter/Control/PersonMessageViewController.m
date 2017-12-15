@@ -35,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet ATNeedBorderButton *emailEditBtn;
 @property (weak, nonatomic) IBOutlet UIView *collectionTopView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollContentViewHeightConstraint;
 
 @property (nonatomic,strong) NSMutableArray * dataSource;
 @end
@@ -46,6 +47,10 @@
     _itemWidth = (MAXWIDTH - 60)/3;
     _itemHeight = _itemWidth * 78 / 104 + 20;
     
+    CGFloat maxH = MAXHEIGHT - 64 - 49 - 66;
+    self.scrollContentViewHeightConstraint.constant = maxH;
+    self.scrollView.contentSize = CGSizeMake(MAXWIDTH, maxH);
+    self.scrollView.directionalLockEnabled = YES;
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     _collectionView.showsVerticalScrollIndicator = NO;

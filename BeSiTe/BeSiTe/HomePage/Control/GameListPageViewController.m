@@ -12,6 +12,7 @@
 #import "GamesMenuView.h"
 #import "GameSearchViewController.h"
 #include "GamesCanScrollTipsView.h"
+#import "GameListPageCollectionReusableView.h"
 
 @interface GameListPageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>{
     CGFloat _itemWidth;
@@ -20,9 +21,9 @@
 
 @property (nonatomic,strong) GameListPageHeaderView * headerView;
 @property (nonatomic,strong) UICollectionView * collectionView;
-@property (nonatomic,strong) UILabel * sectionHeadLab;
-//@property (nonatomic,strong) UILabel * collectionHeaderView;//展示搜索结果时显示
+@property (nonatomic,strong) UILabel * collectionHeaderView;//展示搜索结果时显示
 @property (nonatomic,strong) NSMutableArray * dataSource;
+@property (nonatomic,strong) NSMutableArray * titleDataSource;
 
 @property (nonatomic,assign) BOOL isShowSearchResult;//当前是展示搜索结果
 
@@ -63,9 +64,19 @@
             TTAlert(JSON);
             return ;
         }
-        NSLog(@"%@",JSON);
-        weak_self.dataSource = [GamesModel jsonToArray:JSON];
+        [weak_self.titleDataSource removeAllObjects];
+        [weak_self.dataSource removeAllObjects];
+        NSInteger totalNum = 0;
+        for (NSDictionary * dict in JSON) {
+            NSString * key = dict[@"plateform"];
+            [weak_self.titleDataSource addObject:key];
+            NSMutableArray * array = [GamesModel jsonToArray:dict[@"list"]];
+            totalNum += array.count;
+            [weak_self.dataSource addObject:array];
+        }
+
         [weak_self.collectionView reloadData];
+        [weak_self setSearchResultTitle:totalNum];
         [weak_self ensureCanScroll];
     } failure:^(NSError *error) {
         
@@ -95,17 +106,17 @@
 #pragma mark -- collectionView delegates
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return self.dataSource.count;
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.dataSource.count;
+    return [(NSArray *)self.dataSource[section] count];
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     GameItemCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:kGameItemCollectionViewCellReuseID forIndexPath:indexPath];
     
-    [cell setCellWithModel:self.dataSource[indexPath.item]];
+    [cell setCellWithModel:self.dataSource[indexPath.section][indexPath.item]];
     return cell;
 }
 
@@ -115,25 +126,11 @@
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    if (kind == UICollectionElementKindSectionHeader ) {
-        UICollectionReusableView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableViewkey2" forIndexPath:indexPath];
-        [view removeAllSubviews];
-
-       view.backgroundColor = kWhiteColor;
-       UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 15, 15)];
-       imageView.image = KIMAGE(@"home_gameTypeName_icon");
-       [view addSubview:imageView];
-       [view addSubview:self.sectionHeadLab];
-       
-       if (self.isShowSearchResult)
-       {
-           _sectionHeadLab.text = [NSString stringWithFormat:@"贝斯特为您找到相关结果%ld个",self.dataSource.count];
-
-       }else{
-           _sectionHeadLab.text = [NSString stringWithFormat:@"%@游戏%ld款",self.selectCompanyCode,self.dataSource.count];
-       }
-       _sectionHeadLab.left = imageView.maxX + 3;
-
+    if (kind == UICollectionElementKindSectionHeader )
+    {
+        GameListPageCollectionReusableView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kGameListPageCollectionReusableViewReuseID forIndexPath:indexPath];
+        [view setIsShowResult:self.isShowSearchResult];
+        [view setCellWithCompanyName:self.titleDataSource[indexPath.section] andNums:[self.dataSource[indexPath.section] count]];
 
         return view;
     }
@@ -173,7 +170,7 @@
         _collectionView.delegate = self;
         _collectionView.backgroundColor = kWhiteColor;// UIColorFromINTValue(231, 231, 231);
         _collectionView.showsVerticalScrollIndicator = NO;
-        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionReusableViewkey2"];
+        [_collectionView registerClass:[GameListPageCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kGameListPageCollectionReusableViewReuseID];
         [_collectionView registerClass:[GameItemCollectionViewCell class] forCellWithReuseIdentifier:kGameItemCollectionViewCellReuseID];
     }
     return _collectionView;
@@ -187,12 +184,14 @@
         _headerView.selectGameCompanyBlock = ^(NSString * companyCode){
             weak_self.selectCompanyCode = companyCode;
             weak_self.isShowSearchResult = NO;
+            [weak_self refreshUI];
             [weak_self requestDataWithKey:nil];
         };
         _headerView.gotoSearchBlock = ^(){
             GameSearchViewController * contro = [[GameSearchViewController alloc]init];
             contro.searchBlock = ^(NSString * searchKey){
                 weak_self.isShowSearchResult = YES;
+                [weak_self refreshUI];
                 [weak_self requestDataWithKey:searchKey];
             };
             [weak_self pushVC:contro];
@@ -200,27 +199,47 @@
     }
     return _headerView;
 }
--(UILabel *)sectionHeadLab
-{
-    if (!_sectionHeadLab) {
-        _sectionHeadLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, 200, 15)];
-        _sectionHeadLab.text = @"PNG游戏28款";
-        _sectionHeadLab.textColor = kBlackColor;// UIColorFromINTValue(142, 146, 149);
-        _sectionHeadLab.font = kFont(12);
+
+
+-(void)refreshUI{
+    if (self.isShowSearchResult) {
+        if (!_collectionHeaderView){
+            [self.collectionView setY_offset:20];
+            [self.view addSubview:self.collectionHeaderView];
+        }
+    }else{
+        if (_collectionHeaderView){
+            [_collectionHeaderView removeFromSuperview];
+            _collectionHeaderView = nil;
+            [self.collectionView setY_offset:-20];
+        }
     }
-    return _sectionHeadLab;
 }
-//-(UILabel *)collectionHeaderView
-//{
-//    if (!_collectionHeaderView) {
-//        _collectionHeaderView = [[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionView.top - 20, MAXWIDTH, 20)];
-//        _collectionHeaderView.backgroundColor = kWhiteColor;
-//        _collectionHeaderView.text = @"贝斯特为您找到相关结果4个";
-//        _collectionHeaderView.textColor = kBlackColor;
-//        _collectionHeaderView.font = kFont(12);
-//    }
-//    return _collectionHeaderView;
-//}
+
+-(void)setSearchResultTitle:(NSInteger)totalNums
+{
+    if (!self.isShowSearchResult) {
+        return;
+    }
+    NSMutableAttributedString * mAStr = [[NSMutableAttributedString alloc]initWithString:@"贝斯特为你找到相关结果个" attributes:@{NSForegroundColorAttributeName:UIColorFromINTValue(4, 159, 189),NSFontAttributeName:kFont(12)}];
+    NSAttributedString * mAStr_num = [[NSAttributedString alloc]initWithString:[NSString stringWithFormat:@"%ld",totalNums] attributes:@{NSForegroundColorAttributeName:UIColorFromINTValue(255, 0, 0),NSFontAttributeName:kFont(12)}];
+    [mAStr insertAttributedString:mAStr_num atIndex:mAStr.length-1];
+    _collectionHeaderView.attributedText = mAStr;
+}
+
+
+-(UILabel *)collectionHeaderView
+{
+    if (!_collectionHeaderView) {
+        _collectionHeaderView = [[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionView.top - 20, MAXWIDTH, 20)];
+        _collectionHeaderView.backgroundColor = kWhiteColor;
+        _collectionHeaderView.text = @"贝斯特为您找到相关结果4个";
+        _collectionHeaderView.textColor = kBlackColor;
+        _collectionHeaderView.textAlignment = NSTextAlignmentCenter;
+        _collectionHeaderView.font = kFont(12);
+    }
+    return _collectionHeaderView;
+}
 
 -(NSMutableArray *)dataSource
 {
@@ -229,6 +248,16 @@
     }
     return _dataSource;
 }
+
+-(NSMutableArray *)titleDataSource
+{
+    if (!_titleDataSource) {
+        _titleDataSource = [NSMutableArray array];
+    }
+    return _titleDataSource;
+}
+
+
 #pragma mark -- subViews
 -(void)configSubViews
 {

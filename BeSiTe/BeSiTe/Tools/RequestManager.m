@@ -14,9 +14,10 @@
 + (void)commonRequestWithPath:(NSString *)path params:(NSDictionary *)params method:(NSString *)method success:(RequestSuccessBlock)success failure:(RequestFailureBlock)failure :(BOOL)isManagerData{
     
     NSString * baseUrl = (isManagerData ? ManagerBaseURL : ProfessionalBaseURL);
-    if ([path isEqualToString:@"sendSmsCode"]) {
+    if ([path isEqualToString:@"sendSmsCode"] || [path isEqualToString:@"verify"]) {
         baseUrl = SendCodeURL;
     }
+
     NSString *url = [NSString stringWithFormat:@"%@%@",baseUrl,path];
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

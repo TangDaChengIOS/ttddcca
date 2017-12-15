@@ -232,6 +232,11 @@
 
 - (IBAction)readAgree:(id)sender {
     WebDetailViewController * webVC = [WebDetailViewController quickCreateWithUrl:[BSTSingle defaultSingle].registerAgreementUrl];
+    webVC.isNeedAgreeBtn = YES;
+    kWeakSelf
+    webVC.agreeBtnClickBlock = ^(){
+        weak_self.agreeBtn.selected = YES;
+    };
     [self pushVC:webVC];
 }
 

@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
-//    self.nameTF.text = @"BCASDFG";
+//    self.nameTF.text = @"BC7896";
 //    self.pwdTF.text = @"qwerty";
 }
 
@@ -79,9 +79,13 @@
 #pragma mark -- subViews
 -(void)configSubViews
 {
-    self.navigationItem.titleView = [[UIImageView alloc]initWithImage:KIMAGE_Ori(@"common_navgration_title_ime")];
+//    self.navigationItem.titleView = [[UIImageView alloc]initWithImage:KIMAGE_Ori(@"common_navgration_title_ime")];
+    self.title = @"登录";
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"navgartion_back_btn") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
+    if (self.navigationController.presentingViewController) {
+            self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"navgartion_back_btn") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
+    }
+
     
     self.view.backgroundColor = kWhiteColor;
 
@@ -90,6 +94,7 @@
     
     self.registerBtn.layer.borderColor = UIColorFromINTValue(99, 161, 84).CGColor;
     self.registerBtn.layer.borderWidth = 1;
+    self.loginBtn.layer.borderColor = [UIColor clearColor].CGColor;
 }
 - (IBAction)findPWDBtnClick:(id)sender {
     ForgetPassWordViewController * forgetVC = [[ForgetPassWordViewController alloc]initWithNibName:@"ForgetPassWordViewController" bundle:nil];

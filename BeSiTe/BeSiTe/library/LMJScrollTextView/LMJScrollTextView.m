@@ -223,18 +223,15 @@
 #pragma mark - 设置速度
 -(void)setMoveSpeed:(CGFloat)speed{
     if (speed > 0.1) {
-        [_timer invalidate];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(contentMove) userInfo:nil repeats:YES];
-        return;
+        speed = 0.1;
     }
-    if (speed < 0.001) {
-        [_timer invalidate];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(contentMove) userInfo:nil repeats:YES];
-        return;
+    else if (speed < 0.001) {
+        speed =0.001;
     }
     
     [_timer invalidate];
     _timer = [NSTimer scheduledTimerWithTimeInterval:speed target:self selector:@selector(contentMove) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 
 #pragma mark - 内容移动

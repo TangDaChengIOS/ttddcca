@@ -9,6 +9,10 @@
 #ifndef Constant_h
 #define Constant_h
 
+#import "MenuViewController.h"
+#import "LoginViewController.h"
+#import "MessageViewController.h"
+
 #import "XWInteractiveTransition.h"
 #import "UIViewController+XWTransition.h"
 #import "RequestManager.h"

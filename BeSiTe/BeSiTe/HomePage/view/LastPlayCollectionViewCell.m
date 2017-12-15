@@ -24,7 +24,8 @@
 //        _mainImage.image = KIMAGE(@"home_tab_PNGType_img");
         [self.contentView addSubview:_mainImage];
         
-        _typeImage = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width - 30, 0, 30, 30)];
+        _typeImage = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width - 28, -2, 30, 30)];
+        _typeImage.contentMode = UIViewContentModeScaleToFill;
 //        _typeImage.image = KIMAGE(@"home_activity_hot_icon");
         [self.contentView addSubview:_typeImage];
     }
@@ -33,14 +34,14 @@
 
 -(void)setCellWithModel:(GamesModel *)model{
     _isMenuItem = NO;
-    [_mainImage setImageWithURL:[NSURL URLWithString:model.icon] placeholder:KIMAGE(@"home_tab_PNGType_img")];
+    [_mainImage setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
     
     if (model.isHot) {
-        _typeImage.image = KIMAGE(@"home_activity_hot_icon");
+        _typeImage.image = KIMAGE(@"home_left_hot_icon");
     }
     else{
         if (model.isNew) {
-            _typeImage.image = KIMAGE(@"home_game_platform_new_icon");
+            _typeImage.image = KIMAGE(@"home_left_new_icon");
         }
         else{
             _typeImage.image = nil;
@@ -54,11 +55,11 @@
     [_mainImage setImageWithURL:[NSURL URLWithString:model.classIcon] placeholder:nil];
     
     if (model.isHot) {
-        _typeImage.image = KIMAGE(@"home_activity_hot_icon");
+        _typeImage.image = KIMAGE(@"home_left_hot_icon");
     }
     else{
         if (model.isNew) {
-            _typeImage.image = KIMAGE(@"home_game_platform_new_icon");
+            _typeImage.image = KIMAGE(@"home_left_new_icon");
         }
         else{
             _typeImage.image = nil;

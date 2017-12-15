@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="aplyMoneyBtn" destination="sPl-0U-C35" id="Mv2-Yb-XBA"/>
                 <outlet property="tableView" destination="INx-b6-N47" id="8fs-9Q-dH9"/>
+                <outlet property="tableViewHeightConstraint" destination="pcG-u1-cMs" id="10i-PT-zPj"/>
                 <outlet property="totalMoneyLab" destination="TWh-QB-fly" id="yJO-jO-0zL"/>
                 <outlet property="turnInBtn" destination="MlK-by-5Eb" id="JRP-de-tgZ"/>
                 <outlet property="turnOutBtn" destination="z4z-uq-2Jl" id="9fL-uK-oOa"/>
@@ -45,6 +46,9 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="INx-b6-N47">
                     <rect key="frame" x="12" y="40" width="351" height="488"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="488" id="pcG-u1-cMs"/>
+                    </constraints>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07h-qf-pfh">
                     <rect key="frame" x="187" y="40" width="1" height="488"/>
@@ -101,8 +105,8 @@
                 <constraint firstAttribute="trailing" secondItem="z4z-uq-2Jl" secondAttribute="trailing" constant="12" id="BOM-5Z-bgF"/>
                 <constraint firstItem="MlK-by-5Eb" firstAttribute="width" secondItem="z4z-uq-2Jl" secondAttribute="width" id="R5S-jX-fBn"/>
                 <constraint firstItem="xAg-An-Wd2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Shl-AF-wVG"/>
+                <constraint firstItem="07h-qf-pfh" firstAttribute="height" secondItem="INx-b6-N47" secondAttribute="height" id="W2f-ai-nnp"/>
                 <constraint firstItem="xAg-An-Wd2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="WMB-jA-FAN"/>
-                <constraint firstItem="z4z-uq-2Jl" firstAttribute="top" secondItem="07h-qf-pfh" secondAttribute="bottom" constant="11" id="XKV-Tt-HCU"/>
                 <constraint firstAttribute="trailing" secondItem="sPl-0U-C35" secondAttribute="trailing" constant="12" id="cAm-Bn-ARC"/>
                 <constraint firstItem="INx-b6-N47" firstAttribute="top" secondItem="xAg-An-Wd2" secondAttribute="bottom" constant="5" id="cwz-Eu-sLN"/>
                 <constraint firstAttribute="trailing" secondItem="INx-b6-N47" secondAttribute="trailing" constant="12" id="czf-HS-RcO"/>
@@ -111,7 +115,6 @@
                 <constraint firstItem="sPl-0U-C35" firstAttribute="top" secondItem="MlK-by-5Eb" secondAttribute="bottom" constant="8" id="mTS-as-bHU"/>
                 <constraint firstItem="MlK-by-5Eb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="mmC-rD-PgO"/>
                 <constraint firstItem="sPl-0U-C35" firstAttribute="top" secondItem="z4z-uq-2Jl" secondAttribute="bottom" constant="8" id="oDX-PM-lbp"/>
-                <constraint firstItem="z4z-uq-2Jl" firstAttribute="top" secondItem="INx-b6-N47" secondAttribute="bottom" constant="11" id="rPZ-UX-nb3"/>
                 <constraint firstItem="INx-b6-N47" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="rnE-jd-b5D"/>
                 <constraint firstAttribute="trailing" secondItem="xAg-An-Wd2" secondAttribute="trailing" id="tEx-YP-fS0"/>
                 <constraint firstItem="07h-qf-pfh" firstAttribute="top" secondItem="xAg-An-Wd2" secondAttribute="bottom" constant="5" id="xdU-jy-mKg"/>

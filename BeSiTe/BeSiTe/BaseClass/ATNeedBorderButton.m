@@ -13,7 +13,7 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-    self.layer.borderColor = UIColorFromINTValue(205, 205, 205).CGColor;
+    self.layer.borderColor = [UIColor clearColor].CGColor;
     self.layer.cornerRadius = 4;
     self.layer.borderWidth = 0.5;
 }
@@ -21,7 +21,7 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.layer.borderColor = UIColorFromINTValue(205, 205, 205).CGColor;
+        self.layer.borderColor = [UIColor clearColor].CGColor;
         self.layer.cornerRadius = 4;
         self.layer.borderWidth = 0.5;
     }

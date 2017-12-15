@@ -11,8 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendNewMsgViewController">
             <connections>
-                <outlet property="msgTextView" destination="V3b-gH-abg" id="gSJ-8E-tUo"/>
-                <outlet property="sendBtn" destination="2tQ-Vk-sFV" id="VmX-mj-ujM"/>
                 <outlet property="typeLab" destination="LN6-q3-uLT" id="NmU-6K-seb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -61,40 +59,12 @@
                         <constraint firstItem="v4L-iS-gnd" firstAttribute="leading" secondItem="jNB-Uq-BWp" secondAttribute="trailing" id="viI-Fc-nk5"/>
                     </constraints>
                 </view>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="说点什么..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="V3b-gH-abg">
-                    <rect key="frame" x="20" y="70" width="335" height="120"/>
-                    <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="120" id="Ihv-na-DaZ"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tQ-Vk-sFV">
-                    <rect key="frame" x="275" y="200" width="80" height="30"/>
-                    <color key="backgroundColor" red="0.098039215686274508" green="0.66274509803921566" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="GiS-6E-cDf"/>
-                        <constraint firstAttribute="width" constant="80" id="ghw-tJ-r9e"/>
-                    </constraints>
-                    <state key="normal" title="发送">
-                        <color key="titleColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="sendBtnClick:" destination="-1" eventType="touchUpInside" id="efO-aT-rTo"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="V3b-gH-abg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="4jU-Yq-fvh"/>
                 <constraint firstItem="8sp-av-LoF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GlG-18-4xh"/>
-                <constraint firstAttribute="trailing" secondItem="V3b-gH-abg" secondAttribute="trailing" constant="20" id="Qdq-gg-oDe"/>
                 <constraint firstItem="8sp-av-LoF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TUH-BG-Owh"/>
                 <constraint firstAttribute="trailing" secondItem="8sp-av-LoF" secondAttribute="trailing" id="Umm-98-ouF"/>
-                <constraint firstItem="2tQ-Vk-sFV" firstAttribute="top" secondItem="V3b-gH-abg" secondAttribute="bottom" constant="10" id="hIX-l0-Yrz"/>
-                <constraint firstItem="V3b-gH-abg" firstAttribute="top" secondItem="8sp-av-LoF" secondAttribute="bottom" constant="20" id="iCO-ji-ob3"/>
-                <constraint firstAttribute="trailing" secondItem="2tQ-Vk-sFV" secondAttribute="trailing" constant="20" id="qoI-MR-cvK"/>
             </constraints>
             <point key="canvasLocation" x="25.5" y="51.5"/>
         </view>

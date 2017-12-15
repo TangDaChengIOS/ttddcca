@@ -41,11 +41,11 @@
     _numBtn.hidden = YES;
     
     if (model.isHot) {
-        _rightImageVIew.image = KIMAGE(@"home_activity_hot_icon");
+        _rightImageVIew.image = KIMAGE(@"home_left_hot_icon");
     }
     else{
         if (model.isNew) {
-            _rightImageVIew.image = KIMAGE(@"home_game_platform_new_icon");
+            _rightImageVIew.image = KIMAGE(@"home_left_new_icon");
         }
         else{
             _rightImageVIew.image = nil;

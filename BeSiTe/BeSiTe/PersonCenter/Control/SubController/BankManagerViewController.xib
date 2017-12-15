@@ -101,10 +101,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W0P-qJ-Lnr">
-                            <rect key="frame" x="95" y="14" width="35" height="23"/>
+                            <rect key="frame" x="95" y="11.5" width="35" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="HtX-D2-8CH"/>
-                                <constraint firstAttribute="height" constant="23" id="g4a-9W-UWt"/>
+                                <constraint firstAttribute="height" constant="28" id="g4a-9W-UWt"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-SH-dZX">

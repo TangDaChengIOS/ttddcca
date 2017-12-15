@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *aplyMoneyBtn;
 @property (weak, nonatomic) IBOutlet UIButton *turnInBtn;
 @property (weak, nonatomic) IBOutlet UIButton *turnOutBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
 
 @end
 
@@ -36,30 +37,40 @@
     [self.tableView reloadData];
 }
 
--(void)getBalanceData{
-//    NSArray * arr = @[@"SG",@"BBIN",@"PS",@"PT",@"AG",@"PNG",@"GG",@"MG",@"OS",@"TTG"];
-    [[BSTSingle defaultSingle].gameCompanysBalanceArr removeAllObjects];
-    
-    for (GamesCompanyModel * model in [BSTSingle defaultSingle].companysArray) {
-        NSString * code = model.companyCode;
-        NSDictionary * dict = @{@"gamePlatformCode":code};
-        [RequestManager getWithPath:@"getGameBalance" params:dict success:^(id JSON ,BOOL isSuccess) {
-            if (!isSuccess) {
-                TTAlert(JSON);
-                return ;
-            }
-            NSDictionary * resultDict = JSON[0];
-            BalanceModel * model = [[BalanceModel alloc]init];
-            [model setValuesForKeysWithDictionary:resultDict];
-            [[BSTSingle defaultSingle].gameCompanysBalanceArr addObject:model];
+-(void)getBalanceData
+{
+    kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
+    [RequestManager getWithPath:@"getGameBalance" params:nil success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+       [BSTSingle defaultSingle].gameCompanysBalanceArr = [BalanceModel jsonToArray:JSON];
+        [weak_self.tableView reloadData];
+        [weak_self resetConstraint];
 
-            [self.tableView reloadData];
-        } failure:^(NSError *error) {
-            
-        }];
-    }
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:nil];
 
+    }];
 }
+
+
+-(void)resetConstraint
+{
+    CGFloat needHeight = 37 + 28 * [BSTSingle defaultSingle].gameCompanysBalanceArr.count;
+    if (self.tableView.mj_y + needHeight + 10 < self.turnInBtn.mj_y) {
+        self.tableViewHeightConstraint.constant = needHeight;
+        self.tableView.scrollEnabled = NO;
+    }
+    else{
+        self.tableViewHeightConstraint.constant = self.turnInBtn.mj_y - 10 -self.tableView.mj_y;
+        self.tableView.scrollEnabled = YES;
+    }
+}
+
 
 -(void)configSubViews{
     self.view.backgroundColor = kWhiteColor;

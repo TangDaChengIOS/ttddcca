@@ -11,8 +11,8 @@
 #import "MessageTableViewCell.h"
 #import "SystemNoticesModel.h"
 #import "UserMsgModel.h"
-#import "SendNewMsgViewController.h"
 #import "ReplyMsgViewController.h"
+#import "EmailTypeViewController.h"
 
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -354,9 +354,11 @@
 }
 
 
--(void)sendNewMsgClick{
-    SendNewMsgViewController * newVC = [[SendNewMsgViewController alloc]initWithNibName:@"SendNewMsgViewController" bundle:nil];
-    [self pushVC:newVC];
+-(void)sendNewMsgClick
+{
+    EmailTypeViewController * typeVC = [[EmailTypeViewController alloc]init];
+    typeVC.isClickItemGotoNextPage = YES;
+    [self pushVC:typeVC];
 }
 
 -(BSTNoDataView *)noDataView{

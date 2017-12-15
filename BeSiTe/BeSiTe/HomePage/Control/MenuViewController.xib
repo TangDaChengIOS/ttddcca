@@ -99,7 +99,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJW-1p-8Ok" customClass="ATNeedBorderButton">
                             <rect key="frame" x="214" y="623" width="90" height="36"/>
-                            <color key="backgroundColor" red="0.35449267584550598" green="0.54268499555862615" blue="0.2501310822147651" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.38823529411764707" green="0.63529411764705879" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="90" id="eBe-Cz-bs6"/>
                                 <constraint firstAttribute="height" constant="36" id="zw4-XB-MlR"/>
@@ -119,7 +119,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tue-mA-3T4" customClass="ATNeedBorderButton">
                             <rect key="frame" x="20" y="623" width="90" height="36"/>
-                            <color key="backgroundColor" red="0.35449267579999999" green="0.54268499560000005" blue="0.25013108220000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.38823529411764707" green="0.63529411764705879" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="0Vt-kb-Qln"/>
                                 <constraint firstAttribute="width" constant="90" id="Z6r-pY-Fe2"/>

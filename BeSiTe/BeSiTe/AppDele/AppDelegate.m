@@ -12,6 +12,7 @@
 #import "APPStartRunViewController.h"
 #import "RSAEncryptor.h"
 #import <Instabug/Instabug.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 @interface AppDelegate ()
 
@@ -22,6 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [IQKeyboardManager sharedManager].enable = YES;
     NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
     //第一次运行APP，先加载启动页
     if (![ud boolForKey:@"FirstRunAPP"]) {

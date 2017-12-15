@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;//提交按钮
 @property (weak, nonatomic) IBOutlet UILabel *mainAccountLab;//主账户标签
 @property (weak, nonatomic) IBOutlet UITableView *tableView;//底下列表
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
 
 @property (nonatomic,strong) UIButton * titleViewBtn;//导航栏标题视图
 @property (nonatomic,copy) NSString * selectCompanyCode;//选中的游戏平台code
@@ -93,8 +94,22 @@
     _tableView.layer.borderColor = UIColorFromRGBValue(0xf3f3f3).CGColor;
     _tableView.layer.borderWidth = 1;
     [_tableView registerClass:[MoneyListTableViewCell class] forCellReuseIdentifier:kMoneyListTableViewCellReuseID];
-    
+    [self resetConstraint];
 }
+
+-(void)resetConstraint
+{
+    CGFloat needHeight = 37 + 28 * [BSTSingle defaultSingle].gameCompanysBalanceArr.count;
+    if (self.tableView.mj_y + needHeight + 30 < MAXHEIGHT - 64) {
+        self.tableViewHeightConstraint.constant = needHeight;
+        self.tableView.scrollEnabled = NO;
+    }
+    else{
+        self.tableViewHeightConstraint.constant = MAXHEIGHT - 64 - 30 -self.tableView.mj_y;
+        self.tableView.scrollEnabled = YES;
+    }
+}
+
 #pragma mark -- 切换不同的转账方式
 -(void)refreshUI:(BOOL)isLeft
 {

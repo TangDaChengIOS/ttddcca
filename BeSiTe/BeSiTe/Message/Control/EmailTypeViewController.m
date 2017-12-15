@@ -7,6 +7,7 @@
 //
 
 #import "EmailTypeViewController.h"
+#import "SendNewMsgViewController.h"
 
 @interface EmailTypeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView * tableView;
@@ -39,10 +40,19 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.finishBlock) {
-        self.finishBlock(self.dataSource[indexPath.row]);
+    NSString * type = self.dataSource[indexPath.row];
+    
+    if (self.isClickItemGotoNextPage) {
+        SendNewMsgViewController * newVC = [[SendNewMsgViewController alloc]initWithNibName:@"SendNewMsgViewController" bundle:nil];
+        newVC.emailTypeString = type;
+        [self pushVC:newVC];
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    else{
+        if (self.finishBlock) {
+            self.finishBlock(type);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

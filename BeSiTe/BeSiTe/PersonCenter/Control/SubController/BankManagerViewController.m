@@ -74,8 +74,8 @@
 }
 - (IBAction)saveBtnClick:(id)sender
 {
-    if (self.nameTF.text.length <= 0) {
-        TTAlert(@"请输入标签名");
+    if (self.nameTF.text.length <= 0 || self.nameTF.text.length > 6) {
+        TTAlert(@"请输入正确长度的标签名(1~6个字符)");
         return;
     }
     if (!self.selectBankCode) {

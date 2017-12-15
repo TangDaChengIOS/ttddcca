@@ -13,11 +13,11 @@
 
 -(UIImage *)getTypeImage{
     if (_isHot) {
-        return  KIMAGE(@"home_activity_hot_icon");
+        return  KIMAGE(@"home_left_hot_icon");
     }
     else{
         if (_isNew) {
-            return  KIMAGE(@"home_game_platform_new_icon");
+            return  KIMAGE(@"home_left_new_icon");
         }
         else{
             return  nil;

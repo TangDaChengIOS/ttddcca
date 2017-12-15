@@ -38,10 +38,14 @@
     }];
     [self.tableView.mj_header beginRefreshing];
 }
+#pragma mark -- viewAppear
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    if ([BSTSingle defaultSingle].user) {
+        [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
+    }
 }
 -(void)requestData{
     
@@ -171,6 +175,38 @@
     [_tableView registerClass:[OnlyShowTimeTableViewCell class] forCellReuseIdentifier:kOnlyShowTimeTableViewCellReuseID];
     [_tableView registerNib:[UINib nibWithNibName:@"ActivityTableViewCell" bundle:nil] forCellReuseIdentifier:kActivityTableViewCellReuseID];
     [self.view addSubview:_tableView];
+
+    self.navigationController.navigationBar.translucent = NO;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"commmon_navgation_left_img") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
+    
+    if ([BSTSingle defaultSingle].user) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem_withBadge alloc]initWithImage:KIMAGE_Ori(@"commmon_navgation_right_mail_icon") style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClick)];
+    }else{
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"common_navgation_right_img") style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClick)];
+    }
+        
+    __weak typeof(self)weakSelf = self;
+    
+    //侧滑菜单配置
+    [self xw_registerToInteractiveTransitionWithDirection:XWInteractiveTransitionGestureDirectionRight transitonBlock:^(CGPoint startPoint){
+        [weakSelf xw_transition];
+    } edgeSpacing: 80];
+    
+}
+
+-(void)leftBarButtonItemClick{
+    [self xw_transition];
+}
+
+-(void)rightBarButtonItemClick
+{
+    if ([BSTSingle defaultSingle].user) {
+        MessageViewController * msgVC = [[MessageViewController alloc]initWithNibName:@"MessageViewController" bundle:nil];
+        [self pushVC:msgVC];
+    }else{
+        [LoginViewController presentLoginViewController];
+    }
 }
 
 -(NSMutableArray *)dataSource

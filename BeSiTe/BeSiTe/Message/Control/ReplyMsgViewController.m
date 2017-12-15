@@ -7,14 +7,16 @@
 //
 
 #import "ReplyMsgViewController.h"
+#import "BSTSendMessageView.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 @interface ReplyMsgViewController ()<UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *replyTitleLab;
 @property (weak, nonatomic) IBOutlet UILabel *replyTimeLab;
 @property (weak, nonatomic) IBOutlet UITextView *msgsTextView;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+@property (nonatomic,strong) BSTSendMessageView * messageView;
+
 
 @property (nonatomic,strong) UserMsgReplyModel* replyModel;
 
@@ -27,11 +29,26 @@
     [super viewDidLoad];
     [self readData];
     self.title = @"回复消息";
-    _msgsTextView.editable = NO;
-    _textView.delegate = self;
+    
+    _messageView = [[BSTSendMessageView alloc]initWithFrame:CGRectMake(0, MAXHEIGHT - 64 - 50 , MAXWIDTH, 50)];
+    [_messageView.sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_messageView];
+    
     [self requestData];
+    [self.messageView.textView becomeFirstResponder];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].enable = NO;
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enable = YES;
+}
 
 -(void)requestData{
     kWeakSelf
@@ -53,22 +70,6 @@
         [MBProgressHUD hideHUDForView:nil];
 
     }];
-}
-
-
--(BOOL)textViewShouldBeginEditing:(UITextView *)textView
-{
-    
-    if ([textView.text isEqualToString:@"说点什么..."] && textView == self.textView) {
-        textView.text = @"";
-    }
-    return YES;
-}
--(void)textViewDidEndEditing:(UITextView *)textView
-{
-    if (textView.text.length <= 0 && textView == self.textView) {
-        textView.text = @"说点什么...";
-    }
 }
 
 
@@ -118,14 +119,15 @@
 }
 
 
-- (IBAction)sengBtnClick:(id)sender {
-
-    if (self.textView.text.length <= 0 || [self.textView.text isEqualToString:@"说点什么..."]) {
+- (void)sendBtnClick:(id)sender {
+    [self.view endEditing:YES];
+    if (self.messageView.textView.text.length <= 0 || [self.messageView.textView.text isEqualToString:@"说点什么..."]) {
         TTAlert(@"请输入您想说的内容");
+        [self.messageView.textView becomeFirstResponder];
         return;
     }
     NSDictionary * dict = @{@"userId":[BSTSingle defaultSingle].user.userId,
-                            @"content":self.textView.text,
+                            @"content":self.messageView.textView.text,
                             @"msgId":self.model.msgId};
     kWeakSelf
     [MBProgressHUD showMessage:@"" toView:nil];
@@ -136,7 +138,7 @@
             return ;
         }
         [weak_self requestData];
-        weak_self.textView.text = @"";
+        [weak_self.messageView setDefaultUI];
         BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
         view.showType = ShowTypeWaitThreeSec;
         view.isSuccessMsg = YES;

@@ -19,13 +19,14 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        _leftLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.contentView.width /2, 20)];
+        CGFloat labWidth = self.contentView.width /2 -  50 * kPROPORTION;
+        _leftLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, labWidth, 20)];
         [self.contentView addSubview:_leftLab];
         
-        _rightLab = [[UILabel alloc]initWithFrame:CGRectMake(self.contentView.width /2, 0, self.contentView.width /2, 20)];
+        _rightLab = [[UILabel alloc]initWithFrame:CGRectMake(self.contentView.width /2, 0, labWidth, 20)];
         [self.contentView addSubview:_rightLab];
         
-        _leftLab.textAlignment = _rightLab.textAlignment = NSTextAlignmentCenter;
+        _leftLab.textAlignment = _rightLab.textAlignment = NSTextAlignmentRight;
         
     }
     return self;

@@ -17,14 +17,16 @@
 
 +(NSAttributedString *)getTotalMoneyAttributeString
 {
-    CGFloat money = 0;
+    CGFloat money = 0.00;
+    NSString *convertNumber = @"0.00";
     if ([BSTSingle defaultSingle].user) {
          money = [BSTSingle defaultSingle].user.userAmount;
+        if (money > 0) {
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            [formatter setPositiveFormat:@",###.00"];
+            convertNumber = [formatter stringFromNumber:[NSNumber numberWithDouble:money]];
+        }
     }
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setPositiveFormat:@",###.00"];
-    NSLog(@"%@",[NSNumber numberWithFloat:money]);
-    NSString *convertNumber = [formatter stringFromNumber:[NSNumber numberWithDouble:money]];
     
     NSMutableAttributedString * mAtStr = [[NSMutableAttributedString alloc]initWithString:@"主账户余额 " attributes:@{NSFontAttributeName:kFont(15),NSForegroundColorAttributeName:UIColorFromINTValue(124, 124, 124)}];
     NSAttributedString * atStr = [[NSAttributedString alloc]initWithString:convertNumber attributes:@{NSFontAttributeName:kFont(15),NSForegroundColorAttributeName:UIColorFromINTValue(24, 119, 1)}];

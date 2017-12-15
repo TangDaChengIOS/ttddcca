@@ -9,5 +9,5 @@
 #import "ATBaseViewController.h"
 
 @interface SendNewMsgViewController : ATBaseViewController
-
+@property (nonatomic,copy) NSString * emailTypeString;
 @end

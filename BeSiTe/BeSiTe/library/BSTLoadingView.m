@@ -20,19 +20,11 @@
      self = [super initWithFrame:frame];
      if (self) {
          self.backgroundColor = UIColorFromINTRGBA(0, 0, 0, 0.2);
-//         self.backgroundColor = UIColorFromINTRGBA(255, 255, 255, 1);
 
          [self addSubview:self.loadingImgView];
          [self addSubview:self.lbl];
-         [self.loadingImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-             make.size.mas_equalTo(CGSizeMake(107, 143));
-             make.centerX.centerY.mas_equalTo(self);
-         }];
-         [self.lbl mas_makeConstraints:^(MASConstraintMaker *make) {
-             make.top.mas_equalTo(self.loadingImgView.bottom).offset(5);
-             make.size.mas_equalTo(CGSizeMake(200, 16));
-             make.centerX.mas_equalTo(self.centerX);
-         }];
+         self.loadingImgView.frame = CGRectMake(frame.size.width/ 2 - 39, frame.size.height / 2 - 50, 77, 100);
+         self.lbl.frame = CGRectMake(frame.size.width/ 2 - 100, frame.size.height / 2 + 50 + 5, 200, 16);
      }
      return self;
 }
@@ -41,7 +33,6 @@
 {
     if(!_loadingImgView){
         _loadingImgView = [[UIImageView alloc] init];
-//        _loadingImgView.backgroundColor = [UIColor clearColor];
         //动态图属性
         _loadingImgView.animationImages = [self getImageArray];
         _loadingImgView.animationDuration = 2.0;
@@ -55,8 +46,8 @@
 {
     if(!_lbl){
         _lbl = [[UILabel alloc] init];
-        _lbl.font = [UIFont systemFontOfSize:14];
-        _lbl.textColor = [UIColor darkGrayColor];
+        _lbl.font = [UIFont systemFontOfSize:15];
+        _lbl.textColor = [UIColor whiteColor];
         _lbl.textAlignment = NSTextAlignmentCenter;
     }
     return _lbl;

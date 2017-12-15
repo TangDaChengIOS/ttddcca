@@ -57,6 +57,30 @@
 
 }
 
+#pragma mark -- 侧滑
+- (void)xw_transition{
+    XWDrawerAnimatorDirection direction =  XWDrawerAnimatorDirectionLeft;
+    XWDrawerAnimator *animator = [XWDrawerAnimator xw_animatorWithDirection:direction moveDistance:LeftMenuWidth];
+    animator.toDuration = 0.5;
+    animator.backDuration = 0.5;
+    animator.parallaxEnable = YES;
+    
+    MenuViewController * menuVC = [[MenuViewController alloc]initWithNibName:@"MenuViewController" bundle:nil];
+    [self xw_presentViewController:menuVC withAnimator:animator];
+    __weak typeof(self)weakSelf = self;
+    [animator xw_enableEdgeGestureAndBackTapWithConfig:^{
+        [weakSelf _xw_back];
+    }];
+}
+
+- (void)_xw_back{
+    if (self.presentedViewController) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

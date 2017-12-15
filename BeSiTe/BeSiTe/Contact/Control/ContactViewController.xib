@@ -148,7 +148,7 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxh-nA-8ZJ" customClass="ATNeedBorderButton">
                     <rect key="frame" x="10" y="459" width="355" height="40"/>
-                    <color key="backgroundColor" red="0.396078431372549" green="0.62745098039215685" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.38823529411764707" green="0.63529411764705879" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="mFD-fl-07b"/>
                     </constraints>

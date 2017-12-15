@@ -14,8 +14,6 @@
                 <outlet property="msgsTextView" destination="Y70-te-bLQ" id="mtq-XB-ife"/>
                 <outlet property="replyTimeLab" destination="vp1-NW-bXf" id="rxm-Xs-3JL"/>
                 <outlet property="replyTitleLab" destination="Ep5-JK-9Y4" id="TXp-aL-waV"/>
-                <outlet property="sendBtn" destination="Sow-BQ-0DI" id="2Y4-1v-cNI"/>
-                <outlet property="textView" destination="yQe-CR-2yP" id="dew-f7-8e3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -94,40 +92,12 @@
                         <constraint firstAttribute="height" constant="100" id="vzM-vR-XzY"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sow-BQ-0DI">
-                    <rect key="frame" x="275" y="290" width="80" height="30"/>
-                    <color key="backgroundColor" red="0.098039215690000001" green="0.66274509800000003" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="80" id="C7H-AX-RWa"/>
-                        <constraint firstAttribute="height" constant="30" id="uxq-Fg-eqo"/>
-                    </constraints>
-                    <state key="normal" title="发送">
-                        <color key="titleColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="sengBtnClick:" destination="-1" eventType="touchUpInside" id="Vwj-Zt-XTk"/>
-                    </connections>
-                </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="说点什么..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yQe-CR-2yP">
-                    <rect key="frame" x="20" y="160" width="335" height="120"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="120" id="Ksb-Oq-nlx"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="QFi-5c-pkn" secondAttribute="trailing" id="4df-1m-mip"/>
-                <constraint firstAttribute="trailing" secondItem="yQe-CR-2yP" secondAttribute="trailing" constant="20" id="HOq-fh-mjg"/>
-                <constraint firstItem="yQe-CR-2yP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="NRL-Oo-nTq"/>
                 <constraint firstAttribute="trailing" secondItem="KfP-OH-zap" secondAttribute="trailing" id="TrC-vg-YfC"/>
-                <constraint firstAttribute="trailing" secondItem="Sow-BQ-0DI" secondAttribute="trailing" constant="20" id="YW4-6b-YlU"/>
                 <constraint firstItem="KfP-OH-zap" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cpA-FT-OgK"/>
-                <constraint firstItem="Sow-BQ-0DI" firstAttribute="top" secondItem="yQe-CR-2yP" secondAttribute="bottom" constant="10" id="dYQ-4Z-2Pw"/>
-                <constraint firstItem="yQe-CR-2yP" firstAttribute="top" secondItem="QFi-5c-pkn" secondAttribute="bottom" constant="10" id="hgL-ti-9dZ"/>
                 <constraint firstItem="QFi-5c-pkn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="i85-fU-dBW"/>
                 <constraint firstItem="KfP-OH-zap" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="n4M-cQ-zgp"/>
                 <constraint firstItem="QFi-5c-pkn" firstAttribute="top" secondItem="KfP-OH-zap" secondAttribute="bottom" id="rRu-vj-ddM"/>

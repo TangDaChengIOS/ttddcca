@@ -7,15 +7,11 @@
 //
 
 #import "HomeViewController.h"
-#import "MenuViewController.h"
-#import "XWDrawerAnimator.h"
 #import "HomeHeaderView.h"
 #import "HomeItemCollectionViewCell.h"
 #import "GameListPageViewController.h"
-#import "LoginViewController.h"
 #import "RegisterPageOneViewController.h"
 #import "EditPhoneNumberView.h"
-#import "MessageViewController.h"
 
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -30,12 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
-    __weak typeof(self)weakSelf = self;
-   
-    //侧滑菜单配置
-    [self xw_registerToInteractiveTransitionWithDirection:XWInteractiveTransitionGestureDirectionRight transitonBlock:^(CGPoint startPoint){
-        [weakSelf xw_transition];
-    } edgeSpacing: 80];
+
     kWeakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weak_self requestData];
@@ -141,6 +132,13 @@
     }
     
     [self.view addSubview:self.collectionView];
+    
+    __weak typeof(self)weakSelf = self;
+    
+    //侧滑菜单配置
+    [self xw_registerToInteractiveTransitionWithDirection:XWInteractiveTransitionGestureDirectionRight transitonBlock:^(CGPoint startPoint){
+        [weakSelf xw_transition];
+    } edgeSpacing: 80];
 
 }
 
@@ -195,29 +193,6 @@
         _dataSource = [NSMutableArray array];
     }
     return _dataSource;
-}
-#pragma mark -- 侧滑
-- (void)xw_transition{
-    XWDrawerAnimatorDirection direction =  XWDrawerAnimatorDirectionLeft;
-    XWDrawerAnimator *animator = [XWDrawerAnimator xw_animatorWithDirection:direction moveDistance:LeftMenuWidth];
-    animator.toDuration = 0.5;
-    animator.backDuration = 0.5;
-    animator.parallaxEnable = YES;
-    
-    MenuViewController * menuVC = [[MenuViewController alloc]initWithNibName:@"MenuViewController" bundle:nil];
-    [self xw_presentViewController:menuVC withAnimator:animator];
-    __weak typeof(self)weakSelf = self;
-    [animator xw_enableEdgeGestureAndBackTapWithConfig:^{
-        [weakSelf _xw_back];
-    }];
-}
-
-- (void)_xw_back{
-    if (self.presentedViewController) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }else{
-        [self.navigationController popViewControllerAnimated:YES];
-    }
 }
 
 #pragma mark -- viewAppear

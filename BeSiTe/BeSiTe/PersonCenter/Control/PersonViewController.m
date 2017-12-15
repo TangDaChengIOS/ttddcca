@@ -35,6 +35,7 @@
     if ([BSTSingle defaultSingle].user) {
         [_titleViewBtn setImage:KIMAGE_Ori([[BSTSingle defaultSingle].user getVipImageStr]) forState:UIControlStateNormal];
         [_titleViewBtn setTitle:[BSTSingle defaultSingle].user.accountName forState:UIControlStateNormal];
+        [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
     }else{
         [_titleViewBtn setImage:nil forState:UIControlStateNormal];
         [_titleViewBtn setTitle:@"未登录" forState:UIControlStateNormal];
@@ -159,6 +160,45 @@
 {
     self.navigationItem.titleView = self.titleViewBtn;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem_withBadge alloc]initWithImage:KIMAGE_Ori(@"commmon_navgation_right_mail_icon") style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClick)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"commmon_navgation_left_img") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
+    
+    __weak typeof(self)weakSelf = self;
+    
+    //侧滑菜单配置
+    [self xw_registerToInteractiveTransitionWithDirection:XWInteractiveTransitionGestureDirectionRight transitonBlock:^(CGPoint startPoint){
+        [weakSelf xw_transition];
+    } edgeSpacing: 80];
+    
+}
+
+-(void)leftBarButtonItemClick{
+    [self xw_transition];
+}
+
+
+#pragma mark -- 侧滑
+- (void)xw_transition{
+    XWDrawerAnimatorDirection direction =  XWDrawerAnimatorDirectionLeft;
+    XWDrawerAnimator *animator = [XWDrawerAnimator xw_animatorWithDirection:direction moveDistance:LeftMenuWidth];
+    animator.toDuration = 0.5;
+    animator.backDuration = 0.5;
+    animator.parallaxEnable = YES;
+    
+    MenuViewController * menuVC = [[MenuViewController alloc]initWithNibName:@"MenuViewController" bundle:nil];
+    [self xw_presentViewController:menuVC withAnimator:animator];
+    __weak typeof(self)weakSelf = self;
+    [animator xw_enableEdgeGestureAndBackTapWithConfig:^{
+        [weakSelf _xw_back];
+    }];
+}
+
+- (void)_xw_back{
+    if (self.presentedViewController) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 -(void)rightBarButtonItemClick{

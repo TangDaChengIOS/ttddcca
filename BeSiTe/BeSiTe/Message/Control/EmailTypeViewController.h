@@ -9,5 +9,6 @@
 #import "ATBaseViewController.h"
 
 @interface EmailTypeViewController : ATBaseViewController
+@property (nonatomic,assign) BOOL  isClickItemGotoNextPage;
 @property (nonatomic,copy) void (^finishBlock)(NSString * type);
 @end

@@ -8,12 +8,12 @@
 
 #import "SendNewMsgViewController.h"
 #import "EmailTypeViewController.h"
+#import "BSTSendMessageView.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
-@interface SendNewMsgViewController ()<UITextViewDelegate>
+@interface SendNewMsgViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *typeLab;
-@property (weak, nonatomic) IBOutlet UITextView *msgTextView;
-@property (weak, nonatomic) IBOutlet UIButton *sendBtn;
-
+@property (nonatomic,strong) BSTSendMessageView * messageView;
 @end
 
 @implementation SendNewMsgViewController
@@ -21,25 +21,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"发送新消息";
-    _msgTextView.delegate = self;
-//    _msgTextView.layer.borderColor = UIColorFromRGBValue(0xffffff).CGColor;
-//    _msgTextView.layer.borderWidth = 1.0f;
-
+    
+    _messageView = [[BSTSendMessageView alloc]initWithFrame:CGRectMake(0, MAXHEIGHT - 64 - 50 , MAXWIDTH, 50)];
+    [_messageView.sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_messageView];
+    [self.messageView.textView becomeFirstResponder];
+    
+    self.typeLab.text = _emailTypeString;
 }
 
--(BOOL)textViewShouldBeginEditing:(UITextView *)textView
+-(void)viewWillAppear:(BOOL)animated
 {
-    if ([textView.text isEqualToString:@"说点什么..."]) {
-        textView.text = @"";
-    }
-    return YES;
+    [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].enable = NO;
 }
--(void)textViewDidEndEditing:(UITextView *)textView
+
+-(void)viewWillDisappear:(BOOL)animated
 {
-    if (textView.text.length <= 0) {
-        textView.text = @"说点什么...";
-    }
+    [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enable = YES;
 }
+
 
 - (IBAction)selectTypeBtnClick:(id)sender {
     EmailTypeViewController * typeVC = [[EmailTypeViewController alloc]init];
@@ -49,19 +51,21 @@
     };
     [self pushVC:typeVC];
 }
-- (IBAction)sendBtnClick:(id)sender
+- (void)sendBtnClick:(id)sender
 {
+    [self.view endEditing:YES];
     if (self.typeLab.text.length <= 0 ) {
         TTAlert(@"请选择邮件主题类型");
         return;
     }
-    if (self.msgTextView.text.length <= 0 || [self.msgTextView.text isEqualToString:@"说点什么..."]) {
+    if (self.messageView.textView.text.length <= 0 || [self.messageView.textView.text isEqualToString:@"说点什么..."]) {
         TTAlert(@"请输入您想说的内容");
+        [self.messageView.textView becomeFirstResponder];
         return;
     }
     NSDictionary * dict = @{@"userId":[BSTSingle defaultSingle].user.userId,
                             @"title":self.typeLab.text,
-                            @"content":self.msgTextView.text};
+                            @"content":self.messageView.textView.text};
     kWeakSelf
     [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postManagerDataWithPath:@"user/msg" params:dict success:^(id JSON ,BOOL isSuccess) {
@@ -70,7 +74,7 @@
             TTAlert(JSON);
             return ;
         }
-        weak_self.msgTextView.text = @"";
+        [weak_self.messageView setDefaultUI];
         BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
         view.showType = ShowTypeWaitThreeSec;
         view.isSuccessMsg = YES;

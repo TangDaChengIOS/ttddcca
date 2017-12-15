@@ -198,10 +198,15 @@
 }
 - (IBAction)exitBtnClick:(id)sender {
     [BSTSingle defaultSingle].user = nil;
+    NSInteger selectIndex = [AppDelegate getTabBarController].selectedIndex;
     [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginFailueNotification object:nil];
-    [self dismissViewControllerAnimated:YES completion:^{
-        [LoginViewController presentLoginViewController];
-    }];
+    if (selectIndex == 2) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:^{
+            [LoginViewController presentLoginViewController];
+        }];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -12,9 +12,36 @@
 @interface WebDetailViewController ()<UIWebViewDelegate>
 
 @property (nonatomic,strong) UIWebView * webView;
+@property (nonatomic,strong) UIView * agreeBtnBackView;//部分显示协议的页面，需要同意按钮
 @end
 
 @implementation WebDetailViewController
+
+-(UIView *)agreeBtnBackView
+{
+    if (!_agreeBtnBackView) {
+        _agreeBtnBackView = [[UIView alloc]initWithFrame:CGRectMake(0, MAXHEIGHT - 64 - 76, MAXWIDTH, 76)];
+        _agreeBtnBackView.backgroundColor = kWhiteColor;
+        
+        ATNeedBorderButton * agreeBtn = [[ATNeedBorderButton alloc]initWithFrame:CGRectMake(16, 18, MAXWIDTH - 52, 40)];
+        [agreeBtn setTitle:@"同 意" forState:UIControlStateNormal];
+        [agreeBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
+        agreeBtn.backgroundColor = UIColorFromRGBValue(0x1AAE6A);
+        [agreeBtn addTarget:self action:@selector(agreeBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
+        [_agreeBtnBackView addSubview:agreeBtn];
+    }
+    return _agreeBtnBackView;
+}
+
+
+-(void)agreeBtnDidClick
+{
+    if (self.agreeBtnClickBlock) {
+        self.agreeBtnClickBlock();
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
 
 
 
@@ -33,7 +60,15 @@
     if (_isOpenRotaion) {
         [self openRotaion];
     }
-    
+}
+
+-(void)setIsNeedAgreeBtn:(BOOL)isNeedAgreeBtn
+{
+    _isNeedAgreeBtn = isNeedAgreeBtn;
+    if (_isNeedAgreeBtn) {
+        [self.view addSubview:self.agreeBtnBackView];
+        self.webView.height -= self.agreeBtnBackView.height;
+    }
 }
 
 -(void)leftBarButtonItemClick{

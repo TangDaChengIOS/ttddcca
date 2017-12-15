@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XWDrawerAnimator.h"
+
 #import "BSTSingle.h"
 #import "RecordTableViewCell.h"
 #import "ShowRecordDetailView.h"
@@ -18,4 +20,8 @@
 @property (nonatomic,assign) BOOL isNeedHiddenNav;
 
 -(void)pushVC:(UIViewController *)viewController;
+
+/**一级页面侧滑显示侧栏菜单*/
+- (void)xw_transition;
+
 @end
