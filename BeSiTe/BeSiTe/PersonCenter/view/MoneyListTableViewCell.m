@@ -20,11 +20,11 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        CGFloat labWidth = self.contentView.width /2 -  50 * kPROPORTION;
-        _leftLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, labWidth, 20)];
+        CGFloat labWidth = MAXWIDTH /2 - 12 - 40;
+        _leftLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, labWidth, 20)];
         [self.contentView addSubview:_leftLab];
         
-        _rightLab = [[UILabel alloc]initWithFrame:CGRectMake(self.contentView.width /2, 0, labWidth, 20)];
+        _rightLab = [[UILabel alloc]initWithFrame:CGRectMake(MAXWIDTH /2 -2, 0, labWidth, 20)];
         [self.contentView addSubview:_rightLab];
         
         _leftLab.textAlignment = _rightLab.textAlignment = NSTextAlignmentRight;

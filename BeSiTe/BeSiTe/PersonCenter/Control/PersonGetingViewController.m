@@ -13,7 +13,7 @@
 #import "BankManagerViewController.h"
 #import "MyBankModel.h"
 
-@interface PersonGetingViewController ()
+@interface PersonGetingViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *mainAccountLab;
 
 @property (weak, nonatomic) IBOutlet ATTextField *accountTF;
@@ -48,6 +48,29 @@
     _contentViewHeightConstraint.constant = (self.managerCardBtn.maxY < viewH) ? viewH : self.managerCardBtn.maxY + 50;
     _submitBtn.layer.cornerRadius = _managerCardBtn.layer.cornerRadius = 4.0f;
     _pwdTF.secureTextEntry = YES;
+    
+    _accountTF.delegate = self;
+    _pwdTF.delegate = self;
+    _moneyTF.delegate = self;
+    _cardTF.delegate = self;
+    _cardAdressTF.delegate = self;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == _accountTF){
+        [_pwdTF becomeFirstResponder];
+    }else if (textField == _pwdTF){
+        [self.view endEditing:YES];
+    }else if (textField == _moneyTF){
+        [_cardTF becomeFirstResponder];
+    }else if (textField == _cardTF){
+        [_cardAdressTF becomeFirstResponder];
+    }else if (textField == _cardAdressTF){
+        [self.view endEditing:YES];
+    }
+    
+    return YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated

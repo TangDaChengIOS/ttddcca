@@ -8,7 +8,7 @@
 
 #import "EditPhoneNumberView.h"
 
-@interface EditPhoneNumberView ()
+@interface EditPhoneNumberView ()<UITextFieldDelegate>
 
 @property (nonatomic,strong) UITextField * phoneTF;
 @property (nonatomic,strong) UITextField * codeTF;
@@ -31,11 +31,13 @@
 {
     CGFloat whiteBack_W = MAXWIDTH - 100 * kPROPORTION;
    
+    whiteBack.frame = CGRectMake(50*kPROPORTION, (MAXHEIGHT - 285)/2, whiteBack_W, 285);
+
     //中间的白色背景
-    UIView * whiteBack = [[UIView alloc]initWithFrame:CGRectMake(50*kPROPORTION, (MAXHEIGHT - 285)/2, whiteBack_W, 285)];
-    whiteBack.backgroundColor = kWhiteColor;
-    whiteBack.layer.cornerRadius = 4;
-    [self addSubview:whiteBack];
+//    UIView * whiteBack = [[UIView alloc]initWithFrame:CGRectMake(50*kPROPORTION, (MAXHEIGHT - 285)/2, whiteBack_W, 285)];
+//    whiteBack.backgroundColor = kWhiteColor;
+//    whiteBack.layer.cornerRadius = 4;
+//    [self addSubview:whiteBack];
  
     //顶部的lab
     _titleLab = [[UILabel alloc]initWithFrame:CGRectMake(16, 14, 100, 15)];
@@ -48,6 +50,7 @@
     _phoneTF = [self createTextFieldWithFrame:CGRectMake(16, _titleLab.maxY + 25, whiteBack_W - 32, 38)];
     _phoneTF.placeholder = @"请输入手机号码";
     _phoneTF.keyboardType = UIKeyboardTypePhonePad;
+    _phoneTF.delegate = self;
     [whiteBack addSubview:_phoneTF];
   
     //获取验证码按钮
@@ -65,6 +68,7 @@
     //验证码输入框
     _codeTF = [self createTextFieldWithFrame:CGRectMake(16, _phoneTF.maxY + 12, whiteBack_W - 36 - 90 * kPROPORTION, 38)];
     _codeTF.placeholder = @"请输入验证码";
+    _codeTF.delegate = self;
     [whiteBack addSubview:_codeTF];
    
     //底部提醒字样lab
@@ -95,6 +99,17 @@
     [whiteBack addSubview:cancelBtn];
     
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.phoneTF) {
+        [self.codeTF becomeFirstResponder];
+    }else if (textField == self.codeTF){
+        [self endEditing:YES];
+    }
+    return YES;
+}
+
 +(void)showWithEditPhoneType:(EditPhoneNumberViewType)type withFinshBlock:(void(^)()) completeBlock
 {
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
@@ -140,7 +155,7 @@
         if (weak_self.completeBlock) {
             weak_self.completeBlock();
         }
-        [weak_self removeFromSuperview];
+        [weak_self removeSelf];
     } failure:^(NSError *error) {
         
     }];
@@ -164,7 +179,7 @@
         if (weak_self.completeBlock) {
             weak_self.completeBlock();
         }
-        [weak_self removeFromSuperview];
+        [weak_self removeSelf];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];
 
@@ -174,7 +189,7 @@
 
 
 -(void)cancelBtnClick{
-    [self removeFromSuperview];
+    [self removeSelf];
 }
 
 

@@ -8,7 +8,7 @@
 
 #import "EditEmailView.h"
 
-@interface EditEmailView ()<UIAlertViewDelegate>
+@interface EditEmailView ()<UIAlertViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic,strong) UITextField * emailTF;
 
@@ -28,10 +28,12 @@
 -(void)configSubViews
 {
     CGFloat whiteBack_W = MAXWIDTH - 60 * kPROPORTION;
-    UIView * whiteBack = [[UIView alloc]initWithFrame:CGRectMake(30*kPROPORTION, (MAXHEIGHT - 254)/2, whiteBack_W, 254)];
-    whiteBack.backgroundColor = kWhiteColor;
-    whiteBack.layer.cornerRadius = 4;
-    [self addSubview:whiteBack];
+    whiteBack.frame = CGRectMake(30*kPROPORTION, (MAXHEIGHT - 254)/2, whiteBack_W, 254);
+    
+//    UIView * whiteBack = [[UIView alloc]initWithFrame:CGRectMake(30*kPROPORTION, (MAXHEIGHT - 254)/2, whiteBack_W, 254)];
+//    whiteBack.backgroundColor = kWhiteColor;
+//    whiteBack.layer.cornerRadius = 4;
+//    [self addSubview:whiteBack];
     
     UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(16, 14, 100, 15)];
     lab.text = @"填写邮箱";
@@ -43,6 +45,7 @@
     _emailTF.placeholder = @"请填写您的常用邮箱号码";
     _emailTF.textAlignment = NSTextAlignmentCenter;
     _emailTF.leftViewMode = UITextFieldViewModeNever;
+    _emailTF.delegate = self;
     [whiteBack addSubview:_emailTF];
     
 //    UILabel * lab2 = [[UILabel alloc]initWithFrame:CGRectMake(16, _emailTF.maxY + 15,  whiteBack_W - 32, 15)];
@@ -70,6 +73,15 @@
     [whiteBack addSubview:cancelBtn];
     
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == _emailTF){
+        [self endEditing:YES];
+    }
+    return YES;
+}
+
 +(void)showWithFinshBlock:(void (^)())completeBlock{
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     EditEmailView * view = [[EditEmailView alloc]init];
@@ -102,14 +114,14 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self removeFromSuperview];
+    [self removeSelf];
     if (self.completeBlock) {
         self.completeBlock();
     }
 }
 
 -(void)cancelBtnClick{
-    [self removeFromSuperview];
+    [self removeSelf];
 }
 
 @end

@@ -12,8 +12,12 @@
 #import "GameListPageViewController.h"
 #import "RegisterPageOneViewController.h"
 #import "EditPhoneNumberView.h"
+#import "YQCollectionViewFlowLayout.h"
 
-@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>{
+    CGFloat _margin;
+    CGFloat _itemWidth;
+}
 
 @property (nonatomic,strong) UIImageView * navRightCornImg;
 @property (nonatomic,strong) HomeHeaderView * headerView;
@@ -25,6 +29,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    _margin = 9;
+    _itemWidth = (MAXWIDTH - _margin * 5)/ 4;
     [self configSubViews];
 
     kWeakSelf
@@ -98,29 +105,29 @@
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(81* kPROPORTION, 97 * kPROPORTION);
+    return CGSizeMake(_itemWidth, 100 * kPROPORTION);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return CGSizeMake(MAXWIDTH, 167 * kPROPORTION + 77);
+    return CGSizeMake(MAXWIDTH, 167 * kPROPORTION + 77 + 9);
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 6;
+    return _margin;
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 6;
+    return _margin;
 }
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(9, 9, 0, 9);
+    return UIEdgeInsetsMake(0, _margin, 0, _margin);
 }
 
 
 #pragma mark -- subViews
 -(void)configSubViews
 {
-    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.titleView = [[UIImageView alloc]initWithImage:KIMAGE_Ori(@"common_navgration_title_ime")];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"commmon_navgation_left_img") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
@@ -169,7 +176,10 @@
 -(UICollectionView *)collectionView
 {
     if (!_collectionView) {
-        UICollectionViewFlowLayout * lay = [[UICollectionViewFlowLayout alloc]init];
+//        UICollectionViewFlowLayout * lay = [[UICollectionViewFlowLayout alloc]init];
+        YQCollectionViewFlowLayout * lay = [[YQCollectionViewFlowLayout alloc]init];
+        lay.navHeight = 0;
+
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, MAXWIDTH , MAXHEIGHT - 49 - 64  ) collectionViewLayout:lay];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;

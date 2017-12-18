@@ -160,6 +160,8 @@
 		11CBCCFA1F9CEC03000E4D01 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11CBCCF81F9CEC03000E4D01 /* LoginViewController.xib */; };
 		11D5EB9D1FCC155E0070BE9C /* OnlineSavingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D5EB9C1FCC155E0070BE9C /* OnlineSavingTableViewCell.m */; };
 		11D5EBA01FCC18130070BE9C /* OnlineSavingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D5EB9F1FCC18130070BE9C /* OnlineSavingViewController.m */; };
+		11E239A21FE760B200883C89 /* NoPasteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E239A11FE760B200883C89 /* NoPasteTextField.m */; };
+		11E239A51FE7C43500883C89 /* YQCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E239A41FE7C43500883C89 /* YQCollectionViewFlowLayout.m */; };
 		11E2BF571FB540AA00180762 /* ActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E2BF561FB540AA00180762 /* ActivityModel.m */; };
 		11E2BF5A1FB59E2C00180762 /* ATCombineStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E2BF591FB59E2C00180762 /* ATCombineStrings.m */; };
 		11ECA9401F9D93C600CF84CB /* RegisterPageOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11ECA93E1F9D93C600CF84CB /* RegisterPageOneViewController.m */; };
@@ -462,6 +464,10 @@
 		11D5EB9C1FCC155E0070BE9C /* OnlineSavingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineSavingTableViewCell.m; sourceTree = "<group>"; };
 		11D5EB9E1FCC18130070BE9C /* OnlineSavingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineSavingViewController.h; sourceTree = "<group>"; };
 		11D5EB9F1FCC18130070BE9C /* OnlineSavingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineSavingViewController.m; sourceTree = "<group>"; };
+		11E239A01FE760B200883C89 /* NoPasteTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoPasteTextField.h; sourceTree = "<group>"; };
+		11E239A11FE760B200883C89 /* NoPasteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoPasteTextField.m; sourceTree = "<group>"; };
+		11E239A31FE7C43500883C89 /* YQCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		11E239A41FE7C43500883C89 /* YQCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		11E2BF551FB540AA00180762 /* ActivityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityModel.h; sourceTree = "<group>"; };
 		11E2BF561FB540AA00180762 /* ActivityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityModel.m; sourceTree = "<group>"; };
 		11E2BF581FB59E2C00180762 /* ATCombineStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCombineStrings.h; sourceTree = "<group>"; };
@@ -645,6 +651,8 @@
 				113F71EC1FB3054900EB4567 /* VTMagicController+PushVC.m */,
 				11B2112C1FB430B7003CE6ED /* ATNeedBorderButton.h */,
 				11B2112D1FB430B7003CE6ED /* ATNeedBorderButton.m */,
+				11E239A01FE760B200883C89 /* NoPasteTextField.h */,
+				11E239A11FE760B200883C89 /* NoPasteTextField.m */,
 			);
 			path = BaseClass;
 			sourceTree = "<group>";
@@ -725,6 +733,8 @@
 				11F1B7851FDF698F00F85535 /* GamesCanScrollTipsView.m */,
 				1179AF881FE26DE5006E4985 /* GameListPageCollectionReusableView.h */,
 				1179AF891FE26DE5006E4985 /* GameListPageCollectionReusableView.m */,
+				11E239A31FE7C43500883C89 /* YQCollectionViewFlowLayout.h */,
+				11E239A41FE7C43500883C89 /* YQCollectionViewFlowLayout.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1473,6 +1483,7 @@
 				1190EC5F1F9F2087007A1D05 /* PersonBalanceViewController.m in Sources */,
 				119EAF2A1FA6142500E6C2CA /* PersonSavingViewController.m in Sources */,
 				118A36651FB2030700FD6193 /* MoneyMoveViewController.m in Sources */,
+				11E239A21FE760B200883C89 /* NoPasteTextField.m in Sources */,
 				116463BC1F91F634004ECC79 /* XWFilterTransitionView.m in Sources */,
 				113F71ED1FB3054900EB4567 /* VTMagicController+PushVC.m in Sources */,
 				113F71D81FB2B33900EB4567 /* AppDelegate+Setting.m in Sources */,
@@ -1508,6 +1519,7 @@
 				116463AD1F91F634004ECC79 /* XWCoolAnimator+XWPageFlip.m in Sources */,
 				114BC1B41FAFFB9100C1A46D /* BankModel.m in Sources */,
 				11AC9F1F1FC2A5860016F3E5 /* SKCalendarManage.m in Sources */,
+				11E239A51FE7C43500883C89 /* YQCollectionViewFlowLayout.m in Sources */,
 				1124D9671FC7150A007149BE /* BalanceModel.m in Sources */,
 				1154D11F1FAAC1DF00E05734 /* RecordSearchTypeTableViewCell.m in Sources */,
 				113F71E71FB2B5FC00EB4567 /* UIButton_withBadge.m in Sources */,

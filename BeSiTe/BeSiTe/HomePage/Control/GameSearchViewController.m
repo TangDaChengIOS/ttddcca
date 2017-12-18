@@ -25,6 +25,12 @@
     [self readHistoryData];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.searchBar becomeFirstResponder];
+}
+
 
 -(void)readHistoryData{
     if ([[NSUserDefaults standardUserDefaults]objectForKey:kSearchHistoryKey]) {

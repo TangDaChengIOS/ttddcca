@@ -33,7 +33,7 @@
         _typeImage = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width - w, 0, w, w)];
         [self.contentView addSubview:_typeImage];
         
-        _titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, _mainImage.maxY + 10 * kPROPORTION, self.contentView.width, 15)];
+        _titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, _mainImage.maxY + 10 * kPROPORTION, self.contentView.width, 15 * kPROPORTION)];
         _titleLab.textColor = UIColorFromINTValue(65, 121, 130);
         _titleLab.font = kFont(14);
         _titleLab.textAlignment = NSTextAlignmentCenter;

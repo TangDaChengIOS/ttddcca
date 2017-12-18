@@ -8,7 +8,7 @@
 
 #import "QuickSavingViewController.h"
 
-@interface QuickSavingViewController ()
+@interface QuickSavingViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *tipsLab;
 @property (weak, nonatomic) IBOutlet UILabel *bankNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *bankCardLab;
@@ -27,6 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _giveNameTF.delegate = self;
+    _giveMoneyTF.delegate = self;
+    _giveNumberTF.delegate = self;
+    
     self.navigationController.navigationBar.translucent = NO;
     if (_savingType == QuickSavingType_Bank) {
         self.title =  @"秒存 网银转账";
@@ -36,6 +40,22 @@
         self.subMitBtnTopConstraint.constant -= 50;
     }
     [self requestReceivBankInfo];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == _giveNameTF){
+        [_giveMoneyTF becomeFirstResponder];
+    }else if (textField == _giveMoneyTF){
+        if (_savingType == QuickSavingType_Bank) {
+            [_giveNumberTF becomeFirstResponder];
+        }else{
+            [self.view endEditing:YES];
+        }
+    }else if (textField == _giveNumberTF){
+        [self.view endEditing:YES];
+    }
+    return YES;
 }
 
 -(void)requestReceivBankInfo
@@ -67,8 +87,8 @@
         TTAlert(@"请输入汇款人姓名！");
         return;
     }
-    if (self.giveMoneyTF.text.length <= 0) {
-        TTAlert(@"请输入汇款金额！");
+    if (self.giveMoneyTF.text.length <= 0 || ![ZZTextInput onlyInputMoney:self.giveMoneyTF.text]) {
+        TTAlert(@"请输入正确的汇款金额(最多两位小数)！");
         return;
     }
     if (self.giveNumberTF.text.length <= 0 && _savingType == QuickSavingType_Bank) {

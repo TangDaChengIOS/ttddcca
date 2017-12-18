@@ -9,7 +9,7 @@
 #import "EditPassWordView.h"
 #import "RSAEncryptor.h"
 
-@interface EditPassWordView ()<UIAlertViewDelegate>{
+@interface EditPassWordView ()<UIAlertViewDelegate,UITextFieldDelegate>{
 
     UITextField * oldPwdTF;
 
@@ -35,11 +35,13 @@
 {
     CGFloat whiteBack_W = MAXWIDTH - 100 * kPROPORTION;
     
+    whiteBack.frame = CGRectMake(50*kPROPORTION, (MAXHEIGHT - 300)/2, whiteBack_W, 300);
+
     //中间的白色背景
-    UIView * whiteBack = [[UIView alloc]initWithFrame:CGRectMake(50*kPROPORTION, (MAXHEIGHT - 300)/2, whiteBack_W, 300)];
-    whiteBack.backgroundColor = kWhiteColor;
-    whiteBack.layer.cornerRadius = 4;
-    [self addSubview:whiteBack];
+//    UIView * whiteBack = [[UIView alloc]initWithFrame:CGRectMake(50*kPROPORTION, (MAXHEIGHT - 300)/2, whiteBack_W, 300)];
+//    whiteBack.backgroundColor = kWhiteColor;
+//    whiteBack.layer.cornerRadius = 4;
+//    [self addSubview:whiteBack];
     
     //顶部的lab
     UILabel * _titleLab = [[UILabel alloc]initWithFrame:CGRectMake(16, 14, 100, 15)];
@@ -51,6 +53,7 @@
     oldPwdTF = [self createTextFieldWithFrame:CGRectMake(16,_titleLab.maxY + 25, whiteBack_W - 32, 38)];
     oldPwdTF.placeholder = @"请输入原始密码";
     oldPwdTF.secureTextEntry = YES;
+    oldPwdTF.delegate = self;
     [whiteBack addSubview:oldPwdTF];
     
     newPwdTF = [self createTextFieldWithFrame:CGRectMake(16,oldPwdTF.maxY + 6, whiteBack_W - 32, 38)];
@@ -58,6 +61,8 @@
     newPwdTF.rightView = [self createButtonWithTag:1001];
     newPwdTF.secureTextEntry = YES;
     newPwdTF.rightViewMode = UITextFieldViewModeAlways;
+    newPwdTF.delegate = self;
+
     [whiteBack addSubview:newPwdTF];
     
     newPwdTF2 = [self createTextFieldWithFrame:CGRectMake(16,newPwdTF.maxY + 6, whiteBack_W - 32, 38)];
@@ -65,6 +70,8 @@
     newPwdTF2.rightView = [self createButtonWithTag:1002];
     newPwdTF2.rightViewMode = UITextFieldViewModeAlways;
     newPwdTF2.secureTextEntry = YES;
+    newPwdTF2.delegate = self;
+
     [whiteBack addSubview:newPwdTF2];
    
     
@@ -88,6 +95,20 @@
     [whiteBack addSubview:cancelBtn];
     
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == oldPwdTF) {
+        [newPwdTF becomeFirstResponder];
+    }else if (textField == newPwdTF){
+        [newPwdTF2 becomeFirstResponder];
+    }else if (textField == newPwdTF2){
+        [self endEditing:YES];
+    }
+    return YES;
+}
+
+
 +(void)showWithFinshBlock:(void(^)()) completeBlock
 {
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
@@ -138,12 +159,12 @@
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self removeFromSuperview];    
+    [self removeSelf];
 }
 
 
 -(void)cancelBtnClick{
-    [self removeFromSuperview];
+    [self removeSelf];
 }
 
 

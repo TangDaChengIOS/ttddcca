@@ -94,6 +94,7 @@
             menuVC.selectIndex = indexPath.item;
             GamesCompanyModel * model = [BSTSingle defaultSingle].companysArray[indexPath.row];
             menuVC.selectCompanyCode = model.companyCode;
+            menuVC.hidesBottomBarWhenPushed = YES;
             [[AppDelegate getBoomNavigation] pushViewController:menuVC animated:YES];
         }];
     }else

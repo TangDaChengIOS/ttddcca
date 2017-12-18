@@ -8,7 +8,7 @@
 
 #import "RecordExchangeView.h"
 
-@interface RecordExchangeView (){
+@interface RecordExchangeView ()<UITextFieldDelegate>{
     BOOL _isRequested;
 }
 
@@ -32,10 +32,11 @@
 -(void)configSubViews
 {
     CGFloat whiteBack_W = MAXWIDTH - 60 * kPROPORTION;
-    UIView * whiteBack = [[UIView alloc]initWithFrame:CGRectMake(30*kPROPORTION, (MAXHEIGHT - 274)/2, whiteBack_W, 274)];
-    whiteBack.backgroundColor = kWhiteColor;
-    whiteBack.layer.cornerRadius = 4;
-    [self addSubview:whiteBack];
+    whiteBack.frame = CGRectMake(30*kPROPORTION, (MAXHEIGHT - 274)/2, whiteBack_W, 274);
+//    UIView * whiteBack = [[UIView alloc]initWithFrame:CGRectMake(30*kPROPORTION, (MAXHEIGHT - 274)/2, whiteBack_W, 274)];
+//    whiteBack.backgroundColor = kWhiteColor;
+//    whiteBack.layer.cornerRadius = 4;
+//    [self addSubview:whiteBack];
     
     UILabel * lab = [[UILabel alloc]initWithFrame:CGRectMake(16, 14, 100, 15)];
     lab.text = @"积分兑换";
@@ -61,6 +62,7 @@
     _moneyTF.textAlignment = NSTextAlignmentCenter;
     _moneyTF.leftViewMode = UITextFieldViewModeNever;
     _moneyTF.keyboardType = UIKeyboardTypeNumberPad;
+    _moneyTF.delegate = self;
     [whiteBack addSubview:_moneyTF];
     
     UIButton * allBtn = [[UIButton alloc]initWithFrame:CGRectMake(whiteBack_W - 28 - 40, onlyShowBtn.maxY + 13, 40, 36)];
@@ -94,6 +96,15 @@
     [whiteBack addSubview:cancelBtn];
     
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == _moneyTF){
+        [self endEditing:YES];
+    }
+    return YES;
+}
+
 //- (void)didMoveToWindow
 - (void)didMoveToSuperview
 {
@@ -164,14 +175,14 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self removeFromSuperview];
+    [self removeSelf];
     if (self.completeBlock) {
         self.completeBlock();
     }
 }
 
 -(void)cancelBtnClick{
-    [self removeFromSuperview];
+    [self removeSelf];
 }
 
 

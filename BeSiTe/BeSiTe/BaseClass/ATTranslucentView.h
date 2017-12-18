@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ATTranslucentView : UIView
+@interface ATTranslucentView : UIView{
+    UIView * whiteBack;
+}
+
+@property (nonatomic,assign) BOOL  isNeedObserveKeyBoard;
+
+-(void)removeSelf;
 
 -(UITextField *)createTextFieldWithFrame:(CGRect)frame;
 

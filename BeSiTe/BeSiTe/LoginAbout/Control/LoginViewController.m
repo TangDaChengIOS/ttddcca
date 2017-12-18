@@ -12,7 +12,7 @@
 #import "ForgetPassWordViewController.h"
 #import "RSAEncryptor.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet ATNeedBorderView *nameBackView;
 @property (weak, nonatomic) IBOutlet ATNeedBorderView *pwdBackView;
 @property (weak, nonatomic) IBOutlet UITextField *nameTF;
@@ -28,8 +28,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
-//    self.nameTF.text = @"BC7896";
+    _nameTF.delegate = self;
+    _pwdTF.delegate = self;
+//    self.nameTF.text = @"BCASDFG";
 //    self.pwdTF.text = @"qwerty";
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.nameTF) {
+        [self.pwdTF becomeFirstResponder];
+    }else if (textField == self.pwdTF){
+        [self.view endEditing:YES];
+    }
+    return YES;
 }
 
 - (IBAction)loginBtnDidClicked:(id)sender
@@ -60,14 +72,40 @@
         [model mj_setKeyValues:JSON];
         model.accountName = weak_self.nameTF.text;
         [BSTSingle defaultSingle].user = model;
-        [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginSuccessNotification object:nil];
-        [weak_self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [weak_self getUnReadMsgNums];
 
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];
 
     }];
 }
+
+-(void)getUnReadMsgNums
+{
+    kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:nil];
+    [RequestManager getManagerDataWithPath:@"user/msgNums" params:nil success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
+        if (!isSuccess) {
+            [weak_self finishLogin];
+            return ;
+        }
+        [[BSTSingle defaultSingle] mj_setKeyValues:JSON];
+        [weak_self finishLogin];
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:nil];
+        [weak_self finishLogin];
+    }];
+}
+
+
+-(void)finishLogin{
+    [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginSuccessNotification object:nil];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
 - (IBAction)registerDidClicked:(id)sender
 {
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(leftBarButtonItemClick) name:BSTRegisterSuccessNotification object:nil];

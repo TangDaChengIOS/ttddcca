@@ -7,9 +7,11 @@
 //
 
 #import "ATTranslucentView.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 @interface ATTranslucentView (){
     BOOL _isKeyBoardShow;
+    CGFloat _whiteBack_originY;//底白的实际Y轴坐标
 }
 @property (nonatomic,strong) UIView * contentView;
 
@@ -25,9 +27,9 @@
         _contentView.backgroundColor = UIColorFromINTRGBA(0, 0, 0, 0.4);
         [self addSubview:_contentView];
         
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardShow) name:UIKeyboardDidShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardHidden) name:UIKeyboardDidHideNotification object:nil];
-
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHidden) name:UIKeyboardWillHideNotification object:nil];
+    
         kWeakSelf
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
             if (_isKeyBoardShow) {
@@ -39,21 +41,55 @@
         }];
         [_contentView addGestureRecognizer:tap];
         
+        whiteBack = [[UIView alloc]initWithFrame:CGRectZero];
+        whiteBack.backgroundColor = kWhiteColor;
+        whiteBack.layer.cornerRadius = 4;
+        [self addSubview:whiteBack];
+        
     }
     return self;
 }
+-(void)didMoveToSuperview{
+    _whiteBack_originY = whiteBack.mj_y;
+    [IQKeyboardManager sharedManager].enable = NO;
+}
 
 -(void)removeSelf{
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [IQKeyboardManager sharedManager].enable = YES;
     [self removeFromSuperview];
 }
 
--(void)keyboardShow{
+#pragma mark -- 键盘事件
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
     _isKeyBoardShow = YES;
+
+    //获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    CGFloat keyBoardH = keyboardRect.size.height;
+    [self resetUIWithOffsetY:keyBoardH];
 }
 
--(void)keyboardHidden{
+-(void)keyboardWillHidden
+{
     _isKeyBoardShow = NO;
+    [self resetUIWithOffsetY:0];
+}
+-(void)resetUIWithOffsetY:(CGFloat)offsetY
+{
+    NSLog(@"___offset:%lf___MAX:%lf___H:%lf",offsetY,MAXHEIGHT,whiteBack.mj_h);
+    if (MAXHEIGHT - whiteBack.maxY < offsetY ) {
+        whiteBack.mj_y = MAXHEIGHT - whiteBack.mj_h - offsetY - 5;
+    }else{
+        if (offsetY <= 0) {
+            whiteBack.mj_y = _whiteBack_originY;
+        }
+    }
+    [self layoutIfNeeded];
 }
 
 -(UITextField *)createTextFieldWithFrame:(CGRect)frame{

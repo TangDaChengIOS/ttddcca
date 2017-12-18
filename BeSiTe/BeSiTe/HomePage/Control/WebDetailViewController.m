@@ -53,6 +53,7 @@
     
     _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, MAXWIDTH, MAXHEIGHT - 64)];
     _webView.scalesPageToFit = YES;
+    _webView.backgroundColor = kWhiteColor;
 
     _webView.delegate = self;
     [self.view addSubview:_webView];

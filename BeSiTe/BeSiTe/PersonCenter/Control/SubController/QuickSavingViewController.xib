@@ -185,11 +185,8 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NxC-Ja-SIH">
-                            <rect key="frame" x="80" y="4" width="180" height="30"/>
+                            <rect key="frame" x="80" y="0.0" width="180" height="38"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="dFz-Ow-jJ1"/>
-                            </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -198,11 +195,12 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="NxC-Ja-SIH" secondAttribute="trailing" constant="10" id="DPT-n9-kRZ"/>
+                        <constraint firstAttribute="bottom" secondItem="NxC-Ja-SIH" secondAttribute="bottom" id="WpR-n4-hZc"/>
                         <constraint firstItem="NxC-Ja-SIH" firstAttribute="leading" secondItem="r6C-SC-Njy" secondAttribute="trailing" constant="10" id="aCL-lF-emD"/>
                         <constraint firstItem="r6C-SC-Njy" firstAttribute="top" secondItem="5nB-Di-ena" secondAttribute="top" constant="11" id="cQo-1k-Iwo"/>
                         <constraint firstAttribute="height" constant="38" id="j3h-Er-zr1"/>
                         <constraint firstItem="r6C-SC-Njy" firstAttribute="leading" secondItem="5nB-Di-ena" secondAttribute="leading" id="rHp-fO-Zxg"/>
-                        <constraint firstItem="NxC-Ja-SIH" firstAttribute="top" secondItem="5nB-Di-ena" secondAttribute="top" constant="4" id="sun-uA-Szc"/>
+                        <constraint firstItem="NxC-Ja-SIH" firstAttribute="top" secondItem="5nB-Di-ena" secondAttribute="top" id="sun-uA-Szc"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ug-by-ULy" customClass="ATNeedBorderView">
@@ -218,11 +216,8 @@
                             <color key="textColor" red="0.4823529412" green="0.4823529412" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7WW-ly-9IC">
-                            <rect key="frame" x="80" y="4" width="180" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="6OH-I0-ipu"/>
-                            </constraints>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7WW-ly-9IC" customClass="NoPasteTextField">
+                            <rect key="frame" x="80" y="0.0" width="180" height="38"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -233,8 +228,9 @@
                         <constraint firstItem="7WW-ly-9IC" firstAttribute="leading" secondItem="yHF-zv-YRN" secondAttribute="trailing" constant="10" id="1Za-bG-x1M"/>
                         <constraint firstItem="yHF-zv-YRN" firstAttribute="leading" secondItem="4ug-by-ULy" secondAttribute="leading" id="4iE-Nc-j9d"/>
                         <constraint firstAttribute="trailing" secondItem="7WW-ly-9IC" secondAttribute="trailing" constant="10" id="Fx1-e9-USZ"/>
+                        <constraint firstAttribute="bottom" secondItem="7WW-ly-9IC" secondAttribute="bottom" id="T9w-xD-tl6"/>
                         <constraint firstAttribute="height" constant="38" id="ggW-Wc-PeV"/>
-                        <constraint firstItem="7WW-ly-9IC" firstAttribute="top" secondItem="4ug-by-ULy" secondAttribute="top" constant="4" id="sJg-NR-s7F"/>
+                        <constraint firstItem="7WW-ly-9IC" firstAttribute="top" secondItem="4ug-by-ULy" secondAttribute="top" id="sJg-NR-s7F"/>
                         <constraint firstItem="yHF-zv-YRN" firstAttribute="top" secondItem="4ug-by-ULy" secondAttribute="top" constant="11" id="vvM-vh-Jdx"/>
                     </constraints>
                 </view>
@@ -252,10 +248,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aBF-ki-Vyo">
-                            <rect key="frame" x="80" y="4" width="150" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="krJ-gU-6sy"/>
-                            </constraints>
+                            <rect key="frame" x="80" y="0.0" width="150" height="38"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -276,7 +269,8 @@
                     <constraints>
                         <constraint firstItem="LVR-e7-XiN" firstAttribute="top" secondItem="MwV-Ql-mx6" secondAttribute="top" constant="4" id="JLy-Xj-X80"/>
                         <constraint firstItem="aBF-ki-Vyo" firstAttribute="leading" secondItem="dik-re-WvD" secondAttribute="trailing" constant="10" id="WzB-WL-XLG"/>
-                        <constraint firstItem="aBF-ki-Vyo" firstAttribute="top" secondItem="MwV-Ql-mx6" secondAttribute="top" constant="4" id="XLa-Ld-CWa"/>
+                        <constraint firstItem="aBF-ki-Vyo" firstAttribute="top" secondItem="MwV-Ql-mx6" secondAttribute="top" id="XLa-Ld-CWa"/>
+                        <constraint firstAttribute="bottom" secondItem="aBF-ki-Vyo" secondAttribute="bottom" id="aES-L0-Nf9"/>
                         <constraint firstAttribute="height" constant="38" id="c4f-9Q-k0w"/>
                         <constraint firstAttribute="trailing" secondItem="LVR-e7-XiN" secondAttribute="trailing" constant="4" id="h7N-Gw-X1y"/>
                         <constraint firstAttribute="trailing" secondItem="aBF-ki-Vyo" secondAttribute="trailing" constant="40" id="o4U-5k-c8K"/>

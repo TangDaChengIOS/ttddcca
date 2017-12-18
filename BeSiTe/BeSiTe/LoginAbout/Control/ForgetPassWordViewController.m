@@ -9,7 +9,7 @@
 #import "ForgetPassWordViewController.h"
 #import "UIButton_withBadge.h"
 
-@interface ForgetPassWordViewController ()
+@interface ForgetPassWordViewController ()<UITextFieldDelegate>
 
 //公共模块
 @property (weak, nonatomic) IBOutlet UIButton_withBadge *mailLookbtn;
@@ -39,8 +39,29 @@
     [super viewDidLoad];
     self.title = @"忘记密码";
     [self refreshUI:YES];
- 
+    self.accoutTF_mail.delegate = self;
+    self.emailTF.delegate = self;
+    self.accountTF_phone.delegate = self;
+    self.phoneTF.delegate = self;
+    self.coedTF.delegate = self;
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.accoutTF_mail) {
+        [self.emailTF becomeFirstResponder];
+    }else if (textField == self.emailTF){
+        [self.view endEditing:YES];
+    }else if (textField == self.accountTF_phone){
+        [self.phoneTF becomeFirstResponder];
+    }else if (textField == self.phoneTF){
+        [self.coedTF becomeFirstResponder];
+    }else if (textField == self.coedTF){
+        [self.view endEditing:YES];
+    }
+    return YES;
+}
+
 #pragma mark -- 切换 邮件找回 / 手机找回
 -(void)refreshUI:(BOOL)isLeft
 {
@@ -63,7 +84,7 @@
     _mailLookSuperView.hidden = !isLeft;
     _phoneLookSuperView.hidden = isLeft;
     _phoneLookSuperViewTopConstraint.constant =0;
-
+    [self.view endEditing:YES];
 }
 
 - (IBAction)mailLookbtnClick:(id)sender {
