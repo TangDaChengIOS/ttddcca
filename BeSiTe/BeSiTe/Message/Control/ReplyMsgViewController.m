@@ -102,6 +102,16 @@
     [_msgsTextView scrollRangeToVisible:NSMakeRange(mString.length - 1, 1)];
 }
 
+
+-(void)appendNewData{
+    NSMutableAttributedString * mString = [[NSMutableAttributedString alloc]initWithAttributedString:_msgsTextView.attributedText];
+    [mString appendAttributedString:[self getMineAttributeString]];
+    [mString appendAttributedString:[self getCommonAttributeString:[NSString stringWithFormat:@"  %@\n\n",self.messageView.textView.text]]];
+    _msgsTextView.attributedText = mString;
+    [_msgsTextView scrollRangeToVisible:NSMakeRange(mString.length - 1, 1)];
+}
+
+
 -(NSAttributedString *)getCommonAttributeString:(NSString *)string{
     NSAttributedString * attStr = [[NSAttributedString alloc]initWithString:string attributes:@{NSForegroundColorAttributeName:UIColorFromRGBValue(0x999999),NSFontAttributeName:kFont(12)}];
     return attStr;
@@ -137,7 +147,7 @@
             TTAlert(JSON);
             return ;
         }
-        [weak_self requestData];
+        [weak_self appendNewData];
         [weak_self.messageView setDefaultUI];
         BSTMessageView * view = [[[NSBundle mainBundle]loadNibNamed:@"BSTMessageView" owner:self options:nil] firstObject];
         view.showType = ShowTypeWaitThreeSec;

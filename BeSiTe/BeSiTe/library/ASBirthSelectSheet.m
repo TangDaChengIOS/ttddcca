@@ -109,5 +109,14 @@
     return dateTime;
 }
 
+//获取当前日期前一天
++(NSString *)getDayBeforeCurrentDate {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate * date = [NSDate dateWithTimeIntervalSinceNow:-24*60*60];
+    NSString *dateTime = [formatter stringFromDate:date];
+    return dateTime;
+}
+
 
 @end

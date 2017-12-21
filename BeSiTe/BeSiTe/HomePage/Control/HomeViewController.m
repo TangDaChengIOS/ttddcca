@@ -40,7 +40,8 @@
     }];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeADSRefreshTime) name:@"ADSRollTimeChangedNotification" object:nil];
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(readUnReadMsgNums) name:kGetUnReadMsgNumsSuccessNotification object:nil];
+
     [self.collectionView.mj_header beginRefreshing];
 
 }
@@ -205,16 +206,22 @@
     return _dataSource;
 }
 
+-(void)readUnReadMsgNums
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([BSTSingle defaultSingle].user) {
+            [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
+        }
+    });
+}
+
 #pragma mark -- viewAppear
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
     [self.navigationController.navigationBar addSubview:self.navRightCornImg];
-    if ([BSTSingle defaultSingle].user) {
-        [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
-    }
-
+    [self readUnReadMsgNums];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -235,5 +242,7 @@
 }
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ADSRollTimeChangedNotification" object:nil];
+
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kGetUnReadMsgNumsSuccessNotification object:nil];
 }
 @end

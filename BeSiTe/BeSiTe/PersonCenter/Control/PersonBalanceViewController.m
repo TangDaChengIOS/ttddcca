@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableViewHeightConstraint.constant = 37;
     [self configSubViews];
 }
 
@@ -33,16 +34,14 @@
     [super viewWillAppear:animated];
     self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
     [self getBalanceData];
-
-    [self.tableView reloadData];
 }
 
 -(void)getBalanceData
 {
     kWeakSelf
-    [MBProgressHUD showMessage:@"" toView:nil];
+    [MBProgressHUD showMessage:@"" toView:self.view];
     [RequestManager getWithPath:@"getGameBalance" params:nil success:^(id JSON ,BOOL isSuccess) {
-        [MBProgressHUD hideHUDForView:nil];
+        [MBProgressHUD hideHUDForView:self.view];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -52,7 +51,7 @@
         [weak_self resetConstraint];
 
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:nil];
+        [MBProgressHUD hideHUDForView:self.view];
 
     }];
 }

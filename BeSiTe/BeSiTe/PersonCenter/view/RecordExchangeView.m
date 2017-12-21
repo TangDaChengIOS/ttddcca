@@ -108,6 +108,7 @@
 //- (void)didMoveToWindow
 - (void)didMoveToSuperview
 {
+    [super didMoveToSuperview];
     if (_isRequested) {
         return;
     }

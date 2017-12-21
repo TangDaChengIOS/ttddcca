@@ -29,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *bankCardTF;
 @property (weak, nonatomic) IBOutlet UITextField *bankAddrTF;
 
+@property (nonatomic,copy) NSString * selectBankCode;
+
 @end
 
 @implementation RegisterPageTwoViewController
@@ -111,6 +113,7 @@
     vc.selectBankBlock = ^(BankModel * model){
         [weak_self.bankImageView setImageURL:[NSURL URLWithString:model.icon]];
         weak_self.bankNameLab.text = model.bankName;
+        weak_self.selectBankCode = model.bankCode;
     };
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -162,7 +165,7 @@
     [mDict setValue:self.emailTF.text forKey:@"email"];
     [mDict setValue:self.qqTF.text forKey:@"qq"];
     if (self.bankNameLab.text.length > 0) {
-        [mDict setValue:self.bankNameLab.text forKey:@"bankCode"];
+        [mDict setValue:self.selectBankCode forKey:@"bankCode"];
     }
     if (self.bankCardTF.text.length > 0) {
         [mDict setValue:self.bankCardTF.text forKey:@"cardNo"];

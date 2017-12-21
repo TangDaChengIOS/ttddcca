@@ -28,4 +28,6 @@
 -(NSString *)getVipImageStr;
 +(NSAttributedString *)getTotalMoneyAttributeString;
 
++(void)saveLoginData:(NSDictionary *)data andAccountName:(NSString *)accountName;
++(BOOL)isSuccessReadSavedLoginData;
 @end

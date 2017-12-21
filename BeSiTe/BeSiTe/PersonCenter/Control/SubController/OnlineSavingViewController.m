@@ -206,8 +206,8 @@
 
 -(void)comitBtnClick
 {
-    if (![ZZTextInput onlyInputTheNumber:self.moneyTF.text]) {
-        TTAlert(@"请输入正确的存款数额");
+    if (![ZZTextInput onlyInputMoney:self.moneyTF.text]) {
+        TTAlert(@"请输入正确的存款数额(最多两位小数)！");
         return;
     }
     if (_selectedIndex == -1) {

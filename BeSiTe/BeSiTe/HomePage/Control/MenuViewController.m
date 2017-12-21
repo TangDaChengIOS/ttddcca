@@ -197,7 +197,11 @@
         [LoginViewController presentLoginViewController];
     }];
 }
-- (IBAction)exitBtnClick:(id)sender {
+- (IBAction)exitBtnClick:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSavingUserInfoKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
     [BSTSingle defaultSingle].user = nil;
     NSInteger selectIndex = [AppDelegate getTabBarController].selectedIndex;
     [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginFailueNotification object:nil];

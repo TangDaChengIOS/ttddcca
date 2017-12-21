@@ -46,4 +46,8 @@ typedef NS_ENUM(NSInteger,RecordCellType) {
 @property (nonatomic,copy)NSString * account;//	string	朋友的账号
 @property (nonatomic,copy)NSString * points;//	string	获取积分数
 
+-(UIColor *)quKuanStateLabTextColor;
+-(UIColor *)cunKuanStateLabTextColor;
+-(UIColor *)otherStateLabTextColor;
+
 @end

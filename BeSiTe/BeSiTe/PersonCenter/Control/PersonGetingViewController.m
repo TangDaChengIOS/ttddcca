@@ -149,12 +149,12 @@
         TTAlert(@"请选择银行");
         return;
     }
-    if (![ZZTextInput onlyInputTheNumber:self.moneyTF.text]) {
-        TTAlert(@"请输入正确的取款金额");
+    if (![ZZTextInput onlyInputMoney:self.moneyTF.text]) {
+        TTAlert(@"请输入正确的取款金额(最多两位小数)！");
         return;
     }
-    if (self.cardTF.text.length <= 0) {
-        TTAlert(@"请输入银行卡/折号");
+    if (![ZZTextInput onlyInputTheNumber:self.cardTF.text]) {
+        TTAlert(@"请输入正确的银行卡/折号");
         return;
     }
     

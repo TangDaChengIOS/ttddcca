@@ -31,6 +31,7 @@
 #import "BSTMessageView.h"
 #import <MJExtension/NSObject+MJKeyValue.h>
 #import "MBProgressHUD+ATADD.h"
+#import "RequestCommonData.h"
 
 /**成功登录通知名*/
 #define BSTLoginSuccessNotification @"BSTLoginSuccessNotification"
@@ -41,5 +42,8 @@
 
 /**第一次进入游戏列表页*/
 #define kFirstEnterGameListPage @"kFirstEnterGameListPage"
+
+/**存储登录信息的Key*/
+#define kSavingUserInfoKey @"kSavingUserInfoKey"
 
 #endif /* Constant_h */

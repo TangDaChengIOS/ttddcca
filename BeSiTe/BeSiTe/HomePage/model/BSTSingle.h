@@ -46,4 +46,6 @@
 +(instancetype)defaultSingle;
 
 -(void)updateGameCompany:(NSString *)gamePlatformCode balance:(NSString *)balance;
+
++(void)saveLoginData:(NSDictionary *)data andAccountName:(NSString *)accountName;
 @end

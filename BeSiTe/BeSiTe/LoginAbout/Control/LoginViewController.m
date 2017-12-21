@@ -30,8 +30,8 @@
     [self configSubViews];
     _nameTF.delegate = self;
     _pwdTF.delegate = self;
-//    self.nameTF.text = @"BCASDFG";
-//    self.pwdTF.text = @"qwerty";
+    self.nameTF.text = @"BCASDFG";
+    self.pwdTF.text = @"qwerty";
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -72,32 +72,14 @@
         [model mj_setKeyValues:JSON];
         model.accountName = weak_self.nameTF.text;
         [BSTSingle defaultSingle].user = model;
-        [weak_self getUnReadMsgNums];
+        [UserModel saveLoginData:JSON andAccountName:weak_self.nameTF.text];
+        [weak_self finishLogin];
 
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];
 
     }];
 }
-
--(void)getUnReadMsgNums
-{
-    kWeakSelf
-    [MBProgressHUD showMessage:@"" toView:nil];
-    [RequestManager getManagerDataWithPath:@"user/msgNums" params:nil success:^(id JSON ,BOOL isSuccess) {
-        [MBProgressHUD hideHUDForView:nil];
-        if (!isSuccess) {
-            [weak_self finishLogin];
-            return ;
-        }
-        [[BSTSingle defaultSingle] mj_setKeyValues:JSON];
-        [weak_self finishLogin];
-    } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:nil];
-        [weak_self finishLogin];
-    }];
-}
-
 
 -(void)finishLogin{
     [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginSuccessNotification object:nil];

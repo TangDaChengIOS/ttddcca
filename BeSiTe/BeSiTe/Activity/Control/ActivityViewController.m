@@ -37,15 +37,24 @@
         [weak_self requestData];
     }];
     [self.tableView.mj_header beginRefreshing];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(readUnReadMsgNums) name:kGetUnReadMsgNumsSuccessNotification object:nil];
+
+}
+-(void)readUnReadMsgNums
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([BSTSingle defaultSingle].user) {
+            [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
+        }
+    });
 }
 #pragma mark -- viewAppear
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    if ([BSTSingle defaultSingle].user) {
-        [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
-    }
+    [self readUnReadMsgNums];
+
 }
 -(void)requestData{
     
@@ -215,6 +224,11 @@
         _dataSource = [NSMutableArray array];
     }
     return _dataSource;
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kGetUnReadMsgNumsSuccessNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

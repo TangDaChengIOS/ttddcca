@@ -25,12 +25,12 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     if (!isOpen) {
-        _webViewHeightConstraint.constant = 0.1;
+        _webViewHeightConstraint.constant = 0;
         _rightImageView.image =KIMAGE(@"common_next_icon");
         _webView.hidden = YES;
     }else{
         _webView.hidden = NO;
-        _webView.backgroundColor = kWhiteColor;
+        _webView.backgroundColor = UIColorFromRGBValue(0xf6f6f6);
         _webViewHeightConstraint.constant = 260;
         _rightImageView.image =KIMAGE(@"common_open_icon");
         [_webView loadHTMLString:model.content baseURL:nil];

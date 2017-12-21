@@ -28,7 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(readUnReadMsgNums) name:kGetUnReadMsgNumsSuccessNotification object:nil];
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -41,22 +43,17 @@
         [_titleViewBtn setTitle:@"未登录" forState:UIControlStateNormal];
     }
 
-    [self requestData];
+    [self readUnReadMsgNums];
+    [RequestCommonData getUnReadMsgNums];
 }
 
--(void)requestData{
-    kWeakSelf
-    [RequestManager getManagerDataWithPath:@"user/msgNums" params:nil success:^(id JSON ,BOOL isSuccess) {
-        if (!isSuccess) {
-            TTAlert(JSON);
-            return ;
+-(void)readUnReadMsgNums
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([BSTSingle defaultSingle].user) {
+            [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
         }
-        [[BSTSingle defaultSingle] mj_setKeyValues:JSON];
-        [(UIBarButtonItem_withBadge *)weak_self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
-
-    } failure:^(NSError *error) {
-        
-    }];
+    });
 }
 
 - (NSArray<NSString *> *)menuTitlesForMagicView:(VTMagicView *)magicView
@@ -213,6 +210,12 @@
     }
     return _titleViewBtn;
 }
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kGetUnReadMsgNumsSuccessNotification object:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

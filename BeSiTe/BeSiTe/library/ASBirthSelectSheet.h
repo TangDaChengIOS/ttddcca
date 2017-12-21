@@ -14,4 +14,7 @@
 
 //获取当前日期
 +(NSString *)getCurrentDate;
+
+//获取当前日期前一天
++(NSString *)getDayBeforeCurrentDate;
 @end

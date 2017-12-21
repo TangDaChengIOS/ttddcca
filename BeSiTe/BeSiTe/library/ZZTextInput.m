@@ -28,6 +28,7 @@
 
 /**只能输入最多两位小数的金额*/
 +(BOOL)onlyInputMoney:(NSString*)string{
+    if (string.length == 0) return NO;
     NSString *numString =@"^[0-9]+(.[0-9]{2})?$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",numString];
     BOOL inputString = [predicate evaluateWithObject:string];

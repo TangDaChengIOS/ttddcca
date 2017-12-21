@@ -91,6 +91,7 @@
 		116463BC1F91F634004ECC79 /* XWFilterTransitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1164639C1F91F634004ECC79 /* XWFilterTransitionView.m */; };
 		116463BD1F91F634004ECC79 /* XWMagicMoveAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1164639F1F91F634004ECC79 /* XWMagicMoveAnimator.m */; };
 		11713E201FA2D76300303AD8 /* OnlyShowImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11713E1F1FA2D76300303AD8 /* OnlyShowImageButton.m */; };
+		1176A8FA1FEA6A11007269DC /* RequestCommonData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1176A8F91FEA6A11007269DC /* RequestCommonData.m */; };
 		117799081FDE368D00F722E3 /* BSTLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 117799071FDE368D00F722E3 /* BSTLoadingView.m */; };
 		1179AF8A1FE26DE5006E4985 /* GameListPageCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1179AF891FE26DE5006E4985 /* GameListPageCollectionReusableView.m */; };
 		1179AF8D1FE280E8006E4985 /* BSTSendMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1179AF8C1FE280E8006E4985 /* BSTSendMessageView.m */; };
@@ -339,6 +340,8 @@
 		1164639F1F91F634004ECC79 /* XWMagicMoveAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XWMagicMoveAnimator.m; sourceTree = "<group>"; };
 		11713E1E1FA2D76300303AD8 /* OnlyShowImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlyShowImageButton.h; sourceTree = "<group>"; };
 		11713E1F1FA2D76300303AD8 /* OnlyShowImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlyShowImageButton.m; sourceTree = "<group>"; };
+		1176A8F81FEA6A11007269DC /* RequestCommonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestCommonData.h; sourceTree = "<group>"; };
+		1176A8F91FEA6A11007269DC /* RequestCommonData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestCommonData.m; sourceTree = "<group>"; };
 		117799061FDE368D00F722E3 /* BSTLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTLoadingView.h; sourceTree = "<group>"; };
 		117799071FDE368D00F722E3 /* BSTLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTLoadingView.m; sourceTree = "<group>"; };
 		1179AF881FE26DE5006E4985 /* GameListPageCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameListPageCollectionReusableView.h; sourceTree = "<group>"; };
@@ -895,6 +898,8 @@
 				116463541F91BB78004ECC79 /* PrefixHeader.pch */,
 				1182AF281F95B4A3001CE114 /* RequestManager.h */,
 				1182AF291F95B4A3001CE114 /* RequestManager.m */,
+				1176A8F81FEA6A11007269DC /* RequestCommonData.h */,
+				1176A8F91FEA6A11007269DC /* RequestCommonData.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1468,6 +1473,7 @@
 				116463AF1F91F634004ECC79 /* XWCoolAnimator+XWScanning.m in Sources */,
 				111455061FCF991800996BA1 /* UserMsgModel.m in Sources */,
 				1180453E1FD049F800EA8E76 /* ReplyMsgViewController.m in Sources */,
+				1176A8FA1FEA6A11007269DC /* RequestCommonData.m in Sources */,
 				11D5EBA01FCC18130070BE9C /* OnlineSavingViewController.m in Sources */,
 				11F1B7861FDF698F00F85535 /* GamesCanScrollTipsView.m in Sources */,
 				11AC9F331FC30C020016F3E5 /* MoneyRecord_TJLJ_ViewController.m in Sources */,

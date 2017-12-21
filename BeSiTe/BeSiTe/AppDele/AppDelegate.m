@@ -13,6 +13,7 @@
 #import "RSAEncryptor.h"
 #import <Instabug/Instabug.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import "UserModel.h"
 
 @interface AppDelegate ()
 
@@ -33,7 +34,7 @@
         APPStartRunViewController * runVC = [[APPStartRunViewController alloc]init];
         kWeakSelf
         runVC.finishBlock = ^{
-            [weak_self setDefaultRootViewController];
+            [weak_self setDefaultRootViewController:NO];
         };
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window.backgroundColor = [UIColor whiteColor];
@@ -41,7 +42,12 @@
         [self.window makeKeyAndVisible];
     }
     else{
-        [self setDefaultRootViewController];
+        if ([UserModel isSuccessReadSavedLoginData]) {
+            [self setDefaultRootViewController:YES];
+            [RequestCommonData getUnReadMsgNums];
+        }else{
+            [self setDefaultRootViewController:NO];
+        }
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNoLoginRootViewController) name:BSTLoginFailueNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setLoginSuccessRootViewController) name:BSTLoginSuccessNotification object:nil];

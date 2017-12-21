@@ -10,8 +10,8 @@
 
 @interface AppDelegate (Setting)
 
--(void)setDefaultRootViewController;
-//-(void)autoLogin;
+-(void)setDefaultRootViewController:(BOOL)isLogin;
+
 -(void)setNoLoginRootViewController;
 -(void)setLoginSuccessRootViewController;
 

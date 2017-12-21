@@ -26,15 +26,24 @@
     self.title = @"联系我们";
     [self configSub];
     [self requestData];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(readUnReadMsgNums) name:kGetUnReadMsgNumsSuccessNotification object:nil];
+
 }
+
+-(void)readUnReadMsgNums
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([BSTSingle defaultSingle].user) {
+            [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
+        }
+    });
+}
+
 #pragma mark -- viewAppear
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    if ([BSTSingle defaultSingle].user) {
-        [(UIBarButtonItem_withBadge *)self.navigationItem.rightBarButtonItem setBadgeValue:[BSTSingle defaultSingle].totalNums];
-    }
+    [self readUnReadMsgNums];
 }
 -(void)configSub{
     self.navigationController.navigationBar.translucent = NO;
@@ -100,6 +109,11 @@
 - (IBAction)onLineKefuBtnClick:(id)sender {
     WebDetailViewController * webVC = [WebDetailViewController quickCreateWithUrl:self.model.customer_online.content];
     [self pushVC:webVC];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kGetUnReadMsgNumsSuccessNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

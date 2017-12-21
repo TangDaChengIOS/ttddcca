@@ -17,13 +17,13 @@
 
 @implementation AppDelegate (Setting)
 
--(void)setDefaultRootViewController
+-(void)setDefaultRootViewController:(BOOL)isLogin
 {
     [[UINavigationBar appearance]setBarTintColor:kMainColor];
     UITabBarController *tab = [[UITabBarController alloc]init];
     tab.tabBar.barTintColor = [UIColor whiteColor];
     tab.tabBar.backgroundColor = [UIColor whiteColor];
-    [tab setViewControllers:[self setTabBarControllerViewControllers:NO] animated:YES];
+    [tab setViewControllers:[self setTabBarControllerViewControllers:isLogin] animated:YES];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = tab;
@@ -43,6 +43,7 @@
     [[AppDelegate getTabBarController]setViewControllers:[self setTabBarControllerViewControllers:YES] animated:YES];
 //    [AppDelegate getTabBarController].selectedIndex = 2;
     [self getWebUrls];
+    [RequestCommonData getUnReadMsgNums];
 }
 
 
@@ -77,30 +78,13 @@
     return vcArr;
 }
 
-
-//-(void)autoLogin
-//{
-//    NSString * passWord = [RSAEncryptor encryptStringUseLocalFile:@"5k8b22"];
-//    
-//    NSDictionary * dict = @{@"loginName":@"BCASDFG",
-//                            @"password":passWord};
-//    [RequestManager getWithPath:@"login" params:dict success:^(id JSON ,BOOL isSuccess) {
-//        if (!isSuccess) {
-//            TTAlert(JSON);
-//            return ;
-//        }
-//        UserModel * model = [[UserModel alloc]init];
-//        [model mj_setKeyValues:JSON];
-//        model.accountName = @"BCASDFG";
-//        [BSTSingle defaultSingle].user = model;
-//        NSLog(@"登录成功");
-//    } failure:^(NSError *error) {
-//        
-//    }];
-//}
-
 /**获取各种协议的地址*/
 -(void)getWebUrls{
+    [RequestManager getWithPath:@"msgNums" params:nil success:^(id JSON, BOOL isSuccess) {
+        NSLog(@"%@",JSON);
+    } failure:^(NSError *error) {
+        
+    }];
     [RequestManager getManagerDataWithPath:@"appwebUrls" params:nil success:^(id JSON ,BOOL isSuccess) {
         if (!isSuccess) {
             TTAlert(JSON);

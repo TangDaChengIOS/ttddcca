@@ -11,6 +11,7 @@
 #import "RecordSearchTypeTableViewCell.h"
 #import "ATDAYCalendarView.h"
 #import "MoneyRecordHomeViewController.h"
+#import "ASBirthSelectSheet.h"
 
 @interface PersonRecordSearchViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -75,7 +76,7 @@
     //开始日期
     _beginDateSelectView = [[RecordSelectToolView alloc]init];
     _beginDateSelectView.titleLab.text = @"开始日期";
-    _beginDateSelectView.dateLab.text = @"";
+    _beginDateSelectView.dateLab.text = [ASBirthSelectSheet getDayBeforeCurrentDate];
     _beginDateSelectView.eventBlock = ^(BOOL isOpen){
         [ATDAYCalendarView showWithFinishBlock:^(NSString *dateStr) {
             weak_self.beginDateSelectView.dateLab.text = dateStr;
@@ -86,7 +87,7 @@
     //结束日期
     _endDateSelectView = [[RecordSelectToolView alloc]init];
     _endDateSelectView.titleLab.text = @"结束日期";
-    _endDateSelectView.dateLab.text = @"";
+    _endDateSelectView.dateLab.text = [ASBirthSelectSheet getCurrentDate];
     _endDateSelectView.eventBlock = ^(BOOL isOpen){
         [ATDAYCalendarView showWithFinishBlock:^(NSString *dateStr) {
             weak_self.endDateSelectView.dateLab.text = dateStr;

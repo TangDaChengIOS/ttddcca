@@ -11,6 +11,7 @@
 #import "SKCalendarCollectionViewCell.h"
 #import "SKWeekCollectionViewCell.h"
 #import "SKCalendarManage.h"
+#import "ASBirthSelectSheet.h"
 
 @interface SKCalendarView () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView * weekCollectionView;
@@ -445,6 +446,15 @@
     if (collectionView == self.calendarCollectionView) {
         self.selectedRow = indexPath.row;
         SKCalendarCollectionViewCell * cell = (SKCalendarCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        
+        NSString * dateStr = [NSString stringWithFormat:@"%@-%02lu-%02ld",@(self.year), (unsigned long)self.month, (long)[cell.calendarDate integerValue]];
+        
+        if ([dateStr compare:[ASBirthSelectSheet getCurrentDate] options:NSLiteralSearch] == NSOrderedDescending) {
+            TTAlert(@"选择日期不能大于当前日期");
+            return;
+        }
+        
+        
         self.dayForSelect = cell.calendarDate;
         
         if ([self.delegate respondsToSelector:@selector(selectDateWithRow:)]) {

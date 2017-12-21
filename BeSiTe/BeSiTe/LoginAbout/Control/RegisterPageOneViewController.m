@@ -60,6 +60,7 @@
     self.threeBtn.layer.borderWidth = 1;
     
     self.nameTF.delegate = self;
+    self.nameTF.returnKeyType = UIReturnKeyDefault;
     self.phoneTF.delegate = self;
     self.codeTF.delegate = self;
     self.pwdSecTF.delegate = self;
@@ -193,7 +194,8 @@
         [user mj_setKeyValues:JSON];
         user.accountName = weak_self.nameTF.text;
         [BSTSingle defaultSingle].user = user;
-        
+        [UserModel saveLoginData:JSON andAccountName:weak_self.nameTF.text];
+
         [weak_self.navigationController pushViewController:[[RegisterPageTwoViewController alloc]initWithNibName:@"RegisterPageTwoViewController" bundle:nil] animated:YES];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];

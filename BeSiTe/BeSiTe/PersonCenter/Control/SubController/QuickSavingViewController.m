@@ -87,7 +87,7 @@
         TTAlert(@"请输入汇款人姓名！");
         return;
     }
-    if (self.giveMoneyTF.text.length <= 0 || ![ZZTextInput onlyInputMoney:self.giveMoneyTF.text]) {
+    if ( ![ZZTextInput onlyInputMoney:self.giveMoneyTF.text]) {
         TTAlert(@"请输入正确的汇款金额(最多两位小数)！");
         return;
     }

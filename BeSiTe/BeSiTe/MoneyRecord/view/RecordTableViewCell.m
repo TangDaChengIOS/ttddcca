@@ -112,6 +112,9 @@
             _thirdLab.left = _secLab.maxX + itemSpace;
             _thirdLab.width = singleW * 2.5;
             _thirdLab.textAlignment = NSTextAlignmentCenter;
+            if (cellType != RecordCellType_TJLJ) {
+                _thirdLab.textColor = green;
+            }
 
             _fourthLab.left = _thirdLab.maxX + itemSpace;
             _fourthLab.width = singleW * 1.4;
@@ -130,11 +133,13 @@
             
             _secLab.left = _firstLab.maxX + itemSpace;
             _secLab.width = singleW * 3;
+            if (cellType != RecordCellType_JiFenBoom) {
+                _secLab.textColor = green;
+            }
             
             _thirdLab.left = _secLab.maxX + itemSpace;
             _thirdLab.width = singleW * 2;
-            _thirdLab.textColor = green;
-
+        
             _fourthLab.hidden = YES;
         }
             break;
@@ -152,6 +157,7 @@
             _firstLab.text = [NSString stringWithFormat:@"%@\n%@", model.createdTime,model.cardNo];
             _secLab.text = model.amount;
             _thirdLab.text = model.statusDesc;
+            _thirdLab.textColor = [model quKuanStateLabTextColor];
         }
             break;
             
@@ -161,6 +167,7 @@
             _secLab.text = model.type;
             _thirdLab.text = model.amount;
             _fourthLab.text = model.statusDesc;
+            _fourthLab.textColor = [model cunKuanStateLabTextColor];
         }
             break;
         case RecordCellType_ZhuanZhang:
@@ -169,6 +176,7 @@
             _secLab.text = model.type;
             _thirdLab.text = model.amount;
             _fourthLab.text = model.statusDesc;
+            _fourthLab.textColor = [model otherStateLabTextColor];
         }
             break;
         case RecordCellType_YouHui:
@@ -176,6 +184,7 @@
             _firstLab.text = model.createdTime;
             _secLab.text = model.amount;
             _thirdLab.text = model.statusDesc;
+            _thirdLab.textColor = [model otherStateLabTextColor];
         }
             break;
         case RecordCellType_TJLJ:
@@ -184,6 +193,7 @@
             _secLab.text = model.num;
             _thirdLab.text = model.account;
             _fourthLab.text = model.statusDesc;
+            _fourthLab.textColor = [model otherStateLabTextColor];
         }
             break;
         case RecordCellType_JiFenTop:
@@ -192,6 +202,7 @@
             _secLab.text = model.amount;
             _thirdLab.text = model.point;
             _fourthLab.text = model.statusDesc;
+            _fourthLab.textColor = [model otherStateLabTextColor];
         }
             break;
         case RecordCellType_JiFenBoom:
@@ -199,6 +210,7 @@
             _firstLab.text = model.createdTime;
             _secLab.text = model.points;
             _thirdLab.text = model.statusDesc;
+            _thirdLab.textColor = [model otherStateLabTextColor];
         }
             break;
         default:

@@ -138,8 +138,8 @@
         TTAlert(@"请选择一个游戏平台");
         return;
     }
-    if ( ![ZZTextInput onlyInputTheNumber:self.moneyTF.text]) {
-        TTAlert(@"请输入正确的转账金额（金额不能为小数或负数）");
+    if ( ![ZZTextInput onlyInputMoney:self.moneyTF.text]) {
+        TTAlert(@"请输入正确的转账金额(最多两位小数)！");
         return;
     }
     [self.view endEditing:YES];

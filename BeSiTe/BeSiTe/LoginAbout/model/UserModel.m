@@ -33,4 +33,35 @@
     [mAtStr appendAttributedString:atStr];
     return mAtStr;
 }
+
++(void)saveLoginData:(NSDictionary *)data andAccountName:(NSString *)accountName
+{
+    NSMutableDictionary * mDict = [NSMutableDictionary dictionaryWithDictionary:data];
+    [mDict setValue:accountName forKey:@"accountName"];
+    [mDict setObject:[NSDate date] forKey:@"loginTime"];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:mDict forKey:kSavingUserInfoKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
++(BOOL)isSuccessReadSavedLoginData
+{
+    NSDictionary * dict = [[NSUserDefaults standardUserDefaults]objectForKey:kSavingUserInfoKey];
+    if (!dict) {
+        return NO;
+    }
+    NSDate * lastDate = [dict objectForKey:@"loginTime"];
+    NSDate * maxDate = [NSDate dateWithTimeInterval:24 * 60 * 60 sinceDate:lastDate];
+    
+    if ([maxDate compare:[NSDate date]] == NSOrderedAscending) {
+        return NO;
+    }
+    else{
+        UserModel * model = [[UserModel alloc]init];
+        [model mj_setKeyValues:dict];
+        [BSTSingle defaultSingle].user = model;
+        return YES;
+    }
+}
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ATDAYCalendarView.h"
+#import "ASBirthSelectSheet.h"
 
 @interface ATDAYCalendarView ()<SKCalendarViewDelegate>
 @property (nonatomic, strong) SKCalendarView * calendarView;
@@ -22,7 +23,7 @@
 {
     if (self = [super init]) {
         
-        UIView * view  = [[UIView alloc]initWithFrame:CGRectMake(0, MAXHEIGHT - 410, MAXWIDTH, 410)];
+        UIView * view  = [[UIView alloc]initWithFrame:CGRectMake(0, MAXHEIGHT - 370, MAXWIDTH, 370)];
         view.backgroundColor = kWhiteColor;
         [self addSubview:view];
         
@@ -47,11 +48,11 @@
         [view addSubview:self.calendarView];
         self.YearMonthLabel.text = [NSString stringWithFormat:@"%@年%@月", @(_calendarView.year), @(_calendarView.month)];// 公历年
         
-        ATNeedBorderButton * button = [[ATNeedBorderButton alloc]initWithFrame:CGRectMake(self.calendarView.left,self.calendarView.maxY + 10, self.calendarView.width, 40)];
-        button.backgroundColor = [UIColor orangeColor];
-        [button setTitle:@"确定" forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(finishedSelectedDate) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
+//        ATNeedBorderButton * button = [[ATNeedBorderButton alloc]initWithFrame:CGRectMake(self.calendarView.left,self.calendarView.maxY + 10, self.calendarView.width, 40)];
+//        button.backgroundColor = [UIColor orangeColor];
+//        [button setTitle:@"确定" forState:UIControlStateNormal];
+//        [button addTarget:self action:@selector(finishedSelectedDate) forControlEvents:UIControlEventTouchUpInside];
+//        [view addSubview:button];
     }
     return self;
 }
@@ -60,7 +61,7 @@
 - (SKCalendarView *)calendarView
 {
     if (!_calendarView) {
-        _calendarView = [[SKCalendarView alloc] initWithFrame:CGRectMake(self.center.x - 150, 40, 300, 300)];
+        _calendarView = [[SKCalendarView alloc] initWithFrame:CGRectMake(self.center.x - 150, 50, 300, 300)];
         _calendarView.layer.cornerRadius = 5;
         _calendarView.layer.borderColor = [UIColor blackColor].CGColor;
         _calendarView.layer.borderWidth = 0.5;
@@ -96,28 +97,26 @@
 
 
 - (void)selectDateWithRow:(NSUInteger)row{
-////    NSString * str1 = [NSString stringWithFormat:@"%@%@", self.calendarView.chineseCalendarMonth[row], getNoneNil(self.calendarView.chineseCalendarDay[row])];
-//    NSString * str1 = [NSString stringWithFormat:@"%@%@", @(self.calendarView.month), self.calendarView.dayForSelect];
-//
-//    // 获取节日，注意：此处传入的参数为chineseCalendarDay(不包含节日等信息)
-//    NSString * str2 = [self.calendarView getHolidayAndSolarTermsWithChineseDay:getNoneNil(self.calendarView.chineseCalendarDay[row])];
-//    NSLog(@"%@",str1);
-//    NSLog(@"%@",str2);
-
-}
-
--(void)finishedSelectedDate{
-    if (self.calendarView.dayForSelect.length <= 0) {
-        TTAlert(@"请选择一个日期");
-        return;
-    }
     NSString * dateStr = [NSString stringWithFormat:@"%@-%02lu-%02ld",@(self.calendarView.year), (unsigned long)self.calendarView.month, (long)[self.calendarView.dayForSelect integerValue]];
-    NSLog(@"%@",dateStr);
+
     if (self.block) {
         self.block(dateStr);
-        [self removeFromSuperview];
     }
+    [self removeFromSuperview];
 }
+
+//-(void)finishedSelectedDate{
+//    if (self.calendarView.dayForSelect.length <= 0) {
+//        TTAlert(@"请选择一个日期");
+//        return;
+//    }
+//    NSString * dateStr = [NSString stringWithFormat:@"%@-%02lu-%02ld",@(self.calendarView.year), (unsigned long)self.calendarView.month, (long)[self.calendarView.dayForSelect integerValue]];
+//    NSLog(@"%@",dateStr);
+//    if (self.block) {
+//        self.block(dateStr);
+//        [self removeFromSuperview];
+//    }
+//}
 
 +(void)showWithFinishBlock:(finishSelectBlock)block{
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];

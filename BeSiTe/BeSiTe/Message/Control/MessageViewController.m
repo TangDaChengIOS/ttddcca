@@ -40,7 +40,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(readUnReadMsgNums) name:kGetUnReadMsgNumsSuccessNotification object:nil];
+    
     [self configSubViews];
     
     kWeakSelf
@@ -66,6 +68,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self readUnReadMsgNums];
+    [RequestCommonData getUnReadMsgNums];//先读取，后请求
+    
     if ([BSTSingle defaultSingle].user) {
         [_titleViewBtn setImage:KIMAGE_Ori([[BSTSingle defaultSingle].user getVipImageStr]) forState:UIControlStateNormal];
         [_titleViewBtn setTitle:[BSTSingle defaultSingle].user.accountName forState:UIControlStateNormal];
@@ -86,7 +91,14 @@
         [self requestPersonMsg];
     }
 }
-
+#pragma mark -- 获取未读消息数量
+-(void)readUnReadMsgNums
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.personMsgBtn setBadgeValue:[BSTSingle defaultSingle].msgNums];
+        [self.systemMsgBtn setBadgeValue:[BSTSingle defaultSingle].noticeNums];
+    });
+}
 
 -(void)requestSystemNotices
 {
@@ -384,6 +396,10 @@
     return _personMsgDataSource;
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kGetUnReadMsgNumsSuccessNotification object:nil];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

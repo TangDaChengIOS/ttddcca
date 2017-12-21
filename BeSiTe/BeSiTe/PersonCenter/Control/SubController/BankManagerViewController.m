@@ -11,7 +11,7 @@
 #import "BankSelectViewController.h"
 #import "MyBankModel.h"
 
-@interface BankManagerViewController ()
+@interface BankManagerViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *menuBtn_left;
 @property (weak, nonatomic) IBOutlet UIButton *menuBtn_center;
 @property (weak, nonatomic) IBOutlet UIButton *menuBtn_right;
@@ -38,10 +38,26 @@
     _selectItem = -1;
     self.title = @"管理银行卡";
     self.delBtn.layer.borderColor = [UIColor redColor].CGColor;
+    self.nameTF.delegate = self;
+    self.cardNumTF.delegate = self;
+    self.addressTF.delegate = self;
     [self dealDataFromDataSource];
 }
 
+#pragma mark -- textFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.nameTF) {
+        [self.view endEditing:YES];
+    }else if (textField == self.cardNumTF){
+        [self.addressTF becomeFirstResponder];
+    }else if (textField == self.addressTF){
+        [self.view endEditing:YES];
+    }
+    return YES;
+}
 
+/**读取信息*/
 -(void)dealDataFromDataSource
 {
     for (MyBankModel * model in self.banksArr) {
@@ -82,8 +98,8 @@
         TTAlert(@"请选择银行");
         return;
     }
-    if (self.cardNumTF.text.length <= 0 ) {
-        TTAlert(@"请输入银行卡/折号");
+    if (![ZZTextInput onlyInputTheNumber:self.cardNumTF.text]) {
+        TTAlert(@"请输入正确的银行卡/折号");
         return;
     }
     if (self.addressTF.text.length <= 0) {
