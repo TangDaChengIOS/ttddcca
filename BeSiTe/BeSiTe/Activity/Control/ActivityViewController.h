@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**优惠活动*/
 @interface ActivityViewController : ATBaseViewController
 
 @end

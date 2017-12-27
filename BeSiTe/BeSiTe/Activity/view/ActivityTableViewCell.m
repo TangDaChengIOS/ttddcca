@@ -13,9 +13,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *detailLab;
 @property (weak, nonatomic) IBOutlet UIImageView *rightImageView;
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *webViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *playBtn;
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *webViewTopConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *webViewHeightConstraint;//webView 与开始游戏按钮的父视图的高度约束
+
+@property (nonatomic,strong) ActivityModel * model;
 @end
 @implementation ActivityTableViewCell
 
@@ -23,13 +28,21 @@
 -(void)setCellWithModel:(ActivityModel *)model isOpenState:(BOOL)isOpen
 {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    self.model = model;
     if (!isOpen) {
         _webViewHeightConstraint.constant = 0;
         _rightImageView.image =KIMAGE(@"common_next_icon");
         _webView.hidden = YES;
+        _playBtn.hidden = YES;
     }else{
         _webView.hidden = NO;
+        if (model.type == 2) {
+            _webViewTopConstraint.constant = 45;
+            _playBtn.hidden = NO;
+        }else{
+            _webViewTopConstraint.constant = 10;
+            _playBtn.hidden = YES;
+        }
         _webView.backgroundColor = UIColorFromRGBValue(0xf6f6f6);
         _webViewHeightConstraint.constant = 260;
         _rightImageView.image =KIMAGE(@"common_open_icon");
@@ -66,6 +79,13 @@
 //链接：http://www.jianshu.com/p/5aa7383fe39f
 //來源：简书
 //著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+- (IBAction)playBtnClick:(id)sender {
+    if (self.beginPlayGameBlock && self.model.game) {
+        self.beginPlayGameBlock(self.model.game);
+    }
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, PersonCenterItemType) {
     PersonCenterItemTypeInOutList, //交易记录
 };
 
+/**个人中心SuperViewController*/
 @interface PersonViewController : VTMagicController
 
 @end

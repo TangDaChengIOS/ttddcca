@@ -8,6 +8,7 @@
 
 #import "RequestManager.h"
 #import <AFNetworking/AFNetworking.h>
+#import "AppDelegate+Setting.h"
 
 @implementation RequestManager
 
@@ -47,6 +48,9 @@
                 }
             }
             else{
+                if ([self isNeedPresentLoginPageForReturnCode:[responseObject[@"retCode"] integerValue]]) {
+                    return;
+                }
                 success(responseObject[@"retMsg"],NO);
                 MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
             }
@@ -74,6 +78,9 @@
                 }
             }
             else{
+                if ([self isNeedPresentLoginPageForReturnCode:[responseObject[@"retCode"] integerValue]]) {
+                    return;
+                }
                 success(responseObject[@"retMsg"],NO);
                 MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
             }
@@ -85,6 +92,24 @@
         }];
     }
 }
+
+
++(BOOL)isNeedPresentLoginPageForReturnCode:(NSInteger)returnCode{
+    if (returnCode != 1017) {
+        return  NO;
+    }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSavingUserInfoKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    [BSTSingle defaultSingle].user = nil;
+    AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (!delegate.isShowNoLogin) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginFailueNotification object:nil];
+        TTAlert(@"登录超时，请重新登录！");
+    }
+    return YES;
+}
+
 
 + (void)postWithPath:(NSString *)path params:(NSDictionary *)params success:(RequestSuccessBlock)success failure:(RequestFailureBlock)failure
 {

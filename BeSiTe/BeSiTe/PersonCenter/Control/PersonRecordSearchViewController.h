@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**交易记录查询*/
 @interface PersonRecordSearchViewController : ATBaseViewController
 
 @end

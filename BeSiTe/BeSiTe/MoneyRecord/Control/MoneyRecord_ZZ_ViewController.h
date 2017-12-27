@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**转账记录*/
 @interface MoneyRecord_ZZ_ViewController : ATBaseViewController
 
 @end

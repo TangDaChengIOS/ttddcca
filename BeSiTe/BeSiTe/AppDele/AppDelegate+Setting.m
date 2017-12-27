@@ -20,13 +20,14 @@
 -(void)setDefaultRootViewController:(BOOL)isLogin
 {
     [[UINavigationBar appearance]setBarTintColor:kMainColor];
-    UITabBarController *tab = [[UITabBarController alloc]init];
-    tab.tabBar.barTintColor = [UIColor whiteColor];
-    tab.tabBar.backgroundColor = [UIColor whiteColor];
-    [tab setViewControllers:[self setTabBarControllerViewControllers:isLogin] animated:YES];
+    self.isShowNoLogin = !isLogin;
+    self.tabBarController = [[UITabBarController alloc]init];
+    self.tabBarController.tabBar.barTintColor = [UIColor whiteColor];
+    self.tabBarController.tabBar.backgroundColor = [UIColor whiteColor];
+    [self.tabBarController setViewControllers:[self setTabBarControllerViewControllers:isLogin] animated:YES];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = tab;
+    self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
     [self getWebUrls];
@@ -34,14 +35,19 @@
 
 -(void)setNoLoginRootViewController
 {
+    if (self.isShowNoLogin) {
+        return;
+    }
+    self.isShowNoLogin = YES;
     [[AppDelegate getTabBarController]setViewControllers:[self setTabBarControllerViewControllers:NO] animated:YES];
     [self getWebUrls];
 }
 
 -(void)setLoginSuccessRootViewController
 {
+    self.isShowNoLogin = NO;
+
     [[AppDelegate getTabBarController]setViewControllers:[self setTabBarControllerViewControllers:YES] animated:YES];
-//    [AppDelegate getTabBarController].selectedIndex = 2;
     [self getWebUrls];
     [RequestCommonData getUnReadMsgNums];
 }
@@ -79,12 +85,8 @@
 }
 
 /**获取各种协议的地址*/
--(void)getWebUrls{
-    [RequestManager getWithPath:@"msgNums" params:nil success:^(id JSON, BOOL isSuccess) {
-        NSLog(@"%@",JSON);
-    } failure:^(NSError *error) {
-        
-    }];
+-(void)getWebUrls
+{
     [RequestManager getManagerDataWithPath:@"appwebUrls" params:nil success:^(id JSON ,BOOL isSuccess) {
         if (!isSuccess) {
             TTAlert(JSON);
@@ -121,15 +123,14 @@
 
 
 
-+(UINavigationController *)getBoomNavigation{
-    UIWindow * window = [UIApplication sharedApplication].keyWindow;
-    UITabBarController * tabBar = (UITabBarController * )window.rootViewController;
-    return tabBar.selectedViewController;
++(UINavigationController *)getBoomNavigation
+{
+    AppDelegate * appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    return appdelegate.tabBarController.selectedViewController;
 }
 +(UITabBarController *)getTabBarController{
-    UIWindow * window = [UIApplication sharedApplication].keyWindow;
-    UITabBarController * tabBar = (UITabBarController * )window.rootViewController;
-    return tabBar;
+    AppDelegate * appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    return appdelegate.tabBarController;
 }
 
 

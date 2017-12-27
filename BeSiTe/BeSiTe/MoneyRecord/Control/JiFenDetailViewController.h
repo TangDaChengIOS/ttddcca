@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**积分记录*/
 @interface JiFenDetailViewController : ATBaseViewController
 
 @end

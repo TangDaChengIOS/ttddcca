@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**取款*/
 @interface PersonGetingViewController : ATBaseViewController
 
 @end

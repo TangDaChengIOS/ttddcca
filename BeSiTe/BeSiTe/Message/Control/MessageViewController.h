@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**系统消息、个人信息*/
 @interface MessageViewController : ATBaseViewController
 
 @end

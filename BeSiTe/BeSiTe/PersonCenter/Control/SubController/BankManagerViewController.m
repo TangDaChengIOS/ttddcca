@@ -77,7 +77,7 @@
     self.selectItem = 0;
 }
 
-
+#pragma mark -- 选择银行
 - (IBAction)selectBankClick:(id)sender {
     BankSelectViewController * selectVC = [[BankSelectViewController alloc]init];
     kWeakSelf
@@ -88,6 +88,7 @@
     };
     [self pushVC:selectVC];
 }
+#pragma mark -- 保存
 - (IBAction)saveBtnClick:(id)sender
 {
     if (self.nameTF.text.length <= 0 || self.nameTF.text.length > 6) {
@@ -131,6 +132,7 @@
     }];
 }
 
+#pragma mark -- 保存成功后处理数据
 -(void)resetDataAfterSave{
     if (_selectItem == 0) {
         [self.menuBtn_left setTitle:self.nameTF.text forState:UIControlStateNormal];
@@ -154,7 +156,7 @@
         [self resetModel:_model_right];
     }
 }
-
+#pragma mark -- 删除
 - (IBAction)delBtnClick:(id)sender
 {
     kWeakSelf
@@ -172,7 +174,7 @@
 
     }];
 }
-
+#pragma mark -- 删除后清理数据
 -(void)resetDataAfterDelete{
     if (_selectItem == 0) {
         _model_left = nil;
@@ -188,7 +190,7 @@
     }
     [self setDateWithModel:nil];
 }
-
+#pragma mark -- 将数据存储到模型中
 -(void)resetModel:(MyBankModel *)model
 {
     model.tagName = _nameTF.text;
@@ -196,7 +198,9 @@
     model.cardNo =  _cardNumTF.text;
     model.bankAddr = _addressTF.text;
     model.bankCode=   _selectBankCode;
+    self.delBtn.hidden = NO;
 }
+#pragma mark -- 更新界面展示数据
 -(void)setDateWithModel:(MyBankModel *)model
 {
     if (model) {
@@ -206,6 +210,11 @@
         _cardNumTF.text = model.cardNo;
         _addressTF.text = model.bankAddr;
         _selectBankCode = model.bankCode;
+        self.delBtn.hidden = NO;
+
+//        self.delBtn.layer.borderColor = [UIColor redColor].CGColor;
+//        [self.delBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//        self.delBtn.enabled = YES;
     }
     else{
         _nameTF.text = @"";
@@ -214,11 +223,17 @@
         _cardNumTF.text = @"";
         _addressTF.text = @"";
         _selectBankCode = @"";
+        self.delBtn.hidden = YES;
+
+//        self.delBtn.layer.borderColor = UIColorFromRGBValue(0xe1e1e1).CGColor;
+//        [self.delBtn setTitleColor:UIColorFromRGBValue(0xe1e1e1) forState:UIControlStateNormal];
+//        self.delBtn.enabled = NO;
+
 
     }
 }
 
-
+#pragma mark -- 切换菜单
 - (IBAction)menuBtnLeftClick:(id)sender {
     self.selectItem = 0;
 }

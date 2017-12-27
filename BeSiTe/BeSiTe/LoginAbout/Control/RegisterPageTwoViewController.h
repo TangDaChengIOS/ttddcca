@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**完善信息*/
 @interface RegisterPageTwoViewController : ATBaseViewController
 
 @end

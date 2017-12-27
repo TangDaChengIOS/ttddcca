@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="348" height="196"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="348" height="195"/>
+                <rect key="frame" x="0.0" y="0.0" width="348" height="195.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jkY-Ie-ebY">
@@ -29,7 +29,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拆贝斯特红包，兑现一生相伴的承诺！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKS-cF-fhH">
-                                <rect key="frame" x="65" y="10" width="209" height="15"/>
+                                <rect key="frame" x="65" y="10" width="258" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="YiP-Ug-XLx"/>
                                 </constraints>
@@ -37,7 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贝斯特月月送福利 投注送豪礼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rNk-gy-dcK">
-                                <rect key="frame" x="65" y="30" width="163" height="15"/>
+                                <rect key="frame" x="65" y="30" width="224" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="fn7-uy-h9d"/>
                                 </constraints>
@@ -60,26 +60,45 @@
                             <constraint firstItem="TKS-cF-fhH" firstAttribute="leading" secondItem="0KK-Yo-e6c" secondAttribute="trailing" constant="10" id="PpZ-uT-Zsc"/>
                             <constraint firstItem="rNk-gy-dcK" firstAttribute="leading" secondItem="0KK-Yo-e6c" secondAttribute="trailing" constant="10" id="ROR-9H-8Ia"/>
                             <constraint firstItem="rNk-gy-dcK" firstAttribute="top" secondItem="TKS-cF-fhH" secondAttribute="bottom" constant="5" id="WQv-Tk-3mE"/>
+                            <constraint firstItem="YAR-jE-k9v" firstAttribute="leading" secondItem="rNk-gy-dcK" secondAttribute="trailing" constant="5" id="WZV-qC-Qkq"/>
                             <constraint firstItem="0KK-Yo-e6c" firstAttribute="top" secondItem="jkY-Ie-ebY" secondAttribute="top" constant="10" id="cty-RN-VRM"/>
                             <constraint firstItem="TKS-cF-fhH" firstAttribute="top" secondItem="jkY-Ie-ebY" secondAttribute="top" constant="10" id="gVW-R4-Rcc"/>
                             <constraint firstAttribute="trailing" secondItem="YAR-jE-k9v" secondAttribute="trailing" constant="8" id="lPp-qk-bYW"/>
+                            <constraint firstAttribute="trailing" secondItem="TKS-cF-fhH" secondAttribute="trailing" constant="5" id="tRt-FA-Ye8"/>
                             <constraint firstAttribute="height" constant="65" id="vfm-ez-zfQ"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gKV-4m-Axu">
                         <rect key="frame" x="10" y="65" width="328" height="128"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VMR-u2-r8l">
+                                <rect key="frame" x="6" y="10" width="316" height="30"/>
+                                <color key="backgroundColor" red="0.11764705882352941" green="0.71372549019607845" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="pwa-Mn-Yr2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="开始游戏">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XJw-J8-690"/>
+                                </connections>
+                            </button>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkb-gX-Ljj">
-                                <rect key="frame" x="6" y="10" width="316" height="113"/>
+                                <rect key="frame" x="6" y="45" width="316" height="78"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Hkb-gX-Ljj" firstAttribute="leading" secondItem="gKV-4m-Axu" secondAttribute="leading" constant="6" id="3eQ-Yg-Wle"/>
+                            <constraint firstItem="VMR-u2-r8l" firstAttribute="leading" secondItem="gKV-4m-Axu" secondAttribute="leading" constant="6" id="8qx-x5-BcA"/>
                             <constraint firstAttribute="bottom" secondItem="Hkb-gX-Ljj" secondAttribute="bottom" constant="5" id="EF4-Os-z6J"/>
-                            <constraint firstItem="Hkb-gX-Ljj" firstAttribute="top" secondItem="gKV-4m-Axu" secondAttribute="top" constant="10" id="g0J-7l-kRq"/>
+                            <constraint firstAttribute="trailing" secondItem="VMR-u2-r8l" secondAttribute="trailing" constant="6" id="Ico-di-IE1"/>
+                            <constraint firstItem="VMR-u2-r8l" firstAttribute="top" secondItem="gKV-4m-Axu" secondAttribute="top" constant="10" id="OMe-Yc-82z"/>
                             <constraint firstAttribute="height" constant="128" id="l0A-Ns-DSA"/>
+                            <constraint firstItem="Hkb-gX-Ljj" firstAttribute="top" secondItem="gKV-4m-Axu" secondAttribute="top" constant="45" id="rkG-47-5qf"/>
                             <constraint firstAttribute="trailing" secondItem="Hkb-gX-Ljj" secondAttribute="trailing" constant="6" id="rle-oI-oF5"/>
                         </constraints>
                     </view>
@@ -97,10 +116,12 @@
             <connections>
                 <outlet property="detailLab" destination="rNk-gy-dcK" id="yPa-Za-YUP"/>
                 <outlet property="leftImageView" destination="0KK-Yo-e6c" id="Tnd-Yb-Zfh"/>
+                <outlet property="playBtn" destination="VMR-u2-r8l" id="NJg-7b-Ag4"/>
                 <outlet property="rightImageView" destination="YAR-jE-k9v" id="No8-vb-Jeg"/>
                 <outlet property="titleLab" destination="TKS-cF-fhH" id="9zH-5W-AbG"/>
                 <outlet property="webView" destination="Hkb-gX-Ljj" id="jyn-Xf-2yl"/>
                 <outlet property="webViewHeightConstraint" destination="l0A-Ns-DSA" id="vUR-CY-ZrN"/>
+                <outlet property="webViewTopConstraint" destination="rkG-47-5qf" id="xMf-6M-2SU"/>
             </connections>
             <point key="canvasLocation" x="30" y="89"/>
         </tableViewCell>

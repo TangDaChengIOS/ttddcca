@@ -142,7 +142,7 @@
         NSMutableAttributedString * mAttStr = [[NSMutableAttributedString alloc]init];
         for (int i = 0; i < [(NSArray *)json count]; i++) {
             NSDictionary * dict = json[i];
-            NSString * content = dict[@"content"];
+            NSString * content =[NSString stringWithFormat:@"%@   ", dict[@"content"]];
 //            if ([BSTSingle defaultSingle].user && i == 0) {
 //                content = [NSString stringWithFormat:@"尊贵的%@会员,%@",[BSTSingle defaultSingle].user.accountName,content];
 //            }

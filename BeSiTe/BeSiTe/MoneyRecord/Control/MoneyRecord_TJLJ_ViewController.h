@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**推荐礼金记录*/
 @interface MoneyRecord_TJLJ_ViewController : ATBaseViewController
 
 @end

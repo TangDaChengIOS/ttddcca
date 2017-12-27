@@ -113,6 +113,11 @@
         ActivityModel * model = self.dataSource[indexPath.row /2];
         BOOL open = (_selectedRow == indexPath.row ? YES : NO);
         [cell setCellWithModel:model isOpenState:open];
+        if (model.type == 2) {
+            cell.beginPlayGameBlock = ^(GamesModel * gameModel){
+                [GamesMenuView showWithModel:gameModel];
+            };
+        }
         return cell;
     }
 }
@@ -129,12 +134,12 @@
             [BSTSingle defaultSingle].activityUnreadNum -=1;
             [self.tabBarItem setBadgeValue:[ZZTextInput getBadgeValue:[BSTSingle defaultSingle].activityUnreadNum]];
         }
-        if (model.type == 2) {
-            if (model.game) {
-                [GamesMenuView showWithModel:model.game];
-            }
-            return;
-        }
+//        if (model.type == 2) {
+//            if (model.game) {
+//                [GamesMenuView showWithModel:model.game];
+//            }
+//            return;
+//        }
         if (_selectedRow == indexPath.row) {
             _selectedRow =-1;
         }

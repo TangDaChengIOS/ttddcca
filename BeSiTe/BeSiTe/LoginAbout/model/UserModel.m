@@ -53,7 +53,12 @@
     NSDate * lastDate = [dict objectForKey:@"loginTime"];
     NSDate * maxDate = [NSDate dateWithTimeInterval:24 * 60 * 60 sinceDate:lastDate];
     
-    if ([maxDate compare:[NSDate date]] == NSOrderedAscending) {
+    if ([maxDate compare:[NSDate date]] == NSOrderedAscending)
+    {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSavingUserInfoKey];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        [BSTSingle defaultSingle].user = nil;
         return NO;
     }
     else{

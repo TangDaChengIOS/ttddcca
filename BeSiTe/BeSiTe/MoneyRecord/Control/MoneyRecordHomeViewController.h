@@ -7,7 +7,7 @@
 //
 
 #import <VTMagic/VTMagicController.h>
-
+/**交易记录SuperViewController*/
 @interface MoneyRecordHomeViewController : VTMagicController
 
 @property (nonatomic,assign) NSInteger selectPageIndex;

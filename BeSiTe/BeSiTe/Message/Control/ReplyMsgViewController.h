@@ -8,7 +8,7 @@
 
 #import "ATBaseViewController.h"
 #import "UserMsgModel.h"
-
+/**回复消息*/
 @interface ReplyMsgViewController : ATBaseViewController
 
 @property (nonatomic,strong) UserMsgModel* model;

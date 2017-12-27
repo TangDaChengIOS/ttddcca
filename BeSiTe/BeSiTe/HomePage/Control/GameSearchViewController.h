@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**游戏搜索*/
 @interface GameSearchViewController : ATBaseViewController
 @property (nonatomic,copy) void (^searchBlock)(NSString * searchKey);
 @end

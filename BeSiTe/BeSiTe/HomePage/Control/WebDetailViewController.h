@@ -8,6 +8,7 @@
 
 #import "ATBaseViewController.h"
 
+/**网页*/
 @interface WebDetailViewController : ATBaseViewController
 @property (nonatomic,copy) NSString * url;
 @property (nonatomic,assign) BOOL isOpenRotaion;//是否支持转屏

@@ -18,7 +18,8 @@ typedef void (^RequestFailureBlock)(NSError *error);
 
 
 //管理平台
-#define ManagerBaseURL @"http://47.94.220.227:81/"
+//#define ManagerBaseURL @"http://47.94.220.227:81/"
+#define ManagerBaseURL @"http://120.78.82.81/"
 
 @interface RequestManager : NSObject
 

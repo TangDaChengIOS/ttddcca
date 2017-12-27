@@ -25,7 +25,6 @@
     [super viewDidLoad];
     self.title = @"联系我们";
     [self configSub];
-    [self requestData];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(readUnReadMsgNums) name:kGetUnReadMsgNumsSuccessNotification object:nil];
 
 }
@@ -44,6 +43,9 @@
 {
     [super viewWillAppear:animated];
     [self readUnReadMsgNums];
+    if (!self.model) {
+        [self requestData];
+    }
 }
 -(void)configSub{
     self.navigationController.navigationBar.translucent = NO;

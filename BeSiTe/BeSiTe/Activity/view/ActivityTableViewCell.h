@@ -12,6 +12,8 @@
 #define kActivityTableViewCellReuseID @"kActivityTableViewCellReuseID"
 @interface ActivityTableViewCell : UITableViewCell
 
+@property (nonatomic,copy) void (^beginPlayGameBlock)(GamesModel * model);
+
 -(void)setCellWithModel:(ActivityModel *)model isOpenState:(BOOL)isOpen;
 
 @end

@@ -292,6 +292,7 @@
         [self.noDataView removeFromSuperview];
         
     }else{
+        [self.tableView reloadData];
         [self.tableView.mj_header beginRefreshing];
     }
 }
@@ -303,6 +304,7 @@
         [self.tableView reloadData];
         [self.noDataView removeFromSuperview];
     }else{
+        [self.tableView reloadData];
         [self.tableView.mj_header beginRefreshing];
     }
 }

@@ -35,7 +35,7 @@
     
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = kWhiteColor;
     [_tableView registerClass:[PersonSavingTableViewCell class] forCellReuseIdentifier:kPersonSavingTableViewCellReuseID];
     

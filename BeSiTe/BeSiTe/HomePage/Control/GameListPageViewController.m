@@ -19,7 +19,7 @@
     CGFloat _itemHeight;
 }
 
-@property (nonatomic,strong) GameListPageHeaderView * headerView;
+@property (nonatomic,strong) GameListPageHeaderView * headerView;//顶部菜单及滚屏通告
 @property (nonatomic,strong) UICollectionView * collectionView;
 @property (nonatomic,strong) UILabel * collectionHeaderView;//展示搜索结果时显示
 @property (nonatomic,strong) NSMutableArray * dataSource;
@@ -29,6 +29,7 @@
 
 @property (nonatomic,assign) BOOL isHaveShowTips;//显示可滑动提示
 
+@property (nonatomic,copy) NSString * searchKey;
 @end
 
 @implementation GameListPageViewController
@@ -46,20 +47,27 @@
     [self.headerView setSelectedItem:self.selectIndex];
     [self.headerView.scrollTextView  startScrollWithAttributedString:[BSTSingle defaultSingle].notices];
     self.isShowSearchResult = NO;
-    [self requestDataWithKey:nil];
+    
+    kWeakSelf
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weak_self requestData];
+    }];
+    [self.collectionView.mj_header beginRefreshing];
 }
 
--(void)requestDataWithKey:(NSString *)key
+-(void)requestData
 {
     NSMutableDictionary * mDict = [NSMutableDictionary dictionary];
-    if (key) {
-        [mDict setValue:key forKey:@"key"];
+    [mDict setValue:@"IOS" forKey:@"appOs"];
+    if (self.searchKey) {
+        [mDict setValue:self.searchKey forKey:@"key"];
     }
     else{
         [mDict setValue:_selectCompanyCode forKey:@"companyCode"];
     }
     kWeakSelf
     [RequestManager getManagerDataWithPath:@"games" params:mDict success:^(id JSON ,BOOL isSuccess) {
+        [weak_self.collectionView.mj_header endRefreshing];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -76,10 +84,12 @@
         }
 
         [weak_self.collectionView reloadData];
+        [weak_self.collectionView scrollToTop];
         [weak_self setSearchResultTitle:totalNum];
         [weak_self ensureCanScroll];
     } failure:^(NSError *error) {
-        
+        [weak_self.collectionView.mj_header endRefreshing];
+        TTAlert(@"网络连接失败，请检查您的网络状态！");
     }];
 }
 
@@ -184,15 +194,17 @@
         _headerView.selectGameCompanyBlock = ^(NSString * companyCode){
             weak_self.selectCompanyCode = companyCode;
             weak_self.isShowSearchResult = NO;
+            weak_self.searchKey = nil;
             [weak_self refreshUI];
-            [weak_self requestDataWithKey:nil];
+            [weak_self.collectionView.mj_header beginRefreshing];
         };
         _headerView.gotoSearchBlock = ^(){
             GameSearchViewController * contro = [[GameSearchViewController alloc]init];
             contro.searchBlock = ^(NSString * searchKey){
                 weak_self.isShowSearchResult = YES;
+                weak_self.searchKey = searchKey;
                 [weak_self refreshUI];
-                [weak_self requestDataWithKey:searchKey];
+                [weak_self.collectionView.mj_header beginRefreshing];
             };
             [weak_self pushVC:contro];
         };

@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**注册*/
 @interface RegisterPageOneViewController : ATBaseViewController
 +(void)presentRegisterController;
 

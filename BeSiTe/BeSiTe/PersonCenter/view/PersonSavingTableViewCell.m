@@ -33,6 +33,10 @@
         _rightLab = [[UILabel alloc]initWithFrame:CGRectMake(self.contentView.width /2 + 30, 0, 100, 15)];
         [self.contentView addSubview:_rightLab];
         
+        UIView * line = [[UIView alloc]initWithFrame:CGRectMake(0, 57, MAXWIDTH, 1)];
+        line.backgroundColor = UIColorFromRGBValue(0xf3f3f3);
+        [self.contentView addSubview:line];
+        
         _titleLab.font  = kFont(15);
         _titleLab.textColor = kBlackColor;
         _detailLab.font = kFont(12);

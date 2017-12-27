@@ -7,7 +7,7 @@
 //
 
 #import "ATBaseViewController.h"
-
+/**发送新消息*/
 @interface SendNewMsgViewController : ATBaseViewController
 @property (nonatomic,copy) NSString * emailTypeString;
 @end
