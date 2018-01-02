@@ -14,27 +14,29 @@
 #import "MyBankModel.h"
 
 @interface PersonGetingViewController ()<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *mainAccountLab;
 
-@property (weak, nonatomic) IBOutlet ATTextField *accountTF;
-@property (weak, nonatomic) IBOutlet ATTextField *pwdTF;
+@property (weak, nonatomic) IBOutlet UILabel *mainAccountLab;//主账户余额
 
-@property (weak, nonatomic) IBOutlet UIImageView *bankImageView;
+@property (weak, nonatomic) IBOutlet ATTextField *accountTF;//账号
+@property (weak, nonatomic) IBOutlet ATTextField *pwdTF;//密码
 
-@property (weak, nonatomic) IBOutlet UILabel *bankNameLab;
+@property (weak, nonatomic) IBOutlet UIImageView *bankImageView;//银行图标
 
-@property (weak, nonatomic) IBOutlet ATTextField *moneyTF;
-@property (weak, nonatomic) IBOutlet ATTextField *cardTF;
-@property (weak, nonatomic) IBOutlet ATTextField *cardAdressTF;
-@property (weak, nonatomic) IBOutlet UIButton *managerCardBtn;
-@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
+@property (weak, nonatomic) IBOutlet UILabel *bankNameLab;//银行名称
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet ATTextField *moneyTF;//取款金额
+@property (weak, nonatomic) IBOutlet ATTextField *cardTF;//卡、折号
+@property (weak, nonatomic) IBOutlet ATTextField *cardAdressTF;//开户行地址
+@property (weak, nonatomic) IBOutlet UIButton *managerCardBtn;//管理银行卡按钮
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;//提交按钮
 
-@property (nonatomic,copy) NSString * bankCode;
+@property (weak, nonatomic) IBOutlet UIView *contentView;//容器（scrollview的childView）
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeightConstraint;//容器的高度约束
 
-@property (nonatomic,strong) NSMutableArray * myBankDataSource;
-@property (nonatomic,strong) NSMutableArray * bankDataSource;
+@property (nonatomic,copy) NSString * bankCode;//银行code
+
+@property (nonatomic,strong) NSMutableArray * myBankDataSource;//我的银行卡数据
+@property (nonatomic,strong) NSMutableArray * bankDataSource;//银行数据
 
 @end
 
@@ -49,11 +51,18 @@
     _submitBtn.layer.cornerRadius = _managerCardBtn.layer.cornerRadius = 4.0f;
     _pwdTF.secureTextEntry = YES;
     
+    _accountTF.text = [BSTSingle defaultSingle].user.accountName;
     _accountTF.delegate = self;
     _pwdTF.delegate = self;
     _moneyTF.delegate = self;
     _cardTF.delegate = self;
     _cardAdressTF.delegate = self;
+    
+    kWeakSelf
+    UITapGestureRecognizer * whiteBackTap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
+            [weak_self.view endEditing:YES];
+    }];
+    [self.contentView addGestureRecognizer:whiteBackTap];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -78,6 +87,11 @@
     [super viewWillAppear:animated];
     self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
     [self requestBankData];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
 }
 
 -(void)requestBankData

@@ -77,7 +77,9 @@
 
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];
-        TTAlert(@"网络连接失败，请检查您的网络状态！");
+        if (error) {
+            TTAlert(kNetError);
+        }
     }];
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "QuickSavingViewController.h"
+#import "ZFBHelpViewController.h"
 
 @interface QuickSavingViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *tipsLab;
@@ -17,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *giveNameTF;
 @property (weak, nonatomic) IBOutlet ATNeedBorderView *giveMoneyBackView;
 @property (weak, nonatomic) IBOutlet UITextField *giveMoneyTF;
+@property (weak, nonatomic) IBOutlet UIButton *zfbHelpBtn;
+
 @property (weak, nonatomic) IBOutlet ATNeedBorderView *giveNumberBackView;
 @property (weak, nonatomic) IBOutlet UITextField *giveNumberTF;
 
@@ -34,6 +37,7 @@
     self.navigationController.navigationBar.translucent = NO;
     if (_savingType == QuickSavingType_Bank) {
         self.title =  @"秒存 网银转账";
+        self.zfbHelpBtn.hidden = YES;
     }else{
         self.title = @"秒存 支付宝";
         self.giveNumberBackView.hidden = YES;
@@ -61,7 +65,9 @@
 -(void)requestReceivBankInfo
 {
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:self.view];
     [RequestManager getWithPath:@"getReceivBankInfo" params:nil success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:weak_self.view];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -76,7 +82,10 @@
         }
         NSLog(@"%@",JSON);
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:weak_self.view];
+        if (error) {
+            TTAlert(kNetError);
+        }
     }];
 }
 
@@ -149,6 +158,9 @@
 - (IBAction)helpClick:(id)sender {
     
     [self pushVC:[WebDetailViewController quickCreateWithUrl:[BSTSingle defaultSingle].remitUrl]];
+}
+- (IBAction)zfbHelpClick:(id)sender {
+    [self pushVC:[[ZFBHelpViewController alloc] init]];
 }
 
 - (void)didReceiveMemoryWarning {

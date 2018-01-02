@@ -27,7 +27,7 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [[NSSet alloc] initWithObjects:@"text/plain",@"text/html", @"application/json", nil];
     manager.responseSerializer.acceptableContentTypes = set;
-    manager.requestSerializer.timeoutInterval = 90;
+    manager.requestSerializer.timeoutInterval = 10;
     if ([BSTSingle defaultSingle].user) {
         [manager.requestSerializer setValue:[BSTSingle defaultSingle].user.token forHTTPHeaderField:@"ACCESS_TOKEN"];
     }
@@ -55,10 +55,16 @@
                 MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
-            MyLog(@"Error:%@",error.debugDescription);
-            if (failure == nil) return;
-            failure(error);
+            if (error.code == -1001) {
+                if (failure) {
+                    failure(nil);
+                }
+                TTAlert(kOutTimeError);
+            }else{
+                if (failure) {
+                    failure(error);
+                }
+            }
         }];
         
     }else {//6.POST请求
@@ -85,10 +91,16 @@
                 MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-            MyLog(@"ERROR URL:%@",[task.response valueForKey:@"URL"]);
-            if (failure == nil) return;
-            failure(error);
+            if (error.code == -1001) {
+                if (failure) {
+                    failure(nil);
+                }
+                TTAlert(kOutTimeError);
+            }else{
+                if (failure) {
+                    failure(error);
+                }
+            }
         }];
     }
 }
@@ -102,7 +114,9 @@
     [[NSUserDefaults standardUserDefaults]synchronize];
     
     [BSTSingle defaultSingle].user = nil;
+    [MBProgressHUD hideHUDForView:nil];
     AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
     if (!delegate.isShowNoLogin) {
         [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginFailueNotification object:nil];
         TTAlert(@"登录超时，请重新登录！");

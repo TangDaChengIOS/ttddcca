@@ -40,11 +40,6 @@
     [self configSubViews];
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [super touchesBegan:touches withEvent:event];
-    [self.view endEditing:YES];
-}
 #pragma mark -- subViews
 -(void)configSubViews
 {
@@ -142,10 +137,18 @@
         return;
     }
     
-    if (self.qqTF.text.length <= 0) {
-        TTAlert(@"请输入QQ号");
+    if (![ZZTextInput onlyInputTheNumber:self.qqTF.text]) {
+        TTAlert(@"请输入正确的QQ号");
         return;
     }
+    
+    if (self.bankCardTF.text.length > 0) {
+        if (![ZZTextInput onlyInputTheNumber:self.bankCardTF.text]) {
+            TTAlert(@"请输入正确的银行卡号或存折号");
+            return;
+        }
+    }
+
 //    if (self.bankNameLab.text.length <= 0) {
 //        TTAlert(@"请选择银行");
 //        return;

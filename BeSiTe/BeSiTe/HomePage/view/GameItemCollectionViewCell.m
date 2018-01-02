@@ -38,7 +38,7 @@
 
 -(void)setCellWithModel:(GamesModel *)model{
     _model = model;
-    [_mainImage setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
+    [_mainImage setImageWithURL:[NSURL URLWithString:model.icon] placeholder:KIMAGE(@"commmon_home_history")];
     _boomLab.text = model.gameName;
     self.contentView.gestureRecognizers = nil;
 }

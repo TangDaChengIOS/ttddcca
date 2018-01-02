@@ -50,7 +50,7 @@
 }
 -(void)setCellWithModel:(GamesCompanyModel *)model
 {
-    [_mainImage setImageWithURL:[NSURL URLWithString:model.mainIcon] placeholder:nil];
+    [_mainImage setImageWithURL:[NSURL URLWithString:model.mainIcon] placeholder:KIMAGE(@"commmon_home_history")];
     if (model.isHot) {
         _typeImage.image = KIMAGE(@"home_gameType_hot_img");
     }

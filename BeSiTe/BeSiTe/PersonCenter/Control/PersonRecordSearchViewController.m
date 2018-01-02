@@ -100,6 +100,7 @@
     _searchBtn.backgroundColor = UIColorFromINTValue(26, 174, 106);
     [_searchBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
     [_searchBtn setTitle:@"立即查询" forState:UIControlStateNormal];
+    _searchBtn.titleLabel.font = kFont(15);
     _searchBtn.layer.cornerRadius = 4.0f;
     [_searchBtn addTarget:self action:@selector(searchBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:_searchBtn];

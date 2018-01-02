@@ -24,4 +24,6 @@
 /**一级页面侧滑显示侧栏菜单*/
 - (void)xw_transition;
 
+/**部分页面需要请求数据后展示全部UI*/
+-(void)setIsNoDate:(BOOL)isNoDate;
 @end

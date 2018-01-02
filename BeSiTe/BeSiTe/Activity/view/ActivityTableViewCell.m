@@ -49,7 +49,7 @@
         [_webView loadHTMLString:model.content baseURL:nil];
         _webView.delegate = self;
     }
-    [_leftImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
+    [_leftImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:KIMAGE(@"commmon_home_history")];
     _titleLab.text = model.title;
     _detailLab.text = model.gameCode;
 }

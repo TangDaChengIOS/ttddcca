@@ -52,9 +52,30 @@
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weak_self requestData];
     }];
-    [self.collectionView.mj_header beginRefreshing];
+    [self dealData];
 }
-
+#pragma mark -- 判断是否有缓存数据
+-(void)dealData
+{
+    [self.titleDataSource removeAllObjects];
+    [self.dataSource removeAllObjects];
+    [self.collectionView reloadData];
+    
+    id objec = [[NSUserDefaults standardUserDefaults]objectForKey:self.selectCompanyCode];
+    if (objec) {
+        for (NSDictionary * dict in objec) {
+            NSString * key = dict[@"plateform"];
+            [self.titleDataSource addObject:key];
+            NSMutableArray * array = [GamesModel jsonToArray:dict[@"list"]];
+            [self.dataSource addObject:array];
+        }
+        [self.collectionView reloadData];
+        [self.collectionView scrollToTop];
+    }else{
+        [self.collectionView.mj_header beginRefreshing];
+    }
+}
+#pragma mark -- 从网络加载数据
 -(void)requestData
 {
     NSMutableDictionary * mDict = [NSMutableDictionary dictionary];
@@ -72,8 +93,12 @@
             TTAlert(JSON);
             return ;
         }
-        [weak_self.titleDataSource removeAllObjects];
-        [weak_self.dataSource removeAllObjects];
+        //存储数据到本地
+        if (!weak_self.searchKey) {
+            [[NSUserDefaults standardUserDefaults]setValue:JSON forKey:weak_self.selectCompanyCode];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+        }
+
         NSInteger totalNum = 0;
         for (NSDictionary * dict in JSON) {
             NSString * key = dict[@"plateform"];
@@ -89,11 +114,13 @@
         [weak_self ensureCanScroll];
     } failure:^(NSError *error) {
         [weak_self.collectionView.mj_header endRefreshing];
-        TTAlert(@"网络连接失败，请检查您的网络状态！");
+        if (error) {
+            TTAlert(kNetError);
+        }
     }];
 }
 
-
+//显示可以滚动的tips
 -(void)ensureCanScroll
 {
     if (self.isHaveShowTips || self.dataSource.count == 0) {
@@ -103,7 +130,9 @@
 
             kWeakSelf
             [GamesCanScrollTipsView showWithFinshBlock:^{
-                [weak_self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:weak_self.dataSource.count -1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+                [UIView animateWithDuration:1 animations:^{
+                    [weak_self.collectionView setContentOffset:CGPointMake(0, 200) animated:YES];
+                }];
             }];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstEnterGameListPage];
             [[NSUserDefaults standardUserDefaults]synchronize];
@@ -185,7 +214,7 @@
     }
     return _collectionView;
 }
-
+#pragma mark -- 页面顶部菜单
 -(GameListPageHeaderView *)headerView
 {
     if (!_headerView) {
@@ -196,7 +225,7 @@
             weak_self.isShowSearchResult = NO;
             weak_self.searchKey = nil;
             [weak_self refreshUI];
-            [weak_self.collectionView.mj_header beginRefreshing];
+            [weak_self dealData];
         };
         _headerView.gotoSearchBlock = ^(){
             GameSearchViewController * contro = [[GameSearchViewController alloc]init];
@@ -239,7 +268,7 @@
     _collectionHeaderView.attributedText = mAStr;
 }
 
-
+#pragma mark -- 显示搜索结果时，collectionview顶上的label
 -(UILabel *)collectionHeaderView
 {
     if (!_collectionHeaderView) {

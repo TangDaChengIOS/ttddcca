@@ -147,6 +147,7 @@
 		11B8F0EF1FB4A02000D7E662 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11B8F0ED1FB4A02000D7E662 /* ActivityTableViewCell.m */; };
 		11B8F0F01FB4A02000D7E662 /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11B8F0EE1FB4A02000D7E662 /* ActivityTableViewCell.xib */; };
 		11BF3BBA1FAA04C500195D1C /* ATTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 11BF3BB91FAA04C500195D1C /* ATTextField.m */; };
+		11C0482B1FFA17CD008D15C6 /* ZFBHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C0482A1FFA17CD008D15C6 /* ZFBHelpViewController.m */; };
 		11C38DF51FB344D200D75823 /* private_key.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 11C38DF31FB344D200D75823 /* private_key.p12 */; };
 		11C38DF61FB344D200D75823 /* public_key.der in Resources */ = {isa = PBXBuildFile; fileRef = 11C38DF41FB344D200D75823 /* public_key.der */; };
 		11C38DFA1FB3567900D75823 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C38DF81FB3567900D75823 /* ContactViewController.m */; };
@@ -444,6 +445,8 @@
 		11B8F0EE1FB4A02000D7E662 /* ActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityTableViewCell.xib; sourceTree = "<group>"; };
 		11BF3BB81FAA04C500195D1C /* ATTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATTextField.h; sourceTree = "<group>"; };
 		11BF3BB91FAA04C500195D1C /* ATTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATTextField.m; sourceTree = "<group>"; };
+		11C048291FFA17CD008D15C6 /* ZFBHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBHelpViewController.h; sourceTree = "<group>"; };
+		11C0482A1FFA17CD008D15C6 /* ZFBHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFBHelpViewController.m; sourceTree = "<group>"; };
 		11C38DF31FB344D200D75823 /* private_key.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = private_key.p12; sourceTree = "<group>"; };
 		11C38DF41FB344D200D75823 /* public_key.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = public_key.der; sourceTree = "<group>"; };
 		11C38DF71FB3567900D75823 /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
@@ -1244,6 +1247,8 @@
 				1150A6F41FCD3DEE006C0109 /* BankManagerViewController.h */,
 				1150A6F51FCD3DEE006C0109 /* BankManagerViewController.m */,
 				1150A6F61FCD3DEE006C0109 /* BankManagerViewController.xib */,
+				11C048291FFA17CD008D15C6 /* ZFBHelpViewController.h */,
+				11C0482A1FFA17CD008D15C6 /* ZFBHelpViewController.m */,
 			);
 			path = SubController;
 			sourceTree = "<group>";
@@ -1550,6 +1555,7 @@
 				11CBCCF01F9CD2EB000E4D01 /* PersonMessageViewController.m in Sources */,
 				11D5EB9D1FCC155E0070BE9C /* OnlineSavingTableViewCell.m in Sources */,
 				116463B71F91F634004ECC79 /* XWFilterAnimator+XWMod.m in Sources */,
+				11C0482B1FFA17CD008D15C6 /* ZFBHelpViewController.m in Sources */,
 				11AC9F231FC2A5860016F3E5 /* SKCalendarView.m in Sources */,
 				11930F261FA8CA5300AB33F4 /* JiFenDetailViewController.m in Sources */,
 				1179AF8A1FE26DE5006E4985 /* GameListPageCollectionReusableView.m in Sources */,

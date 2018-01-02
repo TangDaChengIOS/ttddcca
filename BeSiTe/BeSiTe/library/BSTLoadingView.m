@@ -7,6 +7,7 @@
 //
 
 #import "BSTLoadingView.h"
+#import "AppDelegate.h"
 
 @interface BSTLoadingView ()
 
@@ -67,11 +68,16 @@
 + (BSTLoadingView *)showMessage:(NSString *)message toView:(UIView *)view
 {
     if (view == nil) {
-        view = [UIApplication sharedApplication].keyWindow;
+        AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        view = delegate.window;
     }
     [self hideHUDForView:view];
     
-    BSTLoadingView * loadingView = [[BSTLoadingView alloc]initWithFrame:view.bounds];
+    CGRect frame = view.bounds;
+    if (frame.size.width > MAXWIDTH) {
+        frame.size.width = MAXWIDTH;
+    }
+    BSTLoadingView * loadingView = [[BSTLoadingView alloc]initWithFrame:frame];
     loadingView.lbl.text = message;
     [view addSubview:loadingView];
     [loadingView.loadingImgView startAnimating];
@@ -81,7 +87,8 @@
 + (void)hideHUDForView:(UIView *)view
 {
     if (view == nil) {
-        view = [UIApplication sharedApplication].keyWindow;
+        AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        view = delegate.window;
     }
     for (UIView *itemView in view.subviews) {
         if ([itemView isKindOfClass:[BSTLoadingView class]]) {

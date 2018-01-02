@@ -25,6 +25,7 @@
     [super viewDidLoad];
     self.title = @"联系我们";
     [self configSub];
+    [self setIsNoDate:YES];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(readUnReadMsgNums) name:kGetUnReadMsgNumsSuccessNotification object:nil];
 
 }
@@ -84,7 +85,9 @@
 
 -(void)requestData{
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:self.view];
     [RequestManager getManagerDataWithPath:@"customerConfig" params:nil success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:self.view];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -94,11 +97,15 @@
         weak_self.model = model;
         [weak_self setDataWithModel:model];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:self.view];
+        if (error) {
+            TTAlert(kNetError);
+        }
     }];
 }
 
 -(void)setDataWithModel:(ContactModel *)model{
+    [self setIsNoDate:NO];
     self.fflxLab.text = model.hotline.content;
     self.wexinLab.text = model.off_wechat.content;
     self.qqLab.text = model.customer_qq.content;

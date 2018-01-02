@@ -16,6 +16,7 @@
                 <outlet property="bankNameLab" destination="HdL-E9-Hx9" id="GCT-GC-rYF"/>
                 <outlet property="cardAdressTF" destination="1mn-zl-S4I" id="cbc-OZ-LC3"/>
                 <outlet property="cardTF" destination="vLc-p4-WpD" id="X4D-sA-aBs"/>
+                <outlet property="contentView" destination="eiC-Y1-Pf4" id="wvp-GU-4iU"/>
                 <outlet property="contentViewHeightConstraint" destination="CZu-LC-iB3" id="BLh-hE-pXZ"/>
                 <outlet property="mainAccountLab" destination="cY6-Wy-oCP" id="mNl-Uf-bJ6"/>
                 <outlet property="managerCardBtn" destination="jPW-PL-lL7" id="Ds0-oo-xcL"/>
@@ -64,8 +65,9 @@
                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S9l-rA-LYt" customClass="ATTextField">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S9l-rA-LYt" customClass="ATTextField">
                                     <rect key="frame" x="96" y="7" width="247" height="38"/>
+                                    <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="38" id="FLU-Kq-4xU"/>
                                     </constraints>

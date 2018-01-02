@@ -13,23 +13,25 @@
 
 @interface RegisterPageOneViewController ()<UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *firstBtn;
-@property (weak, nonatomic) IBOutlet UIButton *secBtn;
-@property (weak, nonatomic) IBOutlet UIButton *threeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *firstBtn;//按钮①
+@property (weak, nonatomic) IBOutlet UIButton *secBtn;//按钮②
+@property (weak, nonatomic) IBOutlet UIButton *threeBtn;//按钮③
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTF;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTF;
-@property (weak, nonatomic) IBOutlet UITextField *codeTF;
-@property (weak, nonatomic) IBOutlet UITextField *pwdTF;
-@property (weak, nonatomic) IBOutlet ATNeedBorderView *pwdSecBackView;
-@property (weak, nonatomic) IBOutlet UITextField *pwdSecTF;
-@property (weak, nonatomic) IBOutlet UILabel *NotTurePwdLab;
-@property (weak, nonatomic) IBOutlet UIButton *getCodeBtn;
-@property (weak, nonatomic) IBOutlet UIButton *agreeBtn;
+@property (weak, nonatomic) IBOutlet UITextField *nameTF;//姓名
+@property (weak, nonatomic) IBOutlet UITextField *phoneTF;//手机
+@property (weak, nonatomic) IBOutlet UITextField *codeTF;//验证码
+@property (weak, nonatomic) IBOutlet UITextField *pwdTF;//密码
+@property (weak, nonatomic) IBOutlet ATNeedBorderView *pwdSecBackView;//再次密码背景视图
+@property (weak, nonatomic) IBOutlet UITextField *pwdSecTF;//再次密码
+@property (weak, nonatomic) IBOutlet UILabel *NotTurePwdLab;//两次密码不一致
+@property (weak, nonatomic) IBOutlet UIButton *getCodeBtn;//获取验证码
+@property (weak, nonatomic) IBOutlet UIButton *agreeBtn;//同意协议按钮
+@property (weak, nonatomic) IBOutlet UIButton *agreeMentBtn;//查看协议按钮
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *scrollViewFirstChildView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
+@property (weak, nonatomic) IBOutlet UIButton *registerBtn;//注册
 
 @end
 
@@ -38,6 +40,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
+    
+//    我已阅读并同意《贝斯特相关条款和隐私权政策》
+    NSMutableAttributedString * mAttStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并同意《贝斯特相关条款和隐私权政策》" attributes:@{NSForegroundColorAttributeName:UIColorFromRGBValue(0xffffff)}];
+    [mAttStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(8, 13)
+     ];
+    [self.agreeMentBtn setAttributedTitle:mAttStr forState:UIControlStateNormal];
 }
 
 #pragma mark -- subViews
@@ -205,6 +213,7 @@
 #pragma mark -- 获取验证码
 - (IBAction)getCodeBtnDidClicked:(id)sender
 {
+    [self.view endEditing:YES];
     if (![ZZTextInput isValidateMobile:self.phoneTF.text]) {
         TTAlert(@"请输入正确的手机号码");
         return;

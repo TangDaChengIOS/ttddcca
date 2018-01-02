@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="NotTurePwdLab" destination="VwW-bA-7w2" id="4XC-t0-kg9"/>
                 <outlet property="agreeBtn" destination="Ftn-Z4-bgl" id="QUL-2p-I1p"/>
+                <outlet property="agreeMentBtn" destination="buT-nx-1jS" id="5Xz-QG-xTa"/>
                 <outlet property="codeTF" destination="9by-Qs-UAR" id="9sA-BN-lp6"/>
                 <outlet property="firstBtn" destination="DiP-ZL-SVy" id="49Q-MI-iPh"/>
                 <outlet property="getCodeBtn" destination="H86-rN-1EJ" id="ot8-7Q-pIJ"/>

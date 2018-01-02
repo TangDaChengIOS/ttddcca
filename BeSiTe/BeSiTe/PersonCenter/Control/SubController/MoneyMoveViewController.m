@@ -34,7 +34,44 @@
     
     [self refreshUI:(_isMoveToGame ? YES : NO)];
     [self configSubViews];
+
+    kWeakSelf
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [weak_self getBalanceData];
+    }];
+    
+    if ([BSTSingle defaultSingle].gameCompanysBalanceArr.count > 0) {
+        [self.tableView reloadData];
+        [self resetConstraint];
+    }else{
+        [self.tableView.mj_header beginRefreshing];
+    }
 }
+
+#pragma mark -- 获取所有的平台余额
+-(void)getBalanceData
+{
+    kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:self.view];
+    [RequestManager getWithPath:@"getGameBalance" params:nil success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:self.view];
+        [weak_self.tableView.mj_header endRefreshing];
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        [BSTSingle defaultSingle].gameCompanysBalanceArr = [BalanceModel jsonToArray:JSON];
+        [weak_self.tableView reloadData];
+        [weak_self resetConstraint];
+        
+    } failure:^(NSError *error) {
+        [weak_self.tableView.mj_header endRefreshing];
+        [MBProgressHUD hideHUDForView:self.view];
+        
+    }];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -42,6 +79,30 @@
     [self reloadData];
 }
 
+#pragma mark -- 刷新单个平台的余额
+-(void)getBalanceDataWithCompany:(NSString *)company
+{
+    kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:self.view];
+    [RequestManager getWithPath:@"getGameBalance" params:@{@"gamePlatformCode":company} success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:self.view];
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        if ([[JSON class]isSubclassOfClass:[NSArray class]]) {
+            NSDictionary * dict = JSON[0];
+            BalanceModel * model = [[BalanceModel alloc]init];
+            [model mj_setKeyValues:dict];
+            [[BSTSingle defaultSingle]updateGameCompany:model.gamePlatformCode balance:model.balance];
+        }
+        [weak_self.tableView reloadData];
+        
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view];
+        
+    }];
+}
 
 -(void)reloadData
 {
@@ -53,13 +114,15 @@
         [_titleViewBtn setTitle:@"未登录" forState:UIControlStateNormal];
     }
     self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
-    [self.tableView reloadData];
 }
 
 
 #pragma mark -- UITableViewDelegate / DataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if ([BSTSingle defaultSingle].gameCompanysBalanceArr.count == 0) {
+        return 0;
+    }
     return [BSTSingle defaultSingle].gameCompanysBalanceArr.count + 1;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -71,6 +134,10 @@
     }else{
         BalanceModel * model = [BSTSingle defaultSingle].gameCompanysBalanceArr[indexPath.row -1];
         [cell setCell:model.gamePlatformCode money:model.balance whiteBack:(indexPath.row % 2)];
+        kWeakSelf
+        cell.retryBlock = ^(NSString * gameCompanyCode){
+            [weak_self getBalanceDataWithCompany:gameCompanyCode];
+        };
     }
     return cell;
 }
@@ -94,7 +161,6 @@
     _tableView.layer.borderColor = UIColorFromRGBValue(0xf3f3f3).CGColor;
     _tableView.layer.borderWidth = 1;
     [_tableView registerClass:[MoneyListTableViewCell class] forCellReuseIdentifier:kMoneyListTableViewCellReuseID];
-    [self resetConstraint];
 }
 
 -(void)resetConstraint
@@ -102,11 +168,11 @@
     CGFloat needHeight = 37 + 28 * [BSTSingle defaultSingle].gameCompanysBalanceArr.count;
     if (self.tableView.mj_y + needHeight + 30 < MAXHEIGHT - 64) {
         self.tableViewHeightConstraint.constant = needHeight;
-        self.tableView.scrollEnabled = NO;
+//        self.tableView.scrollEnabled = NO;
     }
     else{
         self.tableViewHeightConstraint.constant = MAXHEIGHT - 64 - 30 -self.tableView.mj_y;
-        self.tableView.scrollEnabled = YES;
+//        self.tableView.scrollEnabled = YES;
     }
 }
 
@@ -163,6 +229,9 @@
         NSLog(@"%@",JSON);
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];
+        if (error) {
+            TTAlert(kNetError);
+        }
     }];
 }
 

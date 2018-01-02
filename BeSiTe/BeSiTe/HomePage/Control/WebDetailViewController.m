@@ -13,10 +13,13 @@
 
 @property (nonatomic,strong) UIWebView * webView;
 @property (nonatomic,strong) UIView * agreeBtnBackView;//部分显示协议的页面，需要同意按钮
+@property (nonatomic,strong) UIButton * closeGameBtn;//横屏时退出游戏按钮
+
 @end
 
 @implementation WebDetailViewController
 
+#pragma mark -- 懒加载 同意协议按钮
 -(UIView *)agreeBtnBackView
 {
     if (!_agreeBtnBackView) {
@@ -42,8 +45,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 
 }
-
-
+#pragma mark -- 懒加载 横屏时关闭游戏按钮
+//-(UIButton *)closeGameBtn{
+//    UIButton * agreeBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 18, MAXWIDTH - 52, 40)];
+//    [agreeBtn setTitle:@"同 意" forState:UIControlStateNormal];
+//    [agreeBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
+//    agreeBtn.backgroundColor = UIColorFromRGBValue(0x1AAE6A);
+//    [agreeBtn addTarget:self action:@selector(agreeBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -102,6 +111,7 @@
 {
     AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     delegate.isCanRotationWindow = YES;
+    [self interfaceOrientation:UIInterfaceOrientationLandscapeRight];
 
 }
 - (void)interfaceOrientation:(UIInterfaceOrientation)orientation

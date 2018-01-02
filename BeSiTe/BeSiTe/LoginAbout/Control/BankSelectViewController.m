@@ -23,21 +23,28 @@
     if (self.myBankDataSource.count == 0) {
         self.isHaveOtherData = NO;
     }
+    [self setIsNoDate:YES];
     [self requestData];
 }
 
 
 -(void)requestData{
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:self.view];
     [RequestManager getManagerDataWithPath:@"banks" params:nil success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:weak_self.view];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
+        [weak_self setIsNoDate:NO];
         weak_self.dataSource = [BankModel jsonToArray:JSON];
         [weak_self.tableView reloadData];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:weak_self.view];
+        if (error) {
+            TTAlert(kNetError);
+        }
     }];
 }
 

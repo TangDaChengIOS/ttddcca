@@ -61,7 +61,7 @@
 -(void)setModel:(GamesModel *)model
 {
     _model = model;
-    [self.gameImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
+    [self.gameImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:KIMAGE(@"commmon_home_history")];
     self.gameTitle.text = model.gameName;
     if (model.isTry) {
         [self.tryPlayBtn setTitle:@"试玩" forState:UIControlStateNormal];
@@ -194,6 +194,9 @@
 
 
 +(void)showWithModel:(GamesModel *)model{
+    if (!model) {
+        return;
+    }
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     GamesMenuView * view = [[[NSBundle mainBundle]loadNibNamed:@"GamesMenuView" owner:self options:nil] firstObject];
     view.frame = window.bounds;

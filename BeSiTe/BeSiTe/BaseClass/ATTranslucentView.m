@@ -46,6 +46,12 @@
         whiteBack.layer.cornerRadius = 4;
         [self addSubview:whiteBack];
         
+        UITapGestureRecognizer * whiteBackTap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
+            if (_isKeyBoardShow) {
+                [weak_self endEditing:YES];
+            }
+        }];
+        [whiteBack addGestureRecognizer:whiteBackTap];
     }
     return self;
 }

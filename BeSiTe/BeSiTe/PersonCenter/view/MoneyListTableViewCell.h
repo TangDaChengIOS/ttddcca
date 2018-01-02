@@ -13,7 +13,11 @@ typedef NS_ENUM(NSUInteger,CellType) {
     CellTypeOther
 };
 #define kMoneyListTableViewCellReuseID @"kMoneyListTableViewCellReuseID"
+
 @interface MoneyListTableViewCell : UITableViewCell
+
 @property (nonatomic,assign) CellType cellTye;
+@property (nonatomic,copy) void (^retryBlock)(NSString *gameCompanyCode);
 -(void)setCell:(NSString *)name money:(NSString *)money whiteBack:(BOOL)isWhite;
+
 @end

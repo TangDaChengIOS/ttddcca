@@ -34,7 +34,7 @@
     if (self = [super init]) {
         self.frame =CGRectMake(0, 0, MAXWIDTH, 300);
         
-        _bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.width, 167 * kPROPORTION) delegate:self placeholderImage:nil];
+        _bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.width, 167 * kPROPORTION) delegate:self placeholderImage:KIMAGE(@"commmon_home_pic")];
         if ([BSTSingle defaultSingle].adsRollTime > 0) {
             _bannerView.autoScrollTimeInterval = [BSTSingle defaultSingle].adsRollTime;
         }
@@ -165,7 +165,9 @@
     {
         [self.viewController.navigationController pushViewController:[WebDetailViewController quickCreateWithUrl:model.webUrl] animated:YES];
     }else{//游戏
-        [GamesMenuView showWithModel:model.game];
+        if (model.game) {
+            [GamesMenuView showWithModel:model.game];
+        }
     }
 }
 

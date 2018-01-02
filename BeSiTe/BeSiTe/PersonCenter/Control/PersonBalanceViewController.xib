@@ -50,19 +50,13 @@
                         <constraint firstAttribute="height" constant="488" id="pcG-u1-cMs"/>
                     </constraints>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="07h-qf-pfh">
-                    <rect key="frame" x="187" y="40" width="1" height="488"/>
-                    <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="1" id="7Fo-Bo-uab"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sPl-0U-C35" customClass="ATNeedBorderButton">
                     <rect key="frame" x="12" y="597" width="351" height="40"/>
                     <color key="backgroundColor" red="0.98431372549019602" green="0.54117647058823526" blue="0.38543486396236348" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="wQS-T0-D8e"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="申请救援金" image="profile_balance_apply_btn_left_img">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -101,11 +95,9 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="sPl-0U-C35" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="0Ct-40-GoH"/>
-                <constraint firstItem="07h-qf-pfh" firstAttribute="centerX" secondItem="xAg-An-Wd2" secondAttribute="centerX" id="8cW-ei-3m3"/>
                 <constraint firstAttribute="trailing" secondItem="z4z-uq-2Jl" secondAttribute="trailing" constant="12" id="BOM-5Z-bgF"/>
                 <constraint firstItem="MlK-by-5Eb" firstAttribute="width" secondItem="z4z-uq-2Jl" secondAttribute="width" id="R5S-jX-fBn"/>
                 <constraint firstItem="xAg-An-Wd2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Shl-AF-wVG"/>
-                <constraint firstItem="07h-qf-pfh" firstAttribute="height" secondItem="INx-b6-N47" secondAttribute="height" id="W2f-ai-nnp"/>
                 <constraint firstItem="xAg-An-Wd2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="WMB-jA-FAN"/>
                 <constraint firstAttribute="trailing" secondItem="sPl-0U-C35" secondAttribute="trailing" constant="12" id="cAm-Bn-ARC"/>
                 <constraint firstItem="INx-b6-N47" firstAttribute="top" secondItem="xAg-An-Wd2" secondAttribute="bottom" constant="5" id="cwz-Eu-sLN"/>
@@ -117,7 +109,6 @@
                 <constraint firstItem="sPl-0U-C35" firstAttribute="top" secondItem="z4z-uq-2Jl" secondAttribute="bottom" constant="8" id="oDX-PM-lbp"/>
                 <constraint firstItem="INx-b6-N47" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="rnE-jd-b5D"/>
                 <constraint firstAttribute="trailing" secondItem="xAg-An-Wd2" secondAttribute="trailing" id="tEx-YP-fS0"/>
-                <constraint firstItem="07h-qf-pfh" firstAttribute="top" secondItem="xAg-An-Wd2" secondAttribute="bottom" constant="5" id="xdU-jy-mKg"/>
             </constraints>
             <point key="canvasLocation" x="37.5" y="99.5"/>
         </view>

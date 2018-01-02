@@ -10,6 +10,8 @@
 
 @interface ATBaseViewController ()
 
+@property (nonatomic,strong) UIView * whiteBack;
+
 @end
 
 @implementation ATBaseViewController
@@ -45,6 +47,12 @@
     [self.navigationController setNavigationBarHidden:NO];
 }
 
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    [self.view endEditing:YES];
+}
+
 -(void)pushVC:(UIViewController *)viewController
 {
     if (self.navigationController) {
@@ -55,6 +63,28 @@
         [self presentViewController:nav animated:YES completion:nil];
     }
 
+}
+
+-(void)setIsNoDate:(BOOL)isNoDate{
+    if (isNoDate) {
+        if (!_whiteBack) {
+            [self.view addSubview:self.whiteBack];
+        }
+    }else{
+        if (_whiteBack) {
+            [_whiteBack removeFromSuperview];
+            _whiteBack = nil;
+        }
+    }
+    
+}
+
+-(UIView *)whiteBack{
+    if (!_whiteBack) {
+        _whiteBack = [[UIView alloc]initWithFrame:self.view.bounds];
+        _whiteBack.backgroundColor = kWhiteColor;
+    }
+    return _whiteBack;
 }
 
 #pragma mark -- 侧滑

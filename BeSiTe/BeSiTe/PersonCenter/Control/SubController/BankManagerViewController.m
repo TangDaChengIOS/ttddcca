@@ -39,6 +39,7 @@
     self.title = @"管理银行卡";
     self.delBtn.layer.borderColor = [UIColor redColor].CGColor;
     self.nameTF.delegate = self;
+    self.nameTF.clearButtonMode = UITextFieldViewModeAlways;
     self.cardNumTF.delegate = self;
     self.addressTF.delegate = self;
     [self dealDataFromDataSource];
@@ -117,9 +118,9 @@
     [mDict setValue:self.cardNumTF.text forKey:@"cardNo"];
     [mDict setValue:self.addressTF.text forKey:@"bankAddr"];
     kWeakSelf
-    [MBProgressHUD showMessage:@"" toView:nil];
+    [MBProgressHUD showMessage:@"" toView:self.view];
     [RequestManager postWithPath:@"addUserBankInfo" params:mDict success:^(id JSON ,BOOL isSuccess) {
-        [MBProgressHUD hideHUDForView:nil];
+        [MBProgressHUD hideHUDForView:weak_self.view];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -127,7 +128,7 @@
         TTAlert(@"保存银行卡信息成功！");
         [weak_self resetDataAfterSave];
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:nil];
+        [MBProgressHUD hideHUDForView:weak_self.view];
 
     }];
 }
@@ -160,9 +161,9 @@
 - (IBAction)delBtnClick:(id)sender
 {
     kWeakSelf
-    [MBProgressHUD showMessage:@"" toView:nil];
+    [MBProgressHUD showMessage:@"" toView:self.view];
     [RequestManager postWithPath:@"deleteUserBankInfo" params:@{@"tagId":[NSString stringWithFormat:@"%ld",_selectItem]} success:^(id JSON ,BOOL isSuccess) {
-        [MBProgressHUD hideHUDForView:nil];
+        [MBProgressHUD hideHUDForView:weak_self.view];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -170,7 +171,7 @@
         TTAlert(@"删除银行卡信息成功！");
         [weak_self resetDataAfterDelete];
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:nil];
+        [MBProgressHUD hideHUDForView:weak_self.view];
 
     }];
 }

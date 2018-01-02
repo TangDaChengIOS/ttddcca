@@ -27,6 +27,7 @@
     self.title = @"在线存款";
     _selectedIndex = -1;
     [self configSubViews];
+    [self setIsNoDate:YES];
     [self requestData];
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -38,16 +39,22 @@
 -(void)requestData
 {
     kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:self.view];
     [RequestManager getManagerDataWithPath:@"payChannel" params:nil success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:weak_self.view];
         NSLog(@"%@",JSON);
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
+        [weak_self setIsNoDate:NO];
         weak_self.dataSource = [OnlinePayModel jsonToArray:JSON];
         [weak_self.tableView reloadData];
     } failure:^(NSError *error) {
-    
+        [MBProgressHUD hideHUDForView:weak_self.view];
+        if (error) {
+            TTAlert(kNetError);
+        }
     }];
 }
 
@@ -166,9 +173,11 @@
 
         [_boomView addSubview:_agreeBtn];
         
-        UIButton * agreementBtn = [[UIButton alloc]initWithFrame:CGRectMake(_agreeBtn.maxX , 9, MAXWIDTH - _agreeBtn.maxX - 15, 40)];
+        UIButton * agreementBtn = [[UIButton alloc]initWithFrame:CGRectMake(50 , 9, MAXWIDTH - 50 - 15, 40)];
         [agreementBtn setAttributedTitle:[self getAttributeString] forState:UIControlStateNormal];
-        [agreementBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+        if (MAXWIDTH > 320) {
+            [agreementBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+        }
         [agreementBtn addTarget:self action:@selector(readAgreementBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [_boomView addSubview:agreementBtn];
         

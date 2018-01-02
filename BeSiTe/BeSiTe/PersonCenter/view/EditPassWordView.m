@@ -132,6 +132,11 @@
         return;
     }
 
+    if ([newPwdTF.text isEqualToString:oldPwdTF.text]) {
+        TTAlert(@"您输入的新密码与旧密码相同！");
+        return;
+    }
+    
     if (![newPwdTF.text isEqualToString:newPwdTF2.text]) {
         TTAlert(@"两次输入的新密码不一致！");
         return;
@@ -173,6 +178,7 @@
 //    button.backgroundColor = [UIColor redColor];
     button.contentMode = UIViewContentModeLeft;
     [button setImage:KIMAGE(@"profile_passworld_show_icon") forState:UIControlStateNormal];
+    [button setImage:KIMAGE(@"profile_passworld_hide_icon") forState:UIControlStateSelected];
     button.tag = tag;
     [button addTarget:self action:@selector(showOrHiddenPassword:) forControlEvents:UIControlEventTouchUpInside];
     return button;
