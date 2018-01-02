@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface BSTNoDataView : UIView
+
+@property (nonatomic,strong) UIImageView * imageView;
+@property (nonatomic,strong) UILabel * tipsLab;
+
 @property (nonatomic,assign) BOOL isMsg;
+
 @end

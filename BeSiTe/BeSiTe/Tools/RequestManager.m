@@ -107,7 +107,7 @@
 
 
 +(BOOL)isNeedPresentLoginPageForReturnCode:(NSInteger)returnCode{
-    if (returnCode != 1017) {
+    if (returnCode != 1017 && returnCode != 1003) {
         return  NO;
     }
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSavingUserInfoKey];

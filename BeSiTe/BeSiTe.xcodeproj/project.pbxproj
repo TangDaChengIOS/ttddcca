@@ -177,6 +177,7 @@
 		11F5E2401FB199FB00A23523 /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F5E23F1FB199FB00A23523 /* RSAEncryptor.m */; };
 		11F5E2461FB1AEB300A23523 /* QuickSavingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11F5E2441FB1AEB300A23523 /* QuickSavingViewController.m */; };
 		11F5E2471FB1AEB300A23523 /* QuickSavingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11F5E2451FB1AEB300A23523 /* QuickSavingViewController.xib */; };
+		11FC3F5E1FFBA63700548942 /* UIBarButtonItem+NoBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FC3F5D1FFBA63700548942 /* UIBarButtonItem+NoBadge.m */; };
 		D76A12A2C286CE589FD17E49 /* libPods-BeSiTe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9C397DE03D77B8C457499F /* libPods-BeSiTe.a */; };
 /* End PBXBuildFile section */
 
@@ -497,6 +498,8 @@
 		11F5E2431FB1AEB300A23523 /* QuickSavingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickSavingViewController.h; sourceTree = "<group>"; };
 		11F5E2441FB1AEB300A23523 /* QuickSavingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickSavingViewController.m; sourceTree = "<group>"; };
 		11F5E2451FB1AEB300A23523 /* QuickSavingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuickSavingViewController.xib; sourceTree = "<group>"; };
+		11FC3F5C1FFBA63700548942 /* UIBarButtonItem+NoBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+NoBadge.h"; sourceTree = "<group>"; };
+		11FC3F5D1FFBA63700548942 /* UIBarButtonItem+NoBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+NoBadge.m"; sourceTree = "<group>"; };
 		127AEA3C7DEE346BB43CCF1D /* Pods-BeSiTe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeSiTe.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeSiTe/Pods-BeSiTe.release.xcconfig"; sourceTree = "<group>"; };
 		AAF0243A6D95EA02921365FC /* Pods-BeSiTe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeSiTe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeSiTe/Pods-BeSiTe.debug.xcconfig"; sourceTree = "<group>"; };
 		AF9C397DE03D77B8C457499F /* libPods-BeSiTe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BeSiTe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -659,6 +662,8 @@
 				11B2112D1FB430B7003CE6ED /* ATNeedBorderButton.m */,
 				11E239A01FE760B200883C89 /* NoPasteTextField.h */,
 				11E239A11FE760B200883C89 /* NoPasteTextField.m */,
+				11FC3F5C1FFBA63700548942 /* UIBarButtonItem+NoBadge.h */,
+				11FC3F5D1FFBA63700548942 /* UIBarButtonItem+NoBadge.m */,
 			);
 			path = BaseClass;
 			sourceTree = "<group>";
@@ -1500,6 +1505,7 @@
 				113F71D81FB2B33900EB4567 /* AppDelegate+Setting.m in Sources */,
 				116463B21F91F634004ECC79 /* XWFilterAnimator+XWBarSwipe.m in Sources */,
 				116463A01F91F634004ECC79 /* UINavigationController+XWTransition.m in Sources */,
+				11FC3F5E1FFBA63700548942 /* UIBarButtonItem+NoBadge.m in Sources */,
 				116463A31F91F634004ECC79 /* XWInteractiveTransition.m in Sources */,
 				113227AC1F909DC500E5EE7E /* main.m in Sources */,
 				11F5E2401FB199FB00A23523 /* RSAEncryptor.m in Sources */,

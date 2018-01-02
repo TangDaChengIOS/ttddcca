@@ -9,7 +9,7 @@
 #import "WebDetailViewController.h"
 #import "AppDelegate.h"
 
-@interface WebDetailViewController ()<UIWebViewDelegate>
+@interface WebDetailViewController ()<UIWebViewDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,strong) UIWebView * webView;
 @property (nonatomic,strong) UIView * agreeBtnBackView;//部分显示协议的页面，需要同意按钮
@@ -46,13 +46,44 @@
 
 }
 #pragma mark -- 懒加载 横屏时关闭游戏按钮
-//-(UIButton *)closeGameBtn{
-//    UIButton * agreeBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 18, MAXWIDTH - 52, 40)];
-//    [agreeBtn setTitle:@"同 意" forState:UIControlStateNormal];
-//    [agreeBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
-//    agreeBtn.backgroundColor = UIColorFromRGBValue(0x1AAE6A);
-//    [agreeBtn addTarget:self action:@selector(agreeBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
-//}
+-(UIButton *)closeGameBtn{
+    if (!_closeGameBtn) {
+        _closeGameBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _closeGameBtn.frame = CGRectMake(100, 100, 50, 50);
+        [_closeGameBtn setImage:KIMAGE_Ori(@"game_close") forState:UIControlStateNormal];
+        [_closeGameBtn addTarget:self action:@selector(buttonAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.view addSubview:_closeGameBtn];
+        
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+        [_closeGameBtn addGestureRecognizer:pan];
+    }
+    return _closeGameBtn;
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)pan
+{
+    if (pan.state == UIGestureRecognizerStateChanged){
+        CGPoint nowPoint = [pan locationInView:self.view];
+        CGRect frame = self.webView.frame;
+        if (frame.size.width - 25 < nowPoint.x) {
+            nowPoint.x = frame.size.width - 25;
+        }else if (nowPoint.x < 25){
+            nowPoint.x = 25;
+        }else if (nowPoint.y < 25){
+            nowPoint.y = 25;
+        }
+        else if (nowPoint.y > frame.size.height - 25){
+            nowPoint.y = frame.size.height - 25;
+        }
+        _closeGameBtn.center = nowPoint;
+    }
+}
+
+-(void)buttonAction:(UIButton *)sender
+{
+    [self leftBarButtonItemClick];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -82,10 +113,27 @@
 }
 
 -(void)leftBarButtonItemClick{
+    if (self.isOpenRotaion) {
+        UIAlertView * alter = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您确定要退出游戏么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alter show];
+    }else
+    {
+        [self exit];
+    }
+}
+
+-(void)exit{
     if (self.navigationController.viewControllers.count > 1) {
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self exit];
     }
 }
 
@@ -111,8 +159,6 @@
 {
     AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     delegate.isCanRotationWindow = YES;
-    [self interfaceOrientation:UIInterfaceOrientationLandscapeRight];
-
 }
 - (void)interfaceOrientation:(UIInterfaceOrientation)orientation
 {
@@ -148,9 +194,12 @@
     if (toInterfaceOrientation == UIInterfaceOrientationPortrait) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         _webView.frame = CGRectMake(0, 0, smaller, bigger - 64);
+        self.closeGameBtn.hidden = YES;
     }else{
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         _webView.frame = CGRectMake(0, 0, bigger, smaller);
+        self.closeGameBtn.hidden = NO;
+        self.closeGameBtn.frame = CGRectMake(bigger - 90, 10, 50, 50);
     }
 }
 

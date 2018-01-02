@@ -29,6 +29,8 @@
 @property (nonatomic,assign) NSInteger selectItem;
 @property (nonatomic,copy) NSString * selectBankCode;
 
+@property (nonatomic,strong) NSMutableArray * banksArr;
+
 @end
 
 @implementation BankManagerViewController
@@ -42,7 +44,27 @@
     self.nameTF.clearButtonMode = UITextFieldViewModeAlways;
     self.cardNumTF.delegate = self;
     self.addressTF.delegate = self;
-    [self dealDataFromDataSource];
+    [self setIsNoDate:YES];
+    [self requestBankData];
+}
+
+-(void)requestBankData
+{
+    kWeakSelf
+    [MBProgressHUD showMessage:@"" toView:self.view];
+    [RequestManager getWithPath:@"getUserBankInfo" params:nil success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:weak_self.view];
+        NSLog(@"%@",JSON);
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        weak_self.banksArr = [MyBankModel jsonToArray:JSON];
+        [weak_self setIsNoDate:NO];
+        [weak_self dealDataFromDataSource];
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:weak_self.view];
+    }];
 }
 
 #pragma mark -- textFieldDelegate
@@ -81,11 +103,20 @@
 #pragma mark -- 选择银行
 - (IBAction)selectBankClick:(id)sender {
     BankSelectViewController * selectVC = [[BankSelectViewController alloc]init];
+    selectVC.isNeedMyBankData = YES;
+    selectVC.currentUseBankTag = _selectItem;
     kWeakSelf
     selectVC.selectBankBlock = ^(BankModel * model){
         [weak_self.bankImageView setImageURL:[NSURL URLWithString:model.icon]];
         weak_self.bankNameLab.text = model.bankName;
         weak_self.selectBankCode = model.bankCode;
+    };
+    selectVC.selectMyBankBlock = ^(MyBankModel * model){
+        [weak_self.bankImageView setImageURL:[NSURL URLWithString:model.icon]];
+        weak_self.bankNameLab.text = model.bankName;
+        weak_self.selectBankCode = model.bankCode;
+        weak_self.cardNumTF.text = model.cardNo;
+        weak_self.addressTF.text = model.bankAddr;
     };
     [self pushVC:selectVC];
 }

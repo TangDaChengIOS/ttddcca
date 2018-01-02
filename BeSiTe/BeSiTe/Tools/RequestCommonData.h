@@ -10,9 +10,14 @@
 
 #define kGetUnReadMsgNumsSuccessNotification @"kGetUnReadMsgNumsSuccessNotification"
 
+#define kGetNoticesDataSuccessNotification @"kGetNoticesDataSuccessNotification"
+
+
 @interface RequestCommonData : NSObject
 
 /**获取未读消息数*/
 +(void)getUnReadMsgNums;
 
+/**获取滚屏公告*/
++(void)getNoticesData;
 @end

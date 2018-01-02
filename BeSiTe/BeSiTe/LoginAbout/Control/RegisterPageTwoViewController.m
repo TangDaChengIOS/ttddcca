@@ -104,6 +104,7 @@
 #pragma mark -- 选择银行
 - (IBAction)selectBankClick:(id)sender {
     BankSelectViewController * vc = [[BankSelectViewController alloc]init];
+    vc.currentUseBankTag = -1;
     kWeakSelf
     vc.selectBankBlock = ^(BankModel * model){
         [weak_self.bankImageView setImageURL:[NSURL URLWithString:model.icon]];
@@ -138,13 +139,13 @@
     }
     
     if (![ZZTextInput onlyInputTheNumber:self.qqTF.text]) {
-        TTAlert(@"请输入正确的QQ号");
+        TTAlert(@"请输入正确的QQ号(纯数字)");
         return;
     }
     
     if (self.bankCardTF.text.length > 0) {
         if (![ZZTextInput onlyInputTheNumber:self.bankCardTF.text]) {
-            TTAlert(@"请输入正确的银行卡号或存折号");
+            TTAlert(@"请输入正确的银行卡号或存折号(纯数字)");
             return;
         }
     }

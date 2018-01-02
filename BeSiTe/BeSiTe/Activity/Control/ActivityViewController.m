@@ -17,6 +17,8 @@
 @property (nonatomic,strong) NSMutableArray * dataSource;
 @property (nonatomic,assign) NSInteger selectedRow;
 @property (nonatomic,assign) NSInteger page;
+@property (nonatomic,strong) BSTNoDataView * noDataView;
+
 @end
 
 @implementation ActivityViewController
@@ -80,6 +82,12 @@
         if ([dict[@"hasNext"] integerValue] == 0) {
             [weak_self.tableView.mj_footer endRefreshingWithNoMoreData];
         }
+        if (weak_self.dataSource.count == 0) {
+            [weak_self.tableView addSubview:weak_self.noDataView];
+        }else{
+            [weak_self.noDataView removeFromSuperview];
+        }
+        
         weak_self.page = [dict[@"currentPage"] integerValue];
         NSLog(@"%@",JSON);
     } failure:^(NSError *error) {
@@ -221,6 +229,16 @@
     }else{
         [LoginViewController presentLoginViewController];
     }
+}
+
+-(BSTNoDataView *)noDataView{
+    if (!_noDataView) {
+        _noDataView = [[BSTNoDataView alloc]initWithFrame:self.tableView.bounds];
+        _noDataView.isMsg = YES;
+        _noDataView.tipsLab.text = @"暂无数据";
+        _noDataView.backgroundColor = kWhiteColor;
+    }
+    return _noDataView;
 }
 
 -(NSMutableArray *)dataSource

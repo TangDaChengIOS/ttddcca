@@ -10,6 +10,5 @@
 /**银行卡管理*/
 @interface BankManagerViewController : ATBaseViewController
 
-@property (nonatomic,strong) NSMutableArray * banksArr;
 
 @end

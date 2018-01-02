@@ -19,10 +19,13 @@
     CGFloat _itemWidth;
 }
 
-@property (nonatomic,strong) UIImageView * navRightCornImg;
-@property (nonatomic,strong) HomeHeaderView * headerView;
-@property (nonatomic,strong) UICollectionView * collectionView;
-@property (nonatomic,strong) NSMutableArray * dataSource;
+@property (nonatomic,strong) UIImageView * navRightCornImg;//导航栏右下角的彩色标记
+@property (nonatomic,strong) HomeHeaderView * headerView;//轮播图、最近游戏、跑马灯
+@property (nonatomic,strong) UICollectionView * collectionView;//平台列表
+@property (nonatomic,strong) NSMutableArray * dataSource;//数据源
+@property (nonatomic,strong) NSTimer * timer;//定时器，循环请求滚屏公告数据
+@property (nonatomic,assign) BOOL isRequestData;//是否正在请求数据
+
 @end
 
 @implementation HomeViewController
@@ -41,18 +44,25 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeADSRefreshTime) name:@"ADSRollTimeChangedNotification" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(readUnReadMsgNums) name:kGetUnReadMsgNumsSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(readNoticesData) name:kGetNoticesDataSuccessNotification object:nil];
+
 
     [self.collectionView.mj_header beginRefreshing];
-
+    [[NSRunLoop mainRunLoop]addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 -(void)requestData
 {
+    if (self.isRequestData || self.headerView.isRequestData) {
+        return;
+    }
     [self.headerView refreshData];
+    self.isRequestData = YES;
 
     kWeakSelf
     [RequestManager getManagerDataWithPath:@"gameCompanys" params:nil success:^(id JSON ,BOOL isSuccess) {
-        [weak_self.collectionView.mj_header endRefreshing];
+        weak_self.isRequestData = NO;
+        [weak_self endRefreshState];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -61,10 +71,20 @@
         weak_self.dataSource = [GamesCompanyModel jsonToArray:JSON];
         [weak_self.collectionView reloadData];
     } failure:^(NSError *error) {
-        [weak_self.collectionView.mj_header endRefreshing];
-
+        weak_self.isRequestData = NO;
+        [weak_self endRefreshState];
     }];
+    
+    [RequestCommonData getNoticesData];
 }
+
+
+-(void)endRefreshState{
+    if (!self.isRequestData && !self.headerView.isRequestData) {
+        [self.collectionView.mj_header endRefreshing];
+    }
+}
+
 
 #pragma mark -- collectionView delegates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -128,7 +148,6 @@
 #pragma mark -- subViews
 -(void)configSubViews
 {
-//    self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.titleView = [[UIImageView alloc]initWithImage:KIMAGE_Ori(@"common_navgration_title_ime")];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:KIMAGE_Ori(@"commmon_navgation_left_img") style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemClick)];
@@ -177,7 +196,6 @@
 -(UICollectionView *)collectionView
 {
     if (!_collectionView) {
-//        UICollectionViewFlowLayout * lay = [[UICollectionViewFlowLayout alloc]init];
         YQCollectionViewFlowLayout * lay = [[YQCollectionViewFlowLayout alloc]init];
         lay.navHeight = 0;
 
@@ -196,6 +214,10 @@
 {
     if (!_headerView) {
         _headerView = [[HomeHeaderView alloc]init];
+        kWeakSelf
+        _headerView.finishRequestBlock = ^(){
+            [weak_self endRefreshState];
+        };
     }
     return _headerView;
 }
@@ -205,7 +227,7 @@
     }
     return _dataSource;
 }
-
+#pragma mark -- 读取未读消息数
 -(void)readUnReadMsgNums
 {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -229,11 +251,26 @@
     [self.navRightCornImg removeFromSuperview];
 }
 
-
-
-
+#pragma mark -- 更新轮播图的翻页时间间隔
 -(void)changeADSRefreshTime{
     self.headerView.bannerView.autoScrollTimeInterval = [BSTSingle defaultSingle].adsRollTime ;
+}
+
+#pragma mark -- 滚屏公告相关
+-(NSTimer *)timer
+{
+    if (!_timer) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1800 target:self selector:@selector(timerRunning) userInfo:nil repeats:YES];
+    }
+    return _timer;
+}
+//间隔请求数据
+-(void)timerRunning{
+    [RequestCommonData getNoticesData];
+}
+//接到通知，展示数据
+-(void)readNoticesData{
+    [self.headerView handleNotices];
 }
 
 
@@ -241,8 +278,10 @@
     [super didReceiveMemoryWarning];
 }
 -(void)dealloc{
+    [_timer invalidate];
+    _timer = nil;
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ADSRollTimeChangedNotification" object:nil];
-
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kGetNoticesDataSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:kGetUnReadMsgNumsSuccessNotification object:nil];
 }
 @end

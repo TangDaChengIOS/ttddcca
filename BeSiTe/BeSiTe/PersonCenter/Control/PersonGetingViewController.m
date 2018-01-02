@@ -35,7 +35,7 @@
 
 @property (nonatomic,copy) NSString * bankCode;//银行code
 
-@property (nonatomic,strong) NSMutableArray * myBankDataSource;//我的银行卡数据
+//@property (nonatomic,strong) NSMutableArray * myBankDataSource;//我的银行卡数据
 @property (nonatomic,strong) NSMutableArray * bankDataSource;//银行数据
 
 @end
@@ -97,18 +97,6 @@
 -(void)requestBankData
 {
     kWeakSelf
-
-    [RequestManager getWithPath:@"getUserBankInfo" params:nil success:^(id JSON ,BOOL isSuccess) {
-        NSLog(@"%@",JSON);
-        if (!isSuccess) {
-            TTAlert(JSON);
-            return ;
-        }
-        weak_self.myBankDataSource = [MyBankModel jsonToArray:JSON];
-    } failure:^(NSError *error) {
-        
-    }];
-    
     [RequestManager getManagerDataWithPath:@"banks" params:nil success:^(id JSON ,BOOL isSuccess) {
         if (!isSuccess) {
             TTAlert(JSON);
@@ -131,8 +119,8 @@
 
 - (IBAction)selectBankBtnClick:(id)sender {
     BankSelectViewController * selectVC = [[BankSelectViewController alloc]init];
-    selectVC.myBankDataSource = self.myBankDataSource;
-    selectVC.isHaveOtherData = YES;
+    selectVC.isNeedMyBankData = YES;
+    selectVC.currentUseBankTag = -1;
     kWeakSelf
     selectVC.selectBankBlock = ^(BankModel * model){
         [weak_self.bankImageView setImageURL:[NSURL URLWithString:model.icon]];
@@ -201,15 +189,7 @@
 }
 - (IBAction)managerCardBtnClick:(id)sender {
     BankManagerViewController * bankManagerVC = [[BankManagerViewController alloc]initWithNibName:@"BankManagerViewController" bundle:nil];
-    bankManagerVC.banksArr = self.myBankDataSource;
     [self pushVC:bankManagerVC];
-}
--(NSMutableArray *)myBankDataSource
-{
-    if (!_myBankDataSource) {
-        _myBankDataSource = [NSMutableArray array];
-    }
-    return _myBankDataSource;
 }
 
 -(NSMutableArray *)bankDataSource

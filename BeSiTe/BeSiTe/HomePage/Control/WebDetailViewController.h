@@ -11,7 +11,7 @@
 /**网页*/
 @interface WebDetailViewController : ATBaseViewController
 @property (nonatomic,copy) NSString * url;
-@property (nonatomic,assign) BOOL isOpenRotaion;//是否支持转屏
+@property (nonatomic,assign) BOOL isOpenRotaion;//是否支持转屏，支持转屏的同时，也代表着打开的是游戏
 
 @property (nonatomic,assign) BOOL isNeedAgreeBtn;//是否需要显示同意按钮
 @property (nonatomic,copy) void (^agreeBtnClickBlock)();//点击同意按钮的Block

@@ -37,13 +37,23 @@
                         <color key="textColor" red="0.74509803921568629" green="0.74509803921568629" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1s1-8g-kSj">
+                        <rect key="frame" x="0.0" y="42" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="axM-Fk-kRR"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="rxb-3r-ksE" firstAttribute="leading" secondItem="eB3-s0-ptR" secondAttribute="trailing" constant="15" id="8pF-jr-NKO"/>
                     <constraint firstItem="eB3-s0-ptR" firstAttribute="leading" secondItem="fX5-Fh-d4T" secondAttribute="trailing" constant="20" id="9eE-or-XaP"/>
+                    <constraint firstAttribute="bottom" secondItem="1s1-8g-kSj" secondAttribute="bottom" id="Ak8-UG-ZZ6"/>
+                    <constraint firstAttribute="trailing" secondItem="1s1-8g-kSj" secondAttribute="trailing" id="HXs-D8-HyF"/>
                     <constraint firstItem="fX5-Fh-d4T" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Kuz-us-PgE"/>
                     <constraint firstItem="eB3-s0-ptR" firstAttribute="centerY" secondItem="fX5-Fh-d4T" secondAttribute="centerY" id="TZ9-he-irz"/>
                     <constraint firstItem="rxb-3r-ksE" firstAttribute="centerY" secondItem="eB3-s0-ptR" secondAttribute="centerY" id="fHQ-Vx-9O4"/>
+                    <constraint firstItem="1s1-8g-kSj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hSE-DR-fZl"/>
                     <constraint firstItem="fX5-Fh-d4T" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="ukL-H5-gpc"/>
                 </constraints>
             </tableViewCellContentView>

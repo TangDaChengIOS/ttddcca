@@ -27,13 +27,26 @@
     [_bankImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
     _bankNameLab.text = model.bankName;
     _bankCardLab.hidden = YES;
+    self.bankNameLab.textColor = UIColorFromRGBValue(0x535353);
 }
 
 -(void)setMyBankCellWithModel:(MyBankModel *)model{
     [_bankImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
     _bankNameLab.text = model.bankName;
     _bankCardLab.hidden = NO;
-    _bankCardLab.text = [NSString stringWithFormat:@"尾号%@",[model.cardNo substringFromIndex:model.cardNo.length - 4]];
+    if (model.cardNo.length > 4) {
+        _bankCardLab.text = [NSString stringWithFormat:@"尾号%@",[model.cardNo substringFromIndex:model.cardNo.length - 4]];
+    }else{
+        _bankCardLab.text = [NSString stringWithFormat:@"尾号%@",model.cardNo];
+    }
+    self.bankNameLab.textColor = UIColorFromRGBValue(0x535353);
+}
+-(void)setIsCanClick:(BOOL)isCanClick{
+    if (isCanClick) {
+        self.bankNameLab.textColor = UIColorFromRGBValue(0x535353);
+    }else{
+        self.bankNameLab.textColor = UIColorFromRGBValue(0xe3e3e3);
+    }
 }
 
 

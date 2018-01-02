@@ -13,9 +13,10 @@
 @interface HomeHeaderView : UIView
 
 @property (nonatomic,strong) SDCycleScrollView * bannerView;//轮播图
-
-@property (nonatomic,assign) BOOL isRequestData;
+@property (nonatomic,assign) BOOL isRequestData;//是否正在请求数据
+@property (nonatomic,copy) void (^finishRequestBlock)();//完成数据请求
 
 -(void)refreshData;
+-(void)handleNotices;
 
 @end

@@ -15,8 +15,10 @@ typedef NS_ENUM(NSUInteger, BankSelectVCEnterType) {
 };
 /**银行选择*/
 @interface BankSelectViewController : ATBaseViewController
-@property (nonatomic,assign) BOOL isHaveOtherData;
-@property (nonatomic,copy) NSArray * myBankDataSource;
+
+@property (nonatomic,assign) BOOL isNeedMyBankData;
+
+@property (nonatomic,assign) NSInteger currentUseBankTag;//管理银行卡时用到
 
 @property (nonatomic,copy) void (^selectBankBlock)(BankModel * model);
 @property (nonatomic,copy) void (^selectMyBankBlock)(MyBankModel * model);

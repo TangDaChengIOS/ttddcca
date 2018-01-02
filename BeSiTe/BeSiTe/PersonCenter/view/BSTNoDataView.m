@@ -9,8 +9,7 @@
 #import "BSTNoDataView.h"
 
 @interface BSTNoDataView ()
-@property (nonatomic,strong) UIImageView * imageView;
-@property (nonatomic,strong) UILabel * tipsLab;
+
 @end
 
 @implementation BSTNoDataView

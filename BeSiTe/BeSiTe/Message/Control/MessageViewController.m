@@ -152,15 +152,18 @@
             [weak_self.personMsgDataSource removeAllObjects];
         }
         [weak_self.personMsgDataSource addObjectsFromArray: [UserMsgModel jsonToArray:resultDict[@"data"]]];
-        [weak_self.tableView reloadData];
         if ([resultDict[@"hasNext"] integerValue] == 0) {
             [weak_self.tableView.mj_footer endRefreshingWithNoMoreData];
         }
-//        if (weak_self.personMsgDataSource.count == 0) {
-//            [weak_self.tableView addSubview:weak_self.noDataView];
-//        }else{
-//            [weak_self.noDataView removeFromSuperview];
-//        }
+        if (weak_self.personMsgDataSource.count == 0) {
+            [weak_self.tableView addSubview:weak_self.noDataView];
+            [weak_self.tableView addSubview:weak_self.sendNewMsgBackView];
+            weak_self.sendNewMsgBackView.top = weak_self.tableView.height /2 + 20;
+        }else{
+            [weak_self.sendNewMsgBackView removeFromSuperview];
+            [weak_self.noDataView removeFromSuperview];
+        }
+        [weak_self.tableView reloadData];
         _person_page = [resultDict[@"currentPage"] integerValue];
     } failure:^(NSError *error) {
         [weak_self.tableView.mj_header endRefreshing];
@@ -243,6 +246,9 @@
     if (_isSelectSystem) {
         return 0.01;
     }else{
+        if (self.personMsgDataSource.count == 0) {
+            return 0.01;
+        }
         return 100;
     }
 }
@@ -251,7 +257,12 @@
     if (_isSelectSystem) {
         return nil;
     }else{
-        return self.sendNewMsgBackView;
+        if (self.personMsgDataSource.count == 0) {
+            return nil;
+        }else{
+            self.sendNewMsgBackView.top = 0;
+            return self.sendNewMsgBackView;
+        }
     }
 }
 
@@ -286,6 +297,8 @@
     _isSelectSystem = YES;
     _selectIndex = -1;
     [self refreshUI:YES];
+    
+    [self.sendNewMsgBackView removeFromSuperview];
 
     if (self.dataSource.count) {
         [self.tableView reloadData];

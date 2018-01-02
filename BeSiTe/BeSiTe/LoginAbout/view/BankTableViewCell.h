@@ -16,5 +16,5 @@
 -(void)setCellWithModel:(BankModel *)model;
 
 -(void)setMyBankCellWithModel:(MyBankModel *)model;
-
+-(void)setIsCanClick:(BOOL)isCanClick;
 @end

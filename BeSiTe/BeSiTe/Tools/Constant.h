@@ -32,6 +32,7 @@
 #import <MJExtension/NSObject+MJKeyValue.h>
 #import "MBProgressHUD+ATADD.h"
 #import "RequestCommonData.h"
+#import "UIBarButtonItem+NoBadge.h"
 
 /**成功登录通知名*/
 #define BSTLoginSuccessNotification @"BSTLoginSuccessNotification"

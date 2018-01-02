@@ -38,10 +38,12 @@
     if (_savingType == QuickSavingType_Bank) {
         self.title =  @"秒存 网银转账";
         self.zfbHelpBtn.hidden = YES;
+        self.giveMoneyTF.placeholder = @"请填写金额";
     }else{
         self.title = @"秒存 支付宝";
         self.giveNumberBackView.hidden = YES;
         self.subMitBtnTopConstraint.constant -= 50;
+        
     }
     [self requestReceivBankInfo];
 }

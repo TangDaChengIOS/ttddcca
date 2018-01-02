@@ -12,6 +12,11 @@
 @interface BankSelectViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView * tableView;
 @property (nonatomic,strong) NSMutableArray * dataSource;
+@property (nonatomic,strong) NSMutableArray * myBankDataSource;
+
+@property (nonatomic,assign) NSInteger totalFinishRequest;
+@property (nonatomic,assign) NSInteger currentFinishRequest;
+@property (nonatomic,assign) BOOL isHaveOtherData;
 
 @end
 
@@ -20,11 +25,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubViews];
-    if (self.myBankDataSource.count == 0) {
-        self.isHaveOtherData = NO;
-    }
     [self setIsNoDate:YES];
-    [self requestData];
+    
+    if (self.isNeedMyBankData) {
+        self.totalFinishRequest = 2;
+        [self requestData];
+        [self requestMyBankData];
+    }else{
+        self.totalFinishRequest = 1;
+        [self requestData];
+    }
+    self.currentFinishRequest = 0;
+
 }
 
 
@@ -32,28 +44,52 @@
     kWeakSelf
     [MBProgressHUD showMessage:@"" toView:self.view];
     [RequestManager getManagerDataWithPath:@"banks" params:nil success:^(id JSON ,BOOL isSuccess) {
-        [MBProgressHUD hideHUDForView:weak_self.view];
         if (!isSuccess) {
             TTAlert(JSON);
+            weak_self.currentFinishRequest++;
             return ;
         }
-        [weak_self setIsNoDate:NO];
         weak_self.dataSource = [BankModel jsonToArray:JSON];
-        [weak_self.tableView reloadData];
+        weak_self.currentFinishRequest++;
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:weak_self.view];
-        if (error) {
-            TTAlert(kNetError);
-        }
+        weak_self.currentFinishRequest++;
     }];
 }
-
+-(void)requestMyBankData{
+    kWeakSelf
+    [RequestManager getWithPath:@"getUserBankInfo" params:nil success:^(id JSON ,BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            weak_self.currentFinishRequest++;
+            return ;
+        }
+        weak_self.myBankDataSource = [MyBankModel jsonToArray:JSON];
+        weak_self.currentFinishRequest++;
+    } failure:^(NSError *error) {
+        weak_self.currentFinishRequest++;
+    }];
+}
+-(void)setCurrentFinishRequest:(NSInteger)currentFinishRequest
+{
+    _currentFinishRequest = currentFinishRequest;
+    if (_currentFinishRequest == _totalFinishRequest) {
+        [MBProgressHUD hideHUDForView:self.view];
+        if (self.myBankDataSource.count > 0) {
+            self.isHaveOtherData = YES;
+        }
+        [self.tableView reloadData];
+        [self setIsNoDate:NO];
+    }
+}
 
 #pragma mark -- tableView delegate/dataSource
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_isHaveOtherData && indexPath.section == 0) {
         MyBankModel * model = self.myBankDataSource[indexPath.row];
+        if ([model.tagId integerValue] != self.currentUseBankTag && self.currentUseBankTag > -1) {
+            return;
+        }
         if (self.selectMyBankBlock) {
             self.selectMyBankBlock(model);
         }
@@ -82,7 +118,11 @@
 {
     BankTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kBankTableViewCellReuseID forIndexPath:indexPath];
     if (_isHaveOtherData && indexPath.section == 0) {
-        [cell setMyBankCellWithModel:self.myBankDataSource[indexPath.row]];
+        MyBankModel * model = self.myBankDataSource[indexPath.row];
+        [cell setMyBankCellWithModel:model];
+        if ([model.tagId integerValue] != self.currentUseBankTag && self.currentUseBankTag > -1) {
+            [cell setIsCanClick:NO];
+        }
     }else{
         [cell setCellWithModel:self.dataSource[indexPath.row]];
     }
@@ -133,7 +173,7 @@
     
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerNib:[UINib nibWithNibName:@"BankTableViewCell" bundle:nil] forCellReuseIdentifier:kBankTableViewCellReuseID];
     [self.view addSubview:_tableView];
     [_tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"bankViewSecitonHeaderID"];
@@ -145,6 +185,14 @@
         _dataSource = [NSMutableArray array];
     }
     return _dataSource;
+}
+
+-(NSMutableArray *)myBankDataSource
+{
+    if (!_myBankDataSource) {
+        _myBankDataSource = [NSMutableArray array];
+    }
+    return _myBankDataSource;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

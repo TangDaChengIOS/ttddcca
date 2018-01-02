@@ -45,15 +45,22 @@
     self.isHaveShowTips = [[NSUserDefaults standardUserDefaults] boolForKey:kFirstEnterGameListPage];
     
     [self.headerView setSelectedItem:self.selectIndex];
-    [self.headerView.scrollTextView  startScrollWithAttributedString:[BSTSingle defaultSingle].notices];
     self.isShowSearchResult = NO;
-    
+    [self readNoticesData];
     kWeakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weak_self requestData];
     }];
     [self dealData];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(readNoticesData) name:kGetNoticesDataSuccessNotification object:nil];
+
 }
+
+#pragma mark -- 读取通知，滚屏公告
+-(void)readNoticesData{
+    [self.headerView.scrollTextView  startScrollWithAttributedString:[BSTSingle defaultSingle].notices];
+}
+
 #pragma mark -- 判断是否有缓存数据
 -(void)dealData
 {
@@ -78,6 +85,10 @@
 #pragma mark -- 从网络加载数据
 -(void)requestData
 {
+    [self.titleDataSource removeAllObjects];
+    [self.dataSource removeAllObjects];
+    [self.collectionView reloadData];
+    
     NSMutableDictionary * mDict = [NSMutableDictionary dictionary];
     [mDict setValue:@"IOS" forKey:@"appOs"];
     if (self.searchKey) {
@@ -319,7 +330,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:kGetNoticesDataSuccessNotification object:nil];
+}
 
 
 @end
