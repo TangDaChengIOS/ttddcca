@@ -35,7 +35,6 @@
     [self.view addSubview:_messageView];
     
     [self requestData];
-    [self.messageView.textView becomeFirstResponder];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -65,6 +64,9 @@
         [model mj_setKeyValues:JSON];
         weak_self.replyModel = model;
         [weak_self dealHistoryMsg];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weak_self.messageView.textView becomeFirstResponder];
+        });
 
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];

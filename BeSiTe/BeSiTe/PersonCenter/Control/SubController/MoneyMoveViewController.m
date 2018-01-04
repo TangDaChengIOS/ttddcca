@@ -95,6 +95,9 @@
             BalanceModel * model = [[BalanceModel alloc]init];
             [model mj_setKeyValues:dict];
             [[BSTSingle defaultSingle]updateGameCompany:model.gamePlatformCode balance:model.balance];
+            if ([model.balance componentsSeparatedByString:@"失败"].count > 1) {
+                TTAlert(@"刷新数据失败，请稍后再试！");
+            }
         }
         [weak_self.tableView reloadData];
         

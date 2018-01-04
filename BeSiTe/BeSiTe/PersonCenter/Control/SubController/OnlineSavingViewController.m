@@ -174,10 +174,11 @@
         [_boomView addSubview:_agreeBtn];
         
         UIButton * agreementBtn = [[UIButton alloc]initWithFrame:CGRectMake(50 , 9, MAXWIDTH - 50 - 15, 40)];
-        [agreementBtn setAttributedTitle:[self getAttributeString] forState:UIControlStateNormal];
-        if (MAXWIDTH > 320) {
-            [agreementBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
-        }
+        
+        UILabel * btnTitleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, MAXWIDTH - 50 - 15, 40)];
+        btnTitleLab.attributedText = [self getAttributeString];
+        [agreementBtn addSubview:btnTitleLab];
+        
         [agreementBtn addTarget:self action:@selector(readAgreementBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [_boomView addSubview:agreementBtn];
         

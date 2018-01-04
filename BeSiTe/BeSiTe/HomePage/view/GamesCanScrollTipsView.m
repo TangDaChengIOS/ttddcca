@@ -73,11 +73,10 @@
     }
 }
 
-+(void)showWithFinshBlock:(void (^)())completeBlock{
-    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
++(void)showOnView:(UIView *)superView withFinshBlock:(void(^)()) completeBlock{
     GamesCanScrollTipsView * view = [[GamesCanScrollTipsView alloc]init];
     view.completeBlock = completeBlock;
-    [window addSubview:view];
+    [superView addSubview:view];
 }
 
 @end

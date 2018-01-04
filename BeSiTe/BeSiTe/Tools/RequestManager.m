@@ -48,6 +48,12 @@
                 }
             }
             else{
+                if ([task.originalRequest.URL.path hasSuffix:@"login"])
+                {
+                    success(responseObject[@"retMsg"],NO);
+                    return;
+                }
+                
                 if ([self isNeedPresentLoginPageForReturnCode:[responseObject[@"retCode"] integerValue]]) {
                     return;
                 }

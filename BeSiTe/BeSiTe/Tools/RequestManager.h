@@ -34,4 +34,7 @@ typedef void (^RequestFailureBlock)(NSError *error);
 
 /**管理平台GET*/
 + (void)getManagerDataWithPath:(NSString *)path params:(NSDictionary *)params  success:(RequestSuccessBlock)success failure:(RequestFailureBlock)failure;
+
+/**判断是否登录失效*/
++(BOOL)isNeedPresentLoginPageForReturnCode:(NSInteger)returnCode;
 @end

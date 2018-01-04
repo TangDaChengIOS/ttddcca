@@ -54,8 +54,10 @@
             _notesLab.text = model.notes;
             if ([model.status isEqualToString:@"4"]) {
                 _statusImageView.image =  KIMAGE(@"profile_detail_state_success_icon");
+            }else if ([model.status isEqualToString:@"3"]){
+                _statusImageView.image = KIMAGE(@"profile_detail_state_failure_icon");
             }
-
+            
         }
             break;
             
@@ -72,6 +74,8 @@
             _notesLab.text = model.notes;
             if ([model.status isEqualToString:@"1"]) {
                 _statusImageView.image =  KIMAGE(@"profile_detail_state_success_icon");
+            }else if ([model.status isEqualToString:@"0"]){
+                _statusImageView.image = KIMAGE(@"profile_detail_state_failure_icon");
             }
         }
             break;
@@ -88,6 +92,8 @@
             _notesLab.text = model.notes;
             if ([model.status isEqualToString:@"1"]) {
                 _statusImageView.image =  KIMAGE(@"profile_detail_state_success_icon");
+            }else if ([model.status isEqualToString:@"2"]){
+                _statusImageView.image = KIMAGE(@"profile_detail_state_failure_icon");
             }
         }
             break;
@@ -103,6 +109,8 @@
             _notesLab.text = model.notes;
             if ([model.status isEqualToString:@"1"]) {
                 _statusImageView.image =  KIMAGE(@"profile_detail_state_success_icon");
+            }else if ([model.status isEqualToString:@"2"]){
+                _statusImageView.image = KIMAGE(@"profile_detail_state_failure_icon");
             }
         }
             break;
@@ -120,6 +128,8 @@
             
             if ([model.status isEqualToString:@"1"]) {
                 _statusImageView.image =  KIMAGE(@"profile_detail_state_success_icon");
+            }else{
+                _statusImageView.image = KIMAGE(@"profile_detail_state_failure_icon");
             }
 
         }
@@ -137,6 +147,8 @@
             _notesLab.text = @"";
             if ([model.status isEqualToString:@"1"]) {
                 _statusImageView.image =  KIMAGE(@"profile_detail_state_success_icon");
+            }else{
+                _statusImageView.image = KIMAGE(@"profile_detail_state_failure_icon");
             }
         }
             break;
@@ -153,7 +165,10 @@
             _notesLab.text = @"";
             if ([model.status isEqualToString:@"1"]) {
                 _statusImageView.image =  KIMAGE(@"profile_detail_state_success_icon");
-            }        }
+            }else{
+                _statusImageView.image = KIMAGE(@"profile_detail_state_failure_icon");
+            }
+        }
             break;
         default:
             break;

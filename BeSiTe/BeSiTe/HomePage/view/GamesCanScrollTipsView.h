@@ -12,6 +12,6 @@
 
 @property (nonatomic,copy) void (^completeBlock)();
 
-+(void)showWithFinshBlock:(void(^)()) completeBlock;
++(void)showOnView:(UIView *)superView withFinshBlock:(void(^)()) completeBlock;
 
 @end

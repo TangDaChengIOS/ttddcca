@@ -42,10 +42,18 @@
     [self configSubViews];
     
 //    我已阅读并同意《贝斯特相关条款和隐私权政策》
-    NSMutableAttributedString * mAttStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并同意《贝斯特相关条款和隐私权政策》" attributes:@{NSForegroundColorAttributeName:UIColorFromRGBValue(0xffffff)}];
+    NSMutableAttributedString * mAttStr = [[NSMutableAttributedString alloc]initWithString:@"我已阅读并同意《贝斯特相关条款和隐私权政策》" attributes:@{NSForegroundColorAttributeName:UIColorFromRGBValue(0xffffff),NSFontAttributeName:kFont(11)}];
     [mAttStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(8, 13)
      ];
-    [self.agreeMentBtn setAttributedTitle:mAttStr forState:UIControlStateNormal];
+    UILabel * btnTitleLab = [[UILabel alloc]init];
+    btnTitleLab.attributedText = mAttStr;
+    [self.agreeMentBtn addSubview:btnTitleLab];
+    kWeakSelf
+    [btnTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(weak_self.agreeMentBtn);
+        make.size.mas_equalTo(weak_self.agreeMentBtn);
+    }];
+
 }
 
 #pragma mark -- subViews

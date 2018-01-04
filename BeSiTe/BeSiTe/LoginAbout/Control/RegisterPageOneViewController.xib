@@ -402,7 +402,7 @@
                                         <constraint firstAttribute="height" constant="30" id="ESp-5l-BnR"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                    <state key="normal" title="我已阅读并同意《贝斯特相关条款和隐私权政策》">
+                                    <state key="normal">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>

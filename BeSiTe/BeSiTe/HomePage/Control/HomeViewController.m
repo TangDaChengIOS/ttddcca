@@ -89,6 +89,9 @@
 #pragma mark -- collectionView delegates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if (self.dataSource.count == 0) {
+        return 0;
+    }
     return self.dataSource.count + 3;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

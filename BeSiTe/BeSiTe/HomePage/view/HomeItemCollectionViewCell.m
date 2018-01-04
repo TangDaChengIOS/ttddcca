@@ -9,10 +9,13 @@
 #import "HomeItemCollectionViewCell.h"
 
 @interface HomeItemCollectionViewCell ()
-@property (nonatomic,strong) UIImageView * mainImage;
-@property (nonatomic,strong) UIImageView * typeImage;
-@property (nonatomic,strong) UILabel * titleLab;
-@property (nonatomic,strong) UILabel * nodataLab;
+@property (nonatomic,strong) UIImageView * mainImage;//主图
+@property (nonatomic,strong) UIImageView * typeImage;//最热、最新
+@property (nonatomic,strong) UILabel * titleLab;//平台标题
+@property (nonatomic,strong) UILabel * nodataLab;//无数据lab
+
+@property (nonatomic,strong) UIImageView * loadImage;//用于预加载菜单图
+@property (nonatomic,strong) UIImageView * loadSelImage;//用于预加载菜单图
 
 @end
 
@@ -45,12 +48,18 @@
         _nodataLab.text = @"敬请期待";
         _nodataLab.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:_nodataLab];
+        
+        _loadImage = [[UIImageView alloc]init];
+        _loadSelImage = [[UIImageView alloc]init];
     }
     return self;
 }
 -(void)setCellWithModel:(GamesCompanyModel *)model
 {
     [_mainImage setImageWithURL:[NSURL URLWithString:model.mainIcon] placeholder:KIMAGE(@"commmon_home_history")];
+    [_loadSelImage setImageWithURL:[NSURL URLWithString:model.classIcon] placeholder:nil];
+    [_loadImage setImageWithURL:[NSURL URLWithString:model.classIconSel] placeholder:nil];
+
     if (model.isHot) {
         _typeImage.image = KIMAGE(@"home_gameType_hot_img");
     }

@@ -13,6 +13,8 @@
 #import "GameSearchViewController.h"
 #include "GamesCanScrollTipsView.h"
 #import "GameListPageCollectionReusableView.h"
+#import <AFNetworking/AFNetworking.h>
+
 
 @interface GameListPageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>{
     CGFloat _itemWidth;
@@ -30,6 +32,8 @@
 @property (nonatomic,assign) BOOL isHaveShowTips;//显示可滑动提示
 
 @property (nonatomic,copy) NSString * searchKey;
+
+
 @end
 
 @implementation GameListPageViewController
@@ -78,8 +82,15 @@
         }
         [self.collectionView reloadData];
         [self.collectionView scrollToTop];
+        if ([self.collectionView.mj_header isRefreshing] ) {
+            [self.collectionView.mj_header endRefreshing];
+        }
     }else{
-        [self.collectionView.mj_header beginRefreshing];
+        if ([self.collectionView.mj_header isRefreshing] ) {
+            [self requestData];
+        }else{
+            [self.collectionView.mj_header beginRefreshing];
+        }
     }
 }
 #pragma mark -- 从网络加载数据
@@ -97,38 +108,94 @@
     else{
         [mDict setValue:_selectCompanyCode forKey:@"companyCode"];
     }
+
+    NSString *url = [NSString stringWithFormat:@"%@%@",ManagerBaseURL,@"games"];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [[NSSet alloc] initWithObjects:@"text/plain",@"text/html", @"application/json", nil];
+    manager.responseSerializer.acceptableContentTypes = set;
+    manager.requestSerializer.timeoutInterval = 10;
+    if ([BSTSingle defaultSingle].user) {
+        [manager.requestSerializer setValue:[BSTSingle defaultSingle].user.token forHTTPHeaderField:@"ACCESS_TOKEN"];
+    }
+    
     kWeakSelf
-    [RequestManager getManagerDataWithPath:@"games" params:mDict success:^(id JSON ,BOOL isSuccess) {
-        [weak_self.collectionView.mj_header endRefreshing];
-        if (!isSuccess) {
-            TTAlert(JSON);
-            return ;
-        }
-        //存储数据到本地
-        if (!weak_self.searchKey) {
-            [[NSUserDefaults standardUserDefaults]setValue:JSON forKey:weak_self.selectCompanyCode];
-            [[NSUserDefaults standardUserDefaults]synchronize];
-        }
-
-        NSInteger totalNum = 0;
-        for (NSDictionary * dict in JSON) {
-            NSString * key = dict[@"plateform"];
-            [weak_self.titleDataSource addObject:key];
-            NSMutableArray * array = [GamesModel jsonToArray:dict[@"list"]];
-            totalNum += array.count;
-            [weak_self.dataSource addObject:array];
-        }
-
-        [weak_self.collectionView reloadData];
-        [weak_self.collectionView scrollToTop];
-        [weak_self setSearchResultTitle:totalNum];
-        [weak_self ensureCanScroll];
-    } failure:^(NSError *error) {
-        [weak_self.collectionView.mj_header endRefreshing];
-        if (error) {
-            TTAlert(kNetError);
-        }
-    }];
+    [manager GET:url parameters:mDict progress:^(NSProgress * _Nonnull downloadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSInteger retCode = [responseObject[@"retCode"] integerValue];
+            if (retCode == 0)
+            {
+                NSArray * JSON = [responseObject objectForKey:@"data"];
+                
+                NSString * fullUrl = task.originalRequest.URL.absoluteString;
+                BOOL isSearchResult = YES;
+                if ([fullUrl componentsSeparatedByString:@"companyCode"].count > 1) {
+                    isSearchResult = NO;
+                }
+                
+                if (weak_self.searchKey)
+                {
+                    if (!isSearchResult) {
+                        return ;//在需要显示搜索结果的情况下，当前获取的是单个平台的游戏
+                    }
+//                    NSArray * arr = [fullUrl componentsSeparatedByString:@"key="];
+//                    //防止弱网情况下，频繁切换搜索，导致显示的结果不正确
+//                    if (arr.count <= 1 || ![[arr lastObject]isEqualToString:weak_self.searchKey] )
+//                    {
+//                        return;
+//                    }
+                }else
+                {
+                    if (isSearchResult) {
+                        return;//在需要显示单个平台的游戏的情况下，当前获取的是搜索结果
+                    }
+                    
+                    if (JSON.count > 0) {
+                        NSDictionary * dict_f = JSON[0];
+                        NSString * key_f = dict_f[@"plateform"];
+                        
+                        [[NSUserDefaults standardUserDefaults]setValue:JSON forKey:key_f];//缓存单个平台的游戏数据
+                        [[NSUserDefaults standardUserDefaults]synchronize];
+                        
+                        if (![key_f isEqualToString:weak_self.selectCompanyCode]) {
+                            return;//防止获取平台结果时，已经切换其他平台
+                        }
+                    }
+                }
+                
+                NSInteger totalNum = 0;
+                for (NSDictionary * dict in JSON) {
+                    NSString * key = dict[@"plateform"];
+                    [weak_self.titleDataSource addObject:key];
+                    NSMutableArray * array = [GamesModel jsonToArray:dict[@"list"]];
+                    totalNum += array.count;
+                    [weak_self.dataSource addObject:array];
+                }
+                
+                [weak_self.collectionView reloadData];
+                [weak_self.collectionView scrollToTop];
+                [weak_self setSearchResultTitle:totalNum];
+                [weak_self ensureCanScroll];
+                [weak_self.collectionView.mj_header endRefreshing];
+            }
+            else{
+                [weak_self.collectionView.mj_header endRefreshing];
+                if ([RequestManager isNeedPresentLoginPageForReturnCode:retCode]){
+                    return;
+                }
+                TTAlert(responseObject[@"retMsg"]);
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [weak_self.collectionView.mj_header endRefreshing];
+            if (error.code == -1001) {
+                TTAlert(kOutTimeError);
+            }else{
+                TTAlert(kNetError);
+            }
+        }];
 }
 
 //显示可以滚动的tips
@@ -137,19 +204,18 @@
     if (self.isHaveShowTips || self.dataSource.count == 0) {
         return;
     }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
-            kWeakSelf
-            [GamesCanScrollTipsView showWithFinshBlock:^{
-                [UIView animateWithDuration:1 animations:^{
-                    [weak_self.collectionView setContentOffset:CGPointMake(0, 200) animated:YES];
-                }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        kWeakSelf
+        [GamesCanScrollTipsView showOnView:self.view withFinshBlock:^{
+            [UIView animateWithDuration:1 animations:^{
+                [weak_self.collectionView setContentOffset:CGPointMake(0, 200) animated:YES];
             }];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstEnterGameListPage];
-            [[NSUserDefaults standardUserDefaults]synchronize];
-            self.isHaveShowTips = YES;
+        }];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstEnterGameListPage];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        self.isHaveShowTips = YES;
     });
-
 }
 
 
@@ -244,7 +310,12 @@
                 weak_self.isShowSearchResult = YES;
                 weak_self.searchKey = searchKey;
                 [weak_self refreshUI];
-                [weak_self.collectionView.mj_header beginRefreshing];
+
+                if ([weak_self.collectionView.mj_header isRefreshing] ) {
+                    [weak_self requestData];
+                }else{
+                    [weak_self.collectionView.mj_header beginRefreshing];
+                }
             };
             [weak_self pushVC:contro];
         };
@@ -259,6 +330,8 @@
             [self.collectionView setY_offset:20];
             [self.view addSubview:self.collectionHeaderView];
         }
+//        NSMutableAttributedString * mAStr = [[NSMutableAttributedString alloc]initWithString:@"搜索中...." attributes:@{NSForegroundColorAttributeName:UIColorFromINTValue(4, 159, 189),NSFontAttributeName:kFont(12)}];
+        _collectionHeaderView.attributedText = nil;
     }else{
         if (_collectionHeaderView){
             [_collectionHeaderView removeFromSuperview];
@@ -285,7 +358,6 @@
     if (!_collectionHeaderView) {
         _collectionHeaderView = [[UILabel alloc]initWithFrame:CGRectMake(0, self.collectionView.top - 20, MAXWIDTH, 20)];
         _collectionHeaderView.backgroundColor = kWhiteColor;
-        _collectionHeaderView.text = @"贝斯特为您找到相关结果4个";
         _collectionHeaderView.textColor = kBlackColor;
         _collectionHeaderView.textAlignment = NSTextAlignmentCenter;
         _collectionHeaderView.font = kFont(12);
