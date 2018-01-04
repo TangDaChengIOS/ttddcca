@@ -135,6 +135,7 @@
         TTAlert(@"请输入验证码");
         return;
     }
+    [self endEditing:YES];
     if (self.editType == EditPhoneNumberViewTypeEdit) {
         [self changePhone];
     }else{
@@ -198,10 +199,13 @@
         TTAlert(@"请输入正确的手机号码");
         return;
     }
+    [self endEditing:YES];
     kWeakSelf
     NSDictionary * dict = @{@"mobile":self.phoneTF.text,
                             @"type":@"1"};
+    [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"sendSmsCode" params:dict success:^(id JSON ,BOOL isSuccess) {
+        [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
@@ -211,7 +215,7 @@
             
         }];
     } failure:^(NSError *error) {
-        
+        [MBProgressHUD hideHUDForView:nil];
     }];
 }
 

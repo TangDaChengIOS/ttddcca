@@ -14,7 +14,9 @@
 @property (nonatomic,strong) LMJScrollTextView * scrollTextView;
 
 @property (nonatomic,assign) NSInteger selectedItem;
-@property (nonatomic,copy) void (^selectGameCompanyBlock)(NSString * code);
+//@property (nonatomic,copy) void (^selectGameCompanyBlock)(NSString * code);
+@property (nonatomic,copy) void (^selectGameCompanyBlock)(NSInteger index);
+
 @property (nonatomic,copy) void (^gotoSearchBlock)();
 
 @end

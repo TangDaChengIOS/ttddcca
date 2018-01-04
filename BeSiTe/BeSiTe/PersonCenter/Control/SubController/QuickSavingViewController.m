@@ -148,6 +148,7 @@
     }else{
         pboard.string = @"";
     }
+    TTAlert(@"复制成功！");
 }
 - (IBAction)copyUserNameClick:(id)sender {
     UIPasteboard *pboard = [UIPasteboard generalPasteboard];
@@ -156,6 +157,7 @@
     }else{
         pboard.string = @"";
     }
+    TTAlert(@"复制成功！");
 }
 - (IBAction)helpClick:(id)sender {
     

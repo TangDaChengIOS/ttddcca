@@ -24,6 +24,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     [IQKeyboardManager sharedManager].enable = YES;
     NSUserDefaults * ud = [NSUserDefaults standardUserDefaults];
     //第一次运行APP，先加载启动页
@@ -36,7 +38,7 @@
         runVC.finishBlock = ^{
             [weak_self setDefaultRootViewController:NO];
         };
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        
         self.window.backgroundColor = [UIColor whiteColor];
         self.window.rootViewController = runVC;
         [self.window makeKeyAndVisible];

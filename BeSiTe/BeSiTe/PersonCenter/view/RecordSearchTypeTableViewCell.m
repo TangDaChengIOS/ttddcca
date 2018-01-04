@@ -19,7 +19,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         _titleLab = [[UILabel alloc]initWithFrame:CGRectMake(MAXWIDTH / 2 - 100, 7.5, 200, 20)];
-        _titleLab.center = self.contentView.center;
+//        _titleLab.center = self.contentView.center;
         _titleLab.textAlignment = NSTextAlignmentCenter;
         _titleLab.font  =kFont(14);
 

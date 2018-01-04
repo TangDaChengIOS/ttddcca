@@ -24,14 +24,14 @@
 }
 -(void)setCellWithModel:(BankModel *)model{
     _model = model;
-    [_bankImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
+    [_bankImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:KIMAGE(@"common_bank_")];
     _bankNameLab.text = model.bankName;
     _bankCardLab.hidden = YES;
     self.bankNameLab.textColor = UIColorFromRGBValue(0x535353);
 }
 
 -(void)setMyBankCellWithModel:(MyBankModel *)model{
-    [_bankImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:nil];
+    [_bankImageView setImageWithURL:[NSURL URLWithString:model.icon] placeholder:KIMAGE(@"common_bank_")];
     _bankNameLab.text = model.bankName;
     _bankCardLab.hidden = NO;
     if (model.cardNo.length > 4) {

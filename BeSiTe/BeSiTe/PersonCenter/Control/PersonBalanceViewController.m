@@ -33,14 +33,13 @@
 
         [weak_self getBalanceData];
     }];
-    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
-    [self.tableView reloadData];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 #pragma mark -- 获取所有的平台余额
@@ -97,12 +96,13 @@
 -(void)resetConstraint
 {
     CGFloat needHeight = 37 + 28 * [BSTSingle defaultSingle].gameCompanysBalanceArr.count;
-    if (self.tableView.mj_y + needHeight + 10 < self.turnInBtn.mj_y) {
+    CGFloat maxH = MAXHEIGHT - 64 - 49 - 66 - 100;
+    if (self.tableView.mj_y + needHeight + 10 < maxH ) {
         self.tableViewHeightConstraint.constant = needHeight;
 //        self.tableView.scrollEnabled = NO;
     }
     else{
-        self.tableViewHeightConstraint.constant = self.turnInBtn.mj_y - 10 -self.tableView.mj_y;
+        self.tableViewHeightConstraint.constant = maxH - 10 -self.tableView.mj_y;
 //        self.tableView.scrollEnabled = YES;
     }
 }

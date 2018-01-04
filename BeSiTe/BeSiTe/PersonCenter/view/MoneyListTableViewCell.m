@@ -76,7 +76,7 @@
 -(void)setCell:(NSString *)name money:(NSString *)money whiteBack:(BOOL)isWhite{
     self.contentView.backgroundColor = isWhite ? kWhiteColor :UIColorFromINTValue(248, 246, 247);
 
-    _leftLab.text = name;
+    _leftLab.text = [NSString stringWithFormat:@"%@游戏",name];
     NSRange range = [money rangeOfString:@"失败"];
     if (range.length) {
         _rightLab.hidden = YES;
@@ -91,7 +91,7 @@
 
 -(void)retryBtnClick{
     if (self.retryBlock) {
-        self.retryBlock(_leftLab.text);
+        self.retryBlock([_leftLab.text substringToIndex:_leftLab.text.length -2]);
     }
 }
 

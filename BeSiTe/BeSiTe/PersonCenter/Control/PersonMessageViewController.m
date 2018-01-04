@@ -49,9 +49,7 @@
     _itemWidth = (MAXWIDTH - 60)/3;
     _itemHeight = _itemWidth * 78 / 104 + 20;
     
-    CGFloat maxH = MAXHEIGHT - 64 - 49 - 66;
-    self.scrollContentViewHeightConstraint.constant = maxH;
-    self.scrollView.contentSize = CGSizeMake(MAXWIDTH, maxH);
+    [self refreshUI];
     self.scrollView.directionalLockEnabled = YES;
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
@@ -74,6 +72,25 @@
     }];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationNeedVerifyPhoneNum) name:@"ApplicationNeedVerifyPhoneNum" object:nil];
 }
+
+
+-(void)refreshUI{
+    CGFloat h = self.collectionView.mj_y;
+    CGFloat height = 35 + _itemHeight * 2;
+
+    if (self.dataSource.count > 6) {
+        NSInteger line = ceil(self.dataSource.count / 3.0);
+        height = line * _itemHeight + (line -1) * 15 + 20;
+    }
+    CGFloat maxH = MAXHEIGHT - 64 - 49 - 66;
+    
+    if (height + h > maxH) {
+        maxH = height + h;
+    }
+    self.scrollContentViewHeightConstraint.constant = maxH;
+    self.scrollView.contentSize = CGSizeMake(MAXWIDTH, maxH);
+}
+
 
 #pragma mark -- applicationNeedVerifyPhoneNum
 -(void)applicationNeedVerifyPhoneNum
@@ -149,9 +166,11 @@
         }
         self.emailLab.text = [self dealEmail:user.email];
         self.emailStateImageView.image = user.emailVerified == 0 ? KIMAGE(@"profile_verification_img_false") : KIMAGE(@"profile_verification_img_true");
-        if (user.email.length <= 0) {
-            [self refreshButton:self.emailEditBtn state:YES];
+        if (user.email.length <= 0 || user.emailVerified == 1) {
+            self.emailEditBtn.hidden = YES;
+//            [self refreshButton:self.emailEditBtn state:YES];
         }else{
+            self.emailEditBtn.hidden = NO;
             [self refreshButton:self.emailEditBtn state:user.emailVerified];
         }
     }
@@ -222,6 +241,7 @@
             [weak_self.collectionView addSubview:weak_self.noDataView];
         }else{
             [weak_self.noDataView removeFromSuperview];
+            [weak_self refreshUI];
         }
     } failure:^(NSError *error) {
         
@@ -275,7 +295,12 @@
 #pragma mark -- Buttons Events
 //修改密码
 - (IBAction)changePWDBtnClick:(id)sender {
-    [EditPassWordView showWithFinshBlock:nil];
+    [EditPassWordView showWithFinshBlock:^{
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSavingUserInfoKey];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        [BSTSingle defaultSingle].user = nil;
+        [[NSNotificationCenter defaultCenter]postNotificationName:BSTLoginFailueNotification object:nil];
+    }];
 }
 //推荐有礼
 - (IBAction)recommendBtnClick:(id)sender {

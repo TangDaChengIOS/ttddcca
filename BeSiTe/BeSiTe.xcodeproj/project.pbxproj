@@ -18,6 +18,7 @@
 		1114550B1FD0052B00996BA1 /* SendNewMsgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 111455091FD0052B00996BA1 /* SendNewMsgViewController.xib */; };
 		1114550E1FD00B2700996BA1 /* EmailTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1114550D1FD00B2700996BA1 /* EmailTypeViewController.m */; };
 		111BA5F21FDBBB6700EAE66E /* BSTNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BA5F11FDBBB6700EAE66E /* BSTNoDataView.m */; };
+		111BC5F61FFE0CD8009F1EB1 /* CompanyGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111BC5F51FFE0CD8009F1EB1 /* CompanyGameViewController.m */; };
 		112435311F9BAC9B00C5EAAE /* GamesMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112435301F9BAC9B00C5EAAE /* GamesMenuView.m */; };
 		112435331F9BACA900C5EAAE /* GamesMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 112435321F9BACA900C5EAAE /* GamesMenuView.xib */; };
 		1124D9671FC7150A007149BE /* BalanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1124D9661FC7150A007149BE /* BalanceModel.m */; };
@@ -203,6 +204,8 @@
 		1114550D1FD00B2700996BA1 /* EmailTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailTypeViewController.m; sourceTree = "<group>"; };
 		111BA5F01FDBBB6700EAE66E /* BSTNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTNoDataView.h; sourceTree = "<group>"; };
 		111BA5F11FDBBB6700EAE66E /* BSTNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTNoDataView.m; sourceTree = "<group>"; };
+		111BC5F41FFE0CD8009F1EB1 /* CompanyGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyGameViewController.h; sourceTree = "<group>"; };
+		111BC5F51FFE0CD8009F1EB1 /* CompanyGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyGameViewController.m; sourceTree = "<group>"; };
 		1124352F1F9BAC9B00C5EAAE /* GamesMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamesMenuView.h; sourceTree = "<group>"; };
 		112435301F9BAC9B00C5EAAE /* GamesMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamesMenuView.m; sourceTree = "<group>"; };
 		112435321F9BACA900C5EAAE /* GamesMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GamesMenuView.xib; sourceTree = "<group>"; };
@@ -702,6 +705,8 @@
 				118C69811FB6AAD4005D095A /* WebDetailViewController.m */,
 				112BEADC1FC5CECC00EDD756 /* GameSearchViewController.h */,
 				112BEADD1FC5CECC00EDD756 /* GameSearchViewController.m */,
+				111BC5F41FFE0CD8009F1EB1 /* CompanyGameViewController.h */,
+				111BC5F51FFE0CD8009F1EB1 /* CompanyGameViewController.m */,
 			);
 			path = Control;
 			sourceTree = "<group>";
@@ -1482,6 +1487,7 @@
 				116463A81F91F634004ECC79 /* XWCircleSpreadAnimator.m in Sources */,
 				116463AF1F91F634004ECC79 /* XWCoolAnimator+XWScanning.m in Sources */,
 				111455061FCF991800996BA1 /* UserMsgModel.m in Sources */,
+				111BC5F61FFE0CD8009F1EB1 /* CompanyGameViewController.m in Sources */,
 				1180453E1FD049F800EA8E76 /* ReplyMsgViewController.m in Sources */,
 				1176A8FA1FEA6A11007269DC /* RequestCommonData.m in Sources */,
 				11D5EBA01FCC18130070BE9C /* OnlineSavingViewController.m in Sources */,

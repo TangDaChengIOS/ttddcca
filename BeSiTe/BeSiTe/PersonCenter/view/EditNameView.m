@@ -88,6 +88,7 @@
 }
 
 -(void)saveBtnClick{
+    [self endEditing:YES];
     if (self.nameTF.text.length <= 0) {
         TTAlert(@"请填写真实姓名");
         return;

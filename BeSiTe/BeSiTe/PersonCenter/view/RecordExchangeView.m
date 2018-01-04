@@ -157,7 +157,8 @@
         TTAlert(@"请输入正确的兑换积分数！");
         return;
     }
-    
+    [self endEditing:YES];
+
     [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"completeUserInfo" params:@{@"userName":self.moneyTF.text} success:^(id JSON ,BOOL isSuccess) {
         [MBProgressHUD hideHUDForView:nil];

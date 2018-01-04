@@ -32,7 +32,7 @@
         _titleLab.font = kFont(13);
         [self addSubview:_titleLab];
         
-        _dateLab = [[UILabel alloc]initWithFrame:CGRectMake(MAXWIDTH /2 - 50 , 17, 100, 16)];
+        _dateLab = [[UILabel alloc]initWithFrame:CGRectMake(MAXWIDTH / 2 - 100, 17, 200, 16)];
         _dateLab.textColor = UIColorFromINTValue(88, 88, 88);
         _dateLab.font = [UIFont boldSystemFontOfSize:13];
         _dateLab.textAlignment = NSTextAlignmentCenter;

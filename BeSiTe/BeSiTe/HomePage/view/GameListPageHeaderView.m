@@ -105,7 +105,9 @@
     GamesCompanyModel * model = [BSTSingle defaultSingle].companysArray[indexPath.item];
     NSLog(@"%@",model.companyCode);
     if (self.selectGameCompanyBlock) {
-        self.selectGameCompanyBlock(model.companyCode);
+//        self.selectGameCompanyBlock(model.companyCode);
+        self.selectGameCompanyBlock(_selectedItem);
+
     }
 }
 

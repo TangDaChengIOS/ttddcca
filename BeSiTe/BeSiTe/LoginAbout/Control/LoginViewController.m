@@ -30,8 +30,8 @@
     [self configSubViews];
     _nameTF.delegate = self;
     _pwdTF.delegate = self;
-    self.nameTF.text = @"BCASDFG";
-    self.pwdTF.text = @"qwerty";
+//    self.nameTF.text = @"BCASDFG";
+//    self.pwdTF.text = @"qwerty";
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

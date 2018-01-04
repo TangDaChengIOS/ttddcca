@@ -25,7 +25,6 @@
     self.tabBarController.tabBar.barTintColor = [UIColor whiteColor];
     self.tabBarController.tabBar.backgroundColor = [UIColor whiteColor];
     [self.tabBarController setViewControllers:[self setTabBarControllerViewControllers:isLogin] animated:YES];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];

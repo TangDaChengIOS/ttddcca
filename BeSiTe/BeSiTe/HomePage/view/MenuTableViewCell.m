@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *leftLab;
 @property (weak, nonatomic) IBOutlet UIImageView *rightImageVIew;
 @property (weak, nonatomic) IBOutlet UIButton *numBtn;
+@property (weak, nonatomic) IBOutlet UILabel *versionLab;
 
 @end
 
@@ -30,6 +31,10 @@
         _numBtn.hidden  = NO;
         [_numBtn setTitle:[NSString stringWithFormat:@"%ld",num] forState:UIControlStateNormal];
     }
+    _versionLab.hidden = YES;
+    if ([title isEqualToString:@"关于我们"]) {
+        _versionLab.hidden = NO;
+    }
 }
 -(void)setCellWithModel:(GamesCompanyModel *)model :(BOOL)isSingleLine{
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -39,6 +44,7 @@
     
     _rightImageVIew.hidden = NO;
     _numBtn.hidden = YES;
+    _versionLab.hidden = YES;
     
     if (model.isHot) {
         _rightImageVIew.image = KIMAGE(@"home_left_hot_icon");

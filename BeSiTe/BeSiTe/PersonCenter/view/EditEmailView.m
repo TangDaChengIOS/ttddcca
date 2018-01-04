@@ -94,6 +94,8 @@
         TTAlert(@"请填写邮箱号码");
         return;
     }
+    [self endEditing:YES];
+
     kWeakSelf
     [MBProgressHUD showMessage:@"" toView:nil];
     [RequestManager postWithPath:@"completeUserInfo" params:@{@"email":self.emailTF.text} success:^(id JSON ,BOOL isSuccess) {

@@ -65,6 +65,8 @@
                 if (failure) {
                     failure(nil);
                 }
+//                NSString * path = task.originalRequest.URL.path;
+//                TTAlert([NSString stringWithFormat:@"网络连接超时，请稍后再试！____%@",path]);
                 TTAlert(kOutTimeError);
             }else{
                 if (failure) {
@@ -101,6 +103,8 @@
                 if (failure) {
                     failure(nil);
                 }
+//                NSString * path = task.originalRequest.URL.path;
+//                TTAlert([NSString stringWithFormat:@"网络连接超时，请稍后再试！____%@",path]);
                 TTAlert(kOutTimeError);
             }else{
                 if (failure) {

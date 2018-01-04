@@ -141,7 +141,8 @@
         TTAlert(@"两次输入的新密码不一致！");
         return;
     }
-    
+    [self endEditing:YES];
+
     NSString * oldPassWord = [RSAEncryptor encryptStringUseLocalFile:oldPwdTF.text];
     NSString * newPassWord = [RSAEncryptor encryptStringUseLocalFile:newPwdTF.text];
     NSDictionary * dict = @{@"oldPwd":oldPassWord,
@@ -165,6 +166,9 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [self removeSelf];
+    if (self.completeBlock) {
+        self.completeBlock();
+    }
 }
 
 
