@@ -38,6 +38,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollContentViewHeightConstraint;
 
 @property (nonatomic,strong) NSMutableArray * dataSource;
+@property (nonatomic,strong) BSTNoDataView * noDataView;
+
 @end
 
 @implementation PersonMessageViewController
@@ -71,7 +73,6 @@
         [weak_self getUserMsg];
     }];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationNeedVerifyPhoneNum) name:@"ApplicationNeedVerifyPhoneNum" object:nil];
-    [self.scrollView.mj_header beginRefreshing];
 }
 
 #pragma mark -- applicationNeedVerifyPhoneNum
@@ -86,6 +87,7 @@
     [super viewWillAppear:animated];
     self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
     [self readDataFromSingleLeton];
+    [self.scrollView.mj_header beginRefreshing];
 }
 
 
@@ -207,15 +209,20 @@
 
 -(void)getFavGameData
 {
+    kWeakSelf
     [RequestManager getManagerDataWithPath:@"favGames" params:nil success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
-        self.dataSource = [GamesModel jsonToArray:JSON];
-        [self.collectionView reloadData];
-
+        weak_self.dataSource = [GamesModel jsonToArray:JSON];
+        [weak_self.collectionView reloadData];
+        if (weak_self.dataSource.count == 0) {
+            [weak_self.collectionView addSubview:weak_self.noDataView];
+        }else{
+            [weak_self.noDataView removeFromSuperview];
+        }
     } failure:^(NSError *error) {
         
     }];
@@ -334,6 +341,16 @@
         _dataSource = [NSMutableArray array];
     }
     return _dataSource;
+}
+
+-(BSTNoDataView *)noDataView
+{
+    if (!_noDataView) {
+        _noDataView = [[BSTNoDataView alloc]initWithFrame:self.collectionView.bounds];
+        _noDataView.isMsg = NO;
+        _noDataView.tipsLab.text = @"暂无收藏的游戏";
+    }
+    return _noDataView;
 }
 
 -(void)dealloc{
