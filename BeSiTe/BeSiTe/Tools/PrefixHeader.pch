@@ -46,5 +46,6 @@
 //6.提示语
 #define kNetError @"网络连接失败，请检查您的网络状态！"
 #define kOutTimeError @"网络连接超时，请稍后再试！"
+#define kDataError @"服务器异常，请联系客服！"
 
 #endif /* PrefixHeader_pch */

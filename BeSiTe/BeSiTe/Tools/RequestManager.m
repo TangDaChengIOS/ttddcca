@@ -27,7 +27,7 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [[NSSet alloc] initWithObjects:@"text/plain",@"text/html", @"application/json", nil];
     manager.responseSerializer.acceptableContentTypes = set;
-    manager.requestSerializer.timeoutInterval = 10;
+    manager.requestSerializer.timeoutInterval = 20;
     if ([BSTSingle defaultSingle].user) {
         [manager.requestSerializer setValue:[BSTSingle defaultSingle].user.token forHTTPHeaderField:@"ACCESS_TOKEN"];
     }
@@ -61,14 +61,22 @@
                 MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            if (error.code == -1001) {
+            if (error.code == -1001)
+            {
                 if (failure) {
                     failure(nil);
                 }
-//                NSString * path = task.originalRequest.URL.path;
-//                TTAlert([NSString stringWithFormat:@"网络连接超时，请稍后再试！____%@",path]);
                 TTAlert(kOutTimeError);
-            }else{
+            }
+            else if (error.code == -1011)
+            {
+                if (failure) {
+                    failure(nil);
+                }
+                TTAlert(kDataError);
+            }
+            else
+            {
                 if (failure) {
                     failure(error);
                 }
@@ -99,14 +107,22 @@
                 MyLog(@"GET Error URL:%@",[task.response valueForKey:@"URL"]);
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            if (error.code == -1001) {
+            if (error.code == -1001)
+            {
                 if (failure) {
                     failure(nil);
                 }
-//                NSString * path = task.originalRequest.URL.path;
-//                TTAlert([NSString stringWithFormat:@"网络连接超时，请稍后再试！____%@",path]);
                 TTAlert(kOutTimeError);
-            }else{
+            }
+            else if (error.code == -1011)
+            {
+                if (failure) {
+                    failure(nil);
+                }
+                TTAlert(kDataError);
+            }
+            else
+            {
                 if (failure) {
                     failure(error);
                 }

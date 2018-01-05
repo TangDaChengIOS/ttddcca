@@ -120,13 +120,15 @@
 
         if (!isSuccess) {
             TTAlert(JSON);
+            [weak_self removeSelf];
             return ;
         }
         weak_self.recordLab.text = JSON[@"postring"];
         weak_self.tipsLab.text = JSON[@"ruleDesc"];
+        weak_self.alpha = 1;
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];
-
+        [weak_self removeSelf];
     }];
 }
 
@@ -134,6 +136,7 @@
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     RecordExchangeView * view = [[RecordExchangeView alloc]init];
     view.completeBlock = completeBlock;
+    view.alpha = 0;
     [window addSubview:view];
 }
 

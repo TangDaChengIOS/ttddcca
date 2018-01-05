@@ -14,11 +14,11 @@
 @interface PersonBalanceViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *totalMoneyLab;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIButton *aplyMoneyBtn;
-@property (weak, nonatomic) IBOutlet UIButton *turnInBtn;
-@property (weak, nonatomic) IBOutlet UIButton *turnOutBtn;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
-
+@property (weak, nonatomic) IBOutlet UIButton *aplyMoneyBtn;//申请救援金
+@property (weak, nonatomic) IBOutlet UIButton *turnInBtn;//转入
+@property (weak, nonatomic) IBOutlet UIButton *turnOutBtn;//转出
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;//tableview高度约束
+@property (nonatomic,assign) NSInteger finishRequest;//完成请求数
 @end
 
 @implementation PersonBalanceViewController
@@ -27,11 +27,12 @@
     [super viewDidLoad];
 
     [self configSubViews];
+    [self resetConstraint];
     
     kWeakSelf
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-
-        [weak_self getBalanceData];
+//        [weak_self getBalanceData];
+        [weak_self getBalanceDataOneByOne];
     }];
 }
 
@@ -40,6 +41,44 @@
     [super viewWillAppear:animated];
     self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
     [self.tableView.mj_header beginRefreshing];
+}
+
+#pragma mark -- 挨个刷新平台的余额
+-(void)getBalanceDataOneByOne
+{
+    _finishRequest = 0;
+    [[BSTSingle defaultSingle].gameCompanysBalanceArr removeAllObjects];
+    [self.tableView reloadData];
+    [MBProgressHUD showMessage:@"" toView:self.view];
+    kWeakSelf
+    for (GamesCompanyModel * model in [BSTSingle defaultSingle].companysArray) {
+        [RequestManager getWithPath:@"getGameBalance" params:@{@"gamePlatformCode":model.companyCode} success:^(id JSON ,BOOL isSuccess) {
+            weak_self.finishRequest ++;
+            if (!isSuccess) {
+                TTAlert(JSON);
+                return ;
+            }
+            if ([[JSON class]isSubclassOfClass:[NSArray class]]) {
+                NSDictionary * dict = JSON[0];
+                BalanceModel * model = [[BalanceModel alloc]init];
+                [model mj_setKeyValues:dict];
+                [[BSTSingle defaultSingle].gameCompanysBalanceArr addObject:model];
+                [weak_self.tableView reloadData];
+            }
+            
+        } failure:^(NSError *error) {
+            weak_self.finishRequest ++;
+        }];
+    }
+}
+
+-(void)setFinishRequest:(NSInteger)finishRequest
+{
+    _finishRequest = finishRequest;
+    if (_finishRequest == [BSTSingle defaultSingle].companysArray.count && _finishRequest > 0) {
+        [MBProgressHUD hideHUDForView:self.view];
+        [self.tableView.mj_header endRefreshing];
+    }
 }
 
 #pragma mark -- 获取所有的平台余额
@@ -95,7 +134,9 @@
 
 -(void)resetConstraint
 {
-    CGFloat needHeight = 37 + 28 * [BSTSingle defaultSingle].gameCompanysBalanceArr.count;
+//    CGFloat needHeight = 37 + 28 * [BSTSingle defaultSingle].gameCompanysBalanceArr.count;
+    CGFloat needHeight = 37 + 28 * [BSTSingle defaultSingle].companysArray.count;
+
     CGFloat maxH = MAXHEIGHT - 64 - 49 - 66 - 100;
     if (self.tableView.mj_y + needHeight + 10 < maxH ) {
         self.tableViewHeightConstraint.constant = needHeight;

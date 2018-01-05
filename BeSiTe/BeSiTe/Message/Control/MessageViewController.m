@@ -78,6 +78,7 @@
         [_titleViewBtn setImage:nil forState:UIControlStateNormal];
         [_titleViewBtn setTitle:@"未登录" forState:UIControlStateNormal];
     }
+    _selectIndex = -1;
     [self.tableView.mj_header beginRefreshing];
 }
 

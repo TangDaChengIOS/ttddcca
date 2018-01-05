@@ -34,6 +34,8 @@
     _versionLab.hidden = YES;
     if ([title isEqualToString:@"关于我们"]) {
         _versionLab.hidden = NO;
+       NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        _versionLab.text = [NSString stringWithFormat:@"BST V%@",version];
     }
 }
 -(void)setCellWithModel:(GamesCompanyModel *)model :(BOOL)isSingleLine{

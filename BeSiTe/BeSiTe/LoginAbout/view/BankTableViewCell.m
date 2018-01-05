@@ -21,6 +21,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    _bankImageView.contentMode = UIViewContentModeScaleAspectFill;
 }
 -(void)setCellWithModel:(BankModel *)model{
     _model = model;

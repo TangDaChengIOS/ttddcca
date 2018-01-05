@@ -16,12 +16,14 @@
 @property (nonatomic,strong) NSMutableArray * dataSource;
 @property (nonatomic,strong) BSTNoDataView * noDataView;
 
+@property (nonatomic,assign) BOOL isHaveAppeared;
 @end
 
 @implementation MoneyRecord_QK_ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _isHaveAppeared = NO;
     [self configSubViews];
     kWeakSelf
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -38,7 +40,9 @@
 {
     [super viewWillAppear:animated];
     MoneyRecordHomeViewController * homeVC = (MoneyRecordHomeViewController *)self.magicController;
-    if (homeVC.selectPageIndex == 0) {
+    if (homeVC.selectPageIndex != 0 && !_isHaveAppeared) {
+        _isHaveAppeared = YES;
+    }else{
         [self.tableView.mj_header beginRefreshing];
     }
 }

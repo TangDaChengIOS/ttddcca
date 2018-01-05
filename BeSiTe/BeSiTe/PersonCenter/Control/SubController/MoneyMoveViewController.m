@@ -25,6 +25,8 @@
 @property (nonatomic,strong) UIButton * titleViewBtn;//导航栏标题视图
 @property (nonatomic,copy) NSString * selectCompanyCode;//选中的游戏平台code
 
+@property (nonatomic,assign) NSInteger finishRequest;//完成请求数
+
 @end
 
 @implementation MoneyMoveViewController
@@ -38,7 +40,8 @@
     kWeakSelf
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        [weak_self getBalanceData];
+//        [weak_self getBalanceData];
+        [weak_self getBalanceDataOneByOne];
     }];
     
     if ([BSTSingle defaultSingle].gameCompanysBalanceArr.count > 0) {
@@ -49,6 +52,44 @@
     }
 }
 
+#pragma mark -- 挨个刷新平台的余额
+-(void)getBalanceDataOneByOne
+{
+    _finishRequest = 0;
+    [[BSTSingle defaultSingle].gameCompanysBalanceArr removeAllObjects];
+    [self.tableView reloadData];
+    [MBProgressHUD showMessage:@"" toView:self.view];
+    kWeakSelf
+    for (GamesCompanyModel * model in [BSTSingle defaultSingle].companysArray) {
+        [RequestManager getWithPath:@"getGameBalance" params:@{@"gamePlatformCode":model.companyCode} success:^(id JSON ,BOOL isSuccess) {
+            weak_self.finishRequest ++;
+            if (!isSuccess) {
+                TTAlert(JSON);
+                return ;
+            }
+            if ([[JSON class]isSubclassOfClass:[NSArray class]]) {
+                NSDictionary * dict = JSON[0];
+                BalanceModel * model = [[BalanceModel alloc]init];
+                [model mj_setKeyValues:dict];
+                [[BSTSingle defaultSingle].gameCompanysBalanceArr addObject:model];
+                [weak_self.tableView reloadData];
+            }
+            
+        } failure:^(NSError *error) {
+            weak_self.finishRequest ++;
+        }];
+    }
+}
+
+-(void)setFinishRequest:(NSInteger)finishRequest
+{
+    _finishRequest = finishRequest;
+    if (_finishRequest == [BSTSingle defaultSingle].companysArray.count && _finishRequest > 0) {
+        [MBProgressHUD hideHUDForView:self.view];
+        [self.tableView.mj_header endRefreshing];
+        [self resetConstraint];
+    }
+}
 #pragma mark -- 获取所有的平台余额
 -(void)getBalanceData
 {
@@ -218,6 +259,7 @@
                             @"type":(_isMoveToGame ? @"1":@"2")};
     
     [MBProgressHUD showMessage:@"" toView:nil];
+    kWeakSelf
     [RequestManager postWithPath:@"acctTransfer" params:dict success:^(id JSON ,BOOL isSuccess) {
         [MBProgressHUD hideHUDForView:nil];
         if (!isSuccess) {
@@ -228,7 +270,8 @@
         [BSTSingle defaultSingle].user.userAmount = [JSON[@"balance"] floatValue];
         NSDictionary * resultDict = JSON[@"gameBalance"][0];
         [[BSTSingle defaultSingle]updateGameCompany:resultDict[@"gamePlatformCode"] balance:resultDict[@"balance"]];
-        [self reloadData];
+        [weak_self reloadData];
+        [weak_self.tableView reloadData];
         NSLog(@"%@",JSON);
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];

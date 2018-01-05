@@ -30,6 +30,8 @@
         _mainImage.size = CGSizeMake(62 * kPROPORTION, 62 * kPROPORTION);
         _mainImage.centerX = self.contentView.centerX;
         _mainImage.top = 7 * kPROPORTION;
+        _mainImage.contentMode = UIViewContentModeScaleAspectFill;
+        _mainImage.clipsToBounds = YES;
         [self.contentView addSubview:_mainImage];
         
         CGFloat w = 25 * kPROPORTION;

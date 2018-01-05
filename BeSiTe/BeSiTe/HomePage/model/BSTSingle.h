@@ -14,6 +14,7 @@
 /**BST单例*/
 @interface BSTSingle : NSObject
 
+/**游戏平台集合*/
 @property (nonatomic,strong) NSArray <GamesCompanyModel *>* companysArray;
 
 /**用户登录信息*/
