@@ -82,6 +82,14 @@
         view.msgTitle = @"发送成功";
         view.msgDetail = @"我们将在24小时内给您及时回复，请耐心的等待...";
         [view showInWindow];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            for (UIViewController * vc in self.navigationController.viewControllers) {
+                if ([NSStringFromClass([vc class]) isEqualToString:@"MessageViewController"]) {
+                    [weak_self.navigationController popToViewController:vc animated:YES];
+                    break;
+                }
+            }
+        });
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];
     }];
