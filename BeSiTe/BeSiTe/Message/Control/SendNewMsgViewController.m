@@ -25,7 +25,6 @@
     _messageView = [[BSTSendMessageView alloc]initWithFrame:CGRectMake(0, MAXHEIGHT - 64 - 50 , MAXWIDTH, 50)];
     [_messageView.sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_messageView];
-    [self.messageView.textView becomeFirstResponder];
     
     self.typeLab.text = _emailTypeString;
 }
@@ -34,6 +33,7 @@
 {
     [super viewWillAppear:animated];
     [IQKeyboardManager sharedManager].enable = NO;
+    [self.messageView.textView becomeFirstResponder];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

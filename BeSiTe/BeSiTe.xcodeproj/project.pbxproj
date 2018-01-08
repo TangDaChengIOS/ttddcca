@@ -123,6 +123,8 @@
 		119EAF2B1FA6142500E6C2CA /* PersonSavingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 119EAF291FA6142500E6C2CA /* PersonSavingViewController.xib */; };
 		119EAF2E1FA6179D00E6C2CA /* PersonSavingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 119EAF2D1FA6179D00E6C2CA /* PersonSavingTableViewCell.m */; };
 		11A398421FCE8CC600160650 /* RecordExchangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A398411FCE8CC600160650 /* RecordExchangeView.m */; };
+		11A3ADF92003A024006AA520 /* UpdateVersionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A3ADF82003A024006AA520 /* UpdateVersionView.m */; };
+		11A3ADFC2003A511006AA520 /* CheckIfNeedUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A3ADFB2003A511006AA520 /* CheckIfNeedUpdateModel.m */; };
 		11AC1B701F99DC9400C06D85 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC1B6F1F99DC9400C06D85 /* HomeHeaderView.m */; };
 		11AC1B741F99F5DC00C06D85 /* LMJScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC1B731F99F5DC00C06D85 /* LMJScrollTextView.m */; };
 		11AC9F0C1FC1D2D90016F3E5 /* ATDAYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC9F0B1FC1D2D90016F3E5 /* ATDAYCalendarView.m */; };
@@ -401,6 +403,10 @@
 		119EAF2D1FA6179D00E6C2CA /* PersonSavingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonSavingTableViewCell.m; sourceTree = "<group>"; };
 		11A398401FCE8CC600160650 /* RecordExchangeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordExchangeView.h; sourceTree = "<group>"; };
 		11A398411FCE8CC600160650 /* RecordExchangeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordExchangeView.m; sourceTree = "<group>"; };
+		11A3ADF72003A024006AA520 /* UpdateVersionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateVersionView.h; sourceTree = "<group>"; };
+		11A3ADF82003A024006AA520 /* UpdateVersionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateVersionView.m; sourceTree = "<group>"; };
+		11A3ADFA2003A511006AA520 /* CheckIfNeedUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckIfNeedUpdateModel.h; sourceTree = "<group>"; };
+		11A3ADFB2003A511006AA520 /* CheckIfNeedUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckIfNeedUpdateModel.m; sourceTree = "<group>"; };
 		11AC1B6E1F99DC9400C06D85 /* HomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHeaderView.h; sourceTree = "<group>"; };
 		11AC1B6F1F99DC9400C06D85 /* HomeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderView.m; sourceTree = "<group>"; };
 		11AC1B721F99F5DC00C06D85 /* LMJScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMJScrollTextView.h; sourceTree = "<group>"; };
@@ -722,6 +728,8 @@
 				118E79B41FAB66A600DE053B /* BannerADSModel.m */,
 				118E79B61FAB6D1600DE053B /* GamesModel.h */,
 				118E79B71FAB6D1600DE053B /* GamesModel.m */,
+				11A3ADFA2003A511006AA520 /* CheckIfNeedUpdateModel.h */,
+				11A3ADFB2003A511006AA520 /* CheckIfNeedUpdateModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -751,6 +759,8 @@
 				1179AF891FE26DE5006E4985 /* GameListPageCollectionReusableView.m */,
 				11E239A31FE7C43500883C89 /* YQCollectionViewFlowLayout.h */,
 				11E239A41FE7C43500883C89 /* YQCollectionViewFlowLayout.m */,
+				11A3ADF72003A024006AA520 /* UpdateVersionView.h */,
+				11A3ADF82003A024006AA520 /* UpdateVersionView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1481,6 +1491,7 @@
 				1114550A1FD0052B00996BA1 /* SendNewMsgViewController.m in Sources */,
 				11E2BF5A1FB59E2C00180762 /* ATCombineStrings.m in Sources */,
 				11713E201FA2D76300303AD8 /* OnlyShowImageButton.m in Sources */,
+				11A3ADFC2003A511006AA520 /* CheckIfNeedUpdateModel.m in Sources */,
 				11115D2A1F9B4F0600AB8856 /* HomeItemCollectionViewCell.m in Sources */,
 				116463AE1F91F634004ECC79 /* XWCoolAnimator+XWPortal.m in Sources */,
 				1164634B1F91AA53004ECC79 /* PersonViewController.m in Sources */,
@@ -1500,6 +1511,7 @@
 				116463BB1F91F634004ECC79 /* XWFilterAnimator.m in Sources */,
 				1194B1E31FA7732900241E49 /* MoneyRecordHomeViewController.m in Sources */,
 				116463AC1F91F634004ECC79 /* XWCoolAnimator+XWMiddlePageFlip.m in Sources */,
+				11A3ADF92003A024006AA520 /* UpdateVersionView.m in Sources */,
 				116463A41F91F634004ECC79 /* XWTransitionAnimator.m in Sources */,
 				111BA5F21FDBBB6700EAE66E /* BSTNoDataView.m in Sources */,
 				1190EC5F1F9F2087007A1D05 /* PersonBalanceViewController.m in Sources */,

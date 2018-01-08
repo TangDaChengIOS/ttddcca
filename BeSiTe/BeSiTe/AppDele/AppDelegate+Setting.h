@@ -14,7 +14,7 @@
 
 -(void)setNoLoginRootViewController;
 -(void)setLoginSuccessRootViewController;
-
+-(void)checkNewVersion;
 
 +(UINavigationController *)getBoomNavigation;
 +(UITabBarController *)getTabBarController;

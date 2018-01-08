@@ -50,7 +50,9 @@
         }else{
             [self setDefaultRootViewController:NO];
         }
+        [self checkNewVersion];//检测是否有新的版本需要更新
     }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setNoLoginRootViewController) name:BSTLoginFailueNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setLoginSuccessRootViewController) name:BSTLoginSuccessNotification object:nil];
 

@@ -12,8 +12,6 @@
     UIView * whiteBack;
 }
 
-@property (nonatomic,assign) BOOL  isNeedObserveKeyBoard;
-
 -(void)removeSelf;
 
 -(UITextField *)createTextFieldWithFrame:(CGRect)frame;

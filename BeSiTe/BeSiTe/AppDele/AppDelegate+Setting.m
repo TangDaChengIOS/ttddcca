@@ -14,6 +14,7 @@
 #import "LoginViewController.h"
 #import "UserModel.h"
 #import "RSAEncryptor.h"
+#import "UpdateVersionView.h"
 
 @implementation AppDelegate (Setting)
 
@@ -118,6 +119,22 @@
     }];
 }
 
+-(void)checkNewVersion
+{
+    [RequestManager getManagerDataWithPath:@"newVersion" params:@{@"appOs":@"1"} success:^(id JSON, BOOL isSuccess) {
+        if (!isSuccess) {
+            return ;
+        }
+        CheckIfNeedUpdateModel * model = [[CheckIfNeedUpdateModel alloc]init];
+        [model mj_setKeyValues:JSON];
+        if ([model isNeedUpdate]) {
+            [UpdateVersionView showWithModel:model];
+        }
+        NSLog(@"%@",JSON);
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 
 
