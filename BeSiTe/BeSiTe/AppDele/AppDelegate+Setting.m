@@ -127,6 +127,7 @@
         }
         CheckIfNeedUpdateModel * model = [[CheckIfNeedUpdateModel alloc]init];
         [model mj_setKeyValues:JSON];
+//        model.verNo = @"1.0.4";//测试用
         if ([model isNeedUpdate]) {
             [UpdateVersionView showWithModel:model];
         }

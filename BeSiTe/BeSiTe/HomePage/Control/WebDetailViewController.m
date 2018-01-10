@@ -145,8 +145,12 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    NSString * title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    self.title = title;
+    if (!self.isOpenRotaion) {
+        NSString * title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        self.title = title;
+    }else{
+        self.title = _gameTitle;
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
@@ -225,6 +229,16 @@
     webVC.hidesBottomBarWhenPushed = YES;
     return webVC;
 }
+
++(WebDetailViewController *)quickCreateGamePageWithUrl:(NSString *)url andTitle:(NSString *)title{
+    WebDetailViewController * webVC = [[WebDetailViewController alloc]init];
+    webVC.url = url;
+    webVC.isOpenRotaion = YES;
+    webVC.gameTitle = title;
+    webVC.hidesBottomBarWhenPushed = YES;
+    return webVC;
+}
+
 
 
 - (void)didReceiveMemoryWarning {

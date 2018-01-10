@@ -114,6 +114,8 @@
         [weak_self.scrollView.mj_header endRefreshing];
         NSLog(@"%@",JSON);
         [[BSTSingle defaultSingle].user mj_setKeyValues:JSON];
+//        [BSTSingle defaultSingle].user.emailVerified = 0;
+//        [BSTSingle defaultSingle].user.email = @"";
         [weak_self readDataFromSingleLeton];
     } failure:^(NSError *error) {
         [weak_self.scrollView.mj_header endRefreshing];
@@ -166,12 +168,23 @@
         }
         self.emailLab.text = [self dealEmail:user.email];
         self.emailStateImageView.image = user.emailVerified == 0 ? KIMAGE(@"profile_verification_img_false") : KIMAGE(@"profile_verification_img_true");
-        if (user.email.length <= 0 || user.emailVerified == 1) {
+//        if (user.email.length <= 0 || user.emailVerified == 1) {
+//            self.emailEditBtn.hidden = YES;
+//        }else{
+//            self.emailEditBtn.hidden = NO;
+//            [self refreshButton:self.emailEditBtn state:user.emailVerified];
+//        }
+        self.emailStateImageView.hidden = NO;
+        if (user.emailVerified == 1) {
             self.emailEditBtn.hidden = YES;
-//            [self refreshButton:self.emailEditBtn state:YES];
         }else{
             self.emailEditBtn.hidden = NO;
-            [self refreshButton:self.emailEditBtn state:user.emailVerified];
+            if (user.email.length <= 0 ) {
+                self.emailStateImageView.hidden = YES;;
+                [self refreshButton:self.emailEditBtn state:YES];
+            }else{
+                [self refreshButton:self.emailEditBtn state:NO];
+            }
         }
     }
 }
@@ -228,6 +241,11 @@
 
 -(void)getFavGameData
 {
+//    [RequestManager getWithPath:@"getFavGames" params:nil success:^(id JSON, BOOL isSuccess) {
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
     kWeakSelf
     [RequestManager getManagerDataWithPath:@"favGames" params:nil success:^(id JSON ,BOOL isSuccess) {
         NSLog(@"%@",JSON);
@@ -264,7 +282,7 @@
     [cell setCellWithModel:self.dataSource[indexPath.item]];
     kWeakSelf
     [cell setCanCancelCollecWithFinishBlock:^{
-        [weak_self getFavGameData];
+        [weak_self.scrollView.mj_header beginRefreshing];
     }];
     return cell;
 }

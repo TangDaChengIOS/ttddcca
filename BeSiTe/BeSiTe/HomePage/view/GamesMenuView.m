@@ -85,7 +85,7 @@
     if (self.model.isTry)
     {
         if ([self.model.companyCode isEqualToString:@"PT"]) {
-            [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:self.model.tryUrl] animated:YES];
+            [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:self.model.tryUrl andTitle:self.model.gameName] animated:YES];
             [self removeFromSuperview];
         }else{
             [self requestGameUrlIsTry:YES];
@@ -138,7 +138,7 @@
     }
     if ([self.model.companyCode isEqualToString:@"PT"]) {
         NSString * url = [self addParaToUrl:self.model.gameUrl];
-        [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:url] animated:YES];
+        [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:url andTitle:self.model.gameName] animated:YES];
         [self removeFromSuperview];
     }else{
         [self requestGameUrlIsTry:NO];
@@ -185,7 +185,7 @@
             TTAlert(JSON);
             return ;
         }
-        [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:JSON[@"gameUrl"]] animated:YES];
+        [[AppDelegate getBoomNavigation] pushViewController:[WebDetailViewController quickCreateGamePageWithUrl:JSON[@"gameUrl"] andTitle:weak_self.model.gameName] animated:YES];
         [weak_self removeFromSuperview];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:nil];
