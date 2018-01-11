@@ -45,6 +45,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isNeedRequestPersonBalance = YES;
 
     CGFloat viewH = MAXHEIGHT - 35 - 64 - 66- 50;
     _contentViewHeightConstraint.constant = (self.managerCardBtn.maxY < viewH) ? viewH : self.managerCardBtn.maxY + 50;
@@ -85,9 +86,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
     [self requestBankData];
 }
+
+-(void)refreshPersonBalance{
+    self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

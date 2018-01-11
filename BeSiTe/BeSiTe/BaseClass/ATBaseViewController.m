@@ -39,7 +39,12 @@
 
     }else{
         [self.navigationController setNavigationBarHidden:NO];
+    }
 
+    [self refreshPersonBalance];
+
+    if (_isNeedRequestPersonBalance) {
+        [self requestPersonBalance];
     }
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -64,7 +69,7 @@
     }
 
 }
-
+#pragma mark -- 无数据时，用白板盖住
 -(void)setIsNoDate:(BOOL)isNoDate{
     if (isNoDate) {
         if (!_whiteBack) {
@@ -85,6 +90,26 @@
         _whiteBack.backgroundColor = kWhiteColor;
     }
     return _whiteBack;
+}
+
+/**请求个人主账户余额*/
+-(void)requestPersonBalance{
+    kWeakSelf
+    [RequestManager getWithPath:@"userBalance" params:nil success:^(id JSON, BOOL isSuccess) {
+        if (!isSuccess) {
+            TTAlert(JSON);
+            return ;
+        }
+        [BSTSingle defaultSingle].user.userAmount = [JSON[@"balance"] floatValue];
+        [weak_self refreshPersonBalance];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+/**请求完主账户余额后，刷新界面，父控制器空实现，子控制器实现*/
+-(void)refreshPersonBalance{
+
 }
 
 #pragma mark -- 侧滑

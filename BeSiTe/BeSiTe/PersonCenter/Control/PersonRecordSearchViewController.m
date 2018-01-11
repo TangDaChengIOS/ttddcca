@@ -29,16 +29,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isNeedRequestPersonBalance = YES;
+
     _dataSource = @[@"取款记录",@"存款记录",@"转账记录",@"优惠记录",@"积分记录",@"推荐礼金"];
     [self configSubViews];
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self readDataFromSingleLeton];
-}
 
--(void)readDataFromSingleLeton{
+-(void)refreshPersonBalance{
     self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
 }
 

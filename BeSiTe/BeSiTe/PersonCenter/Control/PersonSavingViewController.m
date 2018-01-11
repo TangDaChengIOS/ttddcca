@@ -21,11 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isNeedRequestPersonBalance = YES;
+
     [self configSubViews];
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+
+-(void)refreshPersonBalance{
     self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
 }
 

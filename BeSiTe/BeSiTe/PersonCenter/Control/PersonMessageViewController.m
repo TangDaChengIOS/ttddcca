@@ -69,6 +69,7 @@
     self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weak_self getFavGameData];
         [weak_self getUserMsg];
+        [weak_self requestPersonBalance];
     }];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationNeedVerifyPhoneNum) name:@"ApplicationNeedVerifyPhoneNum" object:nil];
 }
@@ -102,9 +103,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
     [self readDataFromSingleLeton];
     [self.scrollView.mj_header beginRefreshing];
+}
+
+-(void)refreshPersonBalance{
+    self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
 }
 
 

@@ -42,6 +42,7 @@
         
 //        [weak_self getBalanceData];
         [weak_self getBalanceDataOneByOne];
+        [weak_self requestPersonBalance];
     }];
     
     if ([BSTSingle defaultSingle].gameCompanysBalanceArr.count > 0) {
@@ -120,6 +121,10 @@
     [self reloadData];
 }
 
+-(void)refreshPersonBalance{
+    self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
+}
+
 #pragma mark -- 刷新单个平台的余额
 -(void)getBalanceDataWithCompany:(NSString *)company
 {
@@ -157,7 +162,6 @@
         [_titleViewBtn setImage:nil forState:UIControlStateNormal];
         [_titleViewBtn setTitle:@"未登录" forState:UIControlStateNormal];
     }
-    self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
 }
 
 

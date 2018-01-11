@@ -33,14 +33,18 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
 //        [weak_self getBalanceData];
         [weak_self getBalanceDataOneByOne];
+        [weak_self requestPersonBalance];
     }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
     [self.tableView.mj_header beginRefreshing];
+}
+
+-(void)refreshPersonBalance{
+    self.totalMoneyLab.attributedText = [UserModel getTotalMoneyAttributeString];
 }
 
 #pragma mark -- 挨个刷新平台的余额
