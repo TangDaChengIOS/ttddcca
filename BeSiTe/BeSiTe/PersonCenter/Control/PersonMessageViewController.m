@@ -380,7 +380,10 @@
 }
 //积分兑换
 - (IBAction)recordExchangeBtnClick:(id)sender {
-    [RecordExchangeView showWithFinshBlock:nil];
+    kWeakSelf
+    [RecordExchangeView showWithFinshBlock:^{
+        [weak_self requestPersonBalance];
+    }];
 }
 
 -(NSMutableArray *)dataSource{

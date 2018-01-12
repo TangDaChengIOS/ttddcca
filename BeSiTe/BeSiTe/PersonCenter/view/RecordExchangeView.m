@@ -163,13 +163,15 @@
     [self endEditing:YES];
 
     [MBProgressHUD showMessage:@"" toView:nil];
-    [RequestManager postWithPath:@"completeUserInfo" params:@{@"userName":self.moneyTF.text} success:^(id JSON ,BOOL isSuccess) {
+    kWeakSelf
+    [RequestManager postWithPath:@"exchangeUserScore" params:@{@"score":self.moneyTF.text} success:^(id JSON ,BOOL isSuccess) {
         [MBProgressHUD hideHUDForView:nil];
 
         if (!isSuccess) {
             TTAlert(JSON);
             return ;
         }
+        weak_self.recordLab.text = JSON[@"balance"];
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"积分兑换成功！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
     } failure:^(NSError *error) {
