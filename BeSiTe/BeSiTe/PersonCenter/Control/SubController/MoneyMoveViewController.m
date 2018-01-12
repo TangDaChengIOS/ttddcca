@@ -274,7 +274,7 @@
         [BSTSingle defaultSingle].user.userAmount = [JSON[@"balance"] floatValue];
         NSDictionary * resultDict = JSON[@"gameBalance"][0];
         [[BSTSingle defaultSingle]updateGameCompany:resultDict[@"gamePlatformCode"] balance:resultDict[@"balance"]];
-        [weak_self reloadData];
+        weak_self.mainAccountLab.attributedText = [UserModel getTotalMoneyAttributeString];
         [weak_self.tableView reloadData];
         NSLog(@"%@",JSON);
     } failure:^(NSError *error) {

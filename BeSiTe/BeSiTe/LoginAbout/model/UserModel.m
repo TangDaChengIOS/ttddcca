@@ -64,6 +64,7 @@
     else{
         UserModel * model = [[UserModel alloc]init];
         [model mj_setKeyValues:dict];
+        model.userAmount = 0.00;
         [BSTSingle defaultSingle].user = model;
         return YES;
     }

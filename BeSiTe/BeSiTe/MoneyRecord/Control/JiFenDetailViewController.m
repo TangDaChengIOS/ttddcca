@@ -34,15 +34,15 @@
     [self configSubViews];
     
     kWeakSelf
-    self.tableView_top.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        weak_self.page = 1;
-        [weak_self requestDataForDuiHuan];
-    }];
-    
-    self.tableView_top.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        weak_self.page += 1;
-        [weak_self requestDataForDuiHuan];
-    }];
+//    self.tableView_top.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        weak_self.page = 1;
+//        [weak_self requestDataForDuiHuan];
+//    }];
+//    
+//    self.tableView_top.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        weak_self.page += 1;
+//        [weak_self requestDataForDuiHuan];
+//    }];
     
     self.tableView_boom.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         weak_self.page_boom = 1;
@@ -58,7 +58,7 @@
 {
     [super viewWillAppear:animated];
 
-    [self.tableView_top.mj_header beginRefreshing];
+//    [self.tableView_top.mj_header beginRefreshing];
     [self.tableView_boom.mj_header beginRefreshing];
 
 }
@@ -194,8 +194,10 @@
 
 -(void)configSubViews
 {
-    CGFloat tableViewH  = (MAXHEIGHT - 64 - 50 - (24 + 28)*2 ) /2;
-    
+//    CGFloat tableViewH  = (MAXHEIGHT - 64 - 50 - (24 + 28)*2 ) /2;
+    CGFloat tableViewH  = (MAXHEIGHT - 64 - 50 - (24 + 28));
+
+/*
 //上部分标题
     UILabel * topLab = [self createLabWithFrame:CGRectMake(0, 0, MAXWIDTH, 24) andTitle:@"兑换记录"];
     [self.view addSubview:topLab];
@@ -213,9 +215,11 @@
     _tableView_top.dataSource = self;
     [_tableView_top registerClass:[RecordTableViewCell class] forCellReuseIdentifier:kRecordTableViewCellReuseID];
     [self.view addSubview:_tableView_top];
-    
+*/
+
 //下部分标题
-    UILabel * boomLab = [self createLabWithFrame:CGRectMake(0, _tableView_top.maxY, MAXWIDTH, 24) andTitle:@"获取记录"];
+//    UILabel * boomLab = [self createLabWithFrame:CGRectMake(0, _tableView_top.maxY, MAXWIDTH, 24) andTitle:@"获取记录"];
+    UILabel * boomLab = [self createLabWithFrame:CGRectMake(0, 0, MAXWIDTH, 24) andTitle:@"获取记录"];
     [self.view addSubview:boomLab];
     
 //下部分列表头
@@ -226,7 +230,9 @@
     [self.view addSubview:_headerView_boom];
 
 //下部分tableview
+//    _tableView_boom = [[UITableView alloc]initWithFrame:CGRectMake(0, boomLab.maxY + 28, MAXWIDTH, tableViewH) style:UITableViewStyleGrouped];
     _tableView_boom = [[UITableView alloc]initWithFrame:CGRectMake(0, boomLab.maxY + 28, MAXWIDTH, tableViewH) style:UITableViewStyleGrouped];
+
     _tableView_boom.delegate = self;
     _tableView_boom.dataSource = self;
     [_tableView_boom registerClass:[RecordTableViewCell class] forCellReuseIdentifier:kRecordTableViewCellReuseID];
