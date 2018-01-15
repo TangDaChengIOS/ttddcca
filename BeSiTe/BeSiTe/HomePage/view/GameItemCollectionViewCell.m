@@ -72,6 +72,8 @@
                 return ;
             }
             TTAlert(@"取消收藏成功！");
+            weak_self.model.isFav = NO;
+            [weak_self.model refreshCaches];
             if (weak_self.finishCancelCollectBlock) {
                 weak_self.finishCancelCollectBlock();
             }

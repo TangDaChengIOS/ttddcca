@@ -11,7 +11,8 @@
 @implementation UserModel
 
 -(NSString *)getVipImageStr{
-    return [NSString stringWithFormat:@"common_VIP-%ld",self.vipLevel];
+    NSInteger trueLevel = self.vipLevel >= 1 ? self.vipLevel - 1 : 0;
+    return [NSString stringWithFormat:@"common_VIP-%ld",trueLevel];
 }
 
 

@@ -31,4 +31,29 @@
     return _companyCode;
 }
 
+-(void)refreshCaches
+{
+    id objec = [[NSUserDefaults standardUserDefaults]objectForKey:self.companyCode];
+    //结构 [ {"key":[{},{}... ] } ]
+    if (objec)
+    {
+        NSMutableDictionary * mDict = [NSMutableDictionary dictionaryWithDictionary:objec[0]];
+        NSMutableArray * mArr = [NSMutableArray array];
+        NSArray * temp = mDict[@"list"];
+        for (NSDictionary * dict in temp) {
+            NSString * gameCode = dict[@"gameCode"];
+            if ([gameCode isEqualToString:self.gameCode]) {
+                NSMutableDictionary * mmDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+                [mmDict setValue:(self.isFav ? @"1":@"0") forKey:@"isFav"];
+                [mArr addObject:mmDict];
+            }else{
+                [mArr addObject:dict];
+            }
+        }
+        [mDict setObject:mArr forKey:@"list"];
+        [[NSUserDefaults standardUserDefaults]setObject:@[mDict] forKey:self.companyCode];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+}
+
 @end

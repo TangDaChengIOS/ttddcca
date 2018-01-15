@@ -120,6 +120,7 @@
         }
         TTAlert(@"收藏成功！");
         weak_self.model.isFav = YES;
+        [weak_self.model refreshCaches];
         [weak_self.collectBtn setImage:KIMAGE_Ori(@"home_collection_select_icon") forState:UIControlStateNormal];
         if (!weak_self.model.isTry) {
             [weak_self.tryPlayBtn setTitle:@"已收藏" forState:UIControlStateNormal];

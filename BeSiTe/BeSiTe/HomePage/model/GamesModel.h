@@ -27,4 +27,6 @@
 
 -(UIImage *)getTypeImage;
 
+/**收藏、取消收藏后 刷新缓存*/
+-(void)refreshCaches;
 @end
